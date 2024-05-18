@@ -7,7 +7,11 @@ export default {
     container: false
   },
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        sans: ['Euclid Circular B']
+      }
+    }
   },
   plugins: [
     plugin(function ({ addComponents, theme }) {

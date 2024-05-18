@@ -2,23 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background-blue-night: #2A2E33;
+  --background-black-night: #131517;
+  --background-navbar-theme: rgb(49, 21, 53) linear-gradient(180deg, rgba(49, 21, 53, 0.8044467787114846) 32%, rgba(42, 19, 28, 0.7988445378151261) 47%, rgba(19, 21, 23, 1) 100%);
+  --blue-light: #42464A;
+  --blue-dark: #32363B;
+  --nav-color: #9F9F9F;
+  --font-euclid: 'Euclid Circular B', sans-serif;
+  --font-monterrat: "Montserrat", sans-serif;
+  --black-light: #1C1E20;
+  --black-supper-light: #62605D;
+}
 html {
   height: 100%;
   line-height: 1.2;
-  background: linear-gradient(
-      0deg,
-      rgba(253, 160, 0, 0.88),
-      rgba(253, 160, 0, 0.88)
-    ),
-    linear-gradient(
-      180deg,
-      rgba(211, 32, 139, 0) 30.5%,
-      rgba(211, 32, 139, 0.79) 100%
-    ),
-    linear-gradient(0deg, rgba(135, 154, 242, 0.67), rgba(135, 154, 242, 0.67));
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: var(--font-monterrat);
   font-weight: 400;
 }
