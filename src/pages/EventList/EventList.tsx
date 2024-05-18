@@ -5,6 +5,7 @@ const EventList = () => {
   return (
     <div className='container'>
       <HeaderHomePage />
+      <div>hello</div>
       Event List
       <Footer />
     </div>
