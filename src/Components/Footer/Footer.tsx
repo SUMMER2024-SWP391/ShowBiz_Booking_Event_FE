@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
     <footer className='py-16'>
-      <hr />
-      <div className='mx-auto px-4 flex justify-evenly capitalize'>
+      <hr className='border-nav_color opacity-50'></hr>
+      <div className='mx-auto px-4 flex justify-evenly capitalize font-euclid text-lightgray'>
         <div>
           <div className='mt-4 mb-7 font-bold hover:text-gray-700'>Product</div>
           <div className='mb-4 hover:text-gray-700'>key features</div>
