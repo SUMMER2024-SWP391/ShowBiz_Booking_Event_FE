@@ -1,18 +1,28 @@
 import { Link } from 'react-router-dom'
+import LOGO from '../../assets/img/Logo EventBooking (1).png'
+import styled from 'styled-components'
 
 const HeaderHomePage = () => {
   return (
-    <header>
+    <Header className='text-nav_color'>
       <div className='w-full flex justify-between'>
-        <div>eventbook.</div>
-        <div className='flex justify-evenly items-center'>
-          <div className='mr-8'>home</div>
-          <div className='mr-8'>home</div>
-          <div className='mr-8'>home</div>
-          <div className='mr-8'>home</div>
+        <div className='w-28 h-28 cursor-pointer'>
+          <img src={LOGO} alt='logo' />
+        </div>
+        <div className='flex justify-evenly items-center font-euclid font-bold '>
+          <div className='mr-8 hover:text-lightgray cursor-pointer'>Home</div>
+          <div className='mr-8 hover:text-lightgray cursor-pointer'>
+            My Event
+          </div>
+          <div className='mr-8 hover:text-lightgray cursor-pointer'>
+            All Event
+          </div>
+          <div className='mr-8 hover:text-lightgray cursor-pointer'>
+            Calendar
+          </div>
         </div>
         <div className='flex justify-evenly items-center'>
-          <div className='mr-6'>
+          <div className='mr-6 cursor-pointer'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -28,7 +38,7 @@ const HeaderHomePage = () => {
               />
             </svg>
           </div>
-          <div className='mr-6'>
+          <div className='mr-6 cursor-pointer'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -49,8 +59,16 @@ const HeaderHomePage = () => {
           </div>
         </div>
       </div>
-    </header>
+    </Header>
   )
 }
-
+const Header = styled.div`
+  background: rgb(49, 21, 53)
+    linear-gradient(
+      180deg,
+      rgba(49, 21, 53, 0.8044467787114846) 32%,
+      rgba(42, 19, 28, 0.7988445378151261) 47%,
+      rgba(19, 21, 23, 1) 100%
+    );
+`
 export default HeaderHomePage

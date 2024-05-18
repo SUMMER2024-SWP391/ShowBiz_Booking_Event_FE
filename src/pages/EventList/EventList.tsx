@@ -3,10 +3,9 @@ import HeaderHomePage from 'src/Components/HeaderHomePage/HeaderHomePage'
 
 const EventList = () => {
   return (
-    <div className='container'>
-      <HeaderHomePage />
-      <div>hello</div>
-      Event List
+    <div className='bg-black_night h-auto'>
+      <HeaderHomePage themeColor='bg-red' />
+
       <Footer />
     </div>
   )
