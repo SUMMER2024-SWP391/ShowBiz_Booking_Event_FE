@@ -1,15 +1,14 @@
 import { Link } from 'react-router-dom'
 import LOGO from '../../assets/img/Logo EventBooking (1).png'
-import styled from 'styled-components'
 
 const HeaderHomePage = () => {
   return (
-    <Header className='text-nav_color'>
+    <header className='text-nav_color container capitalize'>
       <div className='w-full flex justify-between'>
-        <div className='w-28 h-28 cursor-pointer'>
-          <img src={LOGO} alt='logo' />
+        <div className='w-28 h-28 cursor-pointer hover:text-lightgray'>
+          <img src={LOGO} alt='logo' className='w-full h-full' />
         </div>
-        <div className='flex justify-evenly items-center font-euclid font-bold '>
+        <div className='flex justify-evenly items-center font-euclid font-bold'>
           <div className='mr-8 hover:text-lightgray cursor-pointer'>Home</div>
           <div className='mr-8 hover:text-lightgray cursor-pointer'>
             My Event
@@ -22,7 +21,7 @@ const HeaderHomePage = () => {
           </div>
         </div>
         <div className='flex justify-evenly items-center'>
-          <div className='mr-6 cursor-pointer'>
+          <div className='mr-6 cursor-pointer hover:text-lightgray'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -45,7 +44,7 @@ const HeaderHomePage = () => {
               viewBox='0 0 24 24'
               strokeWidth={1.5}
               stroke='currentColor'
-              className='w-6 h-6'
+              className='w-6 h-6 hover:text-lightgray'
             >
               <path
                 strokeLinecap='round'
@@ -55,20 +54,14 @@ const HeaderHomePage = () => {
             </svg>
           </div>
           <div className='mr-6'>
-            <Link to=''>Sign in</Link>
+            <Link to='' className='font-bold hover:text-lightgray'>
+              Sign in
+            </Link>
           </div>
         </div>
       </div>
-    </Header>
+    </header>
   )
 }
-const Header = styled.div`
-  background: rgb(49, 21, 53)
-    linear-gradient(
-      180deg,
-      rgba(49, 21, 53, 0.8044467787114846) 32%,
-      rgba(42, 19, 28, 0.7988445378151261) 47%,
-      rgba(19, 21, 23, 1) 100%
-    );
-`
+
 export default HeaderHomePage
