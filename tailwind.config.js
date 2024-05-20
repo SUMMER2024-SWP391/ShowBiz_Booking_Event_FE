@@ -38,7 +38,7 @@ export default {
 
     fontFamily: {
       monterat: ['Montserrat', 'sans-serif'],
-      euclid: ['Euclid Circular B', 'sans-serif']
+      euclid: ['Euclid Circular B', 'serif']
     },
     extend: {
       spacing: {
