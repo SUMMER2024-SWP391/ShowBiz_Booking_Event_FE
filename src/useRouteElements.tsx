@@ -1,5 +1,5 @@
-import EventList from './pages/EventList/EventList'
 import { useRoutes } from 'react-router-dom'
+import EventList from './Components/EventLists/EventList'
 
 const useRouteElements = () => {
   const routeElements = useRoutes([
