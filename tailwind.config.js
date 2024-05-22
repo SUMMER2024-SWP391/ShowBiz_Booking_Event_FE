@@ -57,6 +57,7 @@ export default {
           '100_02': '#d1d0d0',
           '900_02': '#2a2e33',
           '900_01': '#32363b',
+          '900_07': '#D9D9D9',
           '100_03': '#cbcbcb',
           '900_04': '#2f302e',
           '100_01': '#d6d4cb',
@@ -65,7 +66,6 @@ export default {
         black: { 900: '#000000' },
         indigo: { '100_7f': '#b8c6e07f' },
         white_A700_7f: '#ffffff7f',
-        gray_50_8e: '#fff7f78e',
         blue: '#0317fc',
         purple: '#8003fc',
         red: '#fc0303',
@@ -73,7 +73,6 @@ export default {
         green: '#2bcf02',
         yellow: '#e6c302',
         darkgray: '#273444',
-        gray: '#8492a6',
         lightgray: '#d3dce6',
         blueLight: '#42464A',
         blueDark: '#32363B',
@@ -108,12 +107,8 @@ export default {
         }
       },
       backgroundImage: {
-        gradient: 'linear-gradient(180deg, #301535cc, #2a131ccc, #131517',
-        gradient1: 'linear-gradient(180deg, #fb7b0433,#ffffff33'
-      },
-      backgroundColor: {
-        blue_night: '#2A2E33',
-        black_night: '#131517'
+        gradient: 'linear-gradient(180deg, #301535cc, #2a131ccc, #131517)',
+        gradient1: 'linear-gradient(180deg, #fb7b0433,#ffffff33)'
       }
     }
   },
