@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes } from 'react'
+import React from 'react'
 
 const shapes = {
   circle: 'rounded-[50%]',
@@ -10,6 +10,7 @@ const variants = {
     blue_gray_900: 'bg-blue_gray-900',
     white_A700: 'bg-white-A700 text-black-900',
     blue_gray_900_03: 'bg-blue_gray_900_03 text-gray-400_02',
+    blue_gray_900_07: 'bg-blue_gray-900_07 text-black',
     gray_800: 'bg-gray-800 text-blue_gray-100_06',
     indigo_100_7f: 'bg-indigo-100_7f text-black-900',
     blue_gray_900_05: 'bg-blue_gray-900 text-gray-500',

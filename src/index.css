@@ -2,13 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html {
-  height: 100%;
-  line-height: 1.2;
-}
-
-body {
-  
-  font-weight: 400;
+@layer components{
+  .container-xs{
+    @apply w-full mx-auto max-w-[1044px]
+  }
 }
