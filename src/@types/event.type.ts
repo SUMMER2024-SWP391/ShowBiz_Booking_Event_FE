@@ -1,32 +1,32 @@
 export interface Event {
-  eventId: string
+  event_id: string
   event_name: string
   capacity: number
   ticket: string
   description: string
-  typeEvent: string
-  dateEvent: Date
+  type_event: string
+  date_event: Date
   time_start: string
-  timeEnd: string
+  time_end: string
   address: string
-  imageUrl: string
-  eventOperatorId: string
-  eventOperatorName: string
+  image_url: string
+  event_operator_id: string
+  event_operator_name: string
   status: string
   calendarId: string
 }
 
 export type EventList = Pick<
   Event,
-  | 'eventId'
-  | 'eventOperatorName'
-  | 'eventOperatorId'
+  | 'event_id'
+  | 'event_operator_name'
+  | 'event_operator_id'
   | 'capacity'
   | 'event_name'
-  | 'imageUrl'
-  | 'dateEvent'
+  | 'image_url'
+  | 'date_event'
   | 'ticket'
-  | 'timeEnd'
+  | 'time_end'
   | 'time_start'
   | 'address'
 >

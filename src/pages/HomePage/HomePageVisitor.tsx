@@ -85,14 +85,20 @@ export default function HomePageVisitor() {
                         {data?.data.map(
                           (event, index) =>
                             index < 10 && (
-                              <EventList
-                                key={event.eventId}
-                                time={event.time_start}
-                                nameEvent={event.event_name}
-                                event_operator_name={event.event_operator_name}
-                                address={event.address}
-                                imageUrl={event.imageUrl}
-                              />
+                              <div
+                                className='flex flex-1'
+                                key={'homage' + event.event_name}
+                              >
+                                <EventList
+                                  time={event.time_start}
+                                  nameEvent={event.event_name}
+                                  event_operator_name={
+                                    event.event_operator_name
+                                  }
+                                  address={event.address}
+                                  imageUrl={event.image_url}
+                                />
+                              </div>
                             )
                         )}
                       </div>
