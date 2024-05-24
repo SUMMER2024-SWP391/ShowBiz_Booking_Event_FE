@@ -1,76 +1,84 @@
+import { GoogleOutlined, UserOutlined } from '@ant-design/icons'
+import { Input } from 'antd'
+import { Button, Heading } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
-import HeaderHomePage from 'src/Components/HeaderHomePage/HeaderHomePage'
+import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 
 const Register = () => {
   return (
-    <div className='bg-blue_night'>
-      <HeaderHomePage />
-      <div className='container flex items-center justify-center text-[#ffffff] font-euclid'>
-        <div className='bg-black_night w-[435px] h-[510px] border rounded-[20px]'>
-          <div className='pt-10 pl-16'>
-            <div className='pb-3'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='w-10 h-10'
+    <>
+      <div className='flex w-full flex-col gap-[175px] bg-gray-900  sm:gap-[87px]'>
+        <div className='flex flex-col items-center gap-[79px] md:gap-[72px] sm:gao-12'>
+          <Header className='bg-gradient' />
+        </div>
+        <div className='container-xs pl-[313px] pr-[296px] md:p-5 md:px-5'>
+          <div className='flex flex-col items-center gap-[21px] rounded-[20px] border border-solid border-white-A700 bg-gray-900_04 pb-5 pt-[26px] sm:pt-5'>
+            <div className='ml-[46px] flex flex-col item-start gap-[18px] self-start'>
+              <Button
+                color='blue_gray_900'
+                size='4xl'
+                shape='circle'
+                className='w-[68px] !rounded-[34px]'
               >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819'
-                />
-              </svg>
+                <UserOutlined className='!text-gray-500_02' />
+              </Button>
+              <div className='flex flex-col items-start gap-[13px]'>
+                <Heading size='2xl' as='h1' className='!font-bold'>
+                  Welcome to EventBok
+                </Heading>
+                <Heading size='xl' as='h2' className='!text-blue_gray-100_02'>
+                  Please sign in or sign up below
+                </Heading>
+              </div>
             </div>
-            <div className='pb-6 font-bold text-xl'>Welcome to EventBook</div>
-            <form>
-              <div>
-                <div className='flex flex-col'>
-                  <label className='pl-1 pb-4 font-bold hover:text-gray'>
-                    Email
-                  </label>
-                  <input
-                    type='text'
-                    className='pl-4 h-9 w-80 outline-none bg-[#1F1D1B] rounded-[10px] border-2 border-blueDark focus:border-lightgray'
-                  />
-                </div>
-                <div className='pl-2 mt-1 text-red min-h-[1.25rem] text-sm'></div>
+            <div className=' ml-[46px] mr-[46px] flex w-[95%] flex-col gap-[15px]  md:p-5'>
+              <div className='flex flex-col items-start gap-2'>
+                <Heading size='lg' as='h3' className='!font-bold'>
+                  Email
+                </Heading>
+                <Input
+                  color='white_A700'
+                  type='email'
+                  name='email'
+                  placeholder={`your@email.com`}
+                  addonBefore=''
+                  className='rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full '
+                />
               </div>
-              <div>
-                <div className='flex flex-col'>
-                  <label className='pl-1 pb-4 font-bold hover:text-gray'>
-                    Password
-                  </label>
-                  <input
-                    type='password'
-                    className='pl-4 h-9 w-80 outline-none bg-[#1F1D1B] rounded-[10px] border-2 border-blueDark focus:border-lightgray'
-                  />
-                </div>
-                <div className='pl-2 mt-1 text-red min-h-[1.25rem] text-sm'></div>
+              <div className='flex flex-col items-start gap-2'>
+                <Heading size='lg' as='h3' className='!font-bold'>
+                  Password
+                </Heading>
+                <Input
+                  color='white_A700'
+                  type='password'
+                  name='password'
+                  placeholder={`Input your password`}
+                  className='rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full '
+                />
               </div>
-              <div>
-                <div className='flex flex-col'>
-                  <label className='pl-1 pb-4 font-bold hover:text-gray'>
-                    Confirm password
-                  </label>
-                  <input
-                    type='password'
-                    className='pl-4 h-9 w-80 outline-none bg-[#1F1D1B] rounded-[10px] border-2 border-blueDark focus:border-lightgray'
-                  />
-                </div>
-                <div className='pl-2 mt-1 text-red min-h-[1.25rem] text-sm'></div>
-              </div>
-              <button className='h-10 w-80 bg-[#ffff] text-[#000000] rounded-[10px] hover:text-black_supper_light'>
-                Register
-              </button>
-            </form>
+              <Button
+                size='xl'
+                color='white_A700'
+                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
+              >
+                Continue with Email
+              </Button>
+              <div className='h-px w-full self-stretch bg-white-A700' />
+              <Button
+                color='blue_gray_900'
+                size='xl'
+                leftIcon={<GoogleOutlined className='h-[14px] w-[14px]' />}
+                className='min-w-[345px] gap-1.5 rounded-[10px] border border-solid border-blue_gray-100_04 font-semibold sm:px-5 text-white-A700'
+              >
+                Sign in with FPT EDU
+              </Button>
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   )
 }
 
