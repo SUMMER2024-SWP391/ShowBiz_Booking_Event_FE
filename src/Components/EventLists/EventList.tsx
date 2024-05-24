@@ -7,15 +7,17 @@ interface Props {
   className?: string
   time?: string
   nameEvent?: string
-  eventOperator?: string
+  event_operator_name?: string
   address?: string
+  imageUrl?: string
 }
 
 export default function EventList({
   time = '9:30 AM',
   nameEvent = 'Saigon Talk #8: Feelink cảm xúc',
-  eventOperator = 'CLB CSG Event',
+  event_operator_name = 'CLB CSG Event',
   address = 'FPT University',
+  imageUrl = EventLogo,
   ...props
 }: Props) {
   return (
@@ -42,7 +44,7 @@ export default function EventList({
               as='p'
               className='self-end !font-monterat !text-blue_gray-400_01 md:ml-0'
             >
-              {eventOperator}
+              {event_operator_name}
             </Heading>
           </div>
 
@@ -61,7 +63,7 @@ export default function EventList({
           </div>
         </div>
         <Img
-          src={EventLogo}
+          src={imageUrl}
           alt='banner-event'
           className='mt-[7px] w-[135px] h-[135px] rounded-[15px] object-cover justify-end'
         />
