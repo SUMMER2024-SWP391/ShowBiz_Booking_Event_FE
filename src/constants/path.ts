@@ -3,6 +3,7 @@ const path = {
   profile: '/profile',
   login: '/login',
   register: '/register',
-  logout: '/logout'
+  logout: '/logout',
+  adminDashboard: '/admin-dashboard'
 }
 export default path

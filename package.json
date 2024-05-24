@@ -14,11 +14,13 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
+    "@floating-ui/react": "^0.26.16",
     "@tanstack/react-query": "^5.36.0",
     "@tanstack/react-query-devtools": "^5.36.0",
     "antd": "^5.17.0",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
+    "framer-motion": "^11.2.6",
     "postcss": "^8.4.38",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
