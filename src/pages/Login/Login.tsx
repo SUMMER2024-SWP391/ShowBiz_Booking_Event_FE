@@ -1,10 +1,64 @@
 import { GoogleOutlined, UserOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
+import { useForm } from 'react-hook-form'
 import { Button, Heading } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
+import { LoginSchema, LoginSchemaYup } from 'src/utils/rules'
+import { yupResolver } from '@hookform/resolvers/yup'
+import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
+import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
+import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
+import { AuthResponse } from 'src/@types/auth.type'
+import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import { useNavigate } from 'react-router-dom'
 
-const Register = () => {
+type FormData = LoginSchema
+
+const Login = () => {
+  const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors }
+  } = useForm<FormData>({
+    resolver: yupResolver(LoginSchemaYup)
+  })
+
+  const loginMutation = useMutation({
+    mutationFn: async (body: FormData) => {
+      return axios
+        .post<
+          SuccessResponse<AuthResponse>
+        >('http://localhost:4000/users/login', body)
+        .then((res) => res.data)
+    }
+  })
+
+  const onSubmit = handleSubmit((data) => {
+    loginMutation.mutate(data, {
+      onSuccess: (data) => {
+        navigate('/')
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
+          console.log(error.response?.data.errors)
+          const formError = error.response?.data.errors
+
+          if (formError) {
+            Object.keys(formError).forEach((key) => {
+              setError(key as keyof FormData, {
+                message: formError[key as keyof FormData],
+                type: 'Server'
+              })
+            })
+          }
+        }
+      }
+    })
+  })
   return (
     <>
       <div className='flex w-full flex-col gap-[175px] bg-gray-900  sm:gap-[87px]'>
@@ -31,30 +85,48 @@ const Register = () => {
                 </Heading>
               </div>
             </div>
-            <div className=' ml-[46px] mr-[46px] flex w-[95%] flex-col gap-[15px]  md:p-5'>
-              <div className='flex flex-col items-start gap-2'>
+            <form
+              className=' ml-[46px] mr-[46px] flex w-[95%] flex-col gap-[15px]  md:p-5'
+              noValidate
+              onSubmit={onSubmit}
+            >
+              <div className='flex flex-col items-start gap-0'>
                 <Heading size='lg' as='h3' className='!font-bold'>
                   Email
                 </Heading>
-                <Input
+                {/* <span className='text-rose-300'></span> */}
+                <InputVerTwo
+                  type='text'
+                  name='email'
+                  placeholder={`your@email.com`}
+                  classNameInput='rounded-[10px] border border-solid
+                   border-white-A700 font-bold sm:pr-5 w-full font-euclid p-2 outline-none
+                    focus:border-gray-700'
+                  register={register}
+                  errorMessage={errors.email?.message}
+                />
+                {/* <Input
                   color='white_A700'
                   type='email'
                   name='email'
                   placeholder={`your@email.com`}
                   addonBefore=''
                   className='rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full '
-                />
+                /> */}
               </div>
-              <div className='flex flex-col items-start gap-2'>
+              <div className='flex flex-col items-start gap-0'>
                 <Heading size='lg' as='h3' className='!font-bold'>
                   Password
                 </Heading>
-                <Input
-                  color='white_A700'
+                <InputVerTwo
                   type='password'
                   name='password'
                   placeholder={`Input your password`}
-                  className='rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full '
+                  classNameInput='rounded-[10px] border border-solid
+                   border-white-A700 font-bold sm:pr-5 w-full font-euclid p-2 outline-none
+                    focus:border-gray-700'
+                  register={register}
+                  errorMessage={errors.password?.message}
                 />
               </div>
               <Button
@@ -73,7 +145,7 @@ const Register = () => {
               >
                 Sign in with FPT EDU
               </Button>
-            </div>
+            </form>
           </div>
         </div>
         <Footer />
@@ -82,4 +154,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login
