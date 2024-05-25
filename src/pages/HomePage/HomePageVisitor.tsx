@@ -5,12 +5,16 @@ import { DownOutlined } from '@ant-design/icons'
 import EventList from 'src/Components/EventLists/EventList'
 import Footer from 'src/Components/Footer/Footer'
 import { useQuery } from '@tanstack/react-query'
-import eventApi from 'src/apis/event.api'
+import axios from 'axios'
+import { EventList as EventListType } from 'src/@types/event.type'
 
 export default function HomePageVisitor() {
   const { data } = useQuery({
     queryKey: ['events'],
-    queryFn: () => eventApi.getListEvent()
+    queryFn: () =>
+      axios.get<EventListType[]>(
+        'https://server-for-fake-data.onrender.com/events'
+      )
   })
   console.log(data)
   return (

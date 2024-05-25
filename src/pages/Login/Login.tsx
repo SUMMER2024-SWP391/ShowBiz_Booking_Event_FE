@@ -1,5 +1,4 @@
 import { GoogleOutlined, UserOutlined } from '@ant-design/icons'
-import { Input } from 'antd'
 import { useForm } from 'react-hook-form'
 import { Button, Heading } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
@@ -8,15 +7,17 @@ import { LoginSchema, LoginSchemaYup } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
 import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
-import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
-import { AuthResponse } from 'src/@types/auth.type'
+import { ErrorResponse } from 'src/@types/utils.type'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { AppContext } from 'src/context/app.context'
+import authAPI from 'src/apis/auth.api'
 
-type FormData = LoginSchema
+export type FormData = LoginSchema
 
 const Login = () => {
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
   const navigate = useNavigate()
   const {
     register,
@@ -28,21 +29,17 @@ const Login = () => {
   })
 
   const loginMutation = useMutation({
-    mutationFn: async (body: FormData) => {
-      return axios
-        .post<
-          SuccessResponse<AuthResponse>
-        >('http://localhost:4000/users/login', body)
-        .then((res) => res.data)
-    }
+    mutationFn: (body: FormData) => authAPI.login(body)
   })
-
   const onSubmit = handleSubmit((data) => {
     loginMutation.mutate(data, {
       onSuccess: (data) => {
+        setIsAuthenticated(true)
+        setProfile(data.data.data.user)
         navigate('/')
       },
       onError: (error) => {
+        console.log(error)
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
           console.log(error.response?.data.errors)
           const formError = error.response?.data.errors

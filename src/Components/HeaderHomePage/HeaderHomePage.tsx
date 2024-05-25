@@ -4,11 +4,31 @@ import { Img } from '../Img/Img'
 import { Heading } from '../Heading/Heading'
 import { BellOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
+import { useMutation } from '@tanstack/react-query'
+import authAPI from 'src/apis/auth.api'
+import { AppContext } from 'src/context/app.context'
+import { useContext } from 'react'
+import path from 'src/constants/path'
+import { getRefreshTokenFromLS } from 'src/utils/auth'
 
 interface Props {
   className?: string
 }
 export default function Header({ ...props }: Props) {
+  const { setIsAuthenticated, isAuthenticated, setProfile } =
+    useContext(AppContext)
+  const logoutMutation = useMutation({
+    mutationFn: (refresh_token: string) => authAPI.logout(refresh_token),
+    onSuccess: () => {
+      setIsAuthenticated(false)
+      setProfile(null)
+    }
+  })
+
+  const handleLogout = () => {
+    logoutMutation.mutate(getRefreshTokenFromLS())
+  }
+
   return (
     <header
       {...props}
@@ -60,9 +80,23 @@ export default function Header({ ...props }: Props) {
         <a href=''>
           <BellOutlined className='!text-gray-500_02 h-[24px] w-[24px]' />
         </a>
-        <Button className='min-w-[69px] rounded-[10px] font-bold bg-blue_gray-900_03 text text-gray-500'>
-          Sign In
-        </Button>
+        {!isAuthenticated ? (
+          <Link
+            to={path.login}
+            className='w-20 h-8 rounded-[10px] font-bold bg-blue_gray-900_03 text border border-[#e5e7eb]
+             text-gray-500 flex justify-center items-center hover:bg-white-A700 hover:text-[#4096ff]
+             hover:border-[#e5e7eb]'
+          >
+            Sign Up
+          </Link>
+        ) : (
+          <Button
+            className='min-w-[69px] rounded-[10px] font-bold bg-blue_gray-900_03 text text-gray-500'
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        )}
       </div>
     </header>
   )
