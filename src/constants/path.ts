@@ -3,6 +3,7 @@ const path = {
   profile: '/profile',
   login: '/login',
   register: '/register',
-  logout: '/logout'
+  logout: '/logout',
+  eventDetail: '/event/:id'
 }
 export default path

@@ -24,7 +24,7 @@ export default function Header({ ...props }: Props) {
       <div className='flex self-center ]'>
         <ul className='flex flex-warp gap-[45px]'>
           <li>
-            <a href='#'>
+            <a href='/'>
               <Heading as='h6' className='!text-gray-500_02'>
                 Home
               </Heading>
