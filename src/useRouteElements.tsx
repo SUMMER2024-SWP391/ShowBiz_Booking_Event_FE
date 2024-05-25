@@ -1,6 +1,6 @@
 import { useRoutes } from 'react-router-dom'
 import path from './constants/path'
-import Register from './pages/Register/Register'
+import Login from './pages/Login/Login'
 import HomePageVisitor from './pages/HomePage/HomePageVisitor'
 
 const useRouteElements = () => {
@@ -11,7 +11,7 @@ const useRouteElements = () => {
     },
     {
       path: path.register,
-      element: <Register />
+      element: <Login />
     }
   ])
   return routeElements
