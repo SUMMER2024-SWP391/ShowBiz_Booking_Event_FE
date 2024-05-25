@@ -1,8 +1,14 @@
-const Footer = () => {
+interface Props {
+  className?: string
+}
+const Footer = ({ ...props }: Props) => {
   return (
-    <footer className='py-16 text-nav_color container-xs'>
-      <hr />
-      <div className='mx-auto px-4 flex justify-around capitalize'>
+    <div
+      {...props}
+      className={`${props.className} py-16 text-nav_color w-full`}
+    >
+      <div className='h-px w-full self-stretch bg-white-A700' />
+      <div className='mx-auto px-4 flex justify-around capitalize container-xs'>
         <div>
           <div className='mt-4 mb-7 font-bold hover:text-lightgray'>
             Product
@@ -92,7 +98,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   )
 }
 
