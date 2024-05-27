@@ -1,4 +1,4 @@
-import { GoogleOutlined, UserOutlined } from '@ant-design/icons'
+import { UserOutlined } from '@ant-design/icons'
 import { useForm } from 'react-hook-form'
 import { Button, Heading } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
@@ -9,10 +9,11 @@ import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorResponse } from 'src/@types/utils.type'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from 'src/context/app.context'
 import authAPI from 'src/apis/auth.api'
+import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
 
 export type FormData = LoginSchema
 
@@ -134,14 +135,13 @@ const Login = () => {
                 Continue with Email
               </Button>
               <div className='h-px w-full self-stretch bg-white-A700' />
-              <Button
+              <Link
+                to={googleAuthUrl}
                 color='blue_gray_900'
-                size='xl'
-                leftIcon={<GoogleOutlined className='h-[14px] w-[14px]' />}
                 className='min-w-[345px] gap-1.5 rounded-[10px] border border-solid border-blue_gray-100_04 font-semibold sm:px-5 text-white-A700'
               >
-                Sign in with FPT EDU
-              </Button>
+                Sign in with FPT EDU Email
+              </Link>
             </form>
           </div>
         </div>

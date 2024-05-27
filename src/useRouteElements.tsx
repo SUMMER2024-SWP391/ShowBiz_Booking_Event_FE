@@ -6,6 +6,7 @@ import EventDetail from './pages/EventDetailPage/EventDetail'
 import { AppContext } from './context/app.context'
 import { useContext } from 'react'
 import Profile from './pages/Profile/Profile'
+import LoginOauthGoogle from './Components/LoginOauthGoogle/LoginOauthGoogle'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -46,6 +47,10 @@ const useRouteElements = () => {
         {
           path: path.login,
           element: <Login />
+        },
+        {
+          path: path.loginOauthGoogle,
+          element: <LoginOauthGoogle />
         }
       ]
     }

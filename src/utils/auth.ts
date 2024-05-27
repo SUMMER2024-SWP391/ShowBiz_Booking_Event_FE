@@ -1,6 +1,6 @@
 import { User } from 'src/@types/users.type'
 
-export const setAccessTokenToLS = (
+export const setTokenToLS = (
   access_token: string,
   refresh_token: string
 ): void => {
