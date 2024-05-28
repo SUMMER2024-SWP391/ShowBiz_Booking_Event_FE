@@ -5,11 +5,10 @@ import {
   RightOutlined,
   YoutubeOutlined
 } from '@ant-design/icons'
-import React from 'react'
 import { Button, Heading, Img, Text } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
-import thumnal from 'src/assets/images/eventlogo.jpg'
+// import thumnal from 'src/assets/images/eventlogo.jpg'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import { useParams } from 'react-router-dom'

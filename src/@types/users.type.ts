@@ -1,15 +1,17 @@
+import { UserRole, UserVerifyStatus } from './enum'
+
 export interface User {
   id: string
   name: string
   email?: string
-  status: string
+  status: UserVerifyStatus
   password?: string
   phone?: string
   dateOfBirth?: string
   points?: string
   createdAt?: string
   updatedAt?: string
-  role: string
+  role: UserRole
 }
 
 export interface EventOperator {
@@ -18,5 +20,5 @@ export interface EventOperator {
   password: string
   createAt: Date
   name: string
-  role?: string
+  role?: UserRole
 }
