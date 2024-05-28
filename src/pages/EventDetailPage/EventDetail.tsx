@@ -12,7 +12,19 @@ import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import thumnal from 'src/assets/images/eventlogo.jpg'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+
 export default function EventDetail() {
+  const { id } = useParams()
+  const { data } = useQuery({
+    queryKey: ['student', id],
+    queryFn: () =>
+      axios.get(`https://server-for-fake-data.onrender.com/events/${id}`)
+  })
+  const event = data?.data
+  const time = event.dateEvent.split('/')
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
       <Header className='bg-blue_gray-900' />
@@ -21,7 +33,8 @@ export default function EventDetail() {
           <div className='flex w-[41%] flex-row items-start pb-[31px] md:w-full sm:pb-5 container-xs'>
             <div className='mt-[50px] self-stretch w-[40%] mr-36'>
               <Img
-                src={thumnal}
+                // src={thumnal}
+                src={event.imageUrl}
                 alt='thumnal_event'
                 className='h-[378px] w-[375px] rounded-[30px] object-cover mb-[40px]'
               />
@@ -71,7 +84,8 @@ export default function EventDetail() {
                     <div className='flex w-[83%] flex-wrap items-start gap-[18px] md:w-full'>
                       <Img className='h-[24px] w-[24px] rounded-[50%] bg-red' />
                       <Heading size='md' as='h1' className='!font-monterat'>
-                        Câu Lạc Bộ Truyền Thông Cóc Sài Gòn
+                        {/* Câu Lạc Bộ Truyền Thông Cóc Sài Gòn */}
+                        {event.eventOperatorName}
                       </Heading>
                       <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
                     </div>
@@ -127,25 +141,30 @@ export default function EventDetail() {
                   as='h3'
                   className='mt-[11px] w-full !font-monterat leading-[39px]'
                 >
-                  SaiGon Talk kỳ 8: Feelink - Feel Cảm Xúc, Link Sự Nghiệp
+                  {/* SaiGon Talk kỳ 8: Feelink - Feel Cảm Xúc, Link Sự Nghiệp */}
+                  {event.eventName}
                 </Heading>
                 <div className='mt-[15px] flex items-center gap-[21px]'>
                   <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
                     <div className='flex rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
                       <Heading size='xs' as='h4' className='!font-monterat'>
-                        MAY
+                        {/* MAY */}
+                        {time[1]}
                       </Heading>
                     </div>
                     <Text size='md' as='p' className='!font-monterat'>
-                      9
+                      {/* 9 */}
+                      {time[0]}
                     </Text>
                   </div>
                   <div className='flex flex-col items-start gap-1 self-start'>
                     <Heading size='lg' as='h5'>
-                      Thursday, May 9
+                      {/* Thursday, May 9 */}
+                      {event.dateEvent}
                     </Heading>
                     <Text size='xs' as='p' className='!font-monterat'>
-                      5:30 PM - 8:30 PM
+                      {/* 5:30 PM - 8:30 PM */}
+                      {event.timeStart} - {event.timeEnd}
                     </Text>
                   </div>
                 </div>
@@ -165,7 +184,8 @@ export default function EventDetail() {
                       Register to See Address
                     </Heading>
                     <Text size='xs' as='p' className='!font-monterat'>
-                      Thành phố Thủ Đức, Thành Phố Hồ Chí Minh
+                      {/* Thành phố Thủ Đức, Thành Phố Hồ Chí Minh */}
+                      {event.address}
                     </Text>
                   </div>
                 </div>
@@ -200,7 +220,7 @@ export default function EventDetail() {
                     className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
                   >
                     <>
-                      ​Phát triển IQ luôn là xu hướng chung của xã hội hiện đại
+                      {/* ​Phát triển IQ luôn là xu hướng chung của xã hội hiện đại
                       đề cao, trong khi vai trò của chỉ số cảm xúc (EQ) - một
                       trong những yếu tố then chốt dẫn đến thành công, vẫn chưa
                       được nhận thức đầy đủ. Saigon Talk kỳ 8 chính thức quay
@@ -256,7 +276,8 @@ export default function EventDetail() {
                       <br />
                       ​Fanpage: Câu lạc bộ Truyền thông Cóc Sài Gòn
                       <br /> ​Mail: saigontalk.csg@gmail.com <br />
-                      ​SĐT: 039 564 0607 (Project Leader: Hoàng Thiên Hương)
+                      ​SĐT: 039 564 0607 (Project Leader: Hoàng Thiên Hương) */}
+                      {event.description}
                     </>
                   </Text>
                   <div className='mt-9 flex flex-col items-start gap-2 self-stretch'>

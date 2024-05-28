@@ -94,6 +94,7 @@ export default function HomePageVisitor() {
                                 key={'homage' + event.event_name}
                               >
                                 <EventList
+                                  id={event.id}
                                   time={event.time_start}
                                   nameEvent={event.event_name}
                                   event_operator_name={

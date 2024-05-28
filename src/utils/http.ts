@@ -24,6 +24,9 @@ class Http {
     })),
       this.instance.interceptors.request.use(
         (config) => {
+          this.accessToken = this.accessToken
+            ? this.accessToken
+            : getAccessTokenFromLS()
           if (this.accessToken) {
             config.headers.Authorization = `Bearer ${this.accessToken}`
             return config
@@ -38,8 +41,11 @@ class Http {
       (response) => {
         const endPoint = response.config.url?.split('/').pop()
         if (endPoint === 'login') {
-          this.accessToken = response.data.data.token.access_token
-          setTokenToLS(this.accessToken, response.data.data.token.refresh_token)
+          this.accessToken = getAccessTokenFromLS()
+          setTokenToLS(
+            this.accessToken,
+            response.data.data.result.refresh_token
+          )
           setProfileToLS(response.data.data.user)
         } else if (endPoint === 'logout') {
           this.accessToken = ''

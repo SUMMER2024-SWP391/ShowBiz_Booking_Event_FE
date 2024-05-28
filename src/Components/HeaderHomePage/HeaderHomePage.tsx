@@ -18,15 +18,19 @@ export default function Header({ ...props }: Props) {
   const { setIsAuthenticated, isAuthenticated, setProfile } =
     useContext(AppContext)
   const logoutMutation = useMutation({
-    mutationFn: (refresh_token: string) => authAPI.logout(refresh_token),
+    mutationFn: (refresh_token: string) => authAPI.logout({ refresh_token }),
     onSuccess: () => {
       setIsAuthenticated(false)
       setProfile(null)
+    },
+    onError: (error) => {
+      console.log(error)
     }
   })
 
   const handleLogout = () => {
-    logoutMutation.mutate(getRefreshTokenFromLS())
+    const refresh_token = getRefreshTokenFromLS()
+    logoutMutation.mutate(refresh_token)
   }
 
   return (

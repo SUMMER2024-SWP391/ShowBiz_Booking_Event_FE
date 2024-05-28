@@ -37,7 +37,7 @@ const useRouteElements = () => {
       ]
     },
     {
-      path: path.eventDetail,
+      path: `/events/:id`,
       element: <EventDetail />
     },
     {
