@@ -1,5 +1,5 @@
 export interface Event {
-  event_id: string
+  id: string
   event_name: string
   capacity: number
   ticket: string
@@ -18,7 +18,7 @@ export interface Event {
 
 export type EventList = Pick<
   Event,
-  | 'event_id'
+  | 'id'
   | 'event_operator_name'
   | 'event_operator_id'
   | 'capacity'

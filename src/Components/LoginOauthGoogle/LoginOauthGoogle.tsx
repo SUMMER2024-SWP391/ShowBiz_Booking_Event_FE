@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppContext } from 'src/context/app.context'
 import { setTokenToLS } from 'src/utils/auth'
 const LoginOauthGoogle = () => {
-  const { setIsAuthenticated, setProfile } = useContext(AppContext)
+  const { setIsAuthenticated } = useContext(AppContext)
   const [params] = useSearchParams()
   const navigate = useNavigate()
   useEffect(() => {

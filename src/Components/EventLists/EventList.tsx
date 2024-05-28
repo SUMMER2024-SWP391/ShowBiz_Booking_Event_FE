@@ -3,8 +3,12 @@ import { Img } from '../Img/Img'
 import EventLogo from '../../assets/images/eventlogo.jpg'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import LogoEventOperator from '../../assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
+import { Button } from 'antd'
+import path from 'src/constants/path'
+import { Link } from 'react-router-dom'
 interface Props {
   className?: string
+  id: string
   time?: string
   nameEvent?: string
   event_operator_name?: string
@@ -13,6 +17,7 @@ interface Props {
 }
 
 export default function EventList({
+  id,
   time = '9:30 AM',
   nameEvent = 'Saigon Talk #8: Feelink cảm xúc',
   event_operator_name = 'CLB CSG Event',
@@ -26,7 +31,7 @@ export default function EventList({
       className={`${props.className} flex items-center pt-4 pb-[26px] px-7 sm:pb-6 border-white-A700 border border-solid bg-blue_gray-900_03 flex-1 rounded-[15px]`}
     >
       <div className='flex w-full items-start justify-between gap-5 sm:flex-row'>
-        <div className='flex flex-col items-start'>
+        <div className='flex flex-col items-start justify-end h-full'>
           <Heading size='lg' as='p' className='!text-blue_gray-400'>
             {time}
           </Heading>
@@ -62,11 +67,27 @@ export default function EventList({
             </Heading>
           </div>
         </div>
-        <Img
-          src={imageUrl}
-          alt='banner-event'
-          className='mt-[7px] w-[135px] h-[135px] rounded-[15px] object-cover justify-end'
-        />
+        <div>
+          <div>
+            <Img
+              src={imageUrl}
+              alt='banner-event'
+              className='mt-[7px] w-[135px] h-[135px] rounded-[15px] object-cover justify-end'
+            />
+          </div>
+          <div className='flex justify-center items-center'>
+            <Button className=' text-white-A700 bg-black-900 mr-2'>
+              Register
+            </Button>
+            <Link
+              to={`/events/${id}`}
+              className=' text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+              hover:border-[#e5e7eb]'
+            >
+              Detail
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   )

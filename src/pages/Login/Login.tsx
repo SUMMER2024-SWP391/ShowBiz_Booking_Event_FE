@@ -138,7 +138,9 @@ const Login = () => {
               <Link
                 to={googleAuthUrl}
                 color='blue_gray_900'
-                className='min-w-[345px] gap-1.5 rounded-[10px] border border-solid border-blue_gray-100_04 font-semibold sm:px-5 text-white-A700'
+                className='min-w-[345px] p-5 h-[37px] gap-1.5 rounded-[10px] border border-solid
+                 border-blue_gray-100_04 font-semibold sm:px-5 text-white-A700 text-center 
+                 flex justify-center items-center hover:bg-white-A700 hover:text-black-900'
               >
                 Sign in with FPT EDU Email
               </Link>
