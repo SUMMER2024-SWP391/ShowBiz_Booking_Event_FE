@@ -9,11 +9,12 @@ import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorResponse } from 'src/@types/utils.type'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from 'src/context/app.context'
 import authAPI from 'src/apis/auth.api'
-import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { auth } from '../../../firebase'
 
 export type FormData = LoginSchema
 
@@ -28,6 +29,12 @@ const Login = () => {
   } = useForm<FormData>({
     resolver: yupResolver(LoginSchemaYup)
   })
+
+  const onSignInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider()
+    const user = await signInWithPopup(auth, provider)
+    console.log(user)
+  }
 
   const loginMutation = useMutation({
     mutationFn: (body: FormData) => authAPI.login(body)
@@ -135,15 +142,16 @@ const Login = () => {
                 Continue with Email
               </Button>
               <div className='h-px w-full self-stretch bg-white-A700' />
-              <Link
-                to={googleAuthUrl}
+              <Button
+                onClick={onSignInWithGoogle}
                 color='blue_gray_900'
+                size='xl'
                 className='min-w-[345px] p-5 h-[37px] gap-1.5 rounded-[10px] border border-solid
                  border-blue_gray-100_04 font-semibold sm:px-5 text-white-A700 text-center 
                  flex justify-center items-center hover:bg-white-A700 hover:text-black-900'
               >
                 Sign in with FPT EDU Email
-              </Link>
+              </Button>
             </form>
           </div>
         </div>
