@@ -7,6 +7,7 @@ import { AppContext } from './context/app.context'
 import { useContext } from 'react'
 import Profile from './pages/Profile/Profile'
 import LoginOauthGoogle from './Components/LoginOauthGoogle/LoginOauthGoogle'
+import DashboardAdmin from './pages/DashboardAdmin/DashboardAdmin'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -25,6 +26,10 @@ const useRouteElements = () => {
       path: '/',
       index: true,
       element: <HomePageVisitor />
+    },
+    {
+      path: '/dashboard',
+      element: <DashboardAdmin />
     },
     {
       path: '',

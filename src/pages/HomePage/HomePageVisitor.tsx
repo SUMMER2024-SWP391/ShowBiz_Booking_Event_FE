@@ -7,6 +7,7 @@ import Footer from 'src/Components/Footer/Footer'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { EventList as EventListType } from 'src/@types/event.type'
+import { Link } from 'react-router-dom'
 
 export default function HomePageVisitor() {
   const { data } = useQuery({
@@ -16,7 +17,6 @@ export default function HomePageVisitor() {
         'https://server-for-fake-data.onrender.com/events'
       )
   })
-  console.log(data)
   return (
     <>
       <div className='w-full bg-gray-900 pb-[376px] md:pb-5'>
@@ -102,6 +102,23 @@ export default function HomePageVisitor() {
                                   }
                                   address={event.address}
                                   imageUrl={event.image_url}
+                                  renderProps={
+                                    <>
+                                      <Button
+                                        className='text-white-A700 bg-black-900 h-9 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                    hover:border-[#e5e7eb] mr-2'
+                                      >
+                                        Register
+                                      </Button>
+                                      <Link
+                                        to={`/events/${index}`}
+                                        className=' text-white-A700 bg-black-900 h-9 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                    hover:border-[#e5e7eb]'
+                                      >
+                                        Detail
+                                      </Link>
+                                    </>
+                                  }
                                 />
                               </div>
                             )
