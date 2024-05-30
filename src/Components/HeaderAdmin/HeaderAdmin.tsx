@@ -1,20 +1,21 @@
+import { BellOutlined, SearchOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import { Heading } from '../Heading/Heading'
+import { getRefreshTokenFromLS } from 'src/utils/auth'
+import { useContext } from 'react'
+import { AppContext } from 'src/context/app.context'
+import authAPI from 'src/apis/auth.api'
+import { useMutation } from '@tanstack/react-query'
 import LOGO from '../../assets/img/Logo EventBooking (1).png'
 import { Img } from '../Img/Img'
-import { Heading } from '../Heading/Heading'
-import { BellOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
-import { useMutation } from '@tanstack/react-query'
-import authAPI from 'src/apis/auth.api'
-import { AppContext } from 'src/context/app.context'
-import { useContext } from 'react'
 import path from 'src/constants/path'
-import { getRefreshTokenFromLS } from 'src/utils/auth'
 
 interface Props {
   className?: string
 }
-export default function Header({ ...props }: Props) {
+
+const HeaderAdmin = ({ ...props }: Props) => {
   const { setIsAuthenticated, isAuthenticated, setProfile } =
     useContext(AppContext)
   const logoutMutation = useMutation({
@@ -50,28 +51,28 @@ export default function Header({ ...props }: Props) {
           <li>
             <a href='/'>
               <Heading as='h6' className='!text-gray-500_02 hover:text-cyan-50'>
-                Home
+                Manage Event
               </Heading>
             </a>
           </li>
           <li>
             <a href='#'>
               <Heading as='h6' className='!text-gray-500_02 hover:text-cyan-50'>
-                My Event
+                Visitor
               </Heading>
             </a>
           </li>
           <li>
             <a href='#'>
               <Heading as='h6' className='!text-gray-500_02 hover:text-cyan-50'>
-                Calendar
+                Event operator
               </Heading>
             </a>
           </li>
           <li>
             <a href='#'>
               <Heading as='h6' className='!text-gray-500_02 hover:text-cyan-50'>
-                Events
+                More
               </Heading>
             </a>
           </li>
@@ -105,3 +106,5 @@ export default function Header({ ...props }: Props) {
     </header>
   )
 }
+
+export default HeaderAdmin

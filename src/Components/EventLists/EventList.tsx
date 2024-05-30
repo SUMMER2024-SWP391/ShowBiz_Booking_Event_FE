@@ -3,16 +3,16 @@ import { Img } from '../Img/Img'
 import EventLogo from '../../assets/images/eventlogo.jpg'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import LogoEventOperator from '../../assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
-import { Button } from 'antd'
-import { Link } from 'react-router-dom'
+import React from 'react'
 interface Props {
   className?: string
-  id: string
+  id?: string
   time?: string
   nameEvent?: string
   event_operator_name?: string
   address?: string
   imageUrl?: string
+  renderProps?: React.ReactNode
 }
 
 export default function EventList({
@@ -22,6 +22,7 @@ export default function EventList({
   event_operator_name = 'CLB CSG Event',
   address = 'FPT University',
   imageUrl = EventLogo,
+  renderProps,
   ...props
 }: Props) {
   return (
@@ -74,17 +75,8 @@ export default function EventList({
               className='mt-[7px] w-[135px] h-[135px] rounded-[15px] object-cover justify-end'
             />
           </div>
-          <div className='flex justify-center items-center'>
-            <Button className=' text-white-A700 bg-black-900 mr-2'>
-              Register
-            </Button>
-            <Link
-              to={`/events/${id}`}
-              className=' text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
-              hover:border-[#e5e7eb]'
-            >
-              Detail
-            </Link>
+          <div className='flex justify-center items-center mt-5'>
+            {renderProps}
           </div>
         </div>
       </div>

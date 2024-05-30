@@ -23,7 +23,7 @@ export default function EventDetail() {
       axios.get(`https://server-for-fake-data.onrender.com/events/${id}`)
   })
   const event = data?.data
-  const time = event.dateEvent.split('/')
+  console.log(event)
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
       <Header className='bg-blue_gray-900' />
@@ -147,19 +147,17 @@ export default function EventDetail() {
                   <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
                     <div className='flex rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
                       <Heading size='xs' as='h4' className='!font-monterat'>
-                        {/* MAY */}
-                        {time[1]}
+                        MAY
+                        {/* {time[1]} */}
                       </Heading>
                     </div>
                     <Text size='md' as='p' className='!font-monterat'>
-                      {/* 9 */}
-                      {time[0]}
+                      9{/* {time[0]} */}
                     </Text>
                   </div>
                   <div className='flex flex-col items-start gap-1 self-start'>
                     <Heading size='lg' as='h5'>
-                      {/* Thursday, May 9 */}
-                      {event.dateEvent}
+                      Thursday, May 9{/* {event.dateEvent} */}
                     </Heading>
                     <Text size='xs' as='p' className='!font-monterat'>
                       {/* 5:30 PM - 8:30 PM */}
