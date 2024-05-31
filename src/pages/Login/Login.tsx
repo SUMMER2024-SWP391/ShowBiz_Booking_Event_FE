@@ -9,12 +9,13 @@ import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorResponse } from 'src/@types/utils.type'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from 'src/context/app.context'
 import authAPI from 'src/apis/auth.api'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../../firebase'
+import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
 
 export type FormData = LoginSchema
 
@@ -142,7 +143,7 @@ const Login = () => {
                 Continue with Email
               </Button>
               <div className='h-px w-full self-stretch bg-white-A700' />
-              <Button
+              {/* <Button
                 onClick={onSignInWithGoogle}
                 color='blue_gray_900'
                 size='xl'
@@ -151,7 +152,13 @@ const Login = () => {
                  flex justify-center items-center hover:bg-white-A700 hover:text-black-900'
               >
                 Sign in with FPT EDU Email
-              </Button>
+              </Button> */}
+              <Link
+                to={googleAuthUrl}
+                className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white'
+              >
+                Sign in with FPT EDU Email
+              </Link>
             </form>
           </div>
         </div>
