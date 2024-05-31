@@ -7,6 +7,8 @@ import { useContext } from 'react'
 import Profile from './pages/Profile/Profile'
 import LoginOauthGoogle from './Components/LoginOauthGoogle/LoginOauthGoogle'
 import DashboardAdmin from './pages/DashboardAdmin/DashboardAdmin'
+import { EventOperatorHome } from './pages/EventOperatorHome/EventOperatorHome'
+import { Events } from './pages/Events/Events'
 import EventDetailPage from './pages/EventDetailPage/EventDetail'
 
 function ProtectedRoute() {
@@ -30,6 +32,14 @@ const useRouteElements = () => {
     {
       path: '/dashboard',
       element: <DashboardAdmin />
+    },
+    {
+      path: '/eventoperator',
+      element: <EventOperatorHome />
+    },
+    {
+      path: '/eventoperator/Events',
+      element: <Events />
     },
     {
       path: '',
