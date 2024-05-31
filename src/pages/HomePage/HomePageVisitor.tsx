@@ -79,10 +79,7 @@ export default function HomePageVisitor() {
                     <div className='flex flex-row items-start gap-9 md:flex-col'>
                       <div className='mt-3 flex flex-1 flex-col gap-[30px] md:self-stretch'>
                         {data?.data.data.events.map((event) => (
-                          <div
-                            className='flex flex-1'
-                            key={'homage' + event._id}
-                          >
+                          <div className='flex flex-1' key={event._id}>
                             <EventList
                               id={event._id}
                               time={event.time_start}
