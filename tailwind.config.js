@@ -113,6 +113,7 @@ export default {
     }
   },
   plugins: [
+    require('daisyui'),
     plugin(function ({ addComponents, theme }) {
       addComponents({
         '.container': {
