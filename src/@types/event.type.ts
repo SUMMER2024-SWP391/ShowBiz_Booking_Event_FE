@@ -1,29 +1,30 @@
+import { User } from './users.type'
+
 export interface Event {
-  id: string
-  event_name: string
+  _id: string
+  name: string
   capacity: number
   ticket: string
   description: string
   type_event: string
-  date_event: Date
+  date_event: string
   time_start: string
   time_end: string
   address: string
-  image_url: string
-  event_operator_id: string
-  event_operator_name: string
+  image: string
+  event_operator: Pick<User, '_id' | 'user_name' | 'phone_number' | 'email'>
   status: string
   calendarId: string
+  location: string
 }
 
 export type EventList = Pick<
   Event,
-  | 'id'
-  | 'event_operator_name'
-  | 'event_operator_id'
+  | '_id'
+  | 'event_operator'
   | 'capacity'
-  | 'event_name'
-  | 'image_url'
+  | 'name'
+  | 'image'
   | 'date_event'
   | 'ticket'
   | 'time_end'

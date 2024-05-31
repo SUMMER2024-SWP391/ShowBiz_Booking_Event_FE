@@ -5,18 +5,15 @@ import { DownOutlined } from '@ant-design/icons'
 import EventList from 'src/Components/EventLists/EventList'
 import Footer from 'src/Components/Footer/Footer'
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
-import { EventList as EventListType } from 'src/@types/event.type'
 import { Link } from 'react-router-dom'
+import eventApi from 'src/apis/event.api'
 
 export default function HomePageVisitor() {
   const { data } = useQuery({
     queryKey: ['events'],
-    queryFn: () =>
-      axios.get<EventListType[]>(
-        'https://server-for-fake-data.onrender.com/events'
-      )
+    queryFn: () => eventApi.getListEvent()
   })
+  console.log(data?.data.data.events)
   return (
     <>
       <div className='w-full bg-gray-900 pb-[376px] md:pb-5'>
@@ -81,48 +78,40 @@ export default function HomePageVisitor() {
                   <div className='flex flex-col gap-0.5'>
                     <div className='flex flex-row items-start gap-9 md:flex-col'>
                       <div className='mt-3 flex flex-1 flex-col gap-[30px] md:self-stretch'>
-                        {/* {[...Array(2)].map((d, index) => (
-                          <div className='flex flex-1' key={'homepage' + index}>
-                            <EventList />
-                          </div>
-                        ))} */}
-                        {data?.data.map(
-                          (event, index) =>
-                            index < 10 && (
-                              <div
-                                className='flex flex-1'
-                                key={'homage' + event.event_name}
-                              >
-                                <EventList
-                                  id={event.id}
-                                  time={event.time_start}
-                                  nameEvent={event.event_name}
-                                  event_operator_name={
-                                    event.event_operator_name
-                                  }
-                                  address={event.address}
-                                  imageUrl={event.image_url}
-                                  renderProps={
-                                    <>
-                                      <Button
-                                        className='text-white-A700 bg-black-900 h-9 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                        {data?.data.data.events.map((event) => (
+                          <div
+                            className='flex flex-1'
+                            key={'homage' + event._id}
+                          >
+                            <EventList
+                              id={event._id}
+                              time={event.time_start}
+                              nameEvent={event.name}
+                              event_operator_name={
+                                event.event_operator.user_name
+                              }
+                              address={event.address}
+                              imageUrl={event.image}
+                              renderProps={
+                                <>
+                                  <button
+                                    className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
                     hover:border-[#e5e7eb] mr-2'
-                                      >
-                                        Register
-                                      </Button>
-                                      <Link
-                                        to={`/events/${index}`}
-                                        className=' text-white-A700 bg-black-900 h-9 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                                  >
+                                    Register
+                                  </button>
+                                  <Link
+                                    to={`/events/${event._id}`}
+                                    className=' text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
                     hover:border-[#e5e7eb]'
-                                      >
-                                        Detail
-                                      </Link>
-                                    </>
-                                  }
-                                />
-                              </div>
-                            )
-                        )}
+                                  >
+                                    Detail
+                                  </Link>
+                                </>
+                              }
+                            />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>

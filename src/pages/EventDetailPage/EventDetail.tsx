@@ -8,22 +8,23 @@ import {
 import { Button, Heading, Img, Text } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
-// import thumnal from 'src/assets/images/eventlogo.jpg'
+import thumnal from 'src/assets/images/eventlogo.jpg'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
+import eventApi from 'src/apis/event.api'
+import { Event } from 'src/@types/event.type'
 
 export default function EventDetail() {
   const { id } = useParams()
   const { data } = useQuery({
     queryKey: ['student', id],
-    queryFn: () =>
-      axios.get(`https://server-for-fake-data.onrender.com/events/${id}`)
+    queryFn: () => eventApi.getEventById(id as string)
   })
-  const event = data?.data
+  const event = data?.data.data.event as Event
   console.log(event)
+
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
       <Header className='bg-blue_gray-900' />
@@ -33,7 +34,7 @@ export default function EventDetail() {
             <div className='mt-[50px] self-stretch w-[40%] mr-36'>
               <Img
                 // src={thumnal}
-                src={event.imageUrl}
+                src={event.image}
                 alt='thumnal_event'
                 className='h-[378px] w-[375px] rounded-[30px] object-cover mb-[40px]'
               />
@@ -55,7 +56,7 @@ export default function EventDetail() {
                       </Text>
                       <Text size='s' as='p'>
                         <span className='font-semibold text-white-A700'>
-                          CSG - Event
+                          {event.name}
                         </span>
                       </Text>
                     </div>
@@ -83,8 +84,8 @@ export default function EventDetail() {
                     <div className='flex w-[83%] flex-wrap items-start gap-[18px] md:w-full'>
                       <Img className='h-[24px] w-[24px] rounded-[50%] bg-red' />
                       <Heading size='md' as='h1' className='!font-monterat'>
-                        {/* Câu Lạc Bộ Truyền Thông Cóc Sài Gòn */}
-                        {event.eventOperatorName}
+                        Câu Lạc Bộ Truyền Thông Cóc Sài Gòn
+                        {event.event_operator.user_name}
                       </Heading>
                       <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
                     </div>
@@ -141,27 +142,29 @@ export default function EventDetail() {
                   className='mt-[11px] w-full !font-monterat leading-[39px]'
                 >
                   {/* SaiGon Talk kỳ 8: Feelink - Feel Cảm Xúc, Link Sự Nghiệp */}
-                  {event.eventName}
+                  {event.name}
                 </Heading>
                 <div className='mt-[15px] flex items-center gap-[21px]'>
                   <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
                     <div className='flex rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
                       <Heading size='xs' as='h4' className='!font-monterat'>
-                        MAY
-                        {/* {time[1]} */}
+                        {event.date_event
+                          ? event.date_event.split('/')[0]
+                          : 'MAY'}
                       </Heading>
                     </div>
                     <Text size='md' as='p' className='!font-monterat'>
-                      9{/* {time[0]} */}
+                      {event.date_event ? event.date_event.split('/')[1] : '0'}
                     </Text>
                   </div>
                   <div className='flex flex-col items-start gap-1 self-start'>
                     <Heading size='lg' as='h5'>
-                      Thursday, May 9{/* {event.dateEvent} */}
+                      {/* Thursday, May 9 */}
+                      {event.date_event}
                     </Heading>
                     <Text size='xs' as='p' className='!font-monterat'>
                       {/* 5:30 PM - 8:30 PM */}
-                      {event.timeStart} - {event.timeEnd}
+                      {event.time_start} - {event.time_end}
                     </Text>
                   </div>
                 </div>
@@ -279,7 +282,7 @@ export default function EventDetail() {
                   </Text>
                   <div className='mt-9 flex flex-col items-start gap-2 self-stretch'>
                     <Text size='s' as='p'>
-                      Location
+                      {`Location ${event.location}`}
                     </Text>
                     <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
                   </div>

@@ -7,5 +7,5 @@ export type AuthResponse = SuccessResponse<{
     refreshToken: string
     expiresInOfAccessToken: number
   }
-  user: Pick<User, 'id' | 'name' | 'role' | 'status'>
+  user: Pick<User, '_id' | 'user_name' | 'role' | 'status'>
 }>
