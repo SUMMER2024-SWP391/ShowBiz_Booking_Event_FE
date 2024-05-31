@@ -16,6 +16,8 @@ import authAPI from 'src/apis/auth.api'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../../firebase'
 import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
+import { UserRole } from 'src/@types/enum'
+import path from 'src/constants/path'
 
 export type FormData = LoginSchema
 
@@ -45,7 +47,13 @@ const Login = () => {
       onSuccess: (data) => {
         setIsAuthenticated(true)
         setProfile(data.data.data.user)
-        navigate('/')
+        if (data.data.data.user.role == UserRole.Admin) {
+          navigate('/dashboard')
+        } else if (data.data.data.user.role == UserRole.EventOperator) {
+          navigate('/eventoperator')
+        } else {
+          navigate('/')
+        }
       },
       onError: (error) => {
         console.log(error)

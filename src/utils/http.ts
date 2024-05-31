@@ -41,7 +41,8 @@ class Http {
       (response) => {
         const endPoint = response.config.url?.split('/').pop()
         if (endPoint === 'login') {
-          this.accessToken = getAccessTokenFromLS()
+          this.accessToken = response.data.data.result.access_token
+
           setTokenToLS(
             this.accessToken,
             response.data.data.result.refresh_token
