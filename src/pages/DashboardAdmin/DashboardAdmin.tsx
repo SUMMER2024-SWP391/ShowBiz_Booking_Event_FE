@@ -1,11 +1,18 @@
-import { Button, Heading, Img, Text } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
 import Banner from '../../assets/images/banner.png'
 import HeaderAdmin from 'src/Components/HeaderAdmin/HeaderAdmin'
 import EventList from 'src/Components/EventLists/EventList'
 import { Link } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import eventApi from 'src/apis/event.api'
+import ButtonVerTwo from 'src/Components/ButtonVerTwo/ButtonVerTwo'
+import { Heading, Img } from 'src/Components'
 
 const DashboardAdmin = () => {
+  const { data } = useQuery({
+    queryKey: ['event'],
+    queryFn: () => eventApi.getListEvent()
+  })
   return (
     <div className='w-full bg-gray-900 pb-[376px] md:pb-5'>
       <div className='flex flex-col items-center gap-14 sm:gap-7'>
@@ -24,37 +31,46 @@ const DashboardAdmin = () => {
             </div>
             <div className='w-[96%] md:w-full'>
               <div className='flex flex-col'>
-                <div className='flex w-[14%] items-end md:w-full'>
-                  <div className='mb-1.5 h-[6px] w-[6px] rounded-[3px] border border-solid border-white-A700' />
-                  <Heading
-                    size='xl'
-                    as='h2'
-                    className='ml-[9px] !text-white-A700'
-                  >
-                    Today
-                  </Heading>
-                  <Text as='p' className='ml-1.5'>
-                    Saturday
-                  </Text>
+                <div className='flex w-[14%] items-center md:w-full justify-center'>
+                  <ButtonVerTwo
+                    children='All Event'
+                    className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                    hover:border-[#e5e7eb] mr-2'
+                  />
+                  <ButtonVerTwo
+                    children='Pending Event'
+                    className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                    hover:border-[#e5e7eb] mr-2'
+                  />
                 </div>
                 <div className='flex flex-col gap-0.5'>
                   <div className='flex flex-row items-start gap-9 md:flex-col'>
                     <div className='mt-3 flex flex-1 flex-col gap-[30px] md:self-stretch'>
-                      {[...Array(2)].map((_, index) => (
-                        <div className='flex flex-1' key={'homepage' + index}>
+                      {data?.data.data.events.map((event) => (
+                        <div className='flex flex-1' key={event._id}>
                           <EventList
+                            id={event._id}
+                            time={event.time_start}
+                            nameEvent={event.name}
+                            event_operator_name={event.event_operator.user_name}
+                            address={event.address}
+                            imageUrl={event.image}
                             renderProps={
                               <>
-                                <Button
-                                  className='text-white-A700 bg-black-900 h-9 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
-              hover:border-[#e5e7eb] mr-2'
-                                >
-                                  Reject
-                                </Button>
+                                <ButtonVerTwo
+                                  className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                    hover:border-[#e5e7eb] mr-2'
+                                  children='Accept'
+                                />
+                                <ButtonVerTwo
+                                  className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                    hover:border-[#e5e7eb] mr-2'
+                                  children='Reject'
+                                />
                                 <Link
-                                  to={`/events/${index}`}
-                                  className=' text-white-A700 bg-black-900 h-9 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
-              hover:border-[#e5e7eb]'
+                                  to={`/events/${event._id}`}
+                                  className=' text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                    hover:border-[#e5e7eb]'
                                 >
                                   Detail
                                 </Link>
@@ -63,24 +79,6 @@ const DashboardAdmin = () => {
                           />
                         </div>
                       ))}
-                      {/* {data?.data.map(
-                        (event, index) =>
-                          index < 10 && (
-                            <div
-                              className='flex flex-1'
-                              key={'homage' + event.event_name}
-                            >
-                              <EventList
-                                id={event.id}
-                                time={event.time_start}
-                                nameEvent={event.event_name}
-                                event_operator_name={event.event_operator_name}
-                                address={event.address}
-                                imageUrl={event.image_url}
-                              />
-                            </div>
-                          )
-                      )} */}
                     </div>
                   </div>
                 </div>

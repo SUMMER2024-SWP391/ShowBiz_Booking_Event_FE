@@ -2,12 +2,12 @@ import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import path from './constants/path'
 import Login from './pages/Login/Login'
 import HomePageVisitor from './pages/HomePage/HomePageVisitor'
-import EventDetail from './pages/EventDetailPage/EventDetail'
 import { AppContext } from './context/app.context'
 import { useContext } from 'react'
 import Profile from './pages/Profile/Profile'
 import LoginOauthGoogle from './Components/LoginOauthGoogle/LoginOauthGoogle'
 import DashboardAdmin from './pages/DashboardAdmin/DashboardAdmin'
+import EventDetailPage from './pages/EventDetailPage/EventDetail'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -43,7 +43,7 @@ const useRouteElements = () => {
     },
     {
       path: `/events/:id`,
-      element: <EventDetail />
+      element: <EventDetailPage />
     },
     {
       path: '',
