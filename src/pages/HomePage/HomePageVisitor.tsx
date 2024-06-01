@@ -20,7 +20,7 @@ export default function HomePageVisitor() {
         <div className='flex flex-col items-center gap-14 sm:gap-7'>
           <div className='flex flex-col items-center self-stretch'>
             <Header className='bg-gradient' />
-            <div className='relative mt-[-40px] flex h-[469px] w-[82%] items-center justify-center bg-cover bg-no-repeat pb-[216px] pt-[218px] md:h-auto md:w-full md:p-5 md:py-5 '>
+            <div className='relative mt-[-10px] flex h-[469px] w-[80%] items-center justify-center bg-cover bg-no-repeat pb-[216px] pt-[218px]  md:p-5 md:py-5 '>
               <Img src={Banner} className='rounded-[15px]'></Img>
             </div>
           </div>
