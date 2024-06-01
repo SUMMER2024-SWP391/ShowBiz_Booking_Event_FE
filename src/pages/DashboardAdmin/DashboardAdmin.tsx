@@ -11,7 +11,7 @@ import { Heading, Img } from 'src/Components'
 const DashboardAdmin = () => {
   const { data } = useQuery({
     queryKey: ['event'],
-    queryFn: () => eventApi.getListEvent()
+    queryFn: () => eventApi.getAllEventList()
   })
   return (
     <div className='w-full bg-gray-900 pb-[376px] md:pb-5'>
@@ -41,7 +41,7 @@ const DashboardAdmin = () => {
                     children='Pending Event'
                     className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
                     hover:border-[#e5e7eb] mr-2'
-                  />
+                  ></ButtonVerTwo>
                 </div>
                 <div className='flex flex-col gap-0.5'>
                   <div className='flex flex-row items-start gap-9 md:flex-col'>
