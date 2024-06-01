@@ -36,13 +36,13 @@ export default function Header({ ...props }: Props) {
   return (
     <header
       {...props}
-      className={`${props.className} flex flex-row justify-between items-center md:w-full gap-5 `}
+      className={`${props.className} flex flex-row justify-between items-center md:w-full`}
     >
-      <div className='flex self-start'>
+      <div className='flex self-start pr-5'>
         <Img
           src={LOGO}
           alt='logo'
-          className='w-[12%] h-[109px] object-cover md:w-full'
+          className='w-[150px] h-[150px] object-cover md:w-full'
         />
       </div>
       <div className='flex self-center ]'>
