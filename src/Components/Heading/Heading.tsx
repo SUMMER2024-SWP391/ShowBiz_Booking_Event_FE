@@ -4,9 +4,9 @@ const sizes = {
   '3xl': 'text-[32px] font-blod md:text-3xl sm:text-[28px]',
   '2xl': 'text-xl font-extrabold',
   xl: 'text-base font-bold',
-  '4xl': 'text-4xl font-semibold md:text-[34px] sm:text-[32]',
+  '4xl': 'text-4xl font-semibold  ',
   s: 'text-xs font-bold',
-  md: 'text-[13px] font-semibold',
+  md: 'text-[13px] font-semibold w-full',
   xs: 'text-[10px] font-bold',
   lg: 'text-sm font-semibold'
 }

@@ -5,12 +5,12 @@ const Footer = ({ ...props }: Props) => {
   return (
     <div
       {...props}
-      className={`${props.className} py-16 text-nav_color w-full`}
+      className={`${props.className} py-16 text-nav_color w-full `}
     >
-      <div className='h-px w-full self-stretch bg-white-A700' />
-      <div className='mx-auto px-4 flex justify-around capitalize container-xs'>
-        <div>
-          <div className='mt-4 mb-7 font-bold hover:text-lightgray'>
+      <div className='h-[0.5px] w-full self-stretch bg-white-A700 opacity-30' />
+      <div className='mx-auto px-4 flex justify-around capitalize container '>
+        <div className='cursor-pointer'>
+          <div className='mt-4 mb-7 font-bold hover:text-lightgray '>
             Product
           </div>
           <div className='mb-4 hover:text-lightgray'>key features</div>
