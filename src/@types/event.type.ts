@@ -4,7 +4,7 @@ export interface Event {
   _id: string
   name: string
   capacity: number
-  ticket: string
+  ticket_price: string
   description: string
   type_event: string
   date_event: string
@@ -26,8 +26,13 @@ export type EventList = Pick<
   | 'name'
   | 'image'
   | 'date_event'
-  | 'ticket'
+  | 'ticket_price'
   | 'time_end'
   | 'time_start'
   | 'address'
+>
+
+export type EventListPendingAdmin = Pick<
+  Event,
+  '_id' | 'capacity' | 'name' | 'ticket_price' | 'event_operator' | 'location'
 >

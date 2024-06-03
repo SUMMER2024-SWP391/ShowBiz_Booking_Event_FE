@@ -48,7 +48,7 @@ const Login = () => {
         setIsAuthenticated(true)
         setProfile(data.data.data.user)
         if (data.data.data.user.role == UserRole.Admin) {
-          navigate('/dashboard')
+          navigate('/admin')
         } else if (data.data.data.user.role == UserRole.EventOperator) {
           navigate('/eventoperator')
         } else {
