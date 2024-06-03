@@ -10,12 +10,13 @@ import { AppContext } from 'src/context/app.context'
 import { useContext } from 'react'
 import path from 'src/constants/path'
 import { getRefreshTokenFromLS } from 'src/utils/auth'
+import { UserRole } from 'src/@types/enum'
 
 interface Props {
   className?: string
 }
 export default function Header({ ...props }: Props) {
-  const { setIsAuthenticated, isAuthenticated, setProfile } =
+  const { setIsAuthenticated, isAuthenticated, setProfile, profile } =
     useContext(AppContext)
   const logoutMutation = useMutation({
     mutationFn: (refresh_token: string) => authAPI.logout({ refresh_token }),
@@ -47,6 +48,18 @@ export default function Header({ ...props }: Props) {
       </div>
       <div className='flex self-center ]'>
         <ul className='flex flex-warp gap-[45px]'>
+          {isAuthenticated && profile?.role == UserRole.Admin && (
+            <li>
+              <Link to='/admin'>
+                <Heading
+                  as='h6'
+                  className='!text-gray-500_02 hover:text-cyan-50'
+                >
+                  Dashboard
+                </Heading>
+              </Link>
+            </li>
+          )}
           <li>
             <a href='/'>
               <Heading as='h6' className='!text-gray-500_02 hover:text-cyan-50'>
