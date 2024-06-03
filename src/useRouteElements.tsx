@@ -6,10 +6,10 @@ import { AppContext } from './context/app.context'
 import { useContext } from 'react'
 import Profile from './pages/Profile/Profile'
 import LoginOauthGoogle from './Components/LoginOauthGoogle/LoginOauthGoogle'
-import DashboardAdmin from './pages/DashboardAdmin/DashboardAdmin'
 import { EventOperatorHome } from './pages/EventOperatorHome/EventOperatorHome'
 import { Events } from './pages/Events/Events'
 import EventDetailPage from './pages/EventDetailPage/EventDetail'
+import Admin from './pages/Admin/Admin'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -30,9 +30,10 @@ const useRouteElements = () => {
       element: <HomePageVisitor />
     },
     {
-      path: '/dashboard',
-      element: <DashboardAdmin />
+      path: '/admin/*',
+      element: <Admin />
     },
+
     {
       path: '/eventoperator',
       element: <EventOperatorHome />
