@@ -95,19 +95,20 @@ export default function HomePageVisitor() {
                               imageUrl={event.image}
                               renderProps={
                                 <>
-                                  <button
+                                  <Button
                                     className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
                     hover:border-[#e5e7eb] mr-2'
                                   >
                                     Register
-                                  </button>
-                                  <Link
-                                    to={`/events/${event._id}`}
-                                    className=' text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                                  </Button>
+                                  <Button
+                                    className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
                     hover:border-[#e5e7eb]'
                                   >
-                                    Detail
-                                  </Link>
+                                    <Link to={`/events/${event._id}`}>
+                                      Detail
+                                    </Link>
+                                  </Button>
                                 </>
                               }
                             />
