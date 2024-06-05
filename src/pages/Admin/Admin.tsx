@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Chart from 'src/Components/Chart/Chart'
+import CreateEventOperator from 'src/Components/CreateEventOperator/CreateEventOperator'
 import HeaderAdmin from 'src/Components/HeaderAdmin/HeaderAdmin'
 import SideBarAdmin from 'src/Components/SideBarAdmin/SideBarAdmin'
 import TableEventList from 'src/Components/TableEventList/TableEventList'
@@ -21,6 +22,10 @@ const Admin = () => {
             <Route path='list-visitor' element={<TableUser />} />
             <Route path='list-event-pending' element={<TableEventList />} />
             <Route path='list-all-event' element={<TableEventList />} />
+            <Route
+              path='create-event-operator'
+              element={<CreateEventOperator />}
+            />
           </Routes>
         </div>
       </div>

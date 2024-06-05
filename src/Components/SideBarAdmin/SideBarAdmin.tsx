@@ -83,6 +83,11 @@ const SideBarAdmin = () => {
                 Event operator
               </NavLink>
             </li>
+            <li>
+              <NavLink to={'/admin/create-event-operator'}>
+                Create event operator
+              </NavLink>
+            </li>
           </ul>
         </details>
       </li>

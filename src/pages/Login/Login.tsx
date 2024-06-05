@@ -17,7 +17,6 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../../firebase'
 import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
 import { UserRole } from 'src/@types/enum'
-import path from 'src/constants/path'
 
 export type FormData = LoginSchema
 

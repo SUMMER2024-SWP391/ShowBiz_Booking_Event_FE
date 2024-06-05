@@ -8,6 +8,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   register?: UseFormRegister<any>
   rules?: RegisterOptions
   autoComplete?: string
+  renderProps?: React.ReactNode
+  defaultValue?: string
 }
 
 const InputVerTwo = ({
@@ -20,13 +22,17 @@ const InputVerTwo = ({
   rules,
   autoComplete,
   classNameInput = 'rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full',
-  classNameError = 'mt-1 min-h-[1.25rem] text-sm text-rose-300 font-bold'
+  classNameError = 'mt-1 min-h-[1.25rem] text-sm text-rose-300 font-bold',
+  renderProps,
+  defaultValue
 }: InputProps): JSX.Element => {
   const registerResult = register && name ? register(name, rules) : {}
   return (
     <div className={className}>
+      {renderProps}
       <input
         type={type}
+        value={defaultValue}
         autoComplete={autoComplete}
         className={classNameInput}
         placeholder={placeholder}

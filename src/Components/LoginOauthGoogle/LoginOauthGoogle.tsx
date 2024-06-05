@@ -23,9 +23,9 @@ const LoginOauthGoogle = () => {
     )
     const user_id = params.get('user_id')
     const user_name = params.get('user_name')
-    const userInfo: Pick<User, 'id' | 'name' | 'role' | 'status'> = {
-      id: user_id as string,
-      name: user_name as string,
+    const userInfo: Pick<User, '_id' | 'user_name' | 'role' | 'status'> = {
+      _id: user_id as string,
+      user_name: user_name as string,
       role: role,
       status: verify
     }

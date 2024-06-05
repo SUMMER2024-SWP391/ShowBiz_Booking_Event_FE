@@ -29,12 +29,20 @@ const TableEventList = () => {
               <AdminEventList key={event._id} event={event} />
             ))}
           {isFetching && (
-            <div className='flex justify-start'>
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-            </div>
+            <tr>
+              <td>
+                <Skeleton />
+              </td>
+              <td>
+                <Skeleton />
+              </td>
+              <td>
+                <Skeleton />
+              </td>
+              <td>
+                <Skeleton />
+              </td>
+            </tr>
           )}
         </tbody>
       </table>

@@ -1,6 +1,18 @@
+import { useMutation } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import authAPI from 'src/apis/auth.api'
+import { getRefreshTokenFromLS } from 'src/utils/auth'
 
 const HeaderAdmin = () => {
+  const logoutMutation = useMutation({
+    mutationFn: (body: { refresh_token: string }) => authAPI.logout(body)
+  })
+
+  const handleLogout = () => {
+    const refresh_token = getRefreshTokenFromLS()
+    logoutMutation.mutate({ refresh_token })
+  }
+
   return (
     <header>
       <div className='navbar bg-base-100'>
@@ -29,7 +41,9 @@ const HeaderAdmin = () => {
         </div>
         <div className='navbar-center hidden lg:flex'></div>
         <div className='navbar-end'>
-          <button className='btn'>Logout</button>
+          <button className='btn' onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </div>
     </header>

@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { EventStatus } from 'src/@types/enum'
 import { EventListPendingAdmin } from 'src/@types/event.type'
 import eventApi from 'src/apis/event.api'
@@ -26,12 +27,14 @@ const AdminEventList = ({ event }: Props) => {
     (status = EventStatus.APPROVED) =>
     () => {
       mutationEventStatus.mutate(status)
+      toast.success('Approved event success')
     }
 
   const handleRejectedEvent =
     (status = EventStatus.REJECTED) =>
     () => {
       mutationEventStatus.mutate(status)
+      toast.success('Rejected event success')
     }
 
   return (

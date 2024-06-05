@@ -13,3 +13,8 @@ export interface User {
   updatedAt?: string
   role: UserRole
 }
+
+export type UserList = Pick<
+  User,
+  '_id' | 'user_name' | 'email' | 'role' | 'status'
+>
