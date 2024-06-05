@@ -5,6 +5,7 @@ const path = {
   register: '/register',
   logout: '/logout',
   eventDetail: '/events/:id',
-  loginOauthGoogle: '/login/oauth'
+  loginOauthGoogle: '/login/oauth',
+  verify_account: '/verify-success'
 }
 export default path

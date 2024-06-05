@@ -11,6 +11,7 @@ import { Events } from './pages/Events/Events'
 import EventDetailPage from './pages/EventDetailPage/EventDetail'
 import Admin from './pages/Admin/Admin'
 import CreateEvent from './pages/CreateEvent/CreateEvent'
+import VerifyAccount from './Components/VerifyAccount/VerifyAccount'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -25,6 +26,10 @@ function RejectedRoute() {
 
 const useRouteElements = () => {
   const routeElements = useRoutes([
+    {
+      path: path.verify_account,
+      element: <VerifyAccount />
+    },
     {
       path: '/',
       index: true,
