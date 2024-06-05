@@ -10,6 +10,7 @@ import { EventOperatorHome } from './pages/EventOperatorHome/EventOperatorHome'
 import { Events } from './pages/Events/Events'
 import EventDetailPage from './pages/EventDetailPage/EventDetail'
 import Admin from './pages/Admin/Admin'
+import CreateEvent from './pages/CreateEvent/CreateEvent'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -32,6 +33,10 @@ const useRouteElements = () => {
     {
       path: '/admin/*',
       element: <Admin />
+    },
+    {
+      path: '/createEvent',
+      element: <CreateEvent />
     },
 
     {
