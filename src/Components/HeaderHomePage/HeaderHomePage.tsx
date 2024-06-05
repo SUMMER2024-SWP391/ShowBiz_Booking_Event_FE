@@ -37,16 +37,13 @@ export default function Header({ ...props }: Props) {
   return (
     <header
       {...props}
-      className={`${props.className} flex flex-row justify-between items-center md:w-full gap-5 `}
+      className={`${props.className} h-[147px] pt-8 flex flex-row justify-between items-start md:w-full`}
     >
-      <div className='flex self-start'>
-        <Img
-          src={LOGO}
-          alt='logo'
-          className='w-[12%] h-[109px] object-cover md:w-full'
-        />
-      </div>
-      <div className='flex self-center ]'>
+      <Heading as='h1' size='2xl' className='ml-10'>
+        eventbok.
+      </Heading>
+
+      <div className='flex'>
         <ul className='flex flex-warp gap-[45px]'>
           {isAuthenticated && profile?.role == UserRole.Admin && (
             <li>
@@ -90,7 +87,7 @@ export default function Header({ ...props }: Props) {
           </li>
         </ul>
       </div>
-      <div className='flex items-center gap-[19px] mr-5'>
+      <div className='flex items-center gap-[19px] mr-10'>
         <a href=''>
           <SearchOutlined className='!text-gray-500_02 h-[24px] w-[24px]' />
         </a>

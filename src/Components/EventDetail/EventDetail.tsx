@@ -16,14 +16,14 @@ interface Props {
 const EventDetail = ({ event }: Props) => {
   const time = event.date_event.split('/')
   return (
-    <div className='flex w-[74%] flex-col gap-[76px] md:w-full md:gap-[57px] md:p-5 sm:gap-[38px]'>
-      <div className='flex items-start  gap-5 md:flex-col'>
+    <div className='flex container-xs'>
+      <div className='flex md:flex-col'>
         <div className='flex w-[41%] flex-row items-start pb-[31px] md:w-full sm:pb-5 container-xs'>
-          <div className='mt-[50px] self-stretch w-[40%] mr-36'>
+          <div className='w-[40%] mr-[40px]'>
             <Img
               src={event.image}
               alt='thumnal_event'
-              className='h-[378px] w-[375px] rounded-[30px] object-cover mb-[40px]'
+              className='h-[286px] w-[375px] rounded-[30px] object-cover mb-[40px]'
             />
             <div className='flex flex-col'>
               <div className='flex flex-col items-start justify-between gap-5'>
@@ -43,7 +43,7 @@ const EventDetail = ({ event }: Props) => {
                     </Text>
                     <Text size='s' as='p'>
                       <span className='font-semibold text-white-A700'>
-                        {event.name}
+                        {event.event_operator.user_name}
                       </span>
                     </Text>
                   </div>
@@ -135,8 +135,9 @@ const EventDetail = ({ event }: Props) => {
                 <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
                   <div className='flex rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
                     <Heading size='xs' as='h4' className='!font-monterat'>
-                      {time[0]}
-                      {/*  'MAY' */}
+                      {new Date(event.date_event).toLocaleString('en-US', {
+                        month: 'long'
+                      })}
                     </Heading>
                   </div>
                   <Text size='md' as='p' className='!font-monterat'>
@@ -176,7 +177,7 @@ const EventDetail = ({ event }: Props) => {
                 </div>
               </div>
 
-              <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-sm sm:pb-5'>
+              <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
                 <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
                   <Heading size='s' as='p' className='!font-semibold'>
                     Registration
@@ -189,7 +190,7 @@ const EventDetail = ({ event }: Props) => {
                   <Button
                     size='lg'
                     shape='round'
-                    className='min-w-[423px] font-semibold shadow-2xl sm:px-5  bg-white-A700_d3'
+                    className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-white-A700'
                   >
                     Register Now
                   </Button>

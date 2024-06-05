@@ -1,4 +1,4 @@
-import { PlusCircleOutlined } from '@ant-design/icons'
+import { CalendarOutlined, PlusCircleOutlined } from '@ant-design/icons'
 import React from 'react'
 import { Button, Heading, Text } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
@@ -66,6 +66,23 @@ export const Events = () => {
                           </Text>
                         </div>
                       </div>
+                      <CalendarOutlined
+                        style={{ fontSize: '300px' }}
+                        className='mt-[80px]'
+                      />
+                      <Heading as='h1' size='2xl'>
+                        No Upcomming Events
+                      </Heading>
+                      <Text as='p' className=' !font-normal'>
+                        You have no upcoming events. Why not create one?
+                      </Text>
+                      <Button
+                        color='blue_gray_900'
+                        size='3xl'
+                        className='mt-[49px] mb-[400px] min-w-[300px] rounded-[10px] font-euclid font-bold sm:px-5'
+                      >
+                        Create an Event
+                      </Button>
                     </div>
                   </div>
                 </div>

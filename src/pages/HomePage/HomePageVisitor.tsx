@@ -19,23 +19,27 @@ export default function HomePageVisitor() {
       <div className='w-full bg-gray-900 pb-[376px] md:pb-5'>
         <div className='flex flex-col items-center gap-14 sm:gap-7'>
           <div className='flex flex-col items-center self-stretch'>
-            <Header className='bg-gradient' />
-            <div className='relative mt-[-40px] flex h-[469px] w-[82%] items-center justify-center bg-cover bg-no-repeat pb-[216px] pt-[218px] md:h-auto md:w-full md:p-5 md:py-5 '>
+            <Header className='bg-gradient ' />
+            <div className=' flex h-[100%] w-[80%] items-center justify-center bg-cover    '>
               <Img src={Banner} className='rounded-[15px]'></Img>
             </div>
           </div>
-          <div className='container-xs pl-[89px] pr-[70px] md:p-5 md:px-5'>
-            <div className='flex flex-col gap-[73px] md:gap-[54px] sm:gap-9'>
-              <div className='flex items-center justify-center gap-64 md:flex-row'>
-                <Heading as='h1' size='4xl' className='!text-white-A700'>
+          <div className='container-xs'>
+            <div className='flex flex-col gap-[73px] md:gap-[54px] sm:gap-9 mt-5'>
+              <div className='flex items-center justify-center gap-64 '>
+                <Heading
+                  as='h1'
+                  size='4xl'
+                  className='!text-white-A700 w-[53%]'
+                >
                   Upcoming Events
                 </Heading>
-                <div className='flex w-[39%] justify-center gap-[22px] self-end md:w-full'>
+                <div className='flex w-[47%] justify-center gap-[10px] self-end'>
                   <Button
                     size='xl'
                     shape='round'
                     color='blue_gray_900_07'
-                    className='w-full flex-1 gap-2.5 font-bold'
+                    className='w-full gap-2.5 font-bold'
                     rightIcon={<DownOutlined />}
                   >
                     Weekdays
@@ -44,7 +48,7 @@ export default function HomePageVisitor() {
                     size='xl'
                     shape='round'
                     color='blue_gray_900_07'
-                    className='w-full flex-1 gap-2.5 font-bold'
+                    className='w-full gap-2.5 font-bold'
                     rightIcon={<DownOutlined />}
                   >
                     Event Type
@@ -91,19 +95,20 @@ export default function HomePageVisitor() {
                               imageUrl={event.image}
                               renderProps={
                                 <>
-                                  <button
+                                  <Button
                                     className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
                     hover:border-[#e5e7eb] mr-2'
                                   >
                                     Register
-                                  </button>
-                                  <Link
-                                    to={`/events/${event._id}`}
-                                    className=' text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                                  </Button>
+                                  <Button
+                                    className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
                     hover:border-[#e5e7eb]'
                                   >
-                                    Detail
-                                  </Link>
+                                    <Link to={`/events/${event._id}`}>
+                                      Detail
+                                    </Link>
+                                  </Button>
                                 </>
                               }
                             />

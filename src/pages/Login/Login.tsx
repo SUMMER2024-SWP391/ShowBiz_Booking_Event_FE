@@ -78,8 +78,8 @@ const Login = () => {
         <div className='flex flex-col items-center gap-[79px] md:gap-[72px] sm:gao-12'>
           <Header className='bg-gradient' />
         </div>
-        <div className='container-xs pl-[313px] pr-[296px] md:p-5 md:px-5'>
-          <div className='flex flex-col items-center gap-[21px] rounded-[20px] border border-solid border-white-A700 bg-gray-900_04 pb-5 pt-[26px] sm:pt-5'>
+        <div className='container-xs pl-[313px] pr-[296px] flex justify-center md:p-5 md:px-5'>
+          <div className='flex flex-col w-[55%] h-[100%] items-center gap-[21px] rounded-[15px] border border-solid border-white-A700 bg-gray-900_04 pb-5 pt-[26px] sm:pt-5'>
             <div className='ml-[46px] flex flex-col item-start gap-[18px] self-start'>
               <Button
                 color='blue_gray_900'

@@ -4,7 +4,6 @@ import EventLogo from '../../assets/images/eventlogo.jpg'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import LogoEventOperator from '../../assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import React from 'react'
-import { Link } from 'react-router-dom'
 interface Props {
   className?: string
   id?: string
@@ -14,9 +13,10 @@ interface Props {
   address?: string
   imageUrl?: string
   renderProps?: React.ReactNode
+  status?: string
 }
 
-export default function EventList({
+export default function EventsListPending({
   id,
   time = '9:30 AM',
   nameEvent = 'Saigon Talk #8: Feelink cảm xúc',
@@ -29,7 +29,7 @@ export default function EventList({
   return (
     <div
       {...props}
-      className={`${props.className} flex items-center pt-4 pb-[10px] px-7 sm:pb-6 border-white-A700 border border-solid bg-blue_gray-900_03 flex-1 rounded-[15px]`}
+      className={`${props.className} flex items-center pt-4 pb-[26px] px-7 sm:pb-6 border-white-A700 border border-solid bg-blue_gray-900_03 flex-1 rounded-[15px]`}
     >
       <div className='flex w-full items-start justify-between gap-5 sm:flex-row'>
         <div className='flex flex-col items-start justify-end h-full'>

@@ -9,7 +9,6 @@ export enum UserVerifyStatus {
   VERIFIED,
   BANNED
 }
-
 export enum EventStatus {
   PENDING = 'Pending', //0
   APPROVED = 'Approved', //1
