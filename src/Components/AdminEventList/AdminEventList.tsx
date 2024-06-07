@@ -14,12 +14,11 @@ const AdminEventList = ({ event }: Props) => {
   const mutationEventStatus = useMutation({
     mutationFn: (status: EventStatus) =>
       eventApi.handleStatusEventAdmin(event._id, status),
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['eventListPending'],
         exact: true
       })
-      console.log(data)
     }
   })
 

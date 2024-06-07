@@ -1,5 +1,10 @@
 import { EventStatus } from 'src/@types/enum'
-import { Event, EventList, EventListPendingAdmin } from 'src/@types/event.type'
+import {
+  Event,
+  EventList,
+  EventListOperator,
+  EventListPendingAdmin
+} from 'src/@types/event.type'
 import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
 
@@ -17,7 +22,11 @@ const eventApi = {
       '/admins/get-all/event-list'
     ),
   handleStatusEventAdmin: (id: string, status: EventStatus) =>
-    http.patch(`/admins/confirm-event/${id}`, { status })
+    http.patch(`/admins/confirm-event/${id}`, { status }),
+  getEventListOperator: () =>
+    http.get<SuccessResponse<{ events: EventListOperator[] }>>(
+      '/events/list-event/event-operator'
+    )
 }
 
 export default eventApi

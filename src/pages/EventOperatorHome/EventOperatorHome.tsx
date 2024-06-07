@@ -4,6 +4,7 @@ import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import { Events } from '../Events/Events'
 import CreateEvent from '../CreateEvent/CreateEvent'
+import EventListOperator from 'src/Components/EventListOperator/EventListOperator'
 
 export const EventOperatorHome = () => {
   return (
@@ -26,7 +27,7 @@ export const EventOperatorHome = () => {
                     <NavLink
                       role='tab'
                       className='tab tab-active'
-                      to='/event-operator/events'
+                      to='/event-operator/'
                     >
                       Events
                     </NavLink>
@@ -44,6 +45,7 @@ export const EventOperatorHome = () => {
                     </NavLink>
                   </div>
                   <Routes>
+                    <Route path='event-list' element={<EventListOperator />} />
                     <Route index element={<Events />} />
                     <Route path='create' element={<CreateEvent />} />
                   </Routes>

@@ -36,3 +36,8 @@ export type EventListPendingAdmin = Pick<
   Event,
   '_id' | 'capacity' | 'name' | 'ticket_price' | 'event_operator' | 'location'
 >
+
+export type EventListOperator = Pick<
+  Event,
+  '_id' | 'capacity' | 'name' | 'ticket_price' | 'location' | 'status'
+>
