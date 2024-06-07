@@ -33,11 +33,11 @@ const Login = () => {
     resolver: yupResolver(LoginSchemaYup)
   })
 
-  const onSignInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider()
-    const user = await signInWithPopup(auth, provider)
-    console.log(user)
-  }
+  // const onSignInWithGoogle = async () => {
+  //   const provider = new GoogleAuthProvider()
+  //   const user = await signInWithPopup(auth, provider)
+  //   console.log(user)
+  // }
 
   const loginMutation = useMutation({
     mutationFn: (body: FormData) => authAPI.login(body)

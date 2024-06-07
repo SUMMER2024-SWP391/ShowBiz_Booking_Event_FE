@@ -2,34 +2,33 @@ import {
   EnvironmentOutlined,
   FacebookOutlined,
   InstagramOutlined,
+  PlusOutlined,
   RightOutlined,
   YoutubeOutlined
 } from '@ant-design/icons'
-import { Button, Heading, Img, Text } from 'src/Components'
+import { Heading, Img, Input, Text } from 'src/Components'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import Banner from '../../assets/images/baner.png'
-import { useForm } from 'react-hook-form'
+import { DatePicker, TimePicker, Upload } from 'antd'
 
-const onSubmit = (data: any) => {
-  console.log(data)
-}
 const CreateEvent = () => {
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
       <Header className='bg-blue_gray-900' />
       <div className='flex container-xs justify-center'>
-        <form className='flex justify-center' onSubmit={onSubmit} noValidate>
+        <form className='flex justify-center' noValidate>
           <div className='flex md:flex-col justify-center'>
             <div className='flex w-[41%] flex-row items-start pb-[31px] md:w-full sm:pb-5 justify-center'>
-              <div className='w-[40%] mr-[40px]'>
+              <div className='w-[59%] mr-[40px]'>
                 <Img
                   src={Banner}
                   alt='thumnal_event'
                   className='h-[286px] w-[375px] rounded-[30px] object-cover mb-[40px]'
                 />
+
                 <div className='flex flex-col'>
                   <div className='flex flex-col items-start justify-between gap-5'>
                     <div className='flex items-center justify-between gap-[15px]'>
@@ -139,143 +138,51 @@ const CreateEvent = () => {
                     className='mt-5 h-14 font-extrabold text-[30px] bg-blue_gray-900 outline-none border-none'
                     placeholder='EventName'
                   />
-                  <div className='mt-[15px] flex items-center gap-[21px]'>
-                    <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
-                      <div className='flex rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
-                        <Heading
-                          size='xs'
-                          as='h4'
-                          className='!font-monterat'
-                        ></Heading>
-                      </div>
-                      <Text size='md' as='p' className='!font-monterat'>
-                        asdasd
+                  <div className='rounded-[10px] pr-[5px] pl-[23px] pt-[7px] h-auto w-full bg-gray-800_01 sm:pl-5'>
+                    <div className='m-3 left-[8%]  w-auto flex items-start justify-between gap-5'>
+                      <Text as='p' className='mt-2 !text-blue_gray-100'>
+                        Start
                       </Text>
+                      <DatePicker />
+                      <TimePicker />
                     </div>
-                    <div className='flex flex-col items-start gap-1 self-start'>
-                      <Heading size='lg' as='h5'>
-                        Thursday, May 9
-                      </Heading>
-                      <Text size='xs' as='p' className='!font-monterat'>
-                        5:30 PM - 8:30 PM
+                    <div className=' m-3 left-[8%]  w-auto flex items-start justify-between gap-5'>
+                      <Text as='p' className='mt-2 !text-blue_gray-100'>
+                        End
                       </Text>
+                      <DatePicker />
+                      <TimePicker />
                     </div>
                   </div>
-                  <div className='flex items-center gap-[21px]'>
-                    <div className='mt-[22px] flex items-center gap-[21px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
-                      <Button
-                        size='2xl'
-                        variant='outline'
-                        shape='round'
-                        className='w-[33px] h-[33px] !rounded-md'
+                  <div className='mt-10 rounded-[10px] pr-[5px] pl-[23px] pt-[7px] h-auto w-full bg-gray-800_01 sm:pl-5'>
+                    <div className='flex flex-row items-start'>
+                      <EnvironmentOutlined className='mt-1' />
+                      <Text
+                        as='p'
+                        size='xl'
+                        className='ml-5 !text-blue_gray-100 !font-bold'
                       >
-                        <EnvironmentOutlined className='text-white-A700_cc' />
-                      </Button>
-                    </div>
-                    <div className='flex flex-col items-start mt-[22px] gap-[5px] self-start'>
-                      <Heading size='lg' as='h6'>
-                        Register to See Address
-                      </Heading>
-                      <Text size='xs' as='p' className='!font-monterat'>
-                        Thành phố Thủ Đức, Thành Phố Hồ Chí Minh
+                        Add Event Location
                       </Text>
                     </div>
+                    <input
+                      className='ml-9 font-normal !text-blue_gray-100 bg-gray-800_01 outline-none border-none'
+                      placeholder='Offline location or virtual link'
+                    />
                   </div>
-
-                  <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
-                    <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
-                      <Heading size='s' as='p' className='!font-semibold'>
-                        Registration
-                      </Heading>
-                    </div>
-                    <Text size='s' as='p' className='ml-6 self-start '>
-                      Welcome! To join the event, please register below.
-                    </Text>
-                    <a href=''>
-                      <Button
-                        size='lg'
-                        shape='round'
-                        className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-white-A700'
-                      >
-                        Register Now
-                      </Button>
-                    </a>
-                  </div>
-                  <Text size='s' as='p' className='ml-1.5 mt-[21px] md:ml-0'>
-                    About Event
-                  </Text>
-                  <div className='flex flex-col items-start'>
-                    <div className='mt-4 ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
-                    <Text
-                      size='md'
-                      as='p'
-                      className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
+                  <Upload
+                    action='/upload.do'
+                    listType='picture-card'
+                    className='mt-10 self-center text-white-A700'
+                  >
+                    <button
+                      style={{ border: 2, background: 'none' }}
+                      type='button'
                     >
-                      <>
-                        {/* ​Phát triển IQ luôn là xu hướng chung của xã hội hiện đại
-                  đề cao, trong khi vai trò của chỉ số cảm xúc (EQ) - một
-                  trong những yếu tố then chốt dẫn đến thành công, vẫn chưa
-                  được nhận thức đầy đủ. Saigon Talk kỳ 8 chính thức quay
-                  trở lại để “giải oan” cho EQ khỏi định kiến "không đáng
-                  lưu tâm", đồng thời giúp bạn giải mã sức mạnh tiềm ẩn của
-                  nó trên con đường phát triển sự nghiệp bản thân.
-                  <br />
-                  <br />
-                  Trong số kỳ này, Saigon Talk 8 mang đến chủ đề “FEELINK”
-                  với trọng tâm khai phá tiềm năng của EQ (chỉ số cảm xúc)
-                  trong việc phát triển sự nghiệp cá nhân. Góp phần đặc biệt
-                  tại sân khấu buổi chia sẻ lần này xin bật mí bộ đôi khách
-                  mời uy tín: ​🎙️ TIẾN SĨ TÂM LÝ HỌC TÔ NHI A: một trong
-                  những chuyên gia tâm lý học hàng đầu Việt Nam. Không chỉ ở
-                  vai trò giảng viên mà còn là nhà nghiên cứu tâm lý dày dặn
-                  kinh nghiệm, đang đảm nhiệm nhiều vị trí quan trọng: ​-
-                  Giảng viên Trường Đại học Kinh tế - Tài chính TP.HCM
-                  (UEF). ​- Nhà sáng lập Công ty đào tạo - truyền thông Khải
-                  Nguyên. ​- Giảng viên cao cấp và chuyên gia tham vấn trị
-                  liệu tâm lý tại Công ty đào tạo & Chăm sóc sức khỏe tâm
-                  thần Ý Tưởng Việt. ​ 🎙️ Á HẬU QUỐC TẾ PHẠM HỒNG THÚY VÂN:
-                  không chỉ là một Á hậu xinh đẹp, tài năng mà còn là một
-                  doanh nhân thành công với sứ mệnh truyền cảm hứng cho cộng
-                  đồng. Thuộc top 50 nữ lãnh đạo Châu Á cùng nhiều danh hiệu
-                  khác, Thúy Vân sẽ góp mặt tại buổi chia sẻ để mang đến
-                  những trải nghiệm, lời khuyên bổ ích dành cho các bạn tham
-                  dự. ​Với thông điệp “Feel cảm xúc, link sự nghiệp”,
-                  talkshow mang đến trải nghiệm: ​⭐ "Feel" cùng chuyên gia:
-                  Lắng nghe chia sẻ từ 2 diễn giả giàu kinh nghiệm về cách
-                  thức "Feel" (cảm nhận) cảm xúc một cách hiệu quả để ứng
-                  dụng EQ vào thực tế. ​⭐ "Link" với thành công: Tham gia
-                  thảo luận, kết nối và học hỏi bí quyết từ cộng đồng những
-                  người trẻ tại buổi chia sẻ, cùng nhau nối kết để khám phá
-                  giới hạn và chinh phục mục tiêu tương lai. ​⭐ Thưởng thức
-                  tiết mục trình diễn sôi động, hấp dẫn. ​⭐ Minigame cùng
-                  những phần quà xịn xò từ BTC. ​⭐ Nhâm nhi trà bánh tại
-                  tiệc tea break vào cuối buổi. ​📌 THÔNG TIN CHI TIẾT VỀ
-                  CHƯƠNG TRÌNH: ​👥 Đối tượng: toàn bộ học sinh, sinh viên
-                  trên khắp cả nước tham gia. ​⏳ Thời gian: 17:30 - 20:30,
-                  Thứ năm ngày 09/05/2024. ​🏫 Địa điểm: Hall Business,
-                  Trường Đại học FPT TP.HCM (Lô E2a-7, Đường D1, Khu Công
-                  Nghệ Cao, P.Long Thạnh Mỹ, Tp.Thủ Đức, TP.HCM) ​💥 Không
-                  chỉ là buổi chia sẻ mà là hành trình khai phá bản thân.
-                  Còn chần chờ gì nữa? Hãy đăng ký tham dự Saigon Talk Kỳ 8
-                  ngay thôi nào!
-                  <br />
-                  _______________________
-                  <br />
-                  <br />
-                  🧠 SAIGON TALK KỲ 8: FEELINK - FEEL CẢM XÚC, LINK SỰ
-                  NGHIỆP🧠 <br />
-                  ​Mọi thắc mắc vui lòng liên hệ với chúng mình qua:
-                  <br />
-                  ​Fanpage: Câu lạc bộ Truyền thông Cóc Sài Gòn
-                  <br /> ​Mail: saigontalk.csg@gmail.com <br />
-                  ​SĐT: 039 564 0607 (Project Leader: Hoàng Thiên Hương) */}
-                      </>
-                    </Text>
-                    <div className='mt-9 flex flex-col items-start gap-2 self-stretch'>
-                      <Text size='s' as='p'></Text>
-                      <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
-                    </div>
-                  </div>
+                      <PlusOutlined />
+                      <div style={{ marginTop: 8 }}>Upload</div>
+                    </button>
+                  </Upload>
                 </div>
               </div>
             </div>
