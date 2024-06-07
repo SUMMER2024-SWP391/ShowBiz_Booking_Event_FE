@@ -8,211 +8,208 @@ import {
 import { Button, Heading, Img, Text } from 'src/Components'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
-import Footer from 'src/Components/Footer/Footer'
-import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
+
 import Banner from '../../assets/images/baner.png'
-import { useForm } from 'react-hook-form'
 
-const onSubmit = (data: any) => {
-  console.log(data)
-}
 const CreateEvent = () => {
+  const onSubmit = (data: any) => {
+    console.log(data)
+  }
+
   return (
-    <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
-      <Header className='bg-blue_gray-900' />
-      <div className='flex container-xs justify-center'>
-        <form className='flex justify-center' onSubmit={onSubmit} noValidate>
-          <div className='flex md:flex-col justify-center'>
-            <div className='flex w-[41%] flex-row items-start pb-[31px] md:w-full sm:pb-5 justify-center'>
-              <div className='w-[40%] mr-[40px]'>
-                <Img
-                  src={Banner}
-                  alt='thumnal_event'
-                  className='h-[286px] w-[375px] rounded-[30px] object-cover mb-[40px]'
-                />
-                <div className='flex flex-col'>
-                  <div className='flex flex-col items-start justify-between gap-5'>
-                    <div className='flex items-center justify-between gap-[15px]'>
-                      <Img
-                        src={logoOperator}
-                        alt='subriceIcon'
-                        className='h-[32px] w-[32px] rounded-[5px] object-cover'
-                      />
-                      <div className='flex flex-col items-start gap-0.5'>
-                        <Text
-                          size='xs'
-                          as='p'
-                          className='!font-medium !text-white-A700_cc'
-                        >
-                          Presented by
-                        </Text>
-                        <Text size='s' as='p'>
-                          <span className='font-semibold text-white-A700'>
-                            ádasdasd
-                          </span>
-                        </Text>
-                      </div>
-                      <RightOutlined className='mt-4 text-white-A700_cc' />
-                      <Img
-                        src={subriceIcon}
-                        alt='subriceicon'
-                        className='h-[49px] w-[14%] ml-9 object-cover'
-                      />
+    <div className='flex container-xs justify-center'>
+      <form className='flex justify-center' onSubmit={onSubmit} noValidate>
+        <div className='flex md:flex-col justify-center'>
+          <div className='flex w-[41%] flex-row items-start pb-[31px] md:w-full sm:pb-5 justify-center'>
+            <div className='w-[40%] mr-[40px]'>
+              <Img
+                src={Banner}
+                alt='thumnal_event'
+                className='h-[286px] w-[375px] rounded-[30px] object-cover mb-[40px]'
+              />
+              <div className='flex flex-col'>
+                <div className='flex flex-col items-start justify-between gap-5'>
+                  <div className='flex items-center justify-between gap-[15px]'>
+                    <Img
+                      src={logoOperator}
+                      alt='subriceIcon'
+                      className='h-[32px] w-[32px] rounded-[5px] object-cover'
+                    />
+                    <div className='flex flex-col items-start gap-0.5'>
+                      <Text
+                        size='xs'
+                        as='p'
+                        className='!font-medium !text-white-A700_cc'
+                      >
+                        Presented by
+                      </Text>
+                      <Text size='s' as='p'>
+                        <span className='font-semibold text-white-A700'>
+                          ádasdasd
+                        </span>
+                      </Text>
                     </div>
-                    <div className='flex gap-[15px]'>
-                      <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                      <YoutubeOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                      <FacebookOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                    </div>
+                    <RightOutlined className='mt-4 text-white-A700_cc' />
+                    <Img
+                      src={subriceIcon}
+                      alt='subriceicon'
+                      className='h-[49px] w-[14%] ml-9 object-cover'
+                    />
                   </div>
-                </div>
-                <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
-                  <Text size='s' as='p' className='!text-white-A700_cc'>
-                    Host by
-                  </Text>
-                  <div className='self-stretch'>
-                    <div className='flex flex-col items-start gap-[11px]'>
-                      <div className='ml-5 h-px self-stretch bg-white-A700_5e md:ml-0' />
-                      <div className='flex w-[83%] flex-wrap items-start gap-[18px] md:w-full'>
-                        <Img className='h-[24px] w-[24px] rounded-[50%] bg-red' />
-                        <Heading size='md' as='h1' className='!font-monterat'>
-                          Câu Lạc Bộ Truyền Thông Cóc Sài Gòn
-                        </Heading>
-                        <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='mt-11 flex flex-col items-start gap-[11px] self-stretch pb-2.5'>
-                  <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
-                    <Text size='s' as='p' className='!text-white-A700_cc'>
-                      Speacker
-                    </Text>
-                    <div className='h-px self-stretch bg-white-A700_5e' />
-                  </div>
-                  <div className='flex w-[77%] flex-col gap-3.5 md:w-full'>
-                    <Text
-                      size='s'
-                      as='p'
-                      className='!text-white-A700_5e !font-monterat'
-                    >
-                      Á hậu Thúy Vân
-                    </Text>
+                  <div className='flex gap-[15px]'>
                     <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-
-                    <Text
-                      size='s'
-                      as='p'
-                      className='!text-white-A700_5e !font-monterat'
-                    >
-                      Tiến sĩ Tô Nhi A
-                    </Text>
-                    <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
+                    <YoutubeOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
+                    <FacebookOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
                   </div>
                 </div>
-                <Text size='s' as='p' className='mt-[19px] !text-white-A700_cc'>
-                  Contact the Host
-                </Text>
-                <Text size='s' as='p' className='mt-[19px] !text-white-A700_cc'>
-                  Report Event
-                </Text>
               </div>
-              <div className='flex w-[49%] flex-coll gap-2 md:w-full'>
-                <div className='flex flex-col items-start'>
-                  <div className='flex justify-between gap-5 self-stretch'>
-                    <Heading
-                      size='s'
-                      as='h1'
-                      className='flex items-center justify-center rounded-[10px] bg-gray-800_01 p-[3px] !text-black-900'
-                    >
-                      <span className='text-white-A700_bf'>Featured in</span>
-                      <span className='text-white-A700 ml-2'>
-                        Ho Chi Minh City
-                      </span>
-                    </Heading>
-                    <select className='bg-blue_gray-900_01 w-24 text-center max-w-xs rounded-lg'>
-                      <option selected>Private</option>
-                      <option> Public</option>
-                    </select>
-                  </div>
-                  <input
-                    className='mt-5 h-14 font-extrabold text-[30px] bg-blue_gray-900 outline-none border-none'
-                    placeholder='EventName'
-                  />
-                  <div className='mt-[15px] flex items-center gap-[21px]'>
-                    <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
-                      <div className='flex rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
-                        <Heading
-                          size='xs'
-                          as='h4'
-                          className='!font-monterat'
-                        ></Heading>
-                      </div>
-                      <Text size='md' as='p' className='!font-monterat'>
-                        asdasd
-                      </Text>
-                    </div>
-                    <div className='flex flex-col items-start gap-1 self-start'>
-                      <Heading size='lg' as='h5'>
-                        Thursday, May 9
+              <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
+                <Text size='s' as='p' className='!text-white-A700_cc'>
+                  Host by
+                </Text>
+                <div className='self-stretch'>
+                  <div className='flex flex-col items-start gap-[11px]'>
+                    <div className='ml-5 h-px self-stretch bg-white-A700_5e md:ml-0' />
+                    <div className='flex w-[83%] flex-wrap items-start gap-[18px] md:w-full'>
+                      <Img className='h-[24px] w-[24px] rounded-[50%] bg-red' />
+                      <Heading size='md' as='h1' className='!font-monterat'>
+                        Câu Lạc Bộ Truyền Thông Cóc Sài Gòn
                       </Heading>
-                      <Text size='xs' as='p' className='!font-monterat'>
-                        5:30 PM - 8:30 PM
-                      </Text>
+                      <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
                     </div>
                   </div>
-                  <div className='flex items-center gap-[21px]'>
-                    <div className='mt-[22px] flex items-center gap-[21px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
-                      <Button
-                        size='2xl'
-                        variant='outline'
-                        shape='round'
-                        className='w-[33px] h-[33px] !rounded-md'
-                      >
-                        <EnvironmentOutlined className='text-white-A700_cc' />
-                      </Button>
-                    </div>
-                    <div className='flex flex-col items-start mt-[22px] gap-[5px] self-start'>
-                      <Heading size='lg' as='h6'>
-                        Register to See Address
-                      </Heading>
-                      <Text size='xs' as='p' className='!font-monterat'>
-                        Thành phố Thủ Đức, Thành Phố Hồ Chí Minh
-                      </Text>
-                    </div>
-                  </div>
-
-                  <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
-                    <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
-                      <Heading size='s' as='p' className='!font-semibold'>
-                        Registration
-                      </Heading>
-                    </div>
-                    <Text size='s' as='p' className='ml-6 self-start '>
-                      Welcome! To join the event, please register below.
-                    </Text>
-                    <a href=''>
-                      <Button
-                        size='lg'
-                        shape='round'
-                        className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-white-A700'
-                      >
-                        Register Now
-                      </Button>
-                    </a>
-                  </div>
-                  <Text size='s' as='p' className='ml-1.5 mt-[21px] md:ml-0'>
-                    About Event
+                </div>
+              </div>
+              <div className='mt-11 flex flex-col items-start gap-[11px] self-stretch pb-2.5'>
+                <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
+                  <Text size='s' as='p' className='!text-white-A700_cc'>
+                    Speacker
                   </Text>
-                  <div className='flex flex-col items-start'>
-                    <div className='mt-4 ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
-                    <Text
-                      size='md'
-                      as='p'
-                      className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
+                  <div className='h-px self-stretch bg-white-A700_5e' />
+                </div>
+                <div className='flex w-[77%] flex-col gap-3.5 md:w-full'>
+                  <Text
+                    size='s'
+                    as='p'
+                    className='!text-white-A700_5e !font-monterat'
+                  >
+                    Á hậu Thúy Vân
+                  </Text>
+                  <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
+
+                  <Text
+                    size='s'
+                    as='p'
+                    className='!text-white-A700_5e !font-monterat'
+                  >
+                    Tiến sĩ Tô Nhi A
+                  </Text>
+                  <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
+                </div>
+              </div>
+              <Text size='s' as='p' className='mt-[19px] !text-white-A700_cc'>
+                Contact the Host
+              </Text>
+              <Text size='s' as='p' className='mt-[19px] !text-white-A700_cc'>
+                Report Event
+              </Text>
+            </div>
+            <div className='flex w-[49%] flex-coll gap-2 md:w-full'>
+              <div className='flex flex-col items-start'>
+                <div className='flex justify-between gap-5 self-stretch'>
+                  <Heading
+                    size='s'
+                    as='h1'
+                    className='flex items-center justify-center rounded-[10px] bg-gray-800_01 p-[3px] !text-black-900'
+                  >
+                    <span className='text-white-A700_bf'>Featured in</span>
+                    <span className='text-white-A700 ml-2'>
+                      Ho Chi Minh City
+                    </span>
+                  </Heading>
+                  <select className='bg-blue_gray-900_01 w-24 text-center max-w-xs rounded-lg'>
+                    <option selected>Private</option>
+                    <option> Public</option>
+                  </select>
+                </div>
+                <input
+                  className='mt-5 h-14 font-extrabold text-[30px] bg-blue_gray-900 outline-none border-none'
+                  placeholder='EventName'
+                />
+                <div className='mt-[15px] flex items-center gap-[21px]'>
+                  <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
+                    <div className='flex rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
+                      <Heading
+                        size='xs'
+                        as='h4'
+                        className='!font-monterat'
+                      ></Heading>
+                    </div>
+                    <Text size='md' as='p' className='!font-monterat'>
+                      asdasd
+                    </Text>
+                  </div>
+                  <div className='flex flex-col items-start gap-1 self-start'>
+                    <Heading size='lg' as='h5'>
+                      Thursday, May 9
+                    </Heading>
+                    <Text size='xs' as='p' className='!font-monterat'>
+                      5:30 PM - 8:30 PM
+                    </Text>
+                  </div>
+                </div>
+                <div className='flex items-center gap-[21px]'>
+                  <div className='mt-[22px] flex items-center gap-[21px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
+                    <Button
+                      size='2xl'
+                      variant='outline'
+                      shape='round'
+                      className='w-[33px] h-[33px] !rounded-md'
                     >
-                      <>
-                        {/* ​Phát triển IQ luôn là xu hướng chung của xã hội hiện đại
+                      <EnvironmentOutlined className='text-white-A700_cc' />
+                    </Button>
+                  </div>
+                  <div className='flex flex-col items-start mt-[22px] gap-[5px] self-start'>
+                    <Heading size='lg' as='h6'>
+                      Register to See Address
+                    </Heading>
+                    <Text size='xs' as='p' className='!font-monterat'>
+                      Thành phố Thủ Đức, Thành Phố Hồ Chí Minh
+                    </Text>
+                  </div>
+                </div>
+
+                <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
+                  <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
+                    <Heading size='s' as='p' className='!font-semibold'>
+                      Registration
+                    </Heading>
+                  </div>
+                  <Text size='s' as='p' className='ml-6 self-start '>
+                    Welcome! To join the event, please register below.
+                  </Text>
+                  <a href=''>
+                    <Button
+                      size='lg'
+                      shape='round'
+                      className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-white-A700'
+                    >
+                      Register Now
+                    </Button>
+                  </a>
+                </div>
+                <Text size='s' as='p' className='ml-1.5 mt-[21px] md:ml-0'>
+                  About Event
+                </Text>
+                <div className='flex flex-col items-start'>
+                  <div className='mt-4 ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
+                  <Text
+                    size='md'
+                    as='p'
+                    className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
+                  />
+                  <Text>
+                    {/* ​Phát triển IQ luôn là xu hướng chung của xã hội hiện đại
                   đề cao, trong khi vai trò của chỉ số cảm xúc (EQ) - một
                   trong những yếu tố then chốt dẫn đến thành công, vẫn chưa
                   được nhận thức đầy đủ. Saigon Talk kỳ 8 chính thức quay
@@ -269,20 +266,17 @@ const CreateEvent = () => {
                   ​Fanpage: Câu lạc bộ Truyền thông Cóc Sài Gòn
                   <br /> ​Mail: saigontalk.csg@gmail.com <br />
                   ​SĐT: 039 564 0607 (Project Leader: Hoàng Thiên Hương) */}
-                      </>
-                    </Text>
-                    <div className='mt-9 flex flex-col items-start gap-2 self-stretch'>
-                      <Text size='s' as='p'></Text>
-                      <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
-                    </div>
+                  </Text>
+                  <div className='mt-9 flex flex-col items-start gap-2 self-stretch'>
+                    <Text size='s' as='p'></Text>
+                    <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
-      </div>
-      <Footer className='bg-blue_gray-900' />
+        </div>
+      </form>
     </div>
   )
 }

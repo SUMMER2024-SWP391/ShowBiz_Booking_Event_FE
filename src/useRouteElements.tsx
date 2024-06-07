@@ -35,23 +35,19 @@ const useRouteElements = () => {
       index: true,
       element: <HomePageVisitor />
     },
+    //admin
     {
       path: '/admin/*',
       element: <Admin />
     },
-    {
-      path: '/createEvent',
-      element: <CreateEvent />
-    },
+    //event operator
 
     {
-      path: '/eventoperator',
+      path: '/event-operator/*',
       element: <EventOperatorHome />
     },
-    {
-      path: '/eventoperator/Events',
-      element: <Events />
-    },
+
+    //chua set up protected routes
     {
       path: '',
       element: <ProtectedRoute />,

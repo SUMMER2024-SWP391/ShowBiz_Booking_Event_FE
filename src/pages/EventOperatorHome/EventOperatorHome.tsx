@@ -1,9 +1,9 @@
-import { DownOutlined } from '@ant-design/icons'
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Heading, Img, Text } from 'src/Components'
+import { NavLink, Route, Routes } from 'react-router-dom'
+import { Heading } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
+import { Events } from '../Events/Events'
+import CreateEvent from '../CreateEvent/CreateEvent'
 
 export const EventOperatorHome = () => {
   return (
@@ -23,26 +23,30 @@ export const EventOperatorHome = () => {
                     </Heading>
                   </div>
                   <div role='tablist' className='tabs tabs-bordered'>
-                    <a
+                    <NavLink
                       role='tab'
                       className='tab tab-active'
-                      href='/eventoperator/Events'
+                      to='/event-operator/events'
                     >
                       Events
-                    </a>
-                    <a role='tab' className='tab '>
+                    </NavLink>
+                    <NavLink role='tab' className='tab ' to={''}>
                       People
-                    </a>
-                    <a role='tab' className='tab'>
+                    </NavLink>
+                    <NavLink role='tab' className='tab' to={''}>
                       Newsletters
-                    </a>
-                    <a role='tab' className='tab'>
+                    </NavLink>
+                    <NavLink role='tab' className='tab' to={''}>
                       Insights
-                    </a>
-                    <a role='tab' className='tab'>
+                    </NavLink>
+                    <NavLink role='tab' className='tab' to={''}>
                       Setting
-                    </a>
+                    </NavLink>
                   </div>
+                  <Routes>
+                    <Route index element={<Events />} />
+                    <Route path='create' element={<CreateEvent />} />
+                  </Routes>
                 </div>
               </div>
             </div>
