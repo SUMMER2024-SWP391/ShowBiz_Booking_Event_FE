@@ -49,7 +49,7 @@ const Login = () => {
         if (data.data.data.user.role == UserRole.Admin) {
           navigate('/admin')
         } else if (data.data.data.user.role == UserRole.EventOperator) {
-          navigate('/eventoperator')
+          navigate('/event-operator')
         } else {
           navigate('/')
         }

@@ -7,10 +7,8 @@ import { useContext } from 'react'
 import Profile from './pages/Profile/Profile'
 import LoginOauthGoogle from './Components/LoginOauthGoogle/LoginOauthGoogle'
 import { EventOperatorHome } from './pages/EventOperatorHome/EventOperatorHome'
-import { Events } from './pages/Events/Events'
 import EventDetailPage from './pages/EventDetailPage/EventDetail'
 import Admin from './pages/Admin/Admin'
-import CreateEvent from './pages/CreateEvent/CreateEvent'
 import VerifyAccount from './Components/VerifyAccount/VerifyAccount'
 
 function ProtectedRoute() {
@@ -35,17 +33,6 @@ const useRouteElements = () => {
       index: true,
       element: <HomePageVisitor />
     },
-    //admin
-    {
-      path: '/admin/*',
-      element: <Admin />
-    },
-    //event operator
-
-    {
-      path: '/event-operator/*',
-      element: <EventOperatorHome />
-    },
 
     //chua set up protected routes
     {
@@ -55,6 +42,17 @@ const useRouteElements = () => {
         {
           path: path.profile,
           element: <Profile />
+        },
+        //admin
+        {
+          path: '/admin/*',
+          element: <Admin />
+        },
+        //event operator
+
+        {
+          path: '/event-operator/*',
+          element: <EventOperatorHome />
         }
       ]
     },
