@@ -74,3 +74,16 @@ export const CreateEventOperatorSchemaYup = yup.object().shape({
 export type CreateEventOperatorSchema = yup.InferType<
   typeof CreateEventOperatorSchemaYup
 >
+
+export const RegisterEventSchemaYup = yup.object().shape({
+  full_name: yup.string().required('This field is required'),
+  phone_number: yup
+    .string()
+    .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/, 'Invalid phone number')
+    .required('This field is required'),
+  mssv: yup
+    .string()
+    .matches(/[A-Z]{2}\d{6}/, 'Invalid MSSV')
+    .required('This field is required')
+})
+export type RegisterEventSchema = yup.InferType<typeof RegisterEventSchemaYup>
