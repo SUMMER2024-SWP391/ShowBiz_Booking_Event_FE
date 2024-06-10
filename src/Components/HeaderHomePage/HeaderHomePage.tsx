@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
-import LOGO from '../../assets/img/Logo EventBooking (1).png'
-import { Img } from '../Img/Img'
+
 import { Heading } from '../Heading/Heading'
 import { BellOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
@@ -59,7 +58,7 @@ export default function Header({ ...props }: Props) {
           )}
           <li>
             <a href='/'>
-              <Heading as='h6' className='!text-gray-500_02 hover:text-cyan-50'>
+              <Heading as='h6' className=' hover:text-cyan-50'>
                 Home
               </Heading>
             </a>

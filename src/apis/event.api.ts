@@ -7,7 +7,11 @@ import {
 } from 'src/@types/event.type'
 import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
-
+type FormEventRegister = {
+  full_name: string
+  phone_number: string
+  mssv: string
+}
 const eventApi = {
   getListEvent: () =>
     http.get<SuccessResponse<{ events: EventList[] }>>('/events'),
@@ -26,6 +30,12 @@ const eventApi = {
   getEventListOperator: () =>
     http.get<SuccessResponse<{ events: EventListOperator[] }>>(
       '/events/list-event/event-operator'
+    ),
+  registerEvent: (id: string, body: FormEventRegister) =>
+    http.post(`/register-event/:${id}`, body),
+  getListQuestion: (id: string) =>
+    http.get<SuccessResponse<{ eventId: Event }>>(
+      `/forms/question-register/${id}`
     )
 }
 
