@@ -7,11 +7,11 @@ import { useContext } from 'react'
 import Profile from './pages/Profile/Profile'
 import LoginOauthGoogle from './Components/LoginOauthGoogle/LoginOauthGoogle'
 import { EventOperatorHome } from './pages/EventOperatorHome/EventOperatorHome'
-import { Events } from './pages/Events/Events'
 import EventDetailPage from './pages/EventDetailPage/EventDetail'
 import Admin from './pages/Admin/Admin'
-import CreateEvent from './pages/CreateEvent/CreateEvent'
 import VerifyAccount from './Components/VerifyAccount/VerifyAccount'
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
+import Recovery from './pages/Recovery/Recovery'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -35,18 +35,16 @@ const useRouteElements = () => {
       index: true,
       element: <HomePageVisitor />
     },
-    //admin
-    {
-      path: '/admin/*',
-      element: <Admin />
-    },
-    //event operator
 
     {
-      path: '/event-operator/*',
-      element: <EventOperatorHome />
+      path: '/forgot-password',
+      element: <ForgotPassword />
     },
 
+    {
+      path: '/recovery',
+      element: <Recovery />
+    },
     //chua set up protected routes
     {
       path: '',
@@ -55,6 +53,17 @@ const useRouteElements = () => {
         {
           path: path.profile,
           element: <Profile />
+        },
+        //admin
+        {
+          path: '/admin/*',
+          element: <Admin />
+        },
+        //event operator
+
+        {
+          path: '/event-operator/*',
+          element: <EventOperatorHome />
         }
       ]
     },
