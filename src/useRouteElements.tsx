@@ -10,6 +10,8 @@ import { EventOperatorHome } from './pages/EventOperatorHome/EventOperatorHome'
 import EventDetailPage from './pages/EventDetailPage/EventDetail'
 import Admin from './pages/Admin/Admin'
 import VerifyAccount from './Components/VerifyAccount/VerifyAccount'
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
+import Recovery from './pages/Recovery/Recovery'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -34,6 +36,15 @@ const useRouteElements = () => {
       element: <HomePageVisitor />
     },
 
+    {
+      path: '/forgot-password',
+      element: <ForgotPassword />
+    },
+
+    {
+      path: '/recovery',
+      element: <Recovery />
+    },
     //chua set up protected routes
     {
       path: '',

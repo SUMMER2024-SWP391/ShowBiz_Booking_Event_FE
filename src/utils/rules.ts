@@ -1,12 +1,14 @@
 import { RegisterOptions, UseFormGetValues } from 'react-hook-form'
 import * as yup from 'yup'
+import { checkPasswordStrong } from './handleRegex'
 type Rules = {
   [key in
     | 'email'
     | 'password'
     | 'date_of_birth'
     | 'user_name'
-    | 'phone_number']?: RegisterOptions
+    | 'phone_number'
+    | 'confirm_password']?: RegisterOptions
 }
 export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
   return {
@@ -20,9 +22,27 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
     password: {
       required: 'This field is required',
       minLength: {
-        value: 6,
+        value: 8,
         message: 'Password must be at least 6 characters'
-      }
+      },
+      validate:
+        typeof checkPasswordStrong === 'function'
+          ? (value) =>
+              checkPasswordStrong(value) ||
+              'Password must has one symbol, one Uppercase, one number'
+          : undefined
+    },
+    confirm_password: {
+      required: { value: true, message: 'Confirm password is required' },
+      minLength: {
+        value: 8,
+        message: 'Password must be as least 8 characters'
+      },
+      validate:
+        typeof getValues === 'function'
+          ? (value) =>
+              value === getValues('password') || 'Password nhập lại không đúng'
+          : undefined
     },
     date_of_birth: {
       required: 'This field is required',
@@ -74,3 +94,18 @@ export const CreateEventOperatorSchemaYup = yup.object().shape({
 export type CreateEventOperatorSchema = yup.InferType<
   typeof CreateEventOperatorSchemaYup
 >
+
+export const ForgotPasswordSchemaYup = yup.object().shape({
+  email: yup.string().email('Invalid email').required('This field is required')
+})
+export type ForgotPasswordSchema = yup.InferType<typeof ForgotPasswordSchemaYup>
+
+export const ResetPasswordSchemaYub = yup.object().shape({
+  password: yup.string().required('Password must be required'),
+  confirm_password: yup
+    .string()
+    .oneOf([yup.ref('password')], 'Confirm password must be same password')
+    .required('Confirm password must be required')
+})
+
+export type ResetPasswordSchema = yup.InferType<typeof ResetPasswordSchemaYub>
