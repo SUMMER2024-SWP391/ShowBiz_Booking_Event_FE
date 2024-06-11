@@ -7,8 +7,8 @@ export interface User {
   status: UserVerifyStatus
   password?: string
   phone_number?: string
-  dateOfBirth?: string
-  points?: string
+  date_of_birth?: string
+  point?: string
   createdAt?: string
   updatedAt?: string
   role: UserRole

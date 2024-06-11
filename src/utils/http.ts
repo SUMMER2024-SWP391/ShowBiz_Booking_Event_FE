@@ -24,6 +24,7 @@ class Http {
     })),
       this.instance.interceptors.request.use(
         (config) => {
+          console.log(config)
           this.accessToken = this.accessToken
             ? this.accessToken
             : getAccessTokenFromLS()
