@@ -13,8 +13,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from 'src/context/app.context'
 import authAPI from 'src/apis/auth.api'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import { auth } from '../../../firebase'
+// import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+// import { auth } from '../../../firebase'
 import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
 import { UserRole } from 'src/@types/enum'
 
@@ -32,11 +32,11 @@ const Login = () => {
     resolver: yupResolver(LoginSchemaYup)
   })
 
-  const onSignInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider()
-    const user = await signInWithPopup(auth, provider)
-    console.log(user)
-  }
+  // const onSignInWithGoogle = async () => {
+  //   const provider = new GoogleAuthProvider()
+  //   const user = await signInWithPopup(auth, provider)
+  //   console.log(user)
+  // }
 
   const loginMutation = useMutation({
     mutationFn: (body: FormData) => authAPI.login(body)
@@ -57,7 +57,7 @@ const Login = () => {
       onError: (error) => {
         console.log(error)
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
-          console.log(error.response?.data.errors)
+          // console.log(error.response?.data.errors)
           const formError = error.response?.data.errors
 
           if (formError) {
