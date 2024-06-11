@@ -8,8 +8,13 @@ export type UserProfile = {
   >
 }
 
+export type ProfileUpdate = {
+  user: Pick<User, 'user_name' | 'email' | 'date_of_birth' | 'phone_number'>
+}
+
 const ProfileComponent = ({ user }: UserProfile) => {
   const birthdate = user.date_of_birth?.split('T')[0]
+  console.log(birthdate)
   return (
     <div className='grid grid-cols-2 gap-8'>
       <InputVerTwo

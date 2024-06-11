@@ -33,10 +33,7 @@ const Profile = () => {
               index
               element={data && <ProfileComponent user={data.data.data.user} />}
             />
-            <Route
-              path='update'
-              element={data && <UpdateProfile user={data.data.data.user} />}
-            />
+            <Route path='update' element={<UpdateProfile />} />
             <Route path='change-password' element={<ChangePassword />} />
           </Routes>
         </div>

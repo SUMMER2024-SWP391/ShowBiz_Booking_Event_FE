@@ -1,64 +1,77 @@
-import { useForm } from 'react-hook-form'
-import InputVerTwo from '../InputVerTwo/InputVerTwo'
-import { UserProfile } from '../ProfileComponent/ProfileComponent'
-import {
-  CreateEventOperatorSchema,
-  CreateEventOperatorSchemaYup
-} from 'src/utils/rules'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import authAPI from 'src/apis/auth.api'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { ProfileUpdate } from 'src/@types/users.type'
+import { toast } from 'react-toastify'
 
-export type FormUpdateUser = CreateEventOperatorSchema
+export type FormUpdateUser = ProfileUpdate
 
-const UpdateProfile = ({ user }: UserProfile) => {
-  const date = user.date_of_birth?.split('T')[0]
-  const [form, setForm] = useState<FormUpdateUser>(user as FormUpdateUser)
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors }
-  } = useForm<FormUpdateUser>({
-    resolver: yupResolver(CreateEventOperatorSchemaYup)
+const initForm: FormUpdateUser = {
+  email: '',
+  user_name: '',
+  phone_number: '',
+  date_of_birth: '2020-12-01'
+}
+
+const UpdateProfile = () => {
+  const [form, setForm] = useState<FormUpdateUser>(initForm)
+  const getProfile = useQuery({
+    queryKey: ['profile-update'],
+    queryFn: () => authAPI.getProfileToUpdate()
   })
+
+  useEffect(() => {
+    if (getProfile.data) {
+      setForm(getProfile.data.data.data.user)
+    }
+  }, [getProfile.data])
 
   const updateMutation = useMutation({
     mutationFn: (body: FormUpdateUser) => authAPI.updateProfile(body)
   })
 
+  const handleChange =
+    (name: keyof FormUpdateUser) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setForm((prev) => ({ ...prev, [name]: event.target.value }))
+      if (updateMutation.data || updateMutation.error) {
+        updateMutation.reset() //ko nhận và ko return về gì cả
+      }
+    }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    updateMutation.mutate(form, {
+      onSuccess(data) {
+        console.log(data)
+        toast.success('Update success')
+      },
+      onError(error) {
+        console.log(error)
+      }
+    })
+  }
+
   return (
-    <form className='grid grid-cols-2 gap-8'>
-      <InputVerTwo
-        type='text'
-        defaultValue={user.user_name}
-        classNameInput='btn'
-        renderProps={<div className='mb-2'>Name</div>}
-        register={register}
-      />
-      <InputVerTwo
-        type='text'
-        defaultValue={user.email}
-        classNameInput='btn'
-        renderProps={<div className='mb-2'>Email</div>}
-        register={register}
-      />
-      <InputVerTwo
-        type='text'
-        className='basis-2'
-        defaultValue={user.phone_number}
-        classNameInput='btn'
-        renderProps={<div className='mb-2'>Phone number</div>}
-        register={register}
-      />
-      <InputVerTwo
-        type='date'
-        defaultValue={date as string}
-        classNameInput='btn'
-        renderProps={<div className='mb-2'>Birthdate</div>}
-        register={register}
-      />
+    <form className='grid grid-cols-2 gap-8' noValidate onSubmit={handleSubmit}>
+      <div className='flex flex-col'>
+        <label className='mb-2'>User name</label>
+        <input
+          type='text'
+          className='input w-[300px] border-slate-400'
+          value={form.user_name}
+          onChange={handleChange('user_name')}
+        />
+      </div>
+      <div className='flex flex-col'>
+        <label className='mb-2'>Birthdate</label>
+        <input
+          type='date'
+          className='input border-slate-400'
+          value={form.date_of_birth.split('T')[0]}
+          onChange={handleChange('date_of_birth')}
+        />
+      </div>
       <button className='btn'>Update profile</button>
     </form>
   )

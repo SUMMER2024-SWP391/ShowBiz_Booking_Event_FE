@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import LOGO from '../../assets/img/Logo EventBooking (1).png'
-import { Img } from '../Img/Img'
+import { Link, useNavigate } from 'react-router-dom'
+// import LOGO from '../../assets/img/Logo EventBooking (1).png'
+// import { Img } from '../Img/Img'
 import { Heading } from '../Heading/Heading'
 import { BellOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
@@ -16,6 +16,7 @@ interface Props {
   className?: string
 }
 export default function Header({ ...props }: Props) {
+  const navigate = useNavigate()
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } =
     useContext(AppContext)
   const logoutMutation = useMutation({
@@ -32,6 +33,7 @@ export default function Header({ ...props }: Props) {
   const handleLogout = () => {
     const refresh_token = getRefreshTokenFromLS()
     logoutMutation.mutate(refresh_token)
+    navigate('/')
   }
 
   return (
