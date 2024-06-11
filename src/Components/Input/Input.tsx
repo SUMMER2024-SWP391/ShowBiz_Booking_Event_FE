@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes } from 'react'
+import React from 'react'
 
 const shapes = {
   round: 'rounded-[10px]'

@@ -4,7 +4,6 @@ import EventLogo from '../../assets/images/eventlogo.jpg'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import LogoEventOperator from '../../assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import React from 'react'
-import { Link } from 'react-router-dom'
 interface Props {
   className?: string
   id?: string

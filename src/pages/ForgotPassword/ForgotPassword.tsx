@@ -3,7 +3,6 @@ import { useMutation } from '@tanstack/react-query'
 
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { ErrorResponse } from 'src/@types/utils.type'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'

@@ -7,7 +7,6 @@ import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
 import authAPI, { ResetPassword } from 'src/apis/auth.api'
 import { ResetPasswordSchema, ResetPasswordSchemaYub } from 'src/utils/rules'
-import ForgotPassword from '../ForgotPassword/ForgotPassword'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
 import { toast } from 'react-toastify'
@@ -37,7 +36,7 @@ const Recovery = () => {
   const onSubmit = handleSubmit((data) => {
     const body = { ...data, forgot_password_token: token as string }
     resetPasswordMuation.mutate(body, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         toast.success('Reset password success')
         setTimeout(() => {
           navigate('/login')

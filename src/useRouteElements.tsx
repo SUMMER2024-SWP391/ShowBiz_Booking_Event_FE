@@ -27,13 +27,13 @@ function RejectedRoute() {
 const useRouteElements = () => {
   const routeElements = useRoutes([
     {
-      path: path.verify_account,
-      element: <VerifyAccount />
-    },
-    {
       path: '/',
       index: true,
       element: <HomePageVisitor />
+    },
+    {
+      path: path.verify_account,
+      element: <VerifyAccount />
     },
 
     {
