@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Heading } from '../Heading/Heading'
 import { BellOutlined, SearchOutlined } from '@ant-design/icons'
@@ -15,6 +15,7 @@ interface Props {
   className?: string
 }
 export default function Header({ ...props }: Props) {
+  const navigate = useNavigate()
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } =
     useContext(AppContext)
   const logoutMutation = useMutation({
@@ -31,6 +32,7 @@ export default function Header({ ...props }: Props) {
   const handleLogout = () => {
     const refresh_token = getRefreshTokenFromLS()
     logoutMutation.mutate(refresh_token)
+    navigate('/')
   }
 
   return (

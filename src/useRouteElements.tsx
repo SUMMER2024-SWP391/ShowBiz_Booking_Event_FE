@@ -45,15 +45,15 @@ const useRouteElements = () => {
       path: '/recovery',
       element: <Recovery />
     },
+    {
+      path: path.profile,
+      element: <Profile />
+    },
     //chua set up protected routes
     {
       path: '',
       element: <ProtectedRoute />,
       children: [
-        {
-          path: path.profile,
-          element: <Profile />
-        },
         //admin
         {
           path: '/admin/*',

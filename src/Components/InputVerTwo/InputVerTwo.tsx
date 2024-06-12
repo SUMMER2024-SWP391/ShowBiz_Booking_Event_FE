@@ -10,6 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   autoComplete?: string
   renderProps?: React.ReactNode
   defaultValue?: string
+  disabled?: boolean
 }
 
 const InputVerTwo = ({
@@ -24,13 +25,15 @@ const InputVerTwo = ({
   classNameInput = 'rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full',
   classNameError = 'mt-1 min-h-[1.25rem] text-sm text-rose-300 font-bold',
   renderProps,
-  defaultValue
+  defaultValue,
+  disabled
 }: InputProps): JSX.Element => {
   const registerResult = register && name ? register(name, rules) : {}
   return (
     <div className={className}>
       {renderProps}
       <input
+        disabled={disabled}
         type={type}
         value={defaultValue}
         autoComplete={autoComplete}

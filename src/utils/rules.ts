@@ -1,6 +1,5 @@
 import { RegisterOptions, UseFormGetValues } from 'react-hook-form'
 import * as yup from 'yup'
-import { checkPasswordStrong } from './handleRegex'
 type Rules = {
   [key in
     | 'email'
@@ -8,7 +7,8 @@ type Rules = {
     | 'date_of_birth'
     | 'user_name'
     | 'phone_number'
-    | 'confirm_password']?: RegisterOptions
+    | 'confirm_password'
+    | 'old_password']?: RegisterOptions
 }
 export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
   return {
@@ -24,13 +24,7 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
       minLength: {
         value: 8,
         message: 'Password must be at least 6 characters'
-      },
-      validate:
-        typeof checkPasswordStrong === 'function'
-          ? (value) =>
-              checkPasswordStrong(value) ||
-              'Password must has one symbol, one Uppercase, one number'
-          : undefined
+      }
     },
     confirm_password: {
       required: { value: true, message: 'Confirm password is required' },
@@ -63,6 +57,13 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
       pattern: {
         value: /(84|0[3|5|7|8|9])+([0-9]{8})\b/,
         message: 'Invalid phone number'
+      }
+    },
+    old_password: {
+      required: 'This field is required',
+      minLength: {
+        value: 8,
+        message: 'Password must be at least 6 characters'
       }
     }
   }
@@ -121,3 +122,14 @@ export const RegisterEventSchemaYup = yup.object().shape({
     .required('This field is required')
 })
 export type RegisterEventSchema = yup.InferType<typeof RegisterEventSchemaYup>
+
+export const ChangePasswordSchemaYub = yup.object().shape({
+  old_password: yup.string().required('Old password must be required'),
+  password: yup.string().required('Password must be required'),
+  confirm_password: yup
+    .string()
+    .oneOf([yup.ref('password')], 'Confirm password must be same password')
+    .required('Confirm password must be required')
+})
+
+export type ChangePasswordSchema = yup.InferType<typeof ChangePasswordSchemaYub>
