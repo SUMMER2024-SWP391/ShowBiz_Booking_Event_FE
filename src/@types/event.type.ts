@@ -51,3 +51,13 @@ export type EventListOperator = Pick<
   Event,
   '_id' | 'capacity' | 'name' | 'ticket_price' | 'location' | 'status'
 >
+
+export type EventListUser = {
+  events: Array<{
+    _id: string
+    status_check_in: boolean
+    qr_code: string
+    event: Array<Event>
+    event_operator: Array<User>
+  }>
+}

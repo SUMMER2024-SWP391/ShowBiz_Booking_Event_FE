@@ -9,5 +9,5 @@ export const adminApi = {
   deleteUser: (id: string) =>
     http.delete<SuccessResponse<null>>(`/admins/${id}`),
   createEventOperator: (body: CreateEventOperatorSchema) =>
-    http.post('/admins/', body)
+    http.post('/users//register-event-operator', body)
 }

@@ -12,6 +12,7 @@ import Admin from './pages/Admin/Admin'
 import VerifyAccount from './Components/VerifyAccount/VerifyAccount'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import Recovery from './pages/Recovery/Recovery'
+import EventListUser from './pages/EventListUser/EventListUser'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -48,6 +49,10 @@ const useRouteElements = () => {
     {
       path: path.profile,
       element: <Profile />
+    },
+    {
+      path: '/event-list/users',
+      element: <EventListUser />
     },
     //chua set up protected routes
     {

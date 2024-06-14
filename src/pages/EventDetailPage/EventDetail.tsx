@@ -13,7 +13,6 @@ export default function EventDetailPage() {
     queryFn: () => eventApi.getEventById(id as string)
   })
   const event = data?.data.data.event as Event
-  console.log(event)
 
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>

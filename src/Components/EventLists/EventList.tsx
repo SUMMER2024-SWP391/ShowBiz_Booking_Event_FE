@@ -4,7 +4,6 @@ import EventLogo from '../../assets/images/eventlogo.jpg'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import LogoEventOperator from '../../assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import React from 'react'
-import { Link } from 'react-router-dom'
 interface Props {
   className?: string
   id?: string
@@ -14,6 +13,7 @@ interface Props {
   address?: string
   imageUrl?: string
   renderProps?: React.ReactNode
+  location: string
 }
 
 export default function EventList({
@@ -24,6 +24,7 @@ export default function EventList({
   address = 'FPT University',
   imageUrl = EventLogo,
   renderProps,
+  location,
   ...props
 }: Props) {
   return (
@@ -64,7 +65,7 @@ export default function EventList({
               as='p'
               className='self-end !font-monterat !text-blue_gray-400_01'
             >
-              {address}
+              {`${location}, ${address}`}
             </Heading>
           </div>
         </div>

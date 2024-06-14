@@ -5,7 +5,8 @@ import {
   EventListOperator,
   EventListPendingAdmin,
   ListQuestion,
-  FormEventRegister
+  FormEventRegister,
+  EventListUser
 } from 'src/@types/event.type'
 import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
@@ -34,7 +35,9 @@ const eventApi = {
   getListQuestion: (id: string) =>
     http.get<SuccessResponse<{ formRegister: ListQuestion[] }>>(
       `/forms/question-register/${id}`
-    )
+    ),
+  getListEventUser: () =>
+    http.get<SuccessResponse<EventListUser>>('/users/list-register-event')
 }
 
 export default eventApi
