@@ -1,4 +1,3 @@
-import { FormRegister } from 'src/Components/FormRegister/FormRegister';
 import { User } from './users.type'
 
 export interface Event {
@@ -23,8 +22,9 @@ export type ListQuestion = {
   description: string
 }
 export type FormEventRegister = {
-  answer: Array<{
+  answers: Array<{
     _id: string
+    question: string
     description: string
   }>
 }

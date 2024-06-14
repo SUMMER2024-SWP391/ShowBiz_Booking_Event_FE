@@ -1,4 +1,3 @@
-
 import { EventStatus } from 'src/@types/enum'
 import {
   Event,
@@ -31,13 +30,11 @@ const eventApi = {
       '/events/list-event/event-operator'
     ),
   registerEvent: (id: string, body: FormEventRegister) =>
-    http.post(`/register-event/${id}`, body),
+    http.post(`/events/register-event/${id}`, body),
   getListQuestion: (id: string) =>
     http.get<SuccessResponse<{ formRegister: ListQuestion[] }>>(
       `/forms/question-register/${id}`
     )
-
-  
 }
 
 export default eventApi
