@@ -66,11 +66,11 @@ export default function Header({ ...props }: Props) {
             </a>
           </li>
           <li>
-            <a href='#'>
+            <Link to='/event-list/users'>
               <Heading as='h6' className='!text-gray-500_02 hover:text-cyan-50'>
                 My Event
               </Heading>
-            </a>
+            </Link>
           </li>
           <li>
             <a href='#'>
