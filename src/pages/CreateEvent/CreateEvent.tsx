@@ -6,28 +6,65 @@ import {
   RightOutlined,
   YoutubeOutlined
 } from '@ant-design/icons'
-import { Button, Heading, Img,  Text } from 'src/Components'
+import { Button, Heading, Img, Text } from 'src/Components'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import Banner from '../../assets/images/baner.png'
-import { DatePicker, TimePicker, Upload } from 'antd'
-
+import { Col, DatePicker, Row, TimePicker, Upload } from 'antd'
+import DragDropFile from 'drag-drop-file-tk'
+import { useState } from 'react'
 
 const CreateEvent = () => {
+  const [previewImage, setPreviewImage] = useState<string | null>(null)
 
+  const readFileAsDataURL = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        resolve(reader.result as string)
+      }
+      reader.onerror = (error) => reject(error)
+    })
+  }
+  //when image change you can call function to get url previewImage:
 
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const url = await readFileAsDataURL(event.target.files[0])
+      setPreviewImage(url)
+    }
+  }
+console.log('previewImage', previewImage)
+  //you can use to display:
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
       <div className='flex container-xs justify-center'>
         <form className='flex justify-center' noValidate>
           <div className='flex md:flex-col justify-center'>
-            <div className='flex w-[41%] flex-row items-start pb-[31px] md:w-full sm:pb-5 justify-center'>
-              <div className='w-[59%] mr-[40px]'>
-                <Img
-                  src={Banner}
-                  alt='thumnal_event'
-                  className='h-[286px] w-[375px] rounded-[30px] object-cover mb-[40px]'
-                />
+            <div className='flex w-[50%] flex-row items-start pb-[31px] md:w-full sm:pb-5 justify-center'>
+              <div className='w-[50%] m-[40px]'>
+                <div className='relative flex h-[280px] w-[340px] rounded-[30px] items-center justify-center'>
+                  {previewImage ? (
+                    <Img
+                      src={previewImage}
+                      alt='Name Image'
+                      className='h-[280px] w-[350px] rounded-[20px] object-cover mb-[40px]'
+                    />
+                  ) : (
+                    <Img
+                      src={Banner}
+                      alt='thumnal_event'
+                      className='h-[286px] w-[375px] rounded-[30px] object-cover mb-[40px]'
+                    />
+                  )}
+                  {/* <DragDropFile /> */}
+                  <input
+                    type='file'
+                    className='absolute opacity-0 top-0 left-0 w-full h-full cursor-pointer'
+                    onChange={handleChange}
+                  />
+                </div>
 
                 <div className='flex flex-col'>
                   <div className='flex flex-col items-start justify-between gap-5'>
@@ -116,20 +153,20 @@ const CreateEvent = () => {
                   Report Event
                 </Text>
               </div>
-              <div className='flex w-[49%] flex-coll gap-2 md:w-full'>
+              <div className='flex w-[50%] flex-coll gap-5 md:w-full'>
                 <div className='flex flex-col items-start'>
-                  <div className='flex justify-between gap-5 self-stretch'>
+                  <div className='flex justify-between gap-5 self-stretch mt-5'>
                     <Heading
                       size='s'
                       as='h1'
-                      className='flex items-center justify-center rounded-[10px] bg-gray-800_01 p-[3px] !text-black-900'
+                      className='flex items-center justify-center rounded-[10px] bg-gray-800_01 p-2 !text-black-900'
                     >
                       <span className='text-white-A700_bf'>Featured in</span>
                       <span className='text-white-A700 ml-2'>
                         Ho Chi Minh City
                       </span>
                     </Heading>
-                    <select className='bg-blue_gray-900_01 w-24 text-center max-w-xs rounded-lg text-white-A700'>
+                    <select className='bg-blue_gray-900_01 w-24 text-center max-w-xs rounded-lg text-white-A700 font-euclid'>
                       <option selected>Private</option>
                       <option> Public</option>
                     </select>
@@ -138,21 +175,49 @@ const CreateEvent = () => {
                     className='mt-5 h-14 font-extrabold text-[30px] bg-blue_gray-900 !text-white-A700 outline-none border-none'
                     placeholder='EventName'
                   />
-                  <div className='rounded-[10px] pr-[5px] pl-[23px] pt-[7px] h-auto w-full bg-gray-800_01 sm:pl-5'>
-                    <div className='m-3 left-[8%]  w-auto flex items-start justify-between gap-5'>
+                  <div className='flex justify-around items-center gap-5 rounded-[10px] p-3 h-auto w-full bg-gray-800_01 sm:pl-5'>
+                    {/* <div className='m-3 left-[8%] w-auto flex items-start justify-between gap-5'>
                       <Text as='p' className='mt-2 !text-blue_gray-100'>
                         Start
                       </Text>
                       <DatePicker />
-                      <TimePicker />
+                      <TimePicker format='HH:mm' showNow={false} />
                     </div>
-                    <div className=' m-3 left-[8%]  w-auto flex items-start justify-between gap-5'>
+                    <div className='m-3 left-[8%]  w-auto flex items-start justify-between gap-5'>
                       <Text as='p' className='mt-2 !text-blue_gray-100'>
                         End
                       </Text>
                       <DatePicker />
-                      <TimePicker />
-                    </div>
+                      <TimePicker format='HH:mm' showNow={false} />
+                    </div> */}
+                    <Col >
+                      <Row>
+                        <Text as='p' className='m-2 !text-blue_gray-100'>
+                          Start
+                        </Text>
+                      </Row>
+                      <Row>
+                        <Text as='p' className='m-2 !text-blue_gray-100'>
+                          End
+                        </Text>
+                      </Row>
+                    </Col>
+                    <Col>
+                      <Row>
+                        <DatePicker size='middle' />
+                      </Row>
+                      <Row>
+                        <DatePicker />
+                      </Row>
+                    </Col>
+                    <Col>
+                      <Row>
+                        <TimePicker format='HH:mm' showNow={false} />
+                      </Row>
+                      <Row>
+                        <TimePicker format='HH:mm' showNow={false} />
+                      </Row>
+                    </Col>
                   </div>
                   <div className='mt-10 rounded-[10px] pr-[5px] pl-[23px] pt-[7px] h-auto w-full bg-gray-800_01 sm:pl-5'>
                     <div className='flex flex-row items-start'>
@@ -170,8 +235,7 @@ const CreateEvent = () => {
                       placeholder='Offline location or virtual link'
                     />
                   </div>
-                 <Upload
-                    
+                  <Upload
                     action='/upload.do'
                     listType='picture-card'
                     className='mt-10 self-center text-white-A700'
@@ -183,15 +247,14 @@ const CreateEvent = () => {
                       <PlusOutlined />
                       <div style={{ marginTop: 8 }}>Upload</div>
                     </button>
-                  </Upload> 
-                  
+                  </Upload>
                 </div>
               </div>
             </div>
           </div>
         </form>
       </div>
-     </div>
+    </div>
   )
 }
 
