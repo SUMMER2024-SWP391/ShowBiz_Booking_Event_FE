@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button } from '../Button/Button'
-import { RegisterEventSchema, RegisterEventSchemaYup } from 'src/utils/rules'
 import eventApi from 'src/apis/event.api'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import InputVerTwo from '../InputVerTwo/InputVerTwo'
-import { Text } from '../Text/Text'
-import { useForm } from 'react-hook-form'
 import { FormEventRegister } from 'src/@types/event.type'
+import { toast } from 'react-toastify'
 
 type Props = {
   className?: string
@@ -16,62 +13,64 @@ type Props = {
 }
 export type FormDataEvent = FormEventRegister
 const initFormData: FormDataEvent = {
-  answer: [
-    {
-      _id: '',
-      description: ''
-    }
-  ]
+  answers: []
 }
 
 export const FormRegister = ({ className, setTrigger, _id }: Props) => {
-  console.log('id', _id)
   const [form, setForm] = useState<FormDataEvent>(initFormData)
   const getQuestion = useQuery({
     queryKey: ['eventId', _id],
     queryFn: () => eventApi.getListQuestion(_id)
   })
-  // console.log('getQuestion', getQuestion.data?.data.data.formRegister);
   const registerEventMutation = useMutation({
     mutationFn: (body: FormDataEvent) => eventApi.registerEvent(_id, body)
   })
-  const handleChange =  (questionId: string) => async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-  
-    // Ensure getQuestion data is available before updating form
-    if (!getQuestion.isSuccess) {
-      console.warn('Question data not yet loaded. Ignoring change.');
-      return;
-    }
-  
-    const question = getQuestion.data?.data.data.formRegister.map((item) => item._id === questionId);
-    if (!question) {
-      console.warn(`Question with ID ${questionId} not found. Ignoring change.`);
-      return;
-    }
-    console.log('question', question);
-    
-     setForm((prevForm) => ({
-      ...prevForm,
-      answer: prevForm.answer.map((answer) =>
-        answer._id === questionId ? { ...answer, description: value } : answer
-      ),
-    }));
-  };
 
-    
+  const handleChange =
+    (questionId: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value
+
+      setForm((pre) => ({
+        ...pre,
+        answers: pre.answers.map((item) => {
+          if (item._id === questionId) return { ...item, description: value }
+          return item
+        })
+      }))
+    }
+
+  useEffect(() => {
+    if (getQuestion.data) {
+      const answers: Array<{
+        _id: string
+        description: string
+        question: string
+      }> = []
+      const listQuestion = getQuestion.data.data.data.formRegister
+      for (let i = 0; i < listQuestion.length; i++) {
+        answers.push({
+          _id: listQuestion[i]._id,
+          question: listQuestion[i].description,
+          description: ''
+        })
+      }
+      setForm((pre) => ({ ...pre, answers: [...answers] }))
+    }
+  }, [getQuestion.data])
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    registerEventMutation.mutate(form, {
+    registerEventMutation.mutate(form as FormEventRegister, {
       onSuccess: () => {
-        console.log('success', form)
+        toast.success('Register event success')
       },
-      onError: (error) => {
-        console.log('error', error)
+      onError: () => {
+        toast.error('Something error')
       }
     })
   }
-  console.log(initFormData)
+
+  console.log(form)
 
   return (
     <div className={`${className} flex flex-col view_detail fixed inset-0`}>
@@ -87,36 +86,25 @@ export const FormRegister = ({ className, setTrigger, _id }: Props) => {
             Register
           </h1>
           <form className='mt-10' onSubmit={handleSubmit}>
-            {getQuestion.data?.data.data.formRegister.map((item) => (
-              <>
-                <div className='flex flex-col gap-2' key={item._id}>
-                  <Text
-                    as='p'
-                    size='xl'
-                    className='!text-white-A700 font-monterat !font-medium'
-                  >
-                    {item.description}
-                  </Text>
-                  <InputVerTwo
+            {form.answers.length !== 0 &&
+              form.answers.map((item) => (
+                <div className='flex flex-col gap-2 pb-2' key={item._id}>
+                  <div className='mb-2 text-white-A700'>{item.question}</div>
+                  <input
                     type='text'
+                    className='input w-[300px] focus:border-gray-300'
                     name={item._id}
-                    placeholder={`Input your Full Name`}
-                    classNameInput='rounded-[10px] border border-solid
-                   border-white-A700 font-bold sm:pr-5 w-full font-euclid p-2 outline-none
-                    focus:border-gray-700'
+                    value={item.description}
                     onChange={handleChange(item._id)}
-                    // register={register}
-                    // errorMessage={errors.full_name?.message}
                   />
                 </div>
-              </>
-            ))}
+              ))}
             <Button
               color='blue_gray_900'
               size='xl'
-              className='min-w-[345px] p-5 h-[37px] gap-1.5 rounded-[10px] border border-solid
+              className='min-w-[300px] p-5 h-[37px] gap-1.5 rounded-[10px] border border-solid
                  border-blue_gray-100_04 font-semibold sm:px-5 text-white-A700 text-center 
-                 flex justify-center items-center hover:bg-white-A700 hover:text-black-900'
+                 flex justify-center items-center hover:bg-white-A700 hover:text-black-900 mt-4'
             >
               Register
             </Button>
@@ -126,6 +114,7 @@ export const FormRegister = ({ className, setTrigger, _id }: Props) => {
     </div>
   )
 }
+
 const Background = styled.div`
   background-color: #007bff;
   color: white;
