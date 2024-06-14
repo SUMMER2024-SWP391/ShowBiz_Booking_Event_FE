@@ -17,7 +17,17 @@ export interface Event {
   calendarId: string
   location: string
 }
-
+export type ListQuestion = {
+  _id: string
+  description: string
+}
+export type FormEventRegister = {
+  answers: Array<{
+    _id: string
+    question: string
+    description: string
+  }>
+}
 export type EventList = Pick<
   Event,
   | '_id'

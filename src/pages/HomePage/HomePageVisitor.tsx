@@ -7,13 +7,19 @@ import Footer from 'src/Components/Footer/Footer'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import eventApi from 'src/apis/event.api'
+import { useState } from 'react'
+import { FormRegister } from 'src/Components/FormRegister/FormRegister'
+import { set } from 'react-hook-form'
 
 export default function HomePageVisitor() {
+  const [togglePop, setTogglePop] = useState(false)
   const { data } = useQuery({
     queryKey: ['events'],
     queryFn: () => eventApi.getListEvent()
   })
   console.log(data?.data.data.events)
+  console.log(togglePop)
+  const [id, setId] = useState('')
   return (
     <>
       <div className='w-full bg-gray-900 pb-[376px] md:pb-5'>
@@ -98,6 +104,10 @@ export default function HomePageVisitor() {
                                   <Button
                                     className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
                     hover:border-[#e5e7eb] mr-2'
+                                    onClick={() => {
+                                      setTogglePop(true)
+                                      setId(event._id)
+                                    }}
                                   >
                                     Register
                                   </Button>
@@ -122,6 +132,13 @@ export default function HomePageVisitor() {
             </div>
           </div>
         </div>
+        {togglePop && (
+          <FormRegister
+            className='w-full h-full bg-blue_gray-400_01 border border-gray-900_03 border-solid'
+            setTrigger={setTogglePop}
+            _id={id || ''}
+          />
+        )}
         <Footer />
       </div>
     </>

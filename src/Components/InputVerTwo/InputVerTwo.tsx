@@ -11,6 +11,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   renderProps?: React.ReactNode
   defaultValue?: string
   disabled?: boolean
+  // onChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>
 }
 
 const InputVerTwo = ({
@@ -27,6 +28,7 @@ const InputVerTwo = ({
   renderProps,
   defaultValue,
   disabled
+  // onChange
 }: InputProps): JSX.Element => {
   const registerResult = register && name ? register(name, rules) : {}
   return (
@@ -39,6 +41,7 @@ const InputVerTwo = ({
         autoComplete={autoComplete}
         className={classNameInput}
         placeholder={placeholder}
+        // onChange={onChange}
         {...registerResult} //react hook form tự override lại name của tag input do khi chạy register
         //nó sẽ trả và 1 field name tương tự
       />

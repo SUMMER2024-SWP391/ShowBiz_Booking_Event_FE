@@ -110,6 +110,18 @@ export const ResetPasswordSchemaYub = yup.object().shape({
 })
 
 export type ResetPasswordSchema = yup.InferType<typeof ResetPasswordSchemaYub>
+export const RegisterEventSchemaYup = yup.object().shape({
+  full_name: yup.string().required('This field is required'),
+  phone_number: yup
+    .string()
+    .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/, 'Invalid phone number')
+    .required('This field is required'),
+  mssv: yup
+    .string()
+    .matches(/[A-Z]{2}\d{6}/, 'Invalid MSSV')
+    .required('This field is required')
+})
+export type RegisterEventSchema = yup.InferType<typeof RegisterEventSchemaYup>
 
 export const ChangePasswordSchemaYub = yup.object().shape({
   old_password: yup.string().required('Old password must be required'),

@@ -3,7 +3,9 @@ import {
   Event,
   EventList,
   EventListOperator,
-  EventListPendingAdmin
+  EventListPendingAdmin,
+  ListQuestion,
+  FormEventRegister
 } from 'src/@types/event.type'
 import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
@@ -26,6 +28,12 @@ const eventApi = {
   getEventListOperator: () =>
     http.get<SuccessResponse<{ events: EventListOperator[] }>>(
       '/events/list-event/event-operator'
+    ),
+  registerEvent: (id: string, body: FormEventRegister) =>
+    http.post(`/events/register-event/${id}`, body),
+  getListQuestion: (id: string) =>
+    http.get<SuccessResponse<{ formRegister: ListQuestion[] }>>(
+      `/forms/question-register/${id}`
     )
 }
 
