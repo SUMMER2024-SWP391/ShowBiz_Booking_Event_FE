@@ -39,7 +39,8 @@ export const Events = () => {
           size='3xl'
           className='mt-[49px] mb-[400px] min-w-[300px] rounded-[10px] font-euclid font-bold sm:px-5'
         >
-          Create an Event
+          <a href='http://localhost:3000/event-operator/create'>Create an Event</a>
+          
         </Button>
       </div>
     </div>

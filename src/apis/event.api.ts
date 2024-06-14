@@ -1,17 +1,16 @@
+
 import { EventStatus } from 'src/@types/enum'
 import {
   Event,
   EventList,
   EventListOperator,
-  EventListPendingAdmin
+  EventListPendingAdmin,
+  ListQuestion,
+  FormEventRegister
 } from 'src/@types/event.type'
 import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
-type FormEventRegister = {
-  full_name: string
-  phone_number: string
-  mssv: string
-}
+
 const eventApi = {
   getListEvent: () =>
     http.get<SuccessResponse<{ events: EventList[] }>>('/events'),
@@ -32,11 +31,13 @@ const eventApi = {
       '/events/list-event/event-operator'
     ),
   registerEvent: (id: string, body: FormEventRegister) =>
-    http.post(`/register-event/:${id}`, body),
+    http.post(`/register-event/${id}`, body),
   getListQuestion: (id: string) =>
-    http.get<SuccessResponse<{ eventId: Event }>>(
+    http.get<SuccessResponse<{ formRegister: ListQuestion[] }>>(
       `/forms/question-register/${id}`
     )
+
+  
 }
 
 export default eventApi

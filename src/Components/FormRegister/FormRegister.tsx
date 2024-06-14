@@ -1,66 +1,77 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button } from '../Button/Button'
-
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { RegisterEventSchema, RegisterEventSchemaYup } from 'src/utils/rules'
 import eventApi from 'src/apis/event.api'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
-import { ErrorResponse } from 'react-router-dom'
 import InputVerTwo from '../InputVerTwo/InputVerTwo'
 import { Text } from '../Text/Text'
+import { useForm } from 'react-hook-form'
+import { FormEventRegister } from 'src/@types/event.type'
+
 type Props = {
   className?: string
   setTrigger?: (value: boolean) => void
   _id: string
 }
+export type FormDataEvent = FormEventRegister
+const initFormData: FormDataEvent = {
+  answer: [
+    {
+      _id: '',
+      description: ''
+    }
+  ]
+}
 
-export type FormData = RegisterEventSchema
-
-// const {
-//   register,
-//   handleSubmit,
-//   setError,
-//   formState: { errors }
-// } = useForm<FormData>({
-//   resolver: yupResolver(RegisterEventSchemaYup)
-// })
-// const registerMutation = useMutation({
-//   mutationFn: (body: FormData) => eventApi.registerEvent(body)
-// })
-// const onSubmit = handleSubmit((data) => {
-//   registerMutation.mutate(data, {
-//     onSuccess: (data) => {
-//       console.log(data)
-//     },
-//     onError: (error) => {
-//       console.log(error)
-//       // if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
-//       //   console.log(error.response?.data.errors)
-//       //   const formError = error.response?.data.errors
-
-//       // if (formError) {
-//       //   Object.keys(formError).forEach((key) => {
-//       //     setError(key as keyof FormData, {
-//       //       message: formError[key as keyof FormData],
-//       //       type: 'Server'
-//       //     })
-//       //   })
-//       // }
-//       // }
-//     }
-//   })
-// })
 export const FormRegister = ({ className, setTrigger, _id }: Props) => {
   console.log('id', _id)
-
-  const { data } = useQuery({
+  const [form, setForm] = useState<FormDataEvent>(initFormData)
+  const getQuestion = useQuery({
     queryKey: ['eventId', _id],
     queryFn: () => eventApi.getListQuestion(_id)
   })
-  console.log('hi', data)
+  // console.log('getQuestion', getQuestion.data?.data.data.formRegister);
+  const registerEventMutation = useMutation({
+    mutationFn: (body: FormDataEvent) => eventApi.registerEvent(_id, body)
+  })
+  const handleChange =  (questionId: string) => async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+  
+    // Ensure getQuestion data is available before updating form
+    if (!getQuestion.isSuccess) {
+      console.warn('Question data not yet loaded. Ignoring change.');
+      return;
+    }
+  
+    const question = getQuestion.data?.data.data.formRegister.map((item) => item._id === questionId);
+    if (!question) {
+      console.warn(`Question with ID ${questionId} not found. Ignoring change.`);
+      return;
+    }
+    console.log('question', question);
+    
+     setForm((prevForm) => ({
+      ...prevForm,
+      answer: prevForm.answer.map((answer) =>
+        answer._id === questionId ? { ...answer, description: value } : answer
+      ),
+    }));
+  };
+
+    
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    registerEventMutation.mutate(form, {
+      onSuccess: () => {
+        console.log('success', form)
+      },
+      onError: (error) => {
+        console.log('error', error)
+      }
+    })
+  }
+  console.log(initFormData)
 
   return (
     <div className={`${className} flex flex-col view_detail fixed inset-0`}>
@@ -75,67 +86,40 @@ export const FormRegister = ({ className, setTrigger, _id }: Props) => {
           <h1 className='text-2xl font-bold text-center !text-white-A700'>
             Register
           </h1>
-          <form className='mt-10'>
-            <div className='flex flex-col gap-2'>
-              <Text
-                as='p'
-                size='xl'
-                className='!text-white-A700 font-monterat !font-medium'
-              >
-                Ho Va Ten
-              </Text>
-              <InputVerTwo
-                type='text'
-                name='full_name'
-                placeholder={`Input your Full Name`}
-                classNameInput='rounded-[10px] border border-solid
+          <form className='mt-10' onSubmit={handleSubmit}>
+            {getQuestion.data?.data.data.formRegister.map((item) => (
+              <>
+                <div className='flex flex-col gap-2' key={item._id}>
+                  <Text
+                    as='p'
+                    size='xl'
+                    className='!text-white-A700 font-monterat !font-medium'
+                  >
+                    {item.description}
+                  </Text>
+                  <InputVerTwo
+                    type='text'
+                    name={item._id}
+                    placeholder={`Input your Full Name`}
+                    classNameInput='rounded-[10px] border border-solid
                    border-white-A700 font-bold sm:pr-5 w-full font-euclid p-2 outline-none
                     focus:border-gray-700'
-                // register={register}
-                // errorMessage={errors.full_name?.message}
-              />
-              <Text
-                as='p'
-                size='xl'
-                className='!text-white-A700 font-monterat !font-medium'
-              >
-                Phone Number
-              </Text>
-              <InputVerTwo
-                type='text'
-                name='phone_number'
-                placeholder={`Input your phone number`}
-                classNameInput='rounded-[10px] border border-solid
-                   border-white-A700 font-bold sm:pr-5 w-full font-euclid p-2 outline-none
-                    focus:border-gray-700'
-                // register={register}
-                // errorMessage={errors.phone_number?.message}
-              />
-              <Text
-                as='p'
-                size='xl'
-                className='!text-white-A700 font-monterat !font-medium'
-              >
-                MSSV
-              </Text>
-              <InputVerTwo
-                type='text'
-                name='mssv'
-                placeholder={`Input your MSSV`}
-                classNameInput='rounded-[10px] border border-solid
-                   border-white-A700 font-bold sm:pr-5 w-full font-euclid p-2 outline-none
-                    focus:border-gray-700'
-                // register={register}
-                // errorMessage={errors.mssv?.message}
-              />
-              <Button
-                size='xl'
-                color='white_A700'
-                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
-              >
-                Submit
-              </Button>
-            </div>
+                    onChange={handleChange(item._id)}
+                    // register={register}
+                    // errorMessage={errors.full_name?.message}
+                  />
+                </div>
+              </>
+            ))}
+            <Button
+              color='blue_gray_900'
+              size='xl'
+              className='min-w-[345px] p-5 h-[37px] gap-1.5 rounded-[10px] border border-solid
+                 border-blue_gray-100_04 font-semibold sm:px-5 text-white-A700 text-center 
+                 flex justify-center items-center hover:bg-white-A700 hover:text-black-900'
+            >
+              Register
+            </Button>
           </form>
         </div>
       </div>

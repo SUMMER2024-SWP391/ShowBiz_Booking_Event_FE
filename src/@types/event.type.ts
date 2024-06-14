@@ -1,3 +1,4 @@
+import { FormRegister } from 'src/Components/FormRegister/FormRegister';
 import { User } from './users.type'
 
 export interface Event {
@@ -17,7 +18,16 @@ export interface Event {
   calendarId: string
   location: string
 }
-
+export type ListQuestion = {
+  _id: string
+  description: string
+}
+export type FormEventRegister = {
+  answer: Array<{
+    _id: string
+    description: string
+  }>
+}
 export type EventList = Pick<
   Event,
   | '_id'
