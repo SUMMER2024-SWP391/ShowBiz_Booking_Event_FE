@@ -1,30 +1,16 @@
-# React + TypeScript + Vite
+## Event Seminar Registration System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Use Case Diagram
 
-Currently, two official plugins are available:
+![Project Relational Schema](https://github.com/SUMMER2024-SWP391/ShowBiz_Booking_Event_BE/blob/main/imgs/relational_schema.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Team Members
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+| Name                    	| RollNum      	| Role      	| Position                      	|
+|-------------------------	|------------	|------------	|-------------------------------	|
+| [**Nguyễn Việt Hoàng**](https://github.com/hoangday185) 	| **SE16xxxx** 	| **Mern Stack** 	| **Leader Frontend** 	|
+| [**Nguyễn Lê Phương Nam**](https://github.com/HenryDev1553) | **SE171111** 	| **Frontend** 	| **Member**                    	|
+| [**Mai Minh Nhật**](https://github.com/minatisleeping)  	| **SE161567** 	| **Backend** 	| **Member**                    	|
+| [**Nguyễn Anh Huy**](https://github.com/kle1603)        	| **SE17xxxx** 	| **Backend** | **Member**           	|
