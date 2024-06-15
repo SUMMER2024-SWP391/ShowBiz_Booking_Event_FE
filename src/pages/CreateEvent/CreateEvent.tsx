@@ -1,4 +1,5 @@
 import {
+  AlignCenterOutlined,
   EnvironmentOutlined,
   FacebookOutlined,
   InstagramOutlined,
@@ -35,7 +36,7 @@ const CreateEvent = () => {
       setPreviewImage(url)
     }
   }
-console.log('previewImage', previewImage)
+  console.log('previewImage', previewImage)
   //you can use to display:
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
@@ -44,7 +45,7 @@ console.log('previewImage', previewImage)
           <div className='flex md:flex-col justify-center'>
             <div className='flex w-[50%] flex-row items-start pb-[31px] md:w-full sm:pb-5 justify-center'>
               <div className='w-[50%] m-[40px]'>
-                <div className='relative flex h-[280px] w-[340px] rounded-[30px] items-center justify-center'>
+                <div className='relative flex h-[300px] w-[300px] rounded-[30px] items-center justify-center'>
                   {previewImage ? (
                     <Img
                       src={previewImage}
@@ -190,14 +191,20 @@ console.log('previewImage', previewImage)
                       <DatePicker />
                       <TimePicker format='HH:mm' showNow={false} />
                     </div> */}
-                    <Col >
+                    <Col>
                       <Row>
-                        <Text as='p' className='m-2 !text-blue_gray-100'>
+                        <Text
+                          as='p'
+                          className='m-2 !text-blue_gray-100 !font-bold'
+                        >
                           Start
                         </Text>
                       </Row>
                       <Row>
-                        <Text as='p' className='m-2 !text-blue_gray-100'>
+                        <Text
+                          as='p'
+                          className='m-2 !text-blue_gray-100 !font-bold'
+                        >
                           End
                         </Text>
                       </Row>
@@ -207,7 +214,7 @@ console.log('previewImage', previewImage)
                         <DatePicker size='middle' />
                       </Row>
                       <Row>
-                        <DatePicker />
+                        <DatePicker /> 
                       </Row>
                     </Col>
                     <Col>
@@ -219,21 +226,39 @@ console.log('previewImage', previewImage)
                       </Row>
                     </Col>
                   </div>
-                  <div className='mt-10 rounded-[10px] pr-[5px] pl-[23px] pt-[7px] h-auto w-full bg-gray-800_01 sm:pl-5'>
-                    <div className='flex flex-row items-start'>
-                      <EnvironmentOutlined className='mt-1' />
+                  <div className='flex flex-row  p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
+                    <EnvironmentOutlined className='' />
+                    
+                    <div className='flex flex-col items-start ml-2'>
                       <Text
                         as='p'
-                        size='xl'
-                        className='ml-5 !text-blue_gray-100 !font-bold'
+                        size='lg'
+                        className=' !text-blue_gray-100 !font-bold'
                       >
                         Add Event Location
                       </Text>
+                      <input
+                        className='font-normal !text-blue_gray-100 bg-gray-800_01 outline-none border-none text-sm'
+                        placeholder='Offline location or virtual link'
+                      />
                     </div>
-                    <input
-                      className='ml-9 font-normal !text-blue_gray-100 bg-gray-800_01 outline-none border-none'
-                      placeholder='Offline location or virtual link'
-                    />
+                  </div>
+                  <div className='flex flex-row  p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
+                    <AlignCenterOutlined />
+
+                    <div className='flex flex-col items-start ml-2'>
+                      <Text
+                        as='p'
+                        size='lg'
+                        className=' !text-blue_gray-100 !font-bold'
+                      >
+                        Add Description
+                      </Text>
+                      <input
+                        className='font-normal !text-blue_gray-100 bg-gray-800_01 outline-none border-none text-sm'
+                        placeholder='Content for event description'
+                      />
+                    </div>
                   </div>
                   <Upload
                     action='/upload.do'
