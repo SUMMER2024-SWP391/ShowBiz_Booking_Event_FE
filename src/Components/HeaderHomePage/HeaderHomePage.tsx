@@ -58,6 +58,14 @@ export default function Header({ ...props }: Props) {
               </Link>
             </li>
           )}
+          {isAuthenticated && profile?.role == UserRole.EventOperator && (<Link to='/event-operator'>
+                <Heading
+                  as='h6'
+                  className='!text-gray-500_02 hover:text-cyan-50'
+                >
+                  Event Operator
+                </Heading>
+              </Link>)}
           <li>
             <a href='/'>
               <Heading as='h6' className=' hover:text-cyan-50'>

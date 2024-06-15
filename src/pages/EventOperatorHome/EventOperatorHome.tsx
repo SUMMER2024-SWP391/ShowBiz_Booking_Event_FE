@@ -34,8 +34,8 @@ export const EventOperatorHome = () => {
                     <NavLink role='tab' className='tab !text-white-A700' to={''}>
                       People
                     </NavLink>
-                    <NavLink role='tab' className='tab !text-white-A700' to={''}>
-                      Newsletters
+                    <NavLink to='/event-operator/event-list' className='tab !text-white-A700' >
+                      Event List
                     </NavLink>
                     <NavLink role='tab' className='tab !text-white-A700' to={''}>
                       Insights

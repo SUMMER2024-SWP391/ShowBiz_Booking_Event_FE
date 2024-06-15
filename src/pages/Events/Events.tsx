@@ -1,4 +1,5 @@
 import { CalendarOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 import { Button, Heading, Text } from 'src/Components'
 
 export const Events = () => {
@@ -37,9 +38,9 @@ export const Events = () => {
         <Button
           color='blue_gray_900'
           size='3xl'
-          className='mt-[49px] mb-[400px] min-w-[300px] rounded-[10px] font-euclid font-bold sm:px-5'
+          className='mt-[49px] mb400px] min-w-[300px] rounded-[10px] font-euclid font-bold sm:px-5 hover:bg-white-A700 hover:text-black-900 hover:border-white-A700 border-2 border-gray-400_02'
         >
-          <a href='http://localhost:3000/event-operator/create'>Create an Event</a>
+          <Link to='/event-operator/create'>Create an Event</Link>
           
         </Button>
       </div>
