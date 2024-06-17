@@ -31,7 +31,7 @@ const LoginOauthGoogle = () => {
     }
     setIsAuthenticated(true)
     setTokenToLS(access_token as string, refresh_token as string)
-    setProfileToLS(userInfo)
+    setProfileToLS(userInfo as User)
     navigate('/')
   }, [params])
   return <div>Login</div>
