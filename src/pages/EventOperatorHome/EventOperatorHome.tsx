@@ -5,6 +5,7 @@ import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import { Events } from '../Events/Events'
 import CreateEvent from '../CreateEvent/CreateEvent'
 import EventListOperator from 'src/Components/EventListOperator/EventListOperator'
+import FormFeedback from 'src/Components/FormFeedback/FormFeedback'
 
 export const EventOperatorHome = () => {
   return (
@@ -31,27 +32,48 @@ export const EventOperatorHome = () => {
                     >
                       Events
                     </NavLink>
-                    <NavLink role='tab' className='tab !text-white-A700' to={''}>
+                    <NavLink
+                      role='tab'
+                      className='tab !text-white-A700'
+                      to={''}
+                    >
                       People
                     </NavLink>
-                    <NavLink to='/event-operator/event-list' className='tab !text-white-A700' >
+                    <NavLink
+                      to='/event-operator/event-list'
+                      className='tab !text-white-A700'
+                    >
                       Event List
                     </NavLink>
-                    <NavLink role='tab' className='tab !text-white-A700' to={''}>
+                    <NavLink
+                      role='tab'
+                      className='tab !text-white-A700'
+                      to={''}
+                    >
                       Insights
                     </NavLink>
-                    <NavLink role='tab' className='tab !text-white-A700' to={''}>
+                    <NavLink
+                      role='tab'
+                      className='tab !text-white-A700'
+                      to={''}
+                    >
                       Setting
                     </NavLink>
                   </div>
                   <div className='mt-10'>
-                  <Routes>
-                    <Route path='event-list' element={<EventListOperator />} />
-                    <Route index element={<Events />} />
-                    <Route path='create' element={<CreateEvent />} />
-                  </Routes>
+                    <Routes>
+                      <Route
+                        path='event-list'
+                        element={<EventListOperator />}
+                      />
+                      <Route index element={<Events />} />
+                      <Route path='create' element={<CreateEvent />} />
+                      <Route
+                        path='form-feedback/:id'
+                        element={<FormFeedback />}
+                      ></Route>
+                    </Routes>
                   </div>
-                  
                 </div>
               </div>
             </div>
