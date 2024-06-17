@@ -3,7 +3,7 @@ import { Heading } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import { Events } from '../Events/Events'
-import CreateEvent from '../CreateEvent/CreateEvent'
+import CreateEvent from '../../Components/CreateEvent/CreateEvent'
 import EventListOperator from 'src/Components/EventListOperator/EventListOperator'
 
 export const EventOperatorHome = () => {

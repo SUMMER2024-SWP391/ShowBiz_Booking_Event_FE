@@ -6,7 +6,7 @@ import SideBarAdmin from 'src/Components/SideBarAdmin/SideBarAdmin'
 import TableEventList from 'src/Components/TableEventList/TableEventList'
 import TableUser from 'src/Components/TableUser/TableUser'
 
-const Admin = () => {
+const AdminPage = () => {
   return (
     <div className='container'>
       <HeaderAdmin />
@@ -33,4 +33,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default AdminPage
