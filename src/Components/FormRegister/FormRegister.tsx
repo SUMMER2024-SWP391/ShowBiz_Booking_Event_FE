@@ -5,6 +5,7 @@ import eventApi from 'src/apis/event.api'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { FormEventRegister } from 'src/@types/event.type'
 import { toast } from 'react-toastify'
+import { EventQuestionType } from 'src/@types/form.type'
 
 type Props = {
   className?: string
@@ -20,7 +21,7 @@ export const FormRegister = ({ className, setTrigger, _id }: Props) => {
   const [form, setForm] = useState<FormDataEvent>(initFormData)
   const getQuestion = useQuery({
     queryKey: ['eventId', _id],
-    queryFn: () => eventApi.getListQuestion(_id)
+    queryFn: () => eventApi.getListQuestion(_id, EventQuestionType.REGISTER)
   })
   const registerEventMutation = useMutation({
     mutationFn: (body: FormDataEvent) => eventApi.registerEvent(_id, body)

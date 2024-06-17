@@ -6,6 +6,7 @@ import { Events } from '../Events/Events'
 import CreateEvent from '../CreateEvent/CreateEvent'
 import EventListOperator from 'src/Components/EventListOperator/EventListOperator'
 import FormFeedback from 'src/Components/FormFeedback/FormFeedback'
+import UpdateFormFeedback from 'src/Components/UpdateFormFeedback/UpdateFormFeedback'
 
 export const EventOperatorHome = () => {
   return (
@@ -67,6 +68,10 @@ export const EventOperatorHome = () => {
                         element={<EventListOperator />}
                       />
                       <Route index element={<Events />} />
+                      <Route
+                        path='update-form/:id'
+                        element={<UpdateFormFeedback />}
+                      />
                       <Route path='create' element={<CreateEvent />} />
                       <Route
                         path='form-feedback/:id'

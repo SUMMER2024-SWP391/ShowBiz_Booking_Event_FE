@@ -8,6 +8,7 @@ import {
   FormEventRegister,
   EventListUser
 } from 'src/@types/event.type'
+import { EventQuestionType } from 'src/@types/form.type'
 import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
 
@@ -32,9 +33,9 @@ const eventApi = {
     ),
   registerEvent: (id: string, body: FormEventRegister) =>
     http.post(`/events/register-event/${id}`, body),
-  getListQuestion: (id: string) =>
+  getListQuestion: (id: string, type: EventQuestionType) =>
     http.get<SuccessResponse<{ formRegister: ListQuestion[] }>>(
-      `/forms/question-register/${id}`
+      `/forms/question-register/${id}/${type}`
     ),
   getListEventUser: () =>
     http.get<SuccessResponse<EventListUser>>('/users/list-register-event')
