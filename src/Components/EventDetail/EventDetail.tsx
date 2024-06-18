@@ -120,8 +120,8 @@ const EventDetail = ({ event }: Props) => {
                 as='h1'
                 className='flex items-center justify-center rounded-[10px] bg-gray-800_01 p-[3px] !text-black-900'
               >
-                <span className='text-white-A700_bf'>Featured in</span>
-                <span className='text-white-A700 ml-2'>Ho Chi Minh City</span>
+                <span className='text-white-A700_bf p-1'>Featured in</span>
+                <span className='text-white-A700 p-1'>Ho Chi Minh City</span>
               </Heading>
               <Heading
                 size='4xl'
