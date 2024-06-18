@@ -10,7 +10,7 @@ import EventOfForm from '../EventOfForm/EventOfForm'
 import InputQuestion from '../InputQuestion/InputQuestion'
 
 type Question = {
-  id: string
+  _id: string
   description: string
   messageError: string
 }
@@ -22,7 +22,7 @@ type FormFeedBack = {
 const initForm: FormFeedBack = {
   questions: [
     {
-      id: new Date().toISOString(),
+      _id: new Date().toISOString(),
       description: '',
       messageError: ''
     }
@@ -45,7 +45,7 @@ const FormFeedback = () => {
 
   const handleNewQuestion = () => {
     const question = {
-      id: new Date().toISOString(),
+      _id: new Date().toISOString(),
       description: '',
       messageError: ''
     }
@@ -67,7 +67,7 @@ const FormFeedback = () => {
       setForm((prevForm) => ({
         ...prevForm,
         questions: prevForm.questions.map((question) => {
-          if (question.id === id) {
+          if (question._id === id) {
             return { ...question, description: value }
           }
           return question
@@ -78,7 +78,7 @@ const FormFeedback = () => {
   const handleDeleteQuestion = (id: string) => () => {
     setForm((prevForm) => {
       const listQuestion = prevForm.questions
-      const result = listQuestion.filter((question) => question.id !== id)
+      const result = listQuestion.filter((question) => question._id !== id)
 
       return {
         ...prevForm,
@@ -160,7 +160,7 @@ const FormFeedback = () => {
               handleDeleteQuestion={handleDeleteQuestion}
               index={index}
               question={question}
-              key={question.id}
+              key={question._id}
             />
           ))}
 

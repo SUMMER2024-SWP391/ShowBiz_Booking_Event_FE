@@ -34,8 +34,8 @@ const eventApi = {
   registerEvent: (id: string, body: FormEventRegister) =>
     http.post(`/events/register-event/${id}`, body),
   getListQuestion: (id: string, type: EventQuestionType) =>
-    http.get<SuccessResponse<{ formRegister: ListQuestion[] }>>(
-      `/forms/question-register/${id}/${type}`
+    http.get<SuccessResponse<{ formQuestion: ListQuestion[] }>>(
+      `/forms/question/${id}/${type}`
     ),
   getListEventUser: () =>
     http.get<SuccessResponse<EventListUser>>('/users/list-register-event')
