@@ -12,6 +12,7 @@ const EventListUser = () => {
     queryFn: () => eventApi.getListEventUser()
   })
 
+  console.log(data)
   return (
     <>
       <Header />
@@ -39,7 +40,9 @@ const EventListUser = () => {
                     className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
     hover:border-[#e5e7eb]'
                   >
-                    <Link to={`1`}>Detail</Link>
+                    <Link to={`/ticket/${event.event[0]._id}`}>
+                      Ticket detail
+                    </Link>
                   </Button>
                 }
               />
