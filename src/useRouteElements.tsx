@@ -13,7 +13,7 @@ import VerifyAccount from './Components/VerifyAccount/VerifyAccount'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import Recovery from './pages/Recovery/Recovery'
 import EventListUser from './pages/EventListUser/EventListUser'
-import InfoEventRegisterOfUser from './Components/InfoEventRegisterOfUser/InfoEventRegisterOfUser'
+import TicketDetail from './pages/TicketDetail/TicketDetail'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -53,7 +53,7 @@ const useRouteElements = () => {
     },
     {
       path: '/ticket/:id',
-      element: <InfoEventRegisterOfUser />
+      element: <TicketDetail />
     },
     {
       path: '/event-list/users',
