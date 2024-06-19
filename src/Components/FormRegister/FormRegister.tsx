@@ -47,7 +47,7 @@ export const FormRegister = ({ className, setTrigger, _id }: Props) => {
         description: string
         question: string
       }> = []
-      const listQuestion = getQuestion.data.data.data.formRegister
+      const listQuestion = getQuestion.data.data.data.formQuestion
       for (let i = 0; i < listQuestion.length; i++) {
         answers.push({
           _id: listQuestion[i]._id,
