@@ -9,6 +9,7 @@ import {
   EventListUser
 } from 'src/@types/event.type'
 import { EventQuestionType } from 'src/@types/form.type'
+import { Ticket } from 'src/@types/ticket.type'
 import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
 
@@ -38,7 +39,9 @@ const eventApi = {
       `/forms/question/${id}/${type}`
     ),
   getListEventUser: () =>
-    http.get<SuccessResponse<EventListUser>>('/users/list-register-event')
+    http.get<SuccessResponse<EventListUser>>('/users/list-register-event'),
+  getTicket: (id: string) =>
+    http.get<SuccessResponse<{ ticket: Ticket }>>(`/events/ticket/${id}`)
 }
 
 export default eventApi
