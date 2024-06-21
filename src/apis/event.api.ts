@@ -6,7 +6,8 @@ import {
   EventListPendingAdmin,
   ListQuestion,
   FormEventRegister,
-  EventListUser
+  EventListUser,
+  CreateEvent
 } from 'src/@types/event.type'
 import { EventQuestionType } from 'src/@types/form.type'
 import { Ticket } from 'src/@types/ticket.type'
@@ -41,7 +42,9 @@ const eventApi = {
   getListEventUser: () =>
     http.get<SuccessResponse<EventListUser>>('/users/list-register-event'),
   getTicket: (id: string) =>
-    http.get<SuccessResponse<{ ticket: Ticket }>>(`/events/ticket/${id}`)
+    http.get<SuccessResponse<{ ticket: Ticket }>>(`/events/ticket/${id}`),
+  createEvent: (body: CreateEvent) =>
+    http.post<SuccessResponse<{}>>('/events/', body)
 }
 
 export default eventApi
