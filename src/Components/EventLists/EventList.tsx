@@ -13,7 +13,8 @@ interface Props {
   address?: string
   imageUrl?: string
   renderProps?: React.ReactNode
-  location: string
+  location?: string
+  date?: string
 }
 
 export default function EventList({
@@ -24,19 +25,21 @@ export default function EventList({
   address = 'FPT University',
   imageUrl = EventLogo,
   renderProps,
+  date = '06/02/2024',
   location,
   ...props
 }: Props) {
   return (
     <div
       {...props}
-      className={`${props.className} flex items-center pt-4 pb-[10px] px-7 sm:pb-6 border-white-A700 border border-solid bg-blue_gray-900_03 flex-1 rounded-[15px]`}
+      className={`${props.className} ml-10 flex-1 flex items-center pt-4 pb-[10px] px-5 sm:pb-1 border-white-A700 border border-solid bg-blue_gray-900_03 rounded-[15px]`}
     >
       <div className='flex w-full items-start justify-between gap-5 sm:flex-row'>
         <div className='flex flex-col items-start justify-end h-full'>
           <Heading size='lg' as='p' className='!text-blue_gray-400'>
-            {time}
+            {time} | {date}
           </Heading>
+          
           <Heading size='2xl' as='h5' className='!font-monterat'>
             {nameEvent}
           </Heading>
@@ -70,11 +73,11 @@ export default function EventList({
           </div>
         </div>
         <div>
-          <div>
+          <div className='w-[150px] h-[150px]'>
             <Img
               src={imageUrl}
               alt='banner-event'
-              className='mt-[7px] w-[135px] h-[135px] rounded-[15px] object-cover justify-end'
+              className='mt-5 w-full h-full rounded-[15px] object-cover justify-end'
             />
           </div>
           <div className='flex justify-center items-center mt-5'>

@@ -9,12 +9,19 @@ import { Button, Heading, Img, Text } from 'src/Components'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import { Event } from 'src/@types/event.type'
+import { useState } from 'react'
+import { FormRegister } from '../FormRegister/FormRegister'
 
 interface Props {
   event: Event
 }
 const EventDetail = ({ event }: Props) => {
   const time = event.date_event.split('/')
+  console.log(time)
+  const [togglePop, setTogglePop] = useState(false)
+  console.log(togglePop)
+  const [id, setId] = useState('')
+
   return (
     <div className='flex container-xs'>
       <div className='flex md:flex-col'>
@@ -186,15 +193,18 @@ const EventDetail = ({ event }: Props) => {
                 <Text size='s' as='p' className='ml-6 self-start '>
                   Welcome! To join the event, please register below.
                 </Text>
-                <a href=''>
-                  <Button
-                    size='lg'
-                    shape='round'
-                    className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-white-A700'
-                  >
-                    Register Now
-                  </Button>
-                </a>
+
+                <Button
+                  size='lg'
+                  shape='round'
+                  className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-white-A700'
+                  onClick={() => {
+                    setTogglePop(true)
+                    setId(event._id)
+                  }}
+                >
+                  Register Now
+                </Button>
               </div>
               <Text size='s' as='p' className='ml-1.5 mt-[21px] md:ml-0'>
                 About Event
@@ -277,6 +287,13 @@ const EventDetail = ({ event }: Props) => {
             </div>
           </div>
         </div>
+        {togglePop && (
+          <FormRegister
+            className='w-full h-full bg-blue_gray-400_01 border border-gray-900_03 border-solid'
+            setTrigger={setTogglePop}
+            _id={id || ''}
+          />
+        )}
       </div>
     </div>
   )

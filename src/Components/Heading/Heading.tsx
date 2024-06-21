@@ -2,7 +2,7 @@ import React from 'react'
 
 const sizes = {
   '3xl': 'text-[32px] font-blod md:text-3xl sm:text-[28px]',
-  '2xl': 'text-xl font-extrabold',
+  '2xl': 'text-[20px] font-bold',
   xl: 'text-base font-bold',
   '4xl': 'text-4xl font-semibold  ',
   s: 'text-xs font-bold',

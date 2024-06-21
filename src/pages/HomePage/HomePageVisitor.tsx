@@ -1,7 +1,7 @@
 import { Button, Heading, Img, Text } from 'src/Components'
 import Banner from '../../assets/images/banner.png'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
-import { DownOutlined } from '@ant-design/icons'
+import { DownOutlined, SmallDashOutlined } from '@ant-design/icons'
 import EventList from 'src/Components/EventLists/EventList'
 import Footer from 'src/Components/Footer/Footer'
 import { useQuery } from '@tanstack/react-query'
@@ -12,14 +12,11 @@ import { FormRegister } from 'src/Components/FormRegister/FormRegister'
 import { set } from 'react-hook-form'
 
 export default function HomePageVisitor() {
-  const [togglePop, setTogglePop] = useState(false)
   const { data } = useQuery({
     queryKey: ['events'],
     queryFn: () => eventApi.getListEvent()
   })
   console.log(data?.data.data.events)
-  console.log(togglePop)
-  const [id, setId] = useState('')
   return (
     <>
       <div className='w-full bg-gray-900 pb-[376px] md:pb-5'>
@@ -85,44 +82,53 @@ export default function HomePageVisitor() {
                       Saturday
                     </Text>
                   </div>
+
                   <div className='flex flex-col gap-0.5'>
                     <div className='flex flex-row items-start gap-9 md:flex-col'>
-                      <div className='mt-3 flex flex-1 flex-col gap-[30px] md:self-stretch'>
+                      <div className='mt-3 flex flex-col gap-[10px] md:self-stretch'>
                         {data?.data.data.events.map((event) => (
-                          <div className='flex flex-1' key={event._id}>
-                            <EventList
-                              id={event._id}
-                              time={event.time_start}
-                              nameEvent={event.name}
-                              event_operator_name={
-                                event.event_operator.user_name
-                              }
-                              address={event.address}
-                              imageUrl={event.image}
-                              renderProps={
-                                <>
-                                  <Button
-                                    className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
-                    hover:border-[#e5e7eb] mr-2'
-                                    onClick={() => {
-                                      setTogglePop(true)
-                                      setId(event._id)
-                                    }}
-                                  >
-                                    Register
-                                  </Button>
-                                  <Button
-                                    className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
-                    hover:border-[#e5e7eb]'
-                                  >
-                                    <Link to={`/events/${event._id}`}>
-                                      Detail
-                                    </Link>
-                                  </Button>
-                                </>
-                              }
-                            />
-                          </div>
+                          <Link to={`/events/${event._id}`}>
+                            <div
+                              className='flex flex-1 flex-row'
+                              key={event._id}
+                            >
+
+                              <EventList
+                                className=''
+                                id={event._id}
+                                time={event.time_start}
+                                nameEvent={event.name}
+                                event_operator_name={
+                                  event.event_operator.user_name
+                                }
+                                address={event.address}
+                                imageUrl={event.image}
+                                location={event.location}
+                                //           renderProps={
+                                //             <>
+                                //               <Button
+                                //                 className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                                // hover:border-[#e5e7eb] mr-2'
+                                //                 onClick={() => {
+                                //                   setTogglePop(true)
+                                //                   setId(event._id)
+                                //                 }}
+                                //               >
+                                //                 Register
+                                //               </Button>
+                                //               <Button
+                                //                 className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
+                                // hover:border-[#e5e7eb]'
+                                //               >
+                                //                 <Link to={`/events/${event._id}`}>
+                                //                   Detail
+                                //                 </Link>
+                                //               </Button>
+                                //             </>
+                                //           }
+                              />
+                            </div>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -132,13 +138,7 @@ export default function HomePageVisitor() {
             </div>
           </div>
         </div>
-        {togglePop && (
-          <FormRegister
-            className='w-full h-full bg-blue_gray-400_01 border border-gray-900_03 border-solid'
-            setTrigger={setTogglePop}
-            _id={id || ''}
-          />
-        )}
+
         <Footer />
       </div>
     </>
