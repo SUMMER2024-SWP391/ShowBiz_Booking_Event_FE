@@ -8,7 +8,19 @@ type Rules = {
     | 'user_name'
     | 'phone_number'
     | 'confirm_password'
-    | 'old_password']?: RegisterOptions
+    | 'old_password'
+    | 'capacity'
+    | 'date_event'
+    | 'image'
+    | 'name'
+    | 'ticket_price'
+    | 'time_end'
+    | 'time_start'
+    | 'location'
+    | 'description'
+    | 'speaker_name'
+    | 'sponsor_name'
+    | 'type_event']?: RegisterOptions
 }
 export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
   return {
@@ -65,6 +77,42 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
         value: 8,
         message: 'Password must be at least 6 characters'
       }
+    },
+    capacity: {
+      required: 'This field is required'
+    },
+    date_event: {
+      required: 'This field is required'
+    },
+    image: {
+      required: 'This field is required'
+    },
+    name: {
+      required: 'This field is required'
+    },
+    ticket_price: {
+      required: 'This field is required'
+    },
+    time_end: {
+      required: 'This field is required'
+    },
+    time_start: {
+      required: 'This field is required'
+    },
+    location: {
+      required: 'This field is required'
+    },
+    description: {
+      required: 'This field is required'
+    },
+    speaker_name: {
+      required: 'This field is required'
+    },
+    sponsor_name: {
+      required: 'This field is required'
+    },
+    type_event: {
+      required: 'This field is required'
     }
   }
 }
@@ -133,3 +181,20 @@ export const ChangePasswordSchemaYub = yup.object().shape({
 })
 
 export type ChangePasswordSchema = yup.InferType<typeof ChangePasswordSchemaYub>
+
+export const CreateEventSchemaYup = yup.object().shape({
+  name: yup.string().required('This field is required'),
+  type_event: yup.string().required('This field is required'),
+  date_event: yup.string().required('This field is required'),
+  time_start: yup.string().required('This field is required'),
+  time_end: yup.string().required('This field is required'),
+  location: yup.string().required('This field is required'),
+  capacity: yup.string().required('This field is required'),
+  description: yup.string().required('This field is required'),
+  speaker_name: yup.string().required('This field is required'),
+  sponsor_name: yup.string().required('This field is required'),
+  ticket_price: yup.string().required('This field is required'),
+  image: yup.string().required('This field is required')
+})
+
+export type CreateEventSchema = yup.InferType<typeof CreateEventSchemaYup>

@@ -16,6 +16,8 @@ export interface Event {
   status: string
   calendarId: string
   location: string
+  speaker_name: string
+  sponsor_name: string
 }
 export type ListQuestion = {
   _id: string
@@ -60,4 +62,33 @@ export type EventListUser = {
     event: Array<Event>
     event_operator: Array<User>
   }>
+}
+
+export type CreateEvent = Pick<
+  Event,
+  | 'capacity'
+  | 'date_event'
+  | 'image'
+  | 'name'
+  | 'ticket_price'
+  | 'time_end'
+  | 'time_start'
+  | 'location'
+  | 'description'
+  | 'speaker_name'
+  | 'sponsor_name'
+  | 'type_event'
+>
+
+export enum EventTypeEnum {
+  PRIVATE = 'Private',
+  PUBLIC = 'Public'
+}
+
+export enum LocationType {
+  HALL_A = 'Hall A',
+  HALL_B = 'Hall B',
+  HALL_C = 'Hall C',
+  HALL_D = 'Hall D',
+  HALL_E = 'Hall E'
 }

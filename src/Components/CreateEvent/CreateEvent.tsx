@@ -11,11 +11,70 @@ import { Button, Heading, Img, Text } from 'src/Components'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import Banner from 'src/assets/images/baner.png'
-import { Col, DatePicker, Row, Switch, TimePicker } from 'antd'
+import {
+  Col,
+  DatePicker,
+  DatePickerProps,
+  Row,
+  Switch,
+  TimePicker,
+  TimePickerProps
+} from 'antd'
 import { useState } from 'react'
+import dayjs from 'dayjs'
+import {
+  CreateEvent as CreateEventBody,
+  EventTypeEnum,
+  LocationType
+} from 'src/@types/event.type'
+import { useMutation } from '@tanstack/react-query'
+import eventApi from 'src/apis/event.api'
+import { toast } from 'react-toastify'
+import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import { ErrorResponse } from 'src/@types/utils.type'
+
+const defaultValueOfTime = {
+  timeStart: dayjs('15:00', 'HH:MM'),
+  timeEnd: dayjs('17:00', 'HH:MM'),
+  dataEvent: dayjs('06-10-2024', 'DD-MM-YYYY')
+}
+
+const initForm = {
+  type_event: 'Public',
+  name: '',
+  speaker_name: '',
+  sponsor_name: '',
+  description: '',
+  ticket_price: '',
+  capacity: '',
+  date_event: '06-12-2024',
+  location: LocationType.HALL_A,
+  time_start: '15:00',
+  time_end: '17:00'
+}
+
+const errorForm = {
+  type_event: '',
+  name: '',
+  speaker_name: '',
+  sponsor_name: '',
+  description: '',
+  ticket_price: '',
+  capacity: '',
+  date_event: '',
+  location: '',
+  time_start: '',
+  time_end: ''
+}
 
 const CreateEvent = () => {
   const [previewImage, setPreviewImage] = useState<string | null>(null)
+  const [form, setForm] = useState<typeof initForm>(initForm)
+  const [formError, setFormError] = useState<typeof errorForm>(errorForm)
+
+  const createEventMutation = useMutation({
+    mutationFn: (body: CreateEventBody) => eventApi.createEvent(body)
+  })
 
   const readFileAsDataURL = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -35,13 +94,86 @@ const CreateEvent = () => {
       setPreviewImage(url)
     }
   }
-  const onChange = (checked: boolean) => {
+
+  const handleChangeTime: (
+    name: 'time_start' | 'time_end'
+  ) => TimePickerProps['onChange'] = (name: 'time_start' | 'time_end') => {
+    return (timeString) => {
+      if (name === 'time_start') {
+        timeString !== null
+          ? setForm((prevForm) => ({
+              ...prevForm,
+              time_start: timeString.format('HH:MM').toString()
+            }))
+          : setForm((prevForm) => ({
+              ...prevForm,
+              time_start: defaultValueOfTime.timeStart
+                .format('HH:MM')
+                .toString()
+            }))
+      }
+
+      if (name === 'time_end') {
+        timeString !== null
+          ? setForm((prevForm) => ({
+              ...prevForm,
+              time_end: timeString.format('HH:MM').toString()
+            }))
+          : setForm((prevForm) => ({
+              ...prevForm,
+              time_end: defaultValueOfTime.timeEnd.format('HH:MM').toString()
+            }))
+      }
+    }
+  }
+
+  //handle onChange datetime
+  const onChangeDate: DatePickerProps['onChange'] = (dateString) => {
+    dateString !== null
+      ? setForm((prevForm) => ({
+          ...prevForm,
+          date_event: dateString.format('DD-MM-YYYY').toString()
+        }))
+      : setForm((prevForm) => ({
+          ...prevForm,
+          date_event: defaultValueOfTime.dataEvent
+            .format('DD-MM-YYYY')
+            .toString()
+        }))
+  }
+
+  //handle on change switch
+  const onChangeSwitch = (checked: boolean) => {
     console.log(`switch to ${checked}`)
   }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const bodyCreateEvent = form
+    createEventMutation.mutate(bodyCreateEvent as any, {
+      onSuccess: (data) => {
+        toast.success(data.data.message)
+      },
+      onError: (error) => {
+        if (
+          isAxiosUnprocessableEntityError<ErrorResponse<typeof errorForm>>(
+            error
+          )
+        ) {
+          setFormError(error.response?.data.errors as any)
+        }
+      }
+    })
+  }
+
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
       <div className='flex container-xs justify-center'>
-        <form className='flex justify-center' noValidate>
+        <form
+          className='flex justify-center'
+          noValidate
+          onSubmit={handleSubmit}
+        >
           <div className='flex md:flex-col justify-center'>
             <div className='flex w-[50%] flex-row items-start pb-[31px] md:w-full sm:pb-5 justify-center'>
               <div className='w-[50%] m-[40px]'>
@@ -107,14 +239,28 @@ const CreateEvent = () => {
                   <div className='self-stretch'>
                     <div className='flex flex-col w-full items-start gap-[11px]'>
                       <div className='flex flex-row w-full'>
-                        <Text size='lg' as='p' className='!text-white-A700_cc w-[50%]'>
-                          Host by
+                        <Text
+                          size='lg'
+                          as='p'
+                          className='!text-white-A700_cc w-[50%]'
+                        >
+                          Speaker by
                         </Text>
                         <input
-                            type='text'
-                            className='w-[50%] text-[14px] bg-blue_gray-900 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-                            placeholder='Name of Host'
-                          />
+                          type='text'
+                          className='w-[50%] text-[14px] bg-blue_gray-900 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                          placeholder='Name of Host'
+                          value={form.speaker_name}
+                          onChange={(event) => {
+                            setForm((prev) => ({
+                              ...prev,
+                              speaker_name: event.target.value
+                            }))
+                          }}
+                        />
+                        <div className='mt-1 text-sm text-red'>
+                          {formError.speaker_name}
+                        </div>
                       </div>
                       <div className='ml-5 h-px self-stretch bg-white-A700_5e md:ml-0' />
                     </div>
@@ -124,20 +270,34 @@ const CreateEvent = () => {
                   <div className='self-stretch'>
                     <div className='flex flex-col w-full items-start gap-[11px]'>
                       <div className='flex flex-row w-full'>
-                        <Text size='lg' as='p' className='!text-white-A700_cc w-[50%]'>
-                          Speacker
+                        <Text
+                          size='lg'
+                          as='p'
+                          className='!text-white-A700_cc w-[50%]'
+                        >
+                          Sponsor
                         </Text>
                         <input
-                            type='text'
-                            className='w-[50%] text-[14px] bg-blue_gray-900 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-                            placeholder='Name of Speacker'
-                          />
+                          type='text'
+                          className='w-[50%] text-[14px] bg-blue_gray-900 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                          placeholder='Name of Speacker'
+                          value={form.sponsor_name}
+                          onChange={(event) => {
+                            setForm((prev) => ({
+                              ...prev,
+                              sponsor_name: event.target.value
+                            }))
+                          }}
+                        />
+                        <div className='mt-1 text-sm text-red'>
+                          {formError.sponsor_name}
+                        </div>
                       </div>
                       <div className='ml-5 h-px self-stretch bg-white-A700_5e md:ml-0' />
                     </div>
                   </div>
                 </div>
-                
+
                 <Text size='s' as='p' className='mt-[19px] !text-white-A700_cc'>
                   Contact the Host
                 </Text>
@@ -158,15 +318,29 @@ const CreateEvent = () => {
                         Ho Chi Minh City
                       </span>
                     </Heading>
-                    <select className='bg-blue_gray-900_01 w-24 text-center max-w-xs rounded-lg text-white-A700 font-euclid'>
-                      <option selected>Private</option>
-                      <option> Public</option>
+                    <select
+                      className='bg-blue_gray-900_01 w-24 text-center max-w-xs rounded-lg text-white-A700 font-euclid'
+                      value={form.type_event}
+                      onChange={(event) => {
+                        setForm((prev) => ({
+                          ...prev,
+                          type_event: event.target.value
+                        }))
+                      }}
+                    >
+                      <option value={EventTypeEnum.PRIVATE}>Private</option>
+                      <option value={EventTypeEnum.PUBLIC}>Public</option>
                     </select>
                   </div>
                   <input
                     className='mt-2 h-14 font-bold text-[30px] bg-blue_gray-900 !text-white-A700 outline-none border-none'
                     placeholder='Event Name'
+                    value={form.name}
+                    onChange={(event) =>
+                      setForm((prev) => ({ ...prev, name: event.target.value }))
+                    }
                   />
+                  <div className='mt-1 text-sm'>{formError.name}</div>
                   <div className='mt-2 flex justify-around items-center gap-5 rounded-[10px] p-3 h-auto w-full bg-gray-800_01 sm:pl-5'>
                     <Col>
                       <Row>
@@ -188,18 +362,43 @@ const CreateEvent = () => {
                     </Col>
                     <Col>
                       <Row>
-                        <DatePicker size='middle' />
+                        <DatePicker
+                          size='middle'
+                          onChange={onChangeDate}
+                          value={dayjs(form.date_event, 'DD-MM-YYYY')}
+                          format={'DD-MM-YYYY'}
+                        />
                       </Row>
                       <Row>
-                        <DatePicker size='middle' />
+                        <DatePicker
+                          size='middle'
+                          onChange={onChangeDate}
+                          format={'DD-MM-YYYY'}
+                        />
                       </Row>
                     </Col>
                     <Col>
                       <Row>
-                        <TimePicker format='HH:mm' showNow={false} />
+                        <TimePicker
+                          format='HH:mm'
+                          showNow={false}
+                          onChange={handleChangeTime('time_start')}
+                          value={dayjs(form.time_start, 'HH:MM')}
+                        />
+                        <div className='mt-1 text-sm  text-red'>
+                          {formError.time_start}
+                        </div>
                       </Row>
                       <Row>
-                        <TimePicker format='HH:mm' showNow={false} />
+                        <TimePicker
+                          format='HH:mm'
+                          showNow={false}
+                          onChange={handleChangeTime('time_end')}
+                          value={dayjs(form.time_end, 'HH:MM')}
+                        />
+                        <div className='mt-1 text-sm text-red'>
+                          {formError.time_end}
+                        </div>
                       </Row>
                     </Col>
                   </div>
@@ -214,10 +413,25 @@ const CreateEvent = () => {
                       >
                         Add Event Location
                       </Text>
-                      <input
-                        className='font-normal !text-blue_gray-100 bg-gray-800_01 outline-none border-none text-sm'
-                        placeholder='Offline location or virtual link'
-                      />
+                      <select
+                        className='font-normal !text-blue_gray-100 bg-gray-800_01 outline-none border-none text-sm w-full'
+                        value={form.location}
+                        onChange={(event) => {
+                          setForm((prev) => ({
+                            ...prev,
+                            location: event.target.value as LocationType
+                          }))
+                        }}
+                      >
+                        <option value={LocationType.HALL_A}>Hall A</option>
+                        <option value={LocationType.HALL_B}>Hall B</option>
+                        <option value={LocationType.HALL_C}>Hall C</option>
+                        <option value={LocationType.HALL_D}>Hall D</option>
+                        <option value={LocationType.HALL_E}>Hall E</option>
+                      </select>
+                      <div className='mt-1 text-sm text-red'>
+                        {errorForm.location}
+                      </div>
                     </div>
                   </div>
                   <div className='flex flex-row  p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
@@ -234,7 +448,17 @@ const CreateEvent = () => {
                       <input
                         className='font-normal !text-blue_gray-100 bg-gray-800_01 outline-none border-none text-sm'
                         placeholder='Content for event description'
+                        value={form.description}
+                        onChange={(event) => {
+                          setForm((prev) => ({
+                            ...prev,
+                            description: event.target.value
+                          }))
+                        }}
                       />
+                      <div className='mt-1 text-sm text-red'>
+                        {errorForm.location}
+                      </div>
                     </div>
                   </div>
                   <Text as='h1' size='lg' className='mt-3 !font-medium'>
@@ -248,13 +472,13 @@ const CreateEvent = () => {
                             xmlns='http://www.w3.org/2000/svg'
                             fill='none'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             className='size-5 '
                           >
                             <path
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                               d='M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z'
                             />
                           </svg>
@@ -270,10 +494,20 @@ const CreateEvent = () => {
                         <div className='flex flex-row-reverse w-[50%] '>
                           <EditOutlined className='ml-1' />
                           <input
-                            type='number'
+                            type='text'
                             className='bg-gray-800_01 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
                             placeholder='Free'
+                            value={form.ticket_price}
+                            onChange={(event) => {
+                              setForm((prev) => ({
+                                ...prev,
+                                ticket_price: event.target.value
+                              }))
+                            }}
                           />
+                          <div className='mt-1 text-sm text-red'>
+                            {errorForm.ticket_price}
+                          </div>
                         </div>
                       </div>
                       <div className='mt-2 ml-5 h-[0.4px] opacity-20 self-stretch bg-white-A700_5e md:ml-0' />
@@ -290,7 +524,7 @@ const CreateEvent = () => {
                           >
                             <path
                               fill='currentColor'
-                              fill-rule='evenodd'
+                              fillRule='evenodd'
                               d='M7.75.25C5.336.25 3.5 2.086 3.5 4.5c0 1.225.474 2.007.9 2.575.09.12.165.216.23.298.102.13.18.228.255.345.101.158.115.233.115.282 0 .34-.126.536-.392.728-.3.217-.708.375-1.25.585l-.13.05c-.55.215-1.233.49-1.767.954C.88 10.821.5 11.524.5 12.5c0 .752.341 1.354.85 1.799.488.427 1.133.717 1.81.92 1.354.406 3.065.531 4.59.531a.75.75 0 0 0 0-1.5c-1.475 0-3.014-.125-4.16-.468-.573-.173-.99-.383-1.252-.612-.242-.211-.338-.422-.338-.67 0-.524.18-.821.446-1.052.309-.269.751-.463 1.326-.687l.159-.061c.493-.19 1.087-.418 1.555-.756C6.064 9.527 6.5 8.91 6.5 8c0-.451-.174-.813-.353-1.093-.112-.173-.265-.37-.397-.537l-.15-.195c-.324-.432-.6-.9-.6-1.675 0-1.586 1.164-2.75 2.75-2.75S10.5 2.914 10.5 4.5c0 .672-.208 1.11-.463 1.484a.75.75 0 1 0 1.24.843A3.96 3.96 0 0 0 12 4.5C12 2.086 10.164.25 7.75.25m7.561 9.247a.75.75 0 0 0-1.122-.994l-2.962 3.34-.896-1.096a.75.75 0 0 0-1.161.95l1.454 1.778a.75.75 0 0 0 1.142.023z'
                             ></path>
                           </svg>
@@ -307,9 +541,8 @@ const CreateEvent = () => {
                           <Switch
                             defaultChecked
                             size='small'
-                            onChange={onChange}
+                            onChange={onChangeSwitch}
                             className='ml-1'
-                            
                           />
                         </div>
                       </div>
@@ -325,7 +558,7 @@ const CreateEvent = () => {
                           >
                             <path
                               fill='currentColor'
-                              fill-rule='evenodd'
+                              fillRule='evenodd'
                               d='M8 15.5a.75.75 0 0 0 .75-.75V10.5h.041c.872 0 1.609 0 2.159-.08s1.195-.277 1.5-.928c.305-.65.043-1.273-.248-1.746-.29-.474-.762-1.04-1.32-1.71l-.04-.047-.422-.507-.033-.04c-.399-.478-.748-.897-1.072-1.19-.348-.314-.769-.578-1.315-.578s-.966.264-1.315.578c-.324.293-.673.712-1.071 1.19l-.034.04-.422.507-.04.047c-.557.67-1.03 1.236-1.32 1.71-.29.473-.552 1.096-.248 1.746.305.651.95.848 1.5.928s1.288.08 2.16.08h.04v4.25c0 .414.336.75.75.75M4.921 8.85c.046.022.145.057.345.086C5.695 8.998 6.321 9 7.27 9h1.46c.95 0 1.576-.002 2.004-.064.2-.03.3-.064.345-.086a1.3 1.3 0 0 0-.155-.32c-.227-.369-.626-.851-1.234-1.58l-.422-.507c-.442-.53-.723-.865-.958-1.077-.213-.193-.29-.192-.308-.192h-.003c-.02 0-.096 0-.308.192-.235.212-.516.546-.958 1.077l-.423.507c-.608.729-1.007 1.211-1.234 1.58-.106.173-.143.271-.155.32M14 2a.75.75 0 0 0 0-1.5H2A.75.75 0 1 0 2 2z'
                             ></path>
                           </svg>
@@ -344,7 +577,17 @@ const CreateEvent = () => {
                             type='number'
                             className='bg-gray-800_01 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
                             placeholder='Unlimited'
+                            value={form.capacity}
+                            onChange={(event) => {
+                              setForm((prev) => ({
+                                ...prev,
+                                capacity: event.target.value
+                              }))
+                            }}
                           />
+                          <div className='mt-1 text-sm text-red'>
+                            {errorForm.capacity}
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { UseFormRegister } from 'react-hook-form'
 
 type ImgProps = React.DetailedHTMLProps<
   React.ImgHTMLAttributes<HTMLImageElement>,
@@ -8,12 +9,14 @@ type ImgProps = React.DetailedHTMLProps<
     className: string
     src: string
     alt: string
+    register: UseFormRegister<any>
   }>
 
 const Img: React.FC<React.PropsWithChildren<ImgProps>> = ({
   className,
   src = 'defaultNodata.png',
   alt = 'textImg',
+  register,
   ...restProps
 }) => {
   return (
@@ -23,6 +26,7 @@ const Img: React.FC<React.PropsWithChildren<ImgProps>> = ({
       alt={alt}
       {...restProps}
       loading={'lazy'}
+      {...register}
     />
   )
 }
