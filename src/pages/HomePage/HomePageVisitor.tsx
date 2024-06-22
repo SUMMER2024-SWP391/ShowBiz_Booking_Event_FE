@@ -22,7 +22,7 @@ export default function HomePageVisitor() {
       <div className='w-full bg-gray-900 pb-[376px] md:pb-5'>
         <div className='flex flex-col items-center gap-14 sm:gap-7'>
           <div className='flex flex-col items-center self-stretch'>
-            <Header className='bg-gradient ' />
+            <Header className='bg-gradient'  />
             <div className=' flex h-[100%] w-[80%] items-center justify-center bg-cover    '>
               <Img src={Banner} className='rounded-[15px]'></Img>
             </div>
