@@ -32,15 +32,15 @@ export default function EventList({
   return (
     <div
       {...props}
-      className={`${props.className} ml-10 flex-1 flex items-center pt-4 pb-[10px] px-5 sm:pb-1 border-white-A700 border border-solid bg-blue_gray-900_03 rounded-[15px]`}
+      className={`${props.className} ml-10 flex-1 flex items-center pb-[10px] px-5 sm:pb-1 border-white-A700 border-opacity-50 border border-solid bg-blue_gray-900_03 rounded-[15px]`}
     >
       <div className='flex w-full items-start justify-between gap-5 sm:flex-row'>
         <div className='flex flex-col items-start justify-end h-full'>
-          <Heading size='lg' as='p' className='!text-blue_gray-400'>
+          <Heading size='lg' as='p' className='mt-3 !text-blue_gray-400'>
             {time} | {date}
           </Heading>
           
-          <Heading size='2xl' as='h5' className='!font-monterat'>
+          <Heading size='xl' as='h5' className='mt-3 !font-monterat'>
             {nameEvent}
           </Heading>
           <div className='mt-[18px] flex gap-1.5'>
