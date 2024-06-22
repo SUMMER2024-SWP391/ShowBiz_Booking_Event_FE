@@ -16,12 +16,12 @@ interface Props {
   event: Event
 }
 const EventDetail = ({ event }: Props) => {
-  const time = event.date_event.split('/')
-  console.log(time)
+  const time = event.date_event.split('-')
+  const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
   const [togglePop, setTogglePop] = useState(false)
-  console.log(togglePop)
   const [id, setId] = useState('')
-
+  const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`);
+  
   return (
     <div className='flex container-xs'>
       <div className='flex md:flex-col'>
@@ -142,13 +142,13 @@ const EventDetail = ({ event }: Props) => {
                 <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
                   <div className='flex rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
                     <Heading size='xs' as='h4' className='!font-monterat'>
-                      {new Date(event.date_event).toLocaleString('en-US', {
-                        month: 'long'
+                      {dateObj.toLocaleString('en-US', {
+                        month: 'short'
                       })}
                     </Heading>
                   </div>
                   <Text size='md' as='p' className='!font-monterat'>
-                    {time[1]}
+                    {time[0]}
                   </Text>
                 </div>
                 <div className='flex flex-col items-start gap-1 self-start'>
