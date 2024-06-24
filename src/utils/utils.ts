@@ -23,3 +23,5 @@ export function isAxiosUnauthorized<FormError>(
     error.response?.status === HttpStatusCode.Unauthorized
   )
 }
+
+export type NoNullable<T> = Exclude<T, undefined | null>

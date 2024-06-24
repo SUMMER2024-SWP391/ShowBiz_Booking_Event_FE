@@ -44,7 +44,18 @@ const eventApi = {
   getTicket: (id: string) =>
     http.get<SuccessResponse<{ ticket: Ticket }>>(`/events/ticket/${id}`),
   createEvent: (body: CreateEvent) =>
-    http.post<SuccessResponse<{}>>('/events/', body)
+    http.post<SuccessResponse<{}>>('/events/', body),
+  checkInEvent: ({
+    id,
+    body
+  }: {
+    id?: string
+    body: { otp_check_in: string }
+  }) =>
+    http.post<SuccessResponse<{}>>(
+      `/e-operators/checking-staff/check-in/${id}`,
+      body
+    )
 }
 
 export default eventApi
