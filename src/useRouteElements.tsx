@@ -15,7 +15,6 @@ import Recovery from './pages/Recovery/Recovery'
 import EventListUser from './pages/EventListUser/EventListUser'
 import TicketDetail from './pages/TicketDetail/TicketDetail'
 import CheckInWithOTP from './Components/CheckInWithOTP/CheckInWithOTP'
-import AssignCheckingStaff from './Components/AssignCheckingStaff/AssignCheckingStaff'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -38,10 +37,7 @@ const useRouteElements = () => {
       path: '/otp-check-in/:id', //event id
       element: <CheckInWithOTP />
     },
-    {
-      path: '/assign-checking-staff/:id',
-      element: <AssignCheckingStaff />
-    },
+
     {
       path: '/',
       index: true,

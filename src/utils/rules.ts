@@ -208,3 +208,11 @@ export const otpCheckInSchemaYup = yup.object().shape({
 })
 
 export type OTPCheckInSchema = yup.InferType<typeof otpCheckInSchemaYup>
+
+export const addStaffCheckingSchemaYup = yup.object().shape({
+  email: yup.string().required('This field is required').email('Invalid email')
+})
+
+export type AddStaffCheckingSchema = yup.InferType<
+  typeof addStaffCheckingSchemaYup
+>
