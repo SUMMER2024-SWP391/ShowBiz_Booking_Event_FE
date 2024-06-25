@@ -20,7 +20,8 @@ type Rules = {
     | 'description'
     | 'speaker_name'
     | 'sponsor_name'
-    | 'type_event']?: RegisterOptions
+    | 'type_event'
+    | 'otp_check_in']?: RegisterOptions
 }
 export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
   return {
@@ -113,6 +114,9 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
     },
     type_event: {
       required: 'This field is required'
+    },
+    otp_check_in: {
+      required: 'Otp check in is required'
     }
   }
 }
@@ -198,3 +202,17 @@ export const CreateEventSchemaYup = yup.object().shape({
 })
 
 export type CreateEventSchema = yup.InferType<typeof CreateEventSchemaYup>
+
+export const otpCheckInSchemaYup = yup.object().shape({
+  otp_check_in: yup.string().required('This field is required')
+})
+
+export type OTPCheckInSchema = yup.InferType<typeof otpCheckInSchemaYup>
+
+export const addStaffCheckingSchemaYup = yup.object().shape({
+  email: yup.string().required('This field is required').email('Invalid email')
+})
+
+export type AddStaffCheckingSchema = yup.InferType<
+  typeof addStaffCheckingSchemaYup
+>
