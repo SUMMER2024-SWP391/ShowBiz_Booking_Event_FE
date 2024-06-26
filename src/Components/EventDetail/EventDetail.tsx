@@ -9,9 +9,7 @@ import { Button, Heading, Img, Text } from 'src/Components'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import { Event } from 'src/@types/event.type'
-import { useState } from 'react'
-import { FormRegister } from '../FormRegister/FormRegister'
-import { Register } from './Register'
+import HandleRegisterEvent from '../HandleRegisterEvent/HandleRegisterEvent'
 
 interface Props {
   event: Event
@@ -20,8 +18,8 @@ interface Props {
 const EventDetail = ({ event }: Props) => {
   const time = event.date_event.split('-')
   const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
-  const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`);
-  
+  const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
+
   return (
     <div className='flex container-xs'>
       <div className='flex md:flex-col'>
@@ -182,8 +180,8 @@ const EventDetail = ({ event }: Props) => {
                     {event.address}
                   </Text>
                 </div>
-              </div> 
-              <Register _id={event._id}/>
+              </div>
+              <HandleRegisterEvent event={event} />
               {/* <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
                 <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
                   <Heading size='s' as='p' className='!font-semibold'>
@@ -287,7 +285,6 @@ const EventDetail = ({ event }: Props) => {
             </div>
           </div>
         </div>
-        
       </div>
     </div>
   )
