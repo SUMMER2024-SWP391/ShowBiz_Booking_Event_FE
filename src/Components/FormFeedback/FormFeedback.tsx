@@ -9,6 +9,11 @@ import { formAPI } from 'src/apis/form.api'
 import EventOfForm from '../EventOfForm/EventOfForm'
 import InputQuestion from '../InputQuestion/InputQuestion'
 
+type Props = {
+  typeForm: EventQuestionType
+  renderProp: string
+}
+
 type Question = {
   _id: string
   description: string
@@ -144,7 +149,6 @@ const FormFeedback = () => {
       <div className='flex flex-col justify-center items-center w-[95%]'>
         <EventOfForm id={id as string} render={'Create form feedback'} />
         <div>
-          {' '}
           <button
             type='button'
             className='mt-8 w-[300px] h-[54px] text-white-A700 bg-[#41B06E] hover:opacity-90 rounded-xl hover:text-slate-300 hover:border-gray-700 duration-300'

@@ -6,7 +6,7 @@ import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import { LoginSchema, LoginSchemaYup } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { ErrorResponse } from 'src/@types/utils.type'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { Link, useNavigate } from 'react-router-dom'
@@ -37,10 +37,6 @@ const Login = () => {
   //   const user = await signInWithPopup(auth, provider)
   //   console.log(user)
   // }
-  const { data } = useQuery({
-    queryKey: ['get-profile'],
-    queryFn: () => authAPI.getMe()
-  })
   const loginMutation = useMutation({
     mutationFn: (body: FormData) => authAPI.login(body)
   })
@@ -79,7 +75,7 @@ const Login = () => {
     <>
       <div className='flex w-full flex-col gap-[175px] bg-gray-900  sm:gap-[87px]'>
         <div className='flex flex-col items-center gap-[79px] md:gap-[72px] sm:gao-12'>
-          <Header className='bg-gradient' _id={setProfile.name}/>
+          <Header className='bg-gradient' _id={setProfile.name} />
         </div>
         <div className='container-xs pl-[313px] pr-[296px] flex justify-center md:p-5 md:px-5'>
           <div className='flex flex-col w-[55%] h-[100%] items-center gap-[21px] rounded-[15px] border border-solid border-white-A700 bg-gray-900_04 pb-5 pt-[26px] sm:pt-5'>
