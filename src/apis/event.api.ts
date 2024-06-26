@@ -11,6 +11,7 @@ import {
 } from 'src/@types/event.type'
 import { EventQuestionType } from 'src/@types/form.type'
 import { Ticket } from 'src/@types/ticket.type'
+import { User } from 'src/@types/users.type'
 import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
 
@@ -44,7 +45,28 @@ const eventApi = {
   getTicket: (id: string) =>
     http.get<SuccessResponse<{ ticket: Ticket }>>(`/events/ticket/${id}`),
   createEvent: (body: CreateEvent) =>
-    http.post<SuccessResponse<{}>>('/events/', body)
+    http.post<SuccessResponse<{}>>('/events/', body),
+  checkInEvent: ({
+    id,
+    body
+  }: {
+    id?: string
+    body: { otp_check_in: string }
+  }) =>
+    http.post<SuccessResponse<{}>>(
+      `/e-operators/checking-staff/check-in/${id}`,
+      body
+    ),
+  getListCheckingStaff: (id: string) =>
+    http.get<SuccessResponse<{ result: User[] }>>(
+      `/e-operators/event/${id}/list-checking-staff`
+    ),
+  addCheckingStaff: (body: { email: string; event_id: string }) =>
+    http.post<SuccessResponse<{}>>('/e-operators//assign-checking-staff', body),
+  unassignCheckingStaff: (event_id: string, user_id: string) =>
+    http.delete<SuccessResponse<{}>>(
+      `/e-operators/event/${event_id}/unassign-checking-staff/${user_id}`
+    )
 }
 
 export default eventApi

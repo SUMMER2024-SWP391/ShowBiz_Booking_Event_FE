@@ -7,6 +7,7 @@ import CreateEvent from '../../Components/CreateEvent/CreateEvent'
 import EventListOperator from 'src/Components/EventListOperator/EventListOperator'
 import FormFeedback from 'src/Components/FormFeedback/FormFeedback'
 import UpdateFormFeedback from 'src/Components/UpdateFormFeedback/UpdateFormFeedback'
+import AssignCheckingStaff from 'src/Components/AssignCheckingStaff/AssignCheckingStaff'
 
 export const EventOperatorHome = () => {
   return (
@@ -76,6 +77,10 @@ export const EventOperatorHome = () => {
                       <Route
                         path='form-feedback/:id'
                         element={<FormFeedback />}
+                      ></Route>
+                      <Route
+                        path='assign-checking-staff/:id'
+                        element={<AssignCheckingStaff />}
                       ></Route>
                     </Routes>
                   </div>

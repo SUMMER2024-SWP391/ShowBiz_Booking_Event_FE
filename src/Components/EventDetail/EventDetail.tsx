@@ -11,15 +11,15 @@ import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a
 import { Event } from 'src/@types/event.type'
 import { useState } from 'react'
 import { FormRegister } from '../FormRegister/FormRegister'
+import { Register } from './Register'
 
 interface Props {
   event: Event
 }
+
 const EventDetail = ({ event }: Props) => {
   const time = event.date_event.split('-')
   const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
-  const [togglePop, setTogglePop] = useState(false)
-  const [id, setId] = useState('')
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`);
   
   return (
@@ -182,9 +182,9 @@ const EventDetail = ({ event }: Props) => {
                     {event.address}
                   </Text>
                 </div>
-              </div>
-
-              <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
+              </div> 
+              <Register _id={event._id}/>
+              {/* <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
                 <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
                   <Heading size='s' as='p' className='!font-semibold'>
                     Registration
@@ -205,7 +205,7 @@ const EventDetail = ({ event }: Props) => {
                 >
                   Register Now
                 </Button>
-              </div>
+              </div> */}
               <Text size='s' as='p' className='ml-1.5 mt-[21px] md:ml-0'>
                 About Event
               </Text>
@@ -287,13 +287,7 @@ const EventDetail = ({ event }: Props) => {
             </div>
           </div>
         </div>
-        {togglePop && (
-          <FormRegister
-            className='w-full h-full bg-blue_gray-400_01 border border-gray-900_03 border-solid'
-            setTrigger={setTogglePop}
-            _id={id || ''}
-          />
-        )}
+        
       </div>
     </div>
   )

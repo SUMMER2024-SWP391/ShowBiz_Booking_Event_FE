@@ -121,8 +121,8 @@ export default function Header({ ...props }: Props) {
           {!isAuthenticated ? (
             <Link
               to={path.login}
-              className='w-20 h-8 rounded-[10px] font-bold bg-blue_gray-900_03 text border border-[#e5e7eb]
-             text-gray-500 flex justify-center items-center hover:bg-white-A700 hover:text-[#4096ff]
+              className='w-20 h-8 rounded-[10px] font-bold bg-blue_gray-900_03 text 
+             text-gray-500 flex justify-center items-center hover:text-white-A700_bf
              hover:border-[#e5e7eb]'
             >
               Log In

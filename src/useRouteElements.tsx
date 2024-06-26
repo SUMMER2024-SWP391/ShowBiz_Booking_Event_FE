@@ -14,6 +14,7 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import Recovery from './pages/Recovery/Recovery'
 import EventListUser from './pages/EventListUser/EventListUser'
 import TicketDetail from './pages/TicketDetail/TicketDetail'
+import CheckInWithOTP from './Components/CheckInWithOTP/CheckInWithOTP'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -32,6 +33,11 @@ const useRouteElements = () => {
       path: path.verify_account,
       element: <VerifyAccount />
     },
+    {
+      path: '/otp-check-in/:id', //event id
+      element: <CheckInWithOTP />
+    },
+
     {
       path: '/',
       index: true,
