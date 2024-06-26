@@ -64,6 +64,7 @@ export const FormRegister = ({ className, setTrigger, _id }: Props) => {
     registerEventMutation.mutate(form as FormEventRegister, {
       onSuccess: () => {
         toast.success('Register event success')
+        setTrigger && setTrigger(false)
       },
       onError: () => {
         toast.error('Something error')

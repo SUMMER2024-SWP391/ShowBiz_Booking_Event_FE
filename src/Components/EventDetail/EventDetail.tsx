@@ -16,6 +16,7 @@ import { Register } from './Register'
 interface Props {
   event: Event
 }
+
 const EventDetail = ({ event }: Props) => {
   const time = event.date_event.split('-')
   const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
