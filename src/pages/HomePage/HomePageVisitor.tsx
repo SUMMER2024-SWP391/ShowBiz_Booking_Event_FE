@@ -1,22 +1,32 @@
 import { Button, Heading, Img, Text } from 'src/Components'
 import Banner from '../../assets/images/banner.png'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
-import { DownOutlined, SmallDashOutlined } from '@ant-design/icons'
+import { DownOutlined } from '@ant-design/icons'
 import EventList from 'src/Components/EventLists/EventList'
 import Footer from 'src/Components/Footer/Footer'
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import eventApi from 'src/apis/event.api'
-import { useState } from 'react'
-import { FormRegister } from 'src/Components/FormRegister/FormRegister'
-import { set } from 'react-hook-form'
+import Pagination from 'src/Components/Pagination/Pagination'
+import { EventListConfig } from 'src/@types/event.type'
+import useQueryParams from 'src/hooks/useQueryParams'
+
+export type QueryConfig = {
+  [key in keyof EventListConfig]: string
+}
 
 export default function HomePageVisitor() {
+  const queryParams: QueryConfig = useQueryParams()
+  const queryConfig: QueryConfig = {
+    page: queryParams.page || '1',
+    limit: queryParams.limit
+  }
   const { data } = useQuery({
-    queryKey: ['events'],
-    queryFn: () => eventApi.getListEvent()
+    queryKey: ['events', queryConfig],
+    queryFn: () => eventApi.getListEvent(queryConfig),
+    placeholderData: keepPreviousData
   })
-  console.log(data?.data.data.events)
+
   return (
     <>
       <div className='w-full bg-gray-900 pb-[376px] md:pb-5'>
@@ -84,7 +94,7 @@ export default function HomePageVisitor() {
                     <div className='flex flex-row items-start gap-9 md:flex-col'>
                       <div className='mt-5 flex flex-col gap-[10px] md:self-stretch'>
                         {data?.data.data.events.map((event) => (
-                          <Link to={`/events/${event._id}`}>
+                          <Link to={`/events/${event._id}`} key={event._id}>
                             <div
                               className='flex flex-1 flex-row'
                               key={event._id}
@@ -128,6 +138,12 @@ export default function HomePageVisitor() {
                         ))}
                       </div>
                     </div>
+                    {data && (
+                      <Pagination
+                        pageSize={data.data.data.paginate.sum_page}
+                        queryConfig={queryConfig}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

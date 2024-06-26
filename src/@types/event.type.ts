@@ -18,6 +18,7 @@ export interface Event {
   location: string
   speaker_name: string
   sponsor_name: string
+  is_required_form_register: boolean
 }
 export type ListQuestion = {
   _id: string
@@ -92,4 +93,9 @@ export enum LocationType {
   HALL_C = 'Hall C',
   HALL_D = 'Hall D',
   HALL_E = 'Hall E'
+}
+
+export interface EventListConfig {
+  page?: number | string
+  limit?: number | string
 }
