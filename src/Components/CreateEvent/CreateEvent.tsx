@@ -149,7 +149,7 @@ const CreateEvent = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const bodyCreateEvent = form
+    const bodyCreateEvent = { ...form, image: previewImage }
     createEventMutation.mutate(bodyCreateEvent as any, {
       onSuccess: (data) => {
         toast.success(data.data.message)
