@@ -99,3 +99,13 @@ export interface EventListConfig {
   page?: number | string
   limit?: number | string
 }
+
+export type RegisterSucces = {
+  _id?: string
+  event_id: string
+  visitor_id: string
+  status_check_in: boolean
+  otp_check_in: string
+  time_register: string
+  status_register: boolean
+}
