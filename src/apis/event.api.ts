@@ -8,9 +8,9 @@ import {
   FormEventRegister,
   EventListUser,
   CreateEvent,
-  EventListConfig
+  EventListConfig,
+  RegisterSucces
 } from 'src/@types/event.type'
-import { EventQuestionType } from 'src/@types/form.type'
 import { Ticket } from 'src/@types/ticket.type'
 import { User } from 'src/@types/users.type'
 import { SuccessResponse } from 'src/@types/utils.type'
@@ -43,10 +43,13 @@ const eventApi = {
       '/events/list-event/event-operator'
     ),
   registerEvent: (id: string, body: FormEventRegister) =>
-    http.post(`/events/register-event/${id}`, body),
-  getListQuestion: (id: string, type: EventQuestionType) =>
+    http.post<SuccessResponse<{ url: string } | {}>>(
+      `/events/register-event/${id}`,
+      body
+    ),
+  getListQuestion: (id: string) =>
     http.get<SuccessResponse<{ formQuestion: ListQuestion[] }>>(
-      `/forms/question/${id}/${type}`
+      `/forms/question/register/${id}/`
     ),
   getListEventUser: () =>
     http.get<SuccessResponse<EventListUser>>('/users/list-register-event'),
@@ -74,6 +77,10 @@ const eventApi = {
   unassignCheckingStaff: (event_id: string, user_id: string) =>
     http.delete<SuccessResponse<{}>>(
       `/e-operators/event/${event_id}/unassign-checking-staff/${user_id}`
+    ),
+  registerNoFormNoPayment: (id: string) =>
+    http.post<SuccessResponse<{ register: RegisterSucces }>>(
+      `/events/register-event/no-payment-no-form/${id}`
     )
 }
 

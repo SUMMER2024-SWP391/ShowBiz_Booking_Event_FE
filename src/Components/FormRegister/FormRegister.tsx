@@ -5,7 +5,11 @@ import eventApi from 'src/apis/event.api'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { FormEventRegister } from 'src/@types/event.type'
 import { toast } from 'react-toastify'
-import { EventQuestionType } from 'src/@types/form.type'
+import {
+  isAxiosErrorConflictAndNotPermisson,
+  isResponseNoFormHasPaymentType
+} from 'src/utils/utils'
+import { ErrorResponse } from 'src/@types/utils.type'
 
 type Props = {
   className?: string
@@ -21,7 +25,7 @@ export const FormRegister = ({ className, setTrigger, _id }: Props) => {
   const [form, setForm] = useState<FormDataEvent>(initFormData)
   const getQuestion = useQuery({
     queryKey: ['eventId', _id],
-    queryFn: () => eventApi.getListQuestion(_id, EventQuestionType.REGISTER)
+    queryFn: () => eventApi.getListQuestion(_id)
   })
   const registerEventMutation = useMutation({
     mutationFn: (body: FormDataEvent) => eventApi.registerEvent(_id, body)
@@ -62,13 +66,14 @@ export const FormRegister = ({ className, setTrigger, _id }: Props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     registerEventMutation.mutate(form as FormEventRegister, {
-      onSuccess: () => {
-        toast.success('Register event success')
-        setTrigger && setTrigger(false)
+      onSuccess: (data) => {
+        if (isResponseNoFormHasPaymentType(data.data.data)) {
+          window.location.assign(data.data.data.url)
+        }
+        // toast.success('Register event success')
+        // setTrigger && setTrigger(false)
       },
-      onError: () => {
-        toast.error('Something error')
-      }
+      onError: () => {}
     })
   }
 
