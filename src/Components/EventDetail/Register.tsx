@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Heading } from '../Heading/Heading'
 import { Text } from '../Text/Text'
 import { Button } from '../Button/Button'
 import { FormRegister } from '../FormRegister/FormRegister'
-import { useQuery } from '@tanstack/react-query'
-import eventApi from 'src/apis/event.api'
+import { Event } from 'src/@types/event.type'
+
 type Props = {
   _id: string
+  event: Event
 }
 export const Register = ({ _id }: Props) => {
   const [togglePop, setTogglePop] = useState(false)

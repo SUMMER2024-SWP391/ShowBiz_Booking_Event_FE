@@ -7,7 +7,8 @@ import {
   ListQuestion,
   FormEventRegister,
   EventListUser,
-  CreateEvent
+  CreateEvent,
+  EventListConfig
 } from 'src/@types/event.type'
 import { EventQuestionType } from 'src/@types/form.type'
 import { Ticket } from 'src/@types/ticket.type'
@@ -16,8 +17,15 @@ import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
 
 const eventApi = {
-  getListEvent: () =>
-    http.get<SuccessResponse<{ events: EventList[] }>>('/events'),
+  getListEvent: (params: EventListConfig) =>
+    http.get<
+      SuccessResponse<{
+        events: EventList[]
+        paginate: { total_events: string; sum_page: string }
+      }>
+    >('/events', {
+      params
+    }),
   getEventById: (id: string) =>
     http.get<SuccessResponse<{ event: Event }>>(`/events/${id}`),
   getPendingEventListAdmin: () =>
