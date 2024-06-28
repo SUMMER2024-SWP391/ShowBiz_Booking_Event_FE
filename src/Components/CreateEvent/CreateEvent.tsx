@@ -71,6 +71,7 @@ const CreateEvent = () => {
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [form, setForm] = useState<typeof initForm>(initForm)
   const [formError, setFormError] = useState<typeof errorForm>(errorForm)
+  const [checked, setChecked] = useState<boolean>(true)
 
   const createEventMutation = useMutation({
     mutationFn: (body: CreateEventBody) => eventApi.createEvent(body)
@@ -144,12 +145,16 @@ const CreateEvent = () => {
 
   //handle on change switch
   const onChangeSwitch = (checked: boolean) => {
-    console.log(`switch to ${checked}`)
+    setChecked((pre) => !pre)
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const bodyCreateEvent = { ...form, image: previewImage }
+    const bodyCreateEvent = {
+      ...form,
+      image: previewImage,
+      is_required_form_register: checked
+    }
     createEventMutation.mutate(bodyCreateEvent as any, {
       onSuccess: (data) => {
         toast.success(data.data.message)

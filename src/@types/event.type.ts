@@ -44,6 +44,7 @@ export type EventList = Pick<
   | 'time_start'
   | 'address'
   | 'location'
+  | 'is_required_form_register'
 >
 
 export type EventListPendingAdmin = Pick<
