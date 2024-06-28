@@ -43,7 +43,7 @@ const eventApi = {
       '/events/list-event/event-operator'
     ),
   registerEvent: (id: string, body: FormEventRegister) =>
-    http.post<SuccessResponse<{ url: string } | {}>>(
+    http.post<SuccessResponse<{ url: string } | { register: RegisterSucces }>>(
       `/events/register-event/${id}`,
       body
     ),
@@ -81,6 +81,11 @@ const eventApi = {
   registerNoFormNoPayment: (id: string) =>
     http.post<SuccessResponse<{ register: RegisterSucces }>>(
       `/events/register-event/no-payment-no-form/${id}`
+    ),
+  registerEventHasFromNoPayment: (id: string, body: FormEventRegister) =>
+    http.post<SuccessResponse<{ register: RegisterSucces }>>(
+      `/register-event/no-payment/has-form/${id}`,
+      body
     )
 }
 

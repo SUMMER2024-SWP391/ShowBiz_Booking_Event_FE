@@ -3,13 +3,15 @@ import styled from 'styled-components'
 import { Button } from '../Button/Button'
 import eventApi from 'src/apis/event.api'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { FormEventRegister } from 'src/@types/event.type'
+import { FormEventRegister, RegisterSucces } from 'src/@types/event.type'
 import { toast } from 'react-toastify'
 import {
-  isAxiosErrorConflictAndNotPermisson,
+  isAxiosError,
+  isReponseNoPaymentButHaveForm,
   isResponseNoFormHasPaymentType
 } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   className?: string
@@ -23,6 +25,7 @@ const initFormData: FormDataEvent = {
 
 export const FormRegister = ({ className, setTrigger, _id }: Props) => {
   const [form, setForm] = useState<FormDataEvent>(initFormData)
+  const navigate = useNavigate()
   const getQuestion = useQuery({
     queryKey: ['eventId', _id],
     queryFn: () => eventApi.getListQuestion(_id)
@@ -69,11 +72,20 @@ export const FormRegister = ({ className, setTrigger, _id }: Props) => {
       onSuccess: (data) => {
         if (isResponseNoFormHasPaymentType(data.data.data)) {
           window.location.assign(data.data.data.url)
+        } else if (
+          isReponseNoPaymentButHaveForm<RegisterSucces>(data.data.data)
+        ) {
+          toast.success('Register event success')
+          window.location.assign(`http://localhost:3000/ticket/${_id}`)
         }
-        // toast.success('Register event success')
+
         // setTrigger && setTrigger(false)
       },
-      onError: () => {}
+      onError: (error) => {
+        if (isAxiosError<ErrorResponse<{}>>(error)) {
+          toast.error(error.response?.data.message)
+        }
+      }
     })
   }
 

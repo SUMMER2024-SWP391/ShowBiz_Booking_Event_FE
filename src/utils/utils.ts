@@ -1,3 +1,4 @@
+import { Register } from './../Components/EventDetail/Register'
 import axios, { AxiosError } from 'axios'
 import { RegisterSucces } from 'src/@types/event.type'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
@@ -58,5 +59,15 @@ export function isAxiosErrorConflictAndNotPermisson<T>(
     (isAxiosError(error) &&
       error.response?.status === HttpStatusCode.Forbidden) ||
     (isAxiosError(error) && error.response?.status === HttpStatusCode.Conflict)
+  )
+}
+
+export function isReponseNoPaymentButHaveForm<T>(obj: unknown): obj is T {
+  return (
+    obj !== null &&
+    typeof obj === 'object' &&
+    'register' in obj &&
+    typeof obj.register === 'object' &&
+    obj.register !== null
   )
 }

@@ -144,7 +144,7 @@ const CreateEvent = () => {
   }
 
   //handle on change switch
-  const onChangeSwitch = (checked: boolean) => {
+  const onChangeSwitch = () => {
     setChecked((pre) => !pre)
   }
 
