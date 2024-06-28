@@ -6,7 +6,10 @@ import paymentAPI from 'src/apis/payment.api'
 import eventApi from 'src/apis/event.api'
 import { useNavigate } from 'react-router-dom'
 import { ErrorResponse } from 'src/@types/utils.type'
-import { isAxiosErrorConflictAndNotPermisson } from 'src/utils/utils'
+import {
+  isAxiosError,
+  isAxiosErrorConflictAndNotPermisson
+} from 'src/utils/utils'
 import { toast } from 'react-toastify'
 
 type Props = {
@@ -38,7 +41,16 @@ const handleComponentEvent = (event: Event): JSX.Element => {
   }
 
   const handleClickForPaymentAPI = () => {
-    handlePayment.mutate(event._id)
+    handlePayment.mutate(event._id, {
+      onSuccess: (data) => {
+        window.location.assign(data.data.data.url)
+      },
+      onError: (error) => {
+        if (isAxiosError<ErrorResponse<{}>>(error)) {
+          toast.error(error.response?.data.message)
+        }
+      }
+    })
   }
 
   if (event.is_required_form_register && Number(event.ticket_price) !== 0) {
@@ -52,7 +64,16 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     !event.is_required_form_register &&
     Number(event.ticket_price) !== 0
   ) {
-    return <>3</>
+    return (
+      <Button
+        size='lg'
+        shape='round'
+        className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
+        onClick={handleClickForPaymentAPI}
+      >
+        Register now
+      </Button>
+    )
   }
   return (
     <Button
