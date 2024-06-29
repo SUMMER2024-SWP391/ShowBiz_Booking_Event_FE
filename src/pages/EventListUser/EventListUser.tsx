@@ -12,7 +12,6 @@ const EventListUser = () => {
     queryFn: () => eventApi.getListEventUser()
   })
 
-  console.log(data?.data.data)
   return (
     <>
       <Header />
@@ -32,24 +31,16 @@ const EventListUser = () => {
               const _eventOperator = event.event_operator[0]
               console.log(event)
               return (
-                <EventList
-                  key={_event._id}
-                  imageUrl={_event.image}
-                  nameEvent={_event.name}
-                  location={_event.location}
-                  event_operator_name={_eventOperator.user_name}
-                  className='mb-6'
-                  renderProps={
-                    <Button
-                      className='text-white-A700 bg-black-900 h-8 w-[80px] flex justify-center items-center rounded-[5px] p-2 text-sm border border-[#e5e7eb] hover:bg-white-A700 hover:text-[#4096ff]
-    hover:border-[#e5e7eb]'
-                    >
-                      <Link to={`/ticket/${event.event[0]._id}`}>
-                        Ticket detail
-                      </Link>
-                    </Button>
-                  }
-                />
+                <Link to={`/ticket/${event.event[0]._id}`}>
+                  <EventList
+                    key={_event._id}
+                    imageUrl={_event.image}
+                    nameEvent={_event.name}
+                    location={_event.location}
+                    event_operator_name={_eventOperator.user_name}
+                    className='mb-6 w-[800px] !bg-blue_gray-900'
+                  />
+                </Link>
               )
             })}
         </div>

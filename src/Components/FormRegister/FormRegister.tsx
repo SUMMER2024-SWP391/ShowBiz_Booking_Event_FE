@@ -17,13 +17,14 @@ type Props = {
   className?: string
   setTrigger?: (value: boolean) => void
   _id: string
+  setIsRegister?: (value: boolean) => void
 }
 export type FormDataEvent = FormEventRegister
 const initFormData: FormDataEvent = {
   answers: []
 }
 
-export const FormRegister = ({ className, setTrigger, _id }: Props) => {
+export const FormRegister = ({ className, setTrigger,setIsRegister, _id }: Props) => {
   const [form, setForm] = useState<FormDataEvent>(initFormData)
   const navigate = useNavigate()
   const getQuestion = useQuery({

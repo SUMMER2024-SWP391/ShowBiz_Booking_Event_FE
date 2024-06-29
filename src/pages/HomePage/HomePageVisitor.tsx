@@ -102,6 +102,7 @@ export default function HomePageVisitor() {
                               <EventList
                                 className='w-[200px] h-[200px]'
                                 id={event._id}
+                                date={event.date_event}
                                 time={event.time_start}
                                 nameEvent={event.name}
                                 event_operator_name={

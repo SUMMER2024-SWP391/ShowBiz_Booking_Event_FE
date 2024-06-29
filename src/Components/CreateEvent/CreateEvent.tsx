@@ -345,7 +345,7 @@ const CreateEvent = () => {
                       setForm((prev) => ({ ...prev, name: event.target.value }))
                     }
                   />
-                  <div className='mt-1 text-sm'>{formError.name}</div>
+                  <div className='mt-1 text-sm text-red'>{formError.name}</div>
                   <div className='mt-2 flex justify-around items-center gap-5 rounded-[10px] p-3 h-auto w-full bg-gray-800_01 sm:pl-5'>
                     <Col>
                       <Row>
@@ -353,31 +353,32 @@ const CreateEvent = () => {
                           as='p'
                           className='m-2 !text-blue_gray-100 !font-bold'
                         >
-                          Start
+                          Time
                         </Text>
                       </Row>
-                      <Row>
+                      {/* <Row>
                         <Text
                           as='p'
                           className='m-2 !text-blue_gray-100 !font-bold'
                         >
                           End
                         </Text>
-                      </Row>
+                      </Row> */}
                     </Col>
                     <Col>
-                      <Row>
+                      {/* <Row>
                         <DatePicker
                           size='middle'
                           onChange={onChangeDate}
                           value={dayjs(form.date_event, 'DD-MM-YYYY')}
                           format={'DD-MM-YYYY'}
                         />
-                      </Row>
+                      </Row> */}
                       <Row>
                         <DatePicker
                           size='middle'
                           onChange={onChangeDate}
+                          value={dayjs(form.date_event, 'DD-MM-YYYY')}
                           format={'DD-MM-YYYY'}
                         />
                       </Row>
@@ -393,7 +394,11 @@ const CreateEvent = () => {
                         <div className='mt-1 text-sm  text-red'>
                           {formError.time_start}
                         </div>
+
                       </Row>
+                      </Col>
+                      -
+                      <Col>
                       <Row>
                         <TimePicker
                           format='HH:mm'
