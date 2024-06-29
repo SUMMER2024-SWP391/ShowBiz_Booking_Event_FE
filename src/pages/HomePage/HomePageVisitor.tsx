@@ -111,6 +111,7 @@ export default function HomePageVisitor() {
                                 address={event.address}
                                 imageUrl={event.image}
                                 location={event.location}
+                                price={event.ticket_price}
                                 //           renderProps={
                                 //             <>
                                 //               <Button

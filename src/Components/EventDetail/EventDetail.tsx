@@ -97,16 +97,21 @@ const EventDetail = ({ event }: Props) => {
                   as='p'
                   className='!text-white-A700_5e !font-monterat'
                 >
-                  Á hậu Thúy Vân
+                  {event.speaker_name}
                 </Text>
                 <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-
+                <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
+                  <Text size='s' as='p' className='!text-white-A700_cc'>
+                    Sponser
+                  </Text>
+                  <div className='h-px self-stretch bg-white-A700_5e' />
+                </div>
                 <Text
                   size='s'
                   as='p'
                   className='!text-white-A700_5e !font-monterat'
                 >
-                  Tiến sĩ Tô Nhi A
+                  {event.sponsor_name}
                 </Text>
                 <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
               </div>
@@ -182,7 +187,7 @@ const EventDetail = ({ event }: Props) => {
                 </div>
               </div>
               <HandleRegisterEvent event={event} />
-              
+
               <Text size='s' as='p' className='ml-1.5 mt-[21px] md:ml-0'>
                 About Event
               </Text>

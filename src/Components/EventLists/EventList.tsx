@@ -4,6 +4,7 @@ import EventLogo from '../../assets/images/eventlogo.jpg'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import LogoEventOperator from '../../assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import React from 'react'
+import { Text } from '../Text/Text'
 interface Props {
   className?: string
   id?: string
@@ -15,6 +16,7 @@ interface Props {
   renderProps?: React.ReactNode
   location?: string
   date?: string
+  price?: string
 }
 
 export default function EventList({
@@ -27,6 +29,7 @@ export default function EventList({
   renderProps,
   date = '06/02/2024',
   location,
+  price,
   ...props
 }: Props) {
   return (
@@ -39,7 +42,7 @@ export default function EventList({
           <Heading size='lg' as='p' className='mt-3 !text-blue_gray-400'>
             {time} | {date}
           </Heading>
-          
+
           <Heading size='xl' as='h5' className='mt-3 !font-monterat'>
             {nameEvent}
           </Heading>
@@ -69,6 +72,13 @@ export default function EventList({
               className='self-end !font-monterat !text-blue_gray-400_01'
             >
               {`${location}, ${address}`}
+            </Heading>
+          </div>
+          <div className='flex'>
+            <Heading className='mt-[18px] flex'>
+              <Text as='h5' size='lg' className='!text-white-A700_bf'>
+                Price : {`${price}`}
+              </Text>
             </Heading>
           </div>
         </div>
