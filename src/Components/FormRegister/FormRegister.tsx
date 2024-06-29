@@ -11,7 +11,6 @@ import {
   isResponseNoFormHasPaymentType
 } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
-import { useNavigate } from 'react-router-dom'
 
 type Props = {
   className?: string
@@ -26,7 +25,6 @@ const initFormData: FormDataEvent = {
 
 export const FormRegister = ({ className, setTrigger,setIsRegister, _id }: Props) => {
   const [form, setForm] = useState<FormDataEvent>(initFormData)
-  const navigate = useNavigate()
   const getQuestion = useQuery({
     queryKey: ['eventId', _id],
     queryFn: () => eventApi.getListQuestion(_id)
