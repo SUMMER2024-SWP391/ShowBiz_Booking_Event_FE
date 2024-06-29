@@ -36,7 +36,7 @@ import { ErrorResponse } from 'src/@types/utils.type'
 const defaultValueOfTime = {
   timeStart: dayjs('15:00', 'HH:MM'),
   timeEnd: dayjs('17:00', 'HH:MM'),
-  dataEvent: dayjs('06-10-2024', 'DD-MM-YYYY')
+  dataEvent: dayjs('06/10/2024', 'DD/MM/YYYY')
 }
 
 const initForm = {
@@ -47,7 +47,7 @@ const initForm = {
   description: '',
   ticket_price: '',
   capacity: '',
-  date_event: '06-12-2024',
+  date_event: '06/12/2024',
   location: LocationType.HALL_A,
   time_start: '15:00',
   time_end: '17:00'
@@ -133,12 +133,12 @@ const CreateEvent = () => {
     dateString !== null
       ? setForm((prevForm) => ({
           ...prevForm,
-          date_event: dateString.format('DD-MM-YYYY').toString()
+          date_event: dateString.format('DD/MM/YYYY').toString()
         }))
       : setForm((prevForm) => ({
           ...prevForm,
           date_event: defaultValueOfTime.dataEvent
-            .format('DD-MM-YYYY')
+            .format('DD/MM/YYYY')
             .toString()
         }))
   }
@@ -370,15 +370,15 @@ const CreateEvent = () => {
                         <DatePicker
                           size='middle'
                           onChange={onChangeDate}
-                          value={dayjs(form.date_event, 'DD-MM-YYYY')}
-                          format={'DD-MM-YYYY'}
+                          value={dayjs(form.date_event, 'DD/MM/YYYY')}
+                          format={'DD/MM/YYYY'}
                         />
                       </Row>
                       <Row>
                         <DatePicker
                           size='middle'
                           onChange={onChangeDate}
-                          format={'DD-MM-YYYY'}
+                          format={'DD/MM/YYYY'}
                         />
                       </Row>
                     </Col>
