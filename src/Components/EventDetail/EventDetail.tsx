@@ -16,7 +16,7 @@ interface Props {
 }
 
 const EventDetail = ({ event }: Props) => {
-  const time = event.date_event.split('-')
+  const time = event.date_event.split('/')
   const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
 
@@ -138,8 +138,8 @@ const EventDetail = ({ event }: Props) => {
               </Heading>
               <div className='mt-[15px] flex items-center gap-[21px]'>
                 <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
-                  <div className='flex rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
-                    <Heading size='xs' as='h4' className='!font-monterat'>
+                  <div className='flex w-[33px] justify-center rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
+                    <Heading size='xs' as='h4' className='!font-monterat '>
                       {dateObj.toLocaleString('en-US', {
                         month: 'short'
                       })}
@@ -154,7 +154,7 @@ const EventDetail = ({ event }: Props) => {
                     {/* Thursday, May 9 */}
                     {event.date_event}
                   </Heading>
-                  <Text size='xs' as='p' className='!font-monterat'>
+                  <Text size='md' as='p' className='!font-monterat'>
                     {/* 5:30 PM - 8:30 PM */}
                     {event.time_start} - {event.time_end}
                   </Text>
@@ -175,35 +175,14 @@ const EventDetail = ({ event }: Props) => {
                   <Heading size='lg' as='h6'>
                     Register to See Address
                   </Heading>
-                  <Text size='xs' as='p' className='!font-monterat'>
+                  <Text size='md' as='p' className='!font-monterat'>
                     {/* Thành phố Thủ Đức, Thành Phố Hồ Chí Minh */}
                     {event.address}
                   </Text>
                 </div>
               </div>
               <HandleRegisterEvent event={event} />
-              {/* <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
-                <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
-                  <Heading size='s' as='p' className='!font-semibold'>
-                    Registration
-                  </Heading>
-                </div>
-                <Text size='s' as='p' className='ml-6 self-start '>
-                  Welcome! To join the event, please register below.
-                </Text>
-
-                <Button
-                  size='lg'
-                  shape='round'
-                  className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-white-A700'
-                  onClick={() => {
-                    setTogglePop(true)
-                    setId(event._id)
-                  }}
-                >
-                  Register Now
-                </Button>
-              </div> */}
+              
               <Text size='s' as='p' className='ml-1.5 mt-[21px] md:ml-0'>
                 About Event
               </Text>

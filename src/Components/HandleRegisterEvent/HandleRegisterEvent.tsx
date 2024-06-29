@@ -30,7 +30,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     handleRegisterEventNoFormNoPaymentMutation.mutate(id, {
       onSuccess: (data) => {
         toast.success(`$${data.data.message}`)
-        navigate(`/ticket/${data.data.data.register.event_id}`)
+        navigate(`/event/${id}`)
       },
       onError: (error) => {
         if (isAxiosErrorConflictAndNotPermisson<ErrorResponse<{}>>(error)) {
