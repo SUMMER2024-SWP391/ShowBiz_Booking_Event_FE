@@ -11,6 +11,8 @@ import {
   isAxiosErrorConflictAndNotPermisson
 } from 'src/utils/utils'
 import { toast } from 'react-toastify'
+import { Text } from '../Text/Text'
+import { Heading } from '../Heading/Heading'
 
 type Props = {
   event: Event
@@ -65,25 +67,65 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     Number(event.ticket_price) !== 0
   ) {
     return (
-      <Button
-        size='lg'
-        shape='round'
-        className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
-        onClick={handleClickForPaymentAPI}
-      >
-        Register now
-      </Button>
+      // <div className={`flex flex-col view_detail fixed inset-0`}>
+      //   <Button
+      //     size='lg'
+      //     shape='round'
+      //     className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
+      //     onClick={handleClickForPaymentAPI}
+      //   >
+      //     Register now
+      //   </Button>
+      // </div>
+      <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
+        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
+          <Heading size='s' as='p' className='!font-semibold'>
+            Registration
+          </Heading>
+        </div>
+        <Text size='s' as='p' className='ml-6 self-start '>
+          Welcome! To join the event, please register below.
+        </Text>
+
+        <Button
+          size='lg'
+          shape='round'
+          className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
+          onClick={handleClickForPaymentAPI}
+        >
+          Register Now
+        </Button>
+      </div>
     )
   }
   return (
-    <Button
-      size='lg'
-      shape='round'
-      className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
-      onClick={handleRegisterNoPaymentNoForm(event._id)}
-    >
-      Register now
-    </Button>
+    // <Button
+    //   size='lg'
+    //   shape='round'
+    //   className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
+    //   onClick={handleRegisterNoPaymentNoForm(event._id)}
+    // >
+    //   Register now
+    // </Button>
+    <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
+        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
+          <Heading size='s' as='p' className='!font-semibold'>
+            Registration
+          </Heading>
+        </div>
+        <Text size='s' as='p' className='ml-6 self-start '>
+          Welcome! To join the event, please register below.
+        </Text>
+
+        <Button
+          size='lg'
+          shape='round'
+          className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
+          onClick={handleRegisterNoPaymentNoForm(event._id)}
+        >
+          Register Now
+        </Button>
+      </div>
   )
 }
 const HandleRegisterEvent = ({ event }: Props) => {
