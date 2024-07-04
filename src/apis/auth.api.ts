@@ -6,6 +6,7 @@ import {
 import { FormUpdateUser } from 'src/Components/UpdateProfile/UpdateProfile'
 import { FormData } from 'src/pages/Login/Login'
 import http from 'src/utils/http'
+import { RegisterSchema } from 'src/utils/rules'
 
 export type ResetPassword = {
   forgot_password_token: string
@@ -31,7 +32,9 @@ const authAPI = {
   updateProfile: (body: FormUpdateUser) =>
     http.patch<SuccessResponse<UserProfile>>('/users/me', body),
   changePassword: (body: ChangePasswordBody) =>
-    http.post('/users/change-password', body)
+    http.post('/users/change-password', body),
+  register: (body: Omit<RegisterSchema, 'confirm_password'>) =>
+    http.post<SuccessResponse<{}>>('/users/register', body)
 }
 
 export default authAPI

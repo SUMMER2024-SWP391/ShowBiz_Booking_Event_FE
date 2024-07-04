@@ -23,8 +23,8 @@ const InputVerTwo = ({
   register,
   rules,
   autoComplete,
-  classNameInput = 'rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full',
-  classNameError = 'mt-1 min-h-[1.25rem] text-sm text-rose-300 font-bold',
+  classNameInput = 'rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full text-white-A700',
+  classNameError = 'mt-1 min-h-[1.25rem] text-sm text-rose-500',
   renderProps,
   defaultValue,
   disabled
