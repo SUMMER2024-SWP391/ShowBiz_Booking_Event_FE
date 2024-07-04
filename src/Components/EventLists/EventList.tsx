@@ -35,9 +35,9 @@ export default function EventList({
   return (
     <div
       {...props}
-      className={`${props.className} ml-10 flex-1 flex items-center pb-[10px] px-5 sm:pb-1 border-white-A700 border-opacity-50 border border-solid bg-blue_gray-900_03 rounded-[15px]`}
+      className={`${props.className}  flex-1 flex items-center px-5 justify-between border-white-A700 border-opacity-50 border border-solid bg-blue_gray-900_03 rounded-[15px]`}
     >
-      <div className='flex w-full items-start justify-between gap-5 sm:flex-row'>
+      <div className='flex w-full items-center justify-between gap-5 sm:flex-row'>
         <div className='flex flex-col items-start justify-end h-full'>
           <Heading size='lg' as='p' className='mt-3 !text-blue_gray-400'>
             {time} | {date}
@@ -46,7 +46,7 @@ export default function EventList({
           <Heading size='xl' as='h5' className='mt-3 !font-monterat'>
             {nameEvent}
           </Heading>
-          <div className='mt-[18px] flex gap-1.5'>
+          <div className='mt-[10px] flex gap-1.5'>
             <Img
               src={LogoEventOperator}
               alt='eventOperator'
@@ -61,7 +61,7 @@ export default function EventList({
             </Heading>
           </div>
 
-          <div className='mt-[18px] flex gap-1.5'>
+          <div className='mt-[10px] flex gap-1.5'>
             <EnvironmentOutlined
               className='h-[18px] w-[18px] self-start'
               style={{ color: '#8E8F90' }}
@@ -75,8 +75,8 @@ export default function EventList({
             </Heading>
           </div>
           <div className='flex'>
-            <Heading className='mt-[18px] flex'>
-              <Text as='h5' size='lg' className='!text-white-A700_bf'>
+            <Heading className='mt-[10px] flex'>
+              <Text as='h5' size='md' className='!text-white-A700_bf !font-euclid'>
                 Price : {`${price}`}
               </Text>
             </Heading>
