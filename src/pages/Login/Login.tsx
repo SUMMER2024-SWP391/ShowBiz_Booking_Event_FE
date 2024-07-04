@@ -145,7 +145,7 @@ const Login = () => {
               <Button
                 size='xl'
                 color='white_A700'
-                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
+                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 hover:bg-white-A700'
               >
                 Continue with Email
               </Button>
@@ -160,12 +160,20 @@ const Login = () => {
               >
                 Sign in with FPT EDU Email
               </Button> */}
-              <Link
-                to={googleAuthUrl}
-                className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white'
-              >
-                Sign in with FPT EDU Email
-              </Link>
+              <div className='grid grid-cols-2 gap-2'>
+                <Link
+                  to={googleAuthUrl}
+                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white-A700 hover:text-black-900'
+                >
+                  Sign in with FPT EDU Email
+                </Link>
+                <Link
+                  to={'/register'}
+                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white flex justify-center items-center hover:bg-white-A700 hover:text-black-900'
+                >
+                  Register account
+                </Link>
+              </div>
             </form>
           </div>
         </div>

@@ -1,0 +1,203 @@
+import { UserOutlined } from '@ant-design/icons'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
+import { omit } from 'lodash'
+import { useContext } from 'react'
+import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { ErrorResponse } from 'src/@types/utils.type'
+import authAPI from 'src/apis/auth.api'
+import { Button, Heading } from 'src/Components'
+import Footer from 'src/Components/Footer/Footer'
+import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
+import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
+import { AppContext } from 'src/context/app.context'
+import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
+import { RegisterSchema, registerSchemaYup } from 'src/utils/rules'
+import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+
+type FormData = RegisterSchema
+
+const Register = () => {
+  const { setProfile } = useContext(AppContext)
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors }
+  } = useForm<FormData>({
+    resolver: yupResolver(registerSchemaYup)
+  })
+
+  const registerMutation = useMutation({
+    mutationFn: (body: Omit<FormData, 'confirm_password'>) =>
+      authAPI.register(body)
+  })
+
+  const onSubmit = handleSubmit((data) => {
+    const body = omit(data, ['confirm_password'])
+    registerMutation.mutate(body, {
+      onSuccess: (data) => {
+        toast.success(data.data.message)
+      },
+      onError: (error) => {
+        if (
+          isAxiosUnprocessableEntityError<
+            ErrorResponse<Omit<FormData, 'confirm_password'>>
+          >(error)
+        ) {
+          const formError = error.response?.data.errors
+
+          if (formError) {
+            Object.keys(formError).forEach((key) => {
+              setError(key as keyof Omit<FormData, 'confirm_password'>, {
+                message:
+                  formError[key as keyof Omit<FormData, 'confirm_password'>],
+                type: 'Server'
+              })
+            })
+          }
+        }
+      }
+    })
+  })
+
+  return (
+    <>
+      <div className='flex w-full flex-col gap-[175px] bg-gray-900  sm:gap-[87px]'>
+        <div className='flex flex-col items-center gap-[79px] md:gap-[72px] sm:gao-12'>
+          <Header className='bg-gradient' _id={setProfile.name} />
+        </div>
+        <div className='container-xs pl-[313px] pr-[296px] flex justify-center md:p-5 md:px-5'>
+          <div className='flex flex-col w-[55%] h-[100%] items-center gap-[21px] rounded-[15px] border border-solid border-white-A700 bg-gray-900_04 pb-5 pt-[26px] sm:pt-5'>
+            <div className='ml-[46px] flex flex-col item-start gap-[18px] self-start'>
+              <Button
+                color='blue_gray_900'
+                size='4xl'
+                shape='circle'
+                className='w-[68px] !rounded-[34px]'
+              >
+                <UserOutlined className='!text-gray-500_02' />
+              </Button>
+              <div className='flex flex-col items-start gap-[13px]'>
+                <Heading size='2xl' as='h1' className='!font-bold'>
+                  Welcome to EventBok
+                </Heading>
+                <Heading size='xl' as='h2' className='!text-blue_gray-100_02'>
+                  Please sign in or sign up below
+                </Heading>
+              </div>
+            </div>
+            <form
+              className=' ml-[46px] mr-[46px] flex w-[95%] flex-col gap-[15px]  md:p-5'
+              noValidate
+              onSubmit={onSubmit}
+            >
+              <div className='flex flex-col items-start gap-0 w-[90%]'>
+                <Heading size='lg' as='h3' className='!font-bold'>
+                  Email
+                </Heading>
+                {/* <span className='text-rose-300'></span> */}
+                <InputVerTwo
+                  type='text'
+                  name='email'
+                  placeholder={`your@email.com`}
+                  className='mt-2 w-full'
+                  classNameInput='rounded-[10px] border border-solid
+               border-white-A700 sm:pr-5 w-full font-euclid p-2 outline-none text-white-A700
+                focus:border-gray-700'
+                  register={register}
+                  errorMessage={errors.email?.message}
+                />
+              </div>
+              <div className='grid grid-cols-2 gap-2'>
+                <div className='flex flex-col items-start gap-0'>
+                  <Heading size='lg' as='h3' className='!font-bold'>
+                    Your name
+                  </Heading>
+                  <InputVerTwo
+                    type='text'
+                    name='user_name'
+                    placeholder={`Input your full name`}
+                    className='mt-2'
+                    classNameInput='rounded-[10px] border border-solid
+               border-white-A700  sm:pr-5 font-euclid p-2 outline-none text-white-A700
+                focus:border-gray-700 w-[95%]'
+                    register={register}
+                    errorMessage={errors.user_name?.message}
+                  />
+                </div>
+                <div className='flex flex-col items-start gap-0'>
+                  <Heading size='lg' as='h3' className='!font-bold'>
+                    Identity key of student
+                  </Heading>
+                  <InputVerTwo
+                    type='text'
+                    name='mssv'
+                    className='mt-2'
+                    placeholder={`Input your indentity key`}
+                    classNameInput='rounded-[10px] border border-solid
+               border-white-A700 sm:pr-5 w-full font-euclid p-2 outline-none text-white-A700
+                focus:border-gray-700'
+                    register={register}
+                    errorMessage={errors.mssv?.message}
+                  />
+                </div>
+                <div className='flex flex-col items-start gap-0'>
+                  <Heading size='lg' as='h3' className='!font-bold'>
+                    Password
+                  </Heading>
+                  <InputVerTwo
+                    type='password'
+                    name='password'
+                    className='mt-2'
+                    placeholder={`Input your password`}
+                    classNameInput='rounded-[10px] border border-solid
+               border-white-A700 sm:pr-5 w-[90%] font-euclid p-2 outline-none text-white-A700
+                focus:border-gray-700'
+                    register={register}
+                    errorMessage={errors.password?.message}
+                  />
+                </div>
+                <div className='flex flex-col items-start gap-0'>
+                  <Heading size='lg' as='h3' className='!font-bold'>
+                    Confirm Password
+                  </Heading>
+                  <InputVerTwo
+                    type='password'
+                    className='mt-2'
+                    name='confirm_password'
+                    placeholder={`Input your confirm password`}
+                    classNameInput='rounded-[10px] border border-solid
+               border-white-A700  sm:pr-5 w-[90%] font-euclid p-2 outline-none text-white-A700
+                focus:border-gray-700'
+                    register={register}
+                    errorMessage={errors.confirm_password?.message}
+                  />
+                </div>
+              </div>
+              <Button
+                size='xl'
+                color='white_A700'
+                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
+              >
+                Register your account
+              </Button>
+              <div className='h-px w-full self-stretch bg-white-A700' />
+              <Link
+                to={googleAuthUrl}
+                className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:text-black-900 hover:bg-white-A700'
+              >
+                Sign in with FPT EDU Email
+              </Link>
+            </form>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </>
+  )
+}
+
+export default Register

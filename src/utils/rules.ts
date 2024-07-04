@@ -21,7 +21,9 @@ type Rules = {
     | 'speaker_name'
     | 'sponsor_name'
     | 'type_event'
-    | 'otp_check_in']?: RegisterOptions
+    | 'otp_check_in'
+    | 'user_name'
+    | 'mssv']?: RegisterOptions
 }
 export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
   return {
@@ -61,9 +63,6 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
         }
         return true
       }
-    },
-    user_name: {
-      required: 'This field is required'
     },
     phone_number: {
       required: 'This field is required',
@@ -117,6 +116,16 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
     },
     otp_check_in: {
       required: 'Otp check in is required'
+    },
+    user_name: {
+      required: 'User name is required'
+    },
+    mssv: {
+      required: 'MSSV is required',
+      pattern: {
+        value: /[A-Z]{2}\d{6}/,
+        message: 'Invalid MSSV'
+      }
     }
   }
 }
@@ -216,3 +225,22 @@ export const addStaffCheckingSchemaYup = yup.object().shape({
 export type AddStaffCheckingSchema = yup.InferType<
   typeof addStaffCheckingSchemaYup
 >
+
+export const registerSchemaYup = yup.object().shape({
+  mssv: yup
+    .string()
+    .required('This field is required')
+    .matches(/[A-Z]{2}\d{6}/, 'Invalid MSSV'),
+  user_name: yup.string().required('This field is required'),
+  email: yup.string().required('This field is required').email('Invalid email'),
+  password: yup
+    .string()
+    .required('This field is required')
+    .min(8, 'Password must be at least 8 characters'),
+  confirm_password: yup
+    .string()
+    .required('This field is required')
+    .oneOf([yup.ref('password')], 'Confirm password must be same password')
+})
+
+export type RegisterSchema = yup.InferType<typeof registerSchemaYup>
