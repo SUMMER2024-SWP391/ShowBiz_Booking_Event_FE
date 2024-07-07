@@ -33,7 +33,7 @@ const eventApi = {
       '/admins/get-all/pending-list'
     ),
   getAllEventListAdmin: () =>
-    http.get<SuccessResponse<{ events: EventList[] }>>(
+    http.get<SuccessResponse<{ events: Event[] }>>(
       '/admins/get-all/event-list'
     ),
   handleStatusEventAdmin: (id: string, status: EventStatus) =>

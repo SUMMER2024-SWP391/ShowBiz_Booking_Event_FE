@@ -2,14 +2,14 @@ import { useQuery } from '@tanstack/react-query'
 import AdminEventList from '../AdminEventList/AdminEventList'
 import eventApi from 'src/apis/event.api'
 import { Skeleton } from 'antd'
+import TableListAllEvent from '../TableListAllEvent/TableListAllEvent'
 
-const TableEventList = () => {
+const AdminTableEventList = () => {
   const { data, isFetching } = useQuery({
-    queryKey: ['eventListPending'],
-    queryFn: () => eventApi.getPendingEventListAdmin()
+    queryKey: ['event-list-all'],
+    queryFn: () => eventApi.getAllEventListAdmin()
   })
 
-  console.log(data?.data.data.events.length)
   return (
     <div className='overflow-x-auto'>
       <table className='table'>
@@ -29,7 +29,7 @@ const TableEventList = () => {
           {!isFetching &&
             data?.data.data.events.length != 0 &&
             data?.data.data.events.map((event) => (
-              <AdminEventList key={event._id} event={event} />
+              <TableListAllEvent key={event._id} event={event} />
             ))}
           {isFetching && (
             <tr>
@@ -49,13 +49,8 @@ const TableEventList = () => {
           )}
         </tbody>
       </table>
-      {!isFetching && data?.data.data.events.length == 0 && (
-        <div className='flex justify-center items-center'>
-          <h1 className='mt-2 text-white-A700'>There are no event pending</h1>
-        </div>
-      )}
     </div>
   )
 }
 
-export default TableEventList
+export default AdminTableEventList
