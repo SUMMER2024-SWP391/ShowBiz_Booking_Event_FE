@@ -1,12 +1,18 @@
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import AdminUserList from '../AdminUserList/AdminUserList'
 import { adminApi } from 'src/apis/admin.api'
 import { Skeleton } from 'antd'
+import { UserRole } from 'src/@types/enum'
 
-const TableUser = () => {
+interface Props {
+  role: UserRole | string
+}
+
+const TableUser = ({ role }: Props) => {
   const { data, isFetching } = useQuery({
-    queryKey: ['user-list'],
-    queryFn: () => adminApi.getUserList()
+    queryKey: ['user-list', role],
+    queryFn: () => adminApi.getUserList(role),
+    placeholderData: keepPreviousData
   })
 
   return (

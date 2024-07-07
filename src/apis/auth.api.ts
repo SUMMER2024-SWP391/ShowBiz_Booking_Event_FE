@@ -1,3 +1,4 @@
+import { User } from 'src/@types/users.type'
 import { SuccessResponse } from 'src/@types/utils.type'
 import {
   ProfileUpdate,
@@ -20,7 +21,14 @@ export type ChangePasswordBody = {
   confirm_password: string
 }
 const authAPI = {
-  login: (body: FormData) => http.post('/users/login', body),
+  login: (body: FormData) =>
+    http.post<
+      SuccessResponse<{
+        result: { access_token: string; refresh_token: string }
+        user: User
+        listEvent: Array<{ _id: string; event_id: string; user_id: string }>
+      }>
+    >('/users/login', body),
   logout: (body: { refresh_token: string }) => http.post('/users/logout', body),
   forgotPassword: (body: { email: string }) =>
     http.post('/users/forgot-password', body),

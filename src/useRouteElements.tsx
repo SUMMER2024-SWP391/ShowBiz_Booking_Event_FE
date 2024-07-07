@@ -53,6 +53,10 @@ const useRouteElements = () => {
       path: '/forgot-password',
       element: <ForgotPassword />
     },
+    {
+      path: '/list-event-staff',
+      element: <div>ahihi</div>
+    },
 
     {
       path: '/recovery',
@@ -65,10 +69,6 @@ const useRouteElements = () => {
     {
       path: '/ticket/:id',
       element: <TicketDetail />
-    },
-    {
-      path: '/event-list/users',
-      element: <EventListUser />
     },
     //chua set up protected routes
     {
@@ -85,6 +85,10 @@ const useRouteElements = () => {
         {
           path: '/event-operator/*',
           element: <EventOperatorHome />
+        },
+        {
+          path: '/event-list/users',
+          element: <EventListUser />
         }
       ]
     },

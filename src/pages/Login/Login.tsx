@@ -50,6 +50,8 @@ const Login = () => {
           navigate('/admin')
         } else if (data.data.data.user.role == UserRole.EventOperator) {
           navigate('/event-operator')
+        } else if (data.data.data.listEvent.length != 0) {
+          navigate('/list-event-staff')
         } else {
           navigate('/')
         }

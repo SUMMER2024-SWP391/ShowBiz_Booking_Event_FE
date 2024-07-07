@@ -2,14 +2,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { EventStatus } from 'src/@types/enum'
-import { EventListPendingAdmin } from 'src/@types/event.type'
+import { Event } from 'src/@types/event.type'
 import eventApi from 'src/apis/event.api'
 
 interface Props {
-  event: EventListPendingAdmin
+  event: Event
 }
 
-const AdminEventList = ({ event }: Props) => {
+const TableListAllEvent = ({ event }: Props) => {
   const queryClient = useQueryClient()
   const mutationEventStatus = useMutation({
     mutationFn: (status: EventStatus) =>
@@ -43,24 +43,28 @@ const AdminEventList = ({ event }: Props) => {
       <td>{event.capacity}</td>
       <td>{event.ticket_price}</td>
       <td>{event.location}</td>
-      <td>Pending</td>
-      <td>
-        <button className='btn' onClick={handleApprovedEvent()}>
-          Approved
-        </button>
-      </td>
+      <td>{event.status}</td>
+      {EventStatus.PENDING === event.status && (
+        <td>
+          <button className='btn' onClick={handleApprovedEvent()}>
+            Approved
+          </button>
+        </td>
+      )}
       <td>
         <Link to={`/events/${event._id}`} className='btn'>
           Detail
         </Link>
       </td>
-      <td>
-        <button className='btn' onClick={handleRejectedEvent()}>
-          Reject
-        </button>
-      </td>
+      {EventStatus.PENDING === event.status && (
+        <td>
+          <button className='btn' onClick={handleRejectedEvent()}>
+            Reject
+          </button>
+        </td>
+      )}{' '}
     </tr>
   )
 }
 
-export default AdminEventList
+export default TableListAllEvent
