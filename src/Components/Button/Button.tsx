@@ -15,7 +15,9 @@ const variants = {
     indigo_100_7f: 'bg-indigo-100_7f text-black-900',
     blue_gray_900_05: 'bg-blue_gray-900 text-gray-500',
     blue_gray_800: 'bg-blue_gray-100_04 text-black-900',
-    gray_800_01: 'bg-gray-800_01 text-gray-500'
+    gray_800_01: 'bg-gray-800_01 text-gray-500',
+    //---
+    pink_normail: 'bg-pink-normail text-pink-light',
   },
   outline: {
     white_A700: 'border-white-A700 border border-solid shadow-lg'

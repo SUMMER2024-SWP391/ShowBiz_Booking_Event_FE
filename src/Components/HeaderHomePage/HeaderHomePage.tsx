@@ -55,7 +55,7 @@ export default function Header({ ...props }: Props) {
                 <Link to='/admin'>
                   <Heading
                     as='h6'
-                    className='!text-gray-500_02 hover:text-cyan-50'
+                    className=''
                   >
                     Dashboard
                   </Heading>
@@ -66,7 +66,7 @@ export default function Header({ ...props }: Props) {
               <Link to='/event-operator'>
                 <Heading
                   as='h6'
-                  className='!text-gray-500_02 hover:text-cyan-50'
+                  className=''
                 >
                   Event Operator
                 </Heading>
@@ -74,7 +74,7 @@ export default function Header({ ...props }: Props) {
             )}
             <li>
               <a href='/'>
-                <Heading as='h6' className=' hover:text-cyan-50'>
+                <Heading as='h6' className=' hover:text-white-A700'>
                   Home
                 </Heading>
               </a>
@@ -83,7 +83,7 @@ export default function Header({ ...props }: Props) {
               <Link to='/event-list/users'>
                 <Heading
                   as='h6'
-                  className='!text-gray-500_02 hover:text-cyan-50'
+                  className='hover:text-white-A700'
                 >
                   My Event
                 </Heading>
@@ -93,7 +93,7 @@ export default function Header({ ...props }: Props) {
               <a href='#'>
                 <Heading
                   as='h6'
-                  className='!text-gray-500_02 hover:text-cyan-50'
+                  className='hover:text-white-A700'
                 >
                   Calendar
                 </Heading>
@@ -103,7 +103,7 @@ export default function Header({ ...props }: Props) {
               <a href='#'>
                 <Heading
                   as='h6'
-                  className='!text-gray-500_02 hover:text-cyan-50'
+                  className='hover:text-white-A700'
                 >
                   Events
                 </Heading>
@@ -113,16 +113,16 @@ export default function Header({ ...props }: Props) {
         </div>
         <div className='flex justify-around items-center'>
           <a href=''>
-            <SearchOutlined className='!text-gray-500_02 h-[24px] w-[24px]' />
+            <SearchOutlined className='!text-pink-light h-[30px] w-[30px]' />
           </a>
           <a href=''>
-            <BellOutlined className='!text-gray-500_02 h-[24px] w-[24px]' />
+            <BellOutlined className='!text-pink-light h-[30px] w-[30px]' />
           </a>
           {!isAuthenticated ? (
             <Link
               to={path.login}
-              className='w-20 h-8 rounded-[10px] font-bold bg-blue_gray-900_03 text 
-             text-gray-500 flex justify-center items-center hover:text-white-A700_bf
+              className='w-20 h-8 rounded-[10px] font-bold bg-pink-normail text 
+             text-pink-light flex justify-center items-center hover:text-white-A700_bf
              hover:border-[#e5e7eb]'
             >
               Log In

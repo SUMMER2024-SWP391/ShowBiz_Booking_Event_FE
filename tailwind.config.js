@@ -63,6 +63,12 @@ export default {
           '100_01': '#d6d4cb',
           '100_06': '#dad7cf'
         },
+        //thay doi giao dien moi
+        pink:{
+          light: '#FFE6D8',
+          normail: '#F48A6C',
+        },
+        //---------------------
         black: { 900: '#000000' },
         indigo: { '100_7f': '#b8c6e07f' },
         white_A700_7f: '#ffffff7f',
@@ -108,7 +114,10 @@ export default {
       },
       backgroundImage: {
         gradient: 'linear-gradient(180deg, #301535cc, #2a131ccc, #131517)',
-        gradient1: 'linear-gradient(180deg, #fb7b0433,#ffffff33)'
+        gradient1: 'linear-gradient(180deg, #fb7b0433,#ffffff33)',
+        //background home page mới
+        //page vistor
+        gradient_vistor: 'linear-gradient(11deg, #f6d365 0%, #fda085 100%);',
       }
     }
   },

@@ -15,10 +15,10 @@ export default function EventDetailPage() {
   const event = data?.data.data.event as Event
 
   return (
-    <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
-      <Header className='bg-blue_gray-900' />
+    <div className='flex w-full flex-col items-center gap-[61px] bg-gradient_vistor'>
+      <Header className='' />
       {event && <EventDetail event={event} />}
-      <Footer className='bg-blue_gray-900' />
+      <Footer className='' />
     </div>
   )
 }

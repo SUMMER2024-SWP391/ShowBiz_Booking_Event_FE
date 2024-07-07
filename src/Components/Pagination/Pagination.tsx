@@ -39,7 +39,7 @@ const renderPaginate = (
       return (
         <span
           key={index}
-          className='bg-white rounded px-3 py-2 shadow-sm mx-2 border'
+          className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 border'
         >
           ...
         </span>
@@ -53,7 +53,7 @@ const renderPaginate = (
       return (
         <span
           key={index}
-          className='bg-white rounded px-3 py-2 shadow-sm mx-2 border'
+          className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 border'
         >
           ...
         </span>
@@ -101,9 +101,9 @@ const renderPaginate = (
           }}
           key={index}
           className={classNames(
-            'bg-white rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border',
+            'text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border',
             {
-              'border-cyan-500': pageNumber === page,
+              'border-pink-normail': pageNumber === page,
               'border-transparent': pageNumber !== page
             }
           )}
@@ -121,8 +121,8 @@ const Pagination = ({ queryConfig, pageSize }: Props): JSX.Element => {
   return (
     <div className='flex flex-wrap mt-6 justify-center'>
       {page === 1 ? (
-        <span className='bg-white/60 rounded px-3 py-2 shadow-sm mx-2 cursor-not-allowed border'>
-          Prev
+        <span className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-not-allowed border'>
+          Prev  
         </span>
       ) : (
         <Link
@@ -133,14 +133,14 @@ const Pagination = ({ queryConfig, pageSize }: Props): JSX.Element => {
               page: (page - 1).toString()
             }).toString()
           }}
-          className='bg-white rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border'
+          className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border'
         >
           Prev
         </Link>
       )}
       {renderPaginate(page, pageSize, queryConfig)}
       {page === pageSizeNumber ? (
-        <span className='bg-white/60 rounded px-3 py-2 shadow-sm mx-2 cursor-not-allowed border'>
+        <span className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-not-allowed border'>
           Next
         </span>
       ) : (
@@ -152,7 +152,7 @@ const Pagination = ({ queryConfig, pageSize }: Props): JSX.Element => {
               page: (page + 1).toString()
             }).toString()
           }}
-          className='bg-white rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border'
+          className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border'
         >
           Next
         </Link>

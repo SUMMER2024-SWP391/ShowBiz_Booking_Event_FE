@@ -35,15 +35,15 @@ export default function EventList({
   return (
     <div
       {...props}
-      className={`${props.className}  flex-1 flex items-center px-5 justify-between border-white-A700 border-opacity-50 border border-solid bg-blue_gray-900_03 rounded-[15px]`}
+      className={`${props.className} w-[900px] h-auto flex items-center px-5 justify-around bg-pink-normail shadow-2xl rounded-[15px]`}
     >
-      <div className='flex w-full items-center justify-between gap-5 sm:flex-row'>
-        <div className='flex flex-col items-start justify-end h-full'>
-          <Heading size='lg' as='p' className='mt-3 !text-blue_gray-400'>
+      <div className='flex items-center justify-between sm:flex-row'>
+        <div className='my-2 flex flex-col items-start justify-end '>
+          <Heading size='lg' as='p' className=''>
             {time} | {date}
           </Heading>
 
-          <Heading size='xl' as='h5' className='mt-3 !font-monterat'>
+          <Heading size='xl' as='h5' className='w-[700px] !font-monterat !text-white-A700 whitespace-nowrap overflow-hidden text-ellipsis'>
             {nameEvent}
           </Heading>
           <div className='mt-[10px] flex gap-1.5'>
@@ -55,7 +55,7 @@ export default function EventList({
             <Heading
               size='lg'
               as='p'
-              className='self-end !font-monterat !text-blue_gray-400_01 md:ml-0'
+              className='self-end !font-monterat md:ml-0'
             >
               {event_operator_name}
             </Heading>
@@ -63,13 +63,13 @@ export default function EventList({
 
           <div className='mt-[10px] flex gap-1.5'>
             <EnvironmentOutlined
-              className='h-[18px] w-[18px] self-start'
-              style={{ color: '#8E8F90' }}
+              className='h-[18px] w-[18px] self-start !text-pink-light'
+              
             />
             <Heading
               size='lg'
               as='p'
-              className='self-end !font-monterat !text-blue_gray-400_01'
+              className='self-end !font-monterat '
             >
               {`${location}, ${address}`}
             </Heading>

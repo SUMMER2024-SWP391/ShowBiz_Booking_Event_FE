@@ -14,38 +14,40 @@ const EventListUser = () => {
 
   return (
     <>
-      <Header />
-      <div className='container flex justify-center items-center'>
-        <div className='flex flex-col'>
-          {isFetching && (
-            <>
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-            </>
-          )}
-          {!isFetching &&
-            data?.data.data.events.map((event) => {
-              const _event = event.event[0]
-              const _eventOperator = event.event_operator[0]
-              console.log(event)
-              return (
-                <Link to={`/ticket/${event.event[0]._id}`}>
-                  <EventList
-                    key={_event._id}
-                    imageUrl={_event.image}
-                    nameEvent={_event.name}
-                    location={_event.location}
-                    event_operator_name={_eventOperator.user_name}
-                    className='mb-6 w-[800px] !bg-blue_gray-900'
-                  />
-                </Link>
-              )
-            })}
+      <div className='bg-gradient_vistor'>
+        <Header />
+        <div className='container flex justify-center items-center'>
+          <div className='flex flex-col'>
+            {isFetching && (
+              <>
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+              </>
+            )}
+            {!isFetching &&
+              data?.data.data.events.map((event) => {
+                const _event = event.event[0]
+                const _eventOperator = event.event_operator[0]
+                console.log(event)
+                return (
+                  <Link to={`/ticket/${event.event[0]._id}`} className='mt-10'>
+                    <EventList
+                      key={_event._id}
+                      imageUrl={_event.image}
+                      nameEvent={_event.name}
+                      location={_event.location}
+                      event_operator_name={_eventOperator.user_name}
+                      
+                    />
+                  </Link>
+                )
+              })}
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   )
 }

@@ -15,13 +15,13 @@ interface Props {
   event: Event
 }
 
-const EventDetail = ({ event }: Props) => {
+const EventDetail = ({ event }: Props, className: string) => {
   const time = event.date_event.split('/')
   const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
 
   return (
-    <div className='flex container-xs'>
+    <div className={`${className} flex container-xs`}>
       <div className='flex md:flex-col'>
         <div className='flex w-[41%] flex-row items-start pb-[31px] md:w-full sm:pb-5 container-xs'>
           <div className='w-[40%] mr-[40px]'>
@@ -66,7 +66,7 @@ const EventDetail = ({ event }: Props) => {
                 </div>
               </div>
             </div>
-            <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
+            {/* <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
               <Text size='s' as='p' className='!text-white-A700_cc'>
                 Host by
               </Text>
@@ -76,14 +76,14 @@ const EventDetail = ({ event }: Props) => {
                   <div className='flex w-[83%] flex-wrap items-start gap-[18px] md:w-full'>
                     <Img className='h-[24px] w-[24px] rounded-[50%] bg-red' />
                     <Heading size='md' as='h1' className='!font-monterat'>
-                      {/* Câu Lạc Bộ Truyền Thông Cóc Sài Gòn */}
+                     
                       {event.event_operator.user_name}
                     </Heading>
                     <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className='mt-11 flex flex-col items-start gap-[11px] self-stretch pb-2.5'>
               <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
                 <Text size='s' as='p' className='!text-white-A700_cc'>
@@ -128,22 +128,22 @@ const EventDetail = ({ event }: Props) => {
               <Heading
                 size='s'
                 as='h1'
-                className='flex items-center justify-center rounded-[10px] bg-gray-800_01 p-[3px] !text-black-900'
+                className='flex items-center justify-center rounded-[10px] bg-pink-normail p-[3px] '
               >
-                <span className='text-white-A700_bf p-1'>Featured in</span>
+                <span className='text-pink-light p-1'>Featured in</span>
                 <span className='text-white-A700 p-1'>Ho Chi Minh City</span>
               </Heading>
               <Heading
                 size='4xl'
                 as='h3'
-                className='mt-[11px] w-full !font-monterat leading-[39px]'
+                className='mt-[20px] !text-white-A700 w-full !font-monterat leading-[39px]'
               >
                 {/* SaiGon Talk kỳ 8: Feelink - Feel Cảm Xúc, Link Sự Nghiệp */}
                 {event.name}
               </Heading>
               <div className='mt-[15px] flex items-center gap-[21px]'>
                 <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
-                  <div className='flex w-[33px] justify-center rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-gray-800_01 px-[3px] pb-0.5 pt-[3px]'>
+                  <div className='flex w-[33px] justify-center rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-pink-normail px-[3px] pb-0.5 pt-[3px]'>
                     <Heading size='xs' as='h4' className='!font-monterat '>
                       {dateObj.toLocaleString('en-US', {
                         month: 'short'
@@ -155,7 +155,7 @@ const EventDetail = ({ event }: Props) => {
                   </Text>
                 </div>
                 <div className='flex flex-col items-start gap-1 self-start'>
-                  <Heading size='lg' as='h5'>
+                  <Heading size='lg' as='h5' className='!text-white-A700'>
                     {/* Thursday, May 9 */}
                     {event.date_event}
                   </Heading>
@@ -177,7 +177,7 @@ const EventDetail = ({ event }: Props) => {
                   </Button>
                 </div>
                 <div className='flex flex-col items-start mt-[22px] gap-[5px] self-start'>
-                  <Heading size='lg' as='h6'>
+                  <Heading size='lg' as='h6' className='!text-white-A700'>
                     Register to See Address
                   </Heading>
                   <Text size='md' as='p' className='!font-monterat'>
@@ -188,7 +188,7 @@ const EventDetail = ({ event }: Props) => {
               </div>
               <HandleRegisterEvent event={event} />
 
-              <Text size='s' as='p' className='ml-1.5 mt-[21px] md:ml-0'>
+              <Text size='s' as='p' className='!text-white-A700 ml-1.5 mt-[30px] md:ml-0'>
                 About Event
               </Text>
               <div className='flex flex-col items-start'>
@@ -259,8 +259,8 @@ const EventDetail = ({ event }: Props) => {
                     {event.description}
                   </>
                 </Text>
-                <div className='mt-9 flex flex-col items-start gap-2 self-stretch'>
-                  <Text size='s' as='p'>
+                <div className='mt-9 flex flex-col items-start gap-2 self-stretch '>
+                  <Text size='s' as='p' className='!text-white-A700'>
                     {`Location ${event.location}`}
                   </Text>
                   <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
