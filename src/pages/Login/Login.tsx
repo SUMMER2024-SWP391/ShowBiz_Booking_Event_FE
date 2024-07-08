@@ -75,60 +75,59 @@ const Login = () => {
     })
   })
   return (
-    <>
-      <div className='flex w-full flex-col item-center bg-gradient_vistor '>
-        <div className='flex flex-col items-center  '>
-          <Header _id={setProfile.name} />
-        </div>
-        <div className='mt-10 container-xs flex justify-center md:p-5 md:px-5'>
-          <div className='flex flex-col w-[500px] items-start rounded-[15px] border border-solid border-white-A700 pb-5 sm:pt-5'>
-            <div className='mx-[30px] w-[430px]'>
-              <div className='flex flex-col items-start'>
-                <Button
-                  color='pink_normail'
-                  size='4xl'
-                  shape='circle'
-                  className='w-[68px] !rounded-[34px]'
-                >
-                  <UserOutlined className='!text-white-A700' />
-                </Button>
-                <div className=' flex flex-col items-start mt-5'>
-                  <Heading
-                    size='2xl'
-                    as='h1'
-                    className='!font-bold !text-white-A700'
-                  >
-                    Welcome to EventBok
-                  </Heading>
-                  <Heading size='xl' as='h2' className='mt-5'>
-                    Please sign in or sign up below
-                  </Heading>
-                </div>
-              </div>
-              <form
-                className=' mt-5 w-full flex items-start flex-col '
-                noValidate
-                onSubmit={onSubmit}
+    <div className='flex w-full flex-col item-center bg-gradient_vistor'>
+      <div className='flex flex-col items-center  '>
+        <Header _id={setProfile.name} />
+      </div>
+      <div className='mt-10 container-xs flex justify-center md:p-5 md:px-5'>
+        <div className='flex flex-col w-[500px] items-start rounded-[15px] border border-solid border-white-A700 pb-5 sm:pt-5'>
+          <div className='mx-[30px] w-[430px]'>
+            <div className='flex flex-col items-start'>
+              <Button
+                color='pink_normail'
+                size='4xl'
+                shape='circle'
+                className='w-[68px] !rounded-[34px]'
               >
-                <div className='w-full flex flex-col  '>
-                  <Heading
-                    size='lg'
-                    as='h3'
-                    className='!font-bold !text-white-A700'
-                  >
-                    Email
-                  </Heading>
-                  {/* <span className='text-rose-300'></span> */}
-                  <InputVerTwo
-                    type='text'
-                    name='email'
-                    placeholder={`your@email.com`}
-                    classNameInput='mt-2 rounded-[10px] border border-solid bg-white-A700 font-bold  w-full font-euclid p-2 outline-none
+                <UserOutlined className='!text-white-A700' />
+              </Button>
+              <div className=' flex flex-col items-start mt-5'>
+                <Heading
+                  size='2xl'
+                  as='h1'
+                  className='!font-bold !text-white-A700'
+                >
+                  Welcome to EventBok
+                </Heading>
+                <Heading size='xl' as='h2' className='mt-5'>
+                  Please sign in or sign up below
+                </Heading>
+              </div>
+            </div>
+            <form
+              className=' mt-5 w-full flex items-start flex-col '
+              noValidate
+              onSubmit={onSubmit}
+            >
+              <div className='w-full flex flex-col  '>
+                <Heading
+                  size='lg'
+                  as='h3'
+                  className='!font-bold !text-white-A700'
+                >
+                  Email
+                </Heading>
+                {/* <span className='text-rose-300'></span> */}
+                <InputVerTwo
+                  type='text'
+                  name='email'
+                  placeholder={`your@email.com`}
+                  classNameInput='mt-2 rounded-[10px] border border-solid bg-white-A700 font-bold  w-full font-euclid p-2 outline-none
                     '
-                    register={register}
-                    errorMessage={errors.email?.message}
-                  />
-                  {/* <Input
+                  register={register}
+                  errorMessage={errors.email?.message}
+                />
+                {/* <Input
                   color='white_A700'
                   type='email'
                   name='email'
@@ -136,35 +135,35 @@ const Login = () => {
                   addonBefore=''
                   className='rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full '
                 /> */}
-                </div>
-                <div className='flex flex-col w-full'>
-                  <Heading
-                    size='lg'
-                    as='h3'
-                    className='!text-white-A700 !font-bold'
-                  >
-                    Password
-                  </Heading>
-                  <InputVerTwo
-                    type='password'
-                    name='password'
-                    placeholder={`Input your password`}
-                    classNameInput='mt-2 rounded-[10px] border border-solid
+              </div>
+              <div className='flex flex-col w-full'>
+                <Heading
+                  size='lg'
+                  as='h3'
+                  className='!text-white-A700 !font-bold'
+                >
+                  Password
+                </Heading>
+                <InputVerTwo
+                  type='password'
+                  name='password'
+                  placeholder={`Input your password`}
+                  classNameInput='mt-2 rounded-[10px] border border-solid
                    border-white-A700 font-bold sm:pr-5 w-full font-euclid p-2 outline-none
                     bg-white-A700'
-                    register={register}
-                    errorMessage={errors.password?.message}
-                  />
-                </div>
-                <Button
-                  size='xl'
-                  color='white_A700'
-                  className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
-                >
-                  Continue with Email
-                </Button>
-                <div className='my-3 h-px w-full self-stretch bg-white-A700' />
-                {/* <Button
+                  register={register}
+                  errorMessage={errors.password?.message}
+                />
+              </div>
+              <Button
+                size='xl'
+                color='white_A700'
+                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
+              >
+                Continue with Email
+              </Button>
+              <div className='my-3 h-px w-full self-stretch bg-white-A700' />
+              {/* <Button
                 onClick={onSignInWithGoogle}
                 color='blue_gray_900'
                 size='xl'
@@ -191,9 +190,9 @@ const Login = () => {
             </form>
           </div>
         </div>
-        <Footer />
       </div>
-    </>
+      <Footer />
+    </div>
   )
 }
 
