@@ -32,6 +32,7 @@ import eventApi from 'src/apis/event.api'
 import { toast } from 'react-toastify'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
+import { omit } from 'lodash'
 
 const defaultValueOfTime = {
   timeStart: dayjs('15:00', 'HH:MM'),
@@ -152,6 +153,7 @@ const CreateEvent = () => {
     event.preventDefault()
     const bodyCreateEvent = {
       ...form,
+      ticket_price: form.ticket_price ? form.ticket_price : 0,
       image: previewImage,
       is_required_form_register: checked
     }
@@ -165,7 +167,12 @@ const CreateEvent = () => {
             error
           )
         ) {
-          setFormError(error.response?.data.errors as any)
+          const err = omit(error.response?.data.errors, [
+            'date_event',
+            'time_end',
+            'time_end'
+          ])
+          setFormError((prev) => ({ ...prev, ...(err as typeof errorForm) }))
         }
       }
     })
@@ -338,7 +345,7 @@ const CreateEvent = () => {
                     </select>
                   </div>
                   <input
-                    className='mt-2 h-14 font-bold text-[30px] bg-blue_gray-900 !text-white-A700 outline-none border-none'
+                    className='mt-2 h-14 font-bold text-[20px] bg-blue_gray-900 !text-white-A700 outline-none border-none w-full'
                     placeholder='Event Name'
                     value={form.name}
                     onChange={(event) =>
@@ -390,14 +397,10 @@ const CreateEvent = () => {
                           onChange={handleChangeTime('time_start')}
                           value={dayjs(form.time_start, 'HH:MM')}
                         />
-                        <div className='mt-1 text-sm  text-red'>
-                          {formError.time_start}
-                        </div>
-
                       </Row>
-                      </Col>
-                      -
-                      <Col>
+                    </Col>
+                    -
+                    <Col>
                       <Row>
                         <TimePicker
                           format='HH:mm'
@@ -405,9 +408,6 @@ const CreateEvent = () => {
                           onChange={handleChangeTime('time_end')}
                           value={dayjs(form.time_end, 'HH:MM')}
                         />
-                        <div className='mt-1 text-sm text-red'>
-                          {formError.time_end}
-                        </div>
                       </Row>
                     </Col>
                   </div>
@@ -443,19 +443,21 @@ const CreateEvent = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='flex flex-row  p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
-                    <AlignCenterOutlined />
+                  <div className='grid grid-cols-10  p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
+                    <div className='col-span-1 flex justify-center items-center'>
+                      <AlignCenterOutlined />
+                    </div>
 
-                    <div className='flex flex-col items-start ml-2'>
+                    <div className='col-span-9 flex-col items-start ml-2 w-full h-[150px]'>
                       <Text
                         as='p'
                         size='lg'
-                        className=' !text-blue_gray-100 !font-bold'
+                        className=' !text-blue_gray-100 !font-bold mb-2'
                       >
                         Add Description
                       </Text>
-                      <input
-                        className='font-normal !text-blue_gray-100 bg-gray-800_01 outline-none border-none text-sm'
+                      <textarea
+                        className='font-normal h-[80%] !text-blue_gray-100 bg-gray-800_01 outline-none border-none text-sm max-ws-[400px]'
                         placeholder='Content for event description'
                         value={form.description}
                         onChange={(event) => {
@@ -580,7 +582,7 @@ const CreateEvent = () => {
                             Capacity
                           </Text>
                         </div>
-                        <div className='flex flex-row-reverse items-center w-[20%] '>
+                        <div className='flex flex-row-reverse items-center w-[20%] relative h-[45psx] '>
                           <EditOutlined className='ml-1' />
                           <input
                             type='number'
@@ -594,8 +596,8 @@ const CreateEvent = () => {
                               }))
                             }}
                           />
-                          <div className='mt-1 text-sm text-red'>
-                            {errorForm.capacity}
+                          <div className='absolute flex justify-end items-center w-[200px] mt-1 text-sm text-red -bottom-[0.75rem] right-[340%]'>
+                            {formError.capacity}
                           </div>
                         </div>
                       </div>
@@ -608,19 +610,6 @@ const CreateEvent = () => {
                   >
                     Create Event
                   </Button>
-                  {/* <Upload
-                    action='/upload.do'
-                    listType='picture-card'
-                    className='mt-10 self-center text-white-A700'
-                  >
-                    <button
-                      style={{ border: 2, background: 'none' }}
-                      type='button'
-                    >
-                      <PlusOutlined />
-                      <div style={{ marginTop: 8 }}>Upload</div>
-                    </button>
-                  </Upload> */}
                 </div>
               </div>
             </div>
