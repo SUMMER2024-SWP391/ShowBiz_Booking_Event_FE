@@ -1,6 +1,17 @@
-import { NavLink } from 'react-router-dom'
+import { createSearchParams, NavLink, useNavigate } from 'react-router-dom'
+import { EventStatus } from 'src/@types/enum'
+import useQueryParams from 'src/hooks/useQueryParams'
 
 const SideBarAdmin = () => {
+  const navigate = useNavigate()
+  const handleFilterEvent = (status: string | EventStatus) => () => {
+    navigate({
+      pathname: '/admin/list-all-event',
+      search: createSearchParams({
+        status
+      }).toString()
+    })
+  }
   return (
     <ul className='menu bg-base-200 w-56 rounded-box'>
       <li>
@@ -43,10 +54,22 @@ const SideBarAdmin = () => {
           </summary>
           <ul>
             <li>
-              <NavLink to={'/admin/list-all-event'}>All Event</NavLink>
+              <button onClick={handleFilterEvent('')}>All Event</button>
             </li>
             <li>
-              <NavLink to={'/admin/list-event-pending'}>Pending Event</NavLink>
+              <button onClick={handleFilterEvent(EventStatus.PENDING)}>
+                Pending Event
+              </button>
+            </li>
+            <li>
+              <button onClick={handleFilterEvent(EventStatus.APPROVED)}>
+                Approved Event
+              </button>
+            </li>
+            <li>
+              <button onClick={handleFilterEvent(EventStatus.REJECTED)}>
+                Reject Event
+              </button>
             </li>
           </ul>
         </details>

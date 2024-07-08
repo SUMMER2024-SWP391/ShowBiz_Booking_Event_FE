@@ -5,7 +5,6 @@ import Chart from 'src/Components/Chart/Chart'
 import CreateEventOperator from 'src/Components/CreateEventOperator/CreateEventOperator'
 import HeaderAdmin from 'src/Components/HeaderAdmin/HeaderAdmin'
 import SideBarAdmin from 'src/Components/SideBarAdmin/SideBarAdmin'
-import TableEventList from 'src/Components/TableEventList/TableEventList'
 import TableUser from 'src/Components/TableUser/TableUser'
 
 const AdminPage = () => {
@@ -28,7 +27,6 @@ const AdminPage = () => {
               path='list-visitor'
               element={<TableUser role={UserRole.Visitor} />}
             />
-            <Route path='list-event-pending' element={<TableEventList />} />
             <Route path='list-all-event' element={<AdminTableEventList />} />
             <Route
               path='create-event-operator'
