@@ -29,7 +29,7 @@ const Text: React.FC<React.PropsWithChildren<TextProps>> = ({
 
   return (
     <Component
-      className={`text-white-A700 font-euclid ${className} ${sizes[size]}`}
+      className={`text-pink-light font-euclid ${className} ${sizes[size]}`}
       {...restProps}
     >
       {children}

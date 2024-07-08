@@ -22,23 +22,23 @@ const AvatarProfile = (prop: Props) => {
     setOpen(!open)
   }
   return (
-    <div className=' shadow flex items-center'>
+    <div className=' flex items-center'>
       <div
         onClick={toggleOpen}
         className={`relative border-b-4 border-transparent py-3 `}
       >
         <div className='flex items-center space-x-2 cursor-pointer'>
+          <div className='font-semibold dark:text-white text-white-A700 text-[14px]'>
+            <div className='cursor-pointer'>
+              {data?.data.data.user.user_name}
+            </div>
+          </div>
           <div className='w-[24px] h-[24px] rounded-full overflow-hidden border-2 dark:border-white border-gray-900'>
             <img
               src='https://images.unsplash.com/photo-1610397095767-84a5b4736cbd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'
               alt=''
               className='w-full h-full object-cover'
             />
-          </div>
-          <div className='font-semibold dark:text-white text-white-A700 text-[14px]'>
-            <div className='cursor-pointer'>
-              {data?.data.data.user.user_name}
-            </div>
           </div>
         </div>
         {open && (
@@ -47,7 +47,6 @@ const AvatarProfile = (prop: Props) => {
               <li className='font-medium'>
                 <Link
                   to='/profile'
-                  
                   className='flex items-center transform transition-colors duration-200 border-r-4 border-transparent'
                 >
                   <div className='mr-3'>

@@ -77,8 +77,8 @@ const handleComponentEvent = (event: Event): JSX.Element => {
       //     Register now
       //   </Button>
       // </div>
-      <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
-        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
+      <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-xl sm:pb-5'>
+        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-pink-normail px-6 pb-[7px] pt-3 sm:px-5'>
           <Heading size='s' as='p' className='!font-semibold'>
             Registration
           </Heading>
