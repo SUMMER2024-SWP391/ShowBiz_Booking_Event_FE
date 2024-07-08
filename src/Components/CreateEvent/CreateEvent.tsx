@@ -167,6 +167,13 @@ const CreateEvent = () => {
             error
           )
         ) {
+          if (
+            error.response?.data.errors?.time_end ||
+            error.response?.data.errors?.time_start ||
+            error.response?.data.errors?.date_event
+          ) {
+            toast.error('Time is duplicate with another different event')
+          }
           const err = omit(error.response?.data.errors, [
             'date_event',
             'time_end',

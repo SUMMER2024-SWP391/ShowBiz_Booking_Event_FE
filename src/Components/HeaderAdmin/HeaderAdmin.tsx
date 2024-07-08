@@ -1,16 +1,28 @@
 import { useMutation } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import authAPI from 'src/apis/auth.api'
+import { AppContext } from 'src/context/app.context'
 import { getRefreshTokenFromLS } from 'src/utils/auth'
 
 const HeaderAdmin = () => {
+  const navigate = useNavigate()
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
   const logoutMutation = useMutation({
-    mutationFn: (body: { refresh_token: string }) => authAPI.logout(body)
+    mutationFn: (refresh_token: string) => authAPI.logout({ refresh_token }),
+    onSuccess: () => {
+      setIsAuthenticated(false)
+      setProfile(null)
+    },
+    onError: (error) => {
+      console.log(error)
+    }
   })
 
   const handleLogout = () => {
     const refresh_token = getRefreshTokenFromLS()
-    logoutMutation.mutate({ refresh_token })
+    logoutMutation.mutate(refresh_token)
+    navigate('/')
   }
 
   return (
