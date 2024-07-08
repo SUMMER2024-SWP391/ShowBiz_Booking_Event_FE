@@ -1,13 +1,15 @@
-import { useQuery } from '@tanstack/react-query'
-import AdminEventList from '../AdminEventList/AdminEventList'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import eventApi from 'src/apis/event.api'
 import { Skeleton } from 'antd'
 import TableListAllEvent from '../TableListAllEvent/TableListAllEvent'
+import useQueryParams from 'src/hooks/useQueryParams'
 
 const AdminTableEventList = () => {
+  const { status = '' } = useQueryParams()
   const { data, isFetching } = useQuery({
-    queryKey: ['event-list-all'],
-    queryFn: () => eventApi.getAllEventListAdmin()
+    queryKey: ['event-list-all', status],
+    queryFn: () => eventApi.getAllEventListAdmin(status),
+    placeholderData: keepPreviousData
   })
 
   return (
@@ -49,6 +51,11 @@ const AdminTableEventList = () => {
           )}
         </tbody>
       </table>
+      {!isFetching && data?.data.data.events.length == 0 && (
+        <div className='flex justify-center items-center mt-2'>
+          <h1>There are not have event {status.toLowerCase()} </h1>
+        </div>
+      )}
     </div>
   )
 }

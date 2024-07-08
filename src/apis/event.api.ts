@@ -32,9 +32,9 @@ const eventApi = {
     http.get<SuccessResponse<{ events: EventListPendingAdmin[] }>>(
       '/admins/get-all/pending-list'
     ),
-  getAllEventListAdmin: () =>
+  getAllEventListAdmin: (status: EventStatus | string) =>
     http.get<SuccessResponse<{ events: Event[] }>>(
-      '/admins/get-all/event-list'
+      `/admins/get-all/event-list?status=${status}`
     ),
   handleStatusEventAdmin: (id: string, status: EventStatus) =>
     http.patch(`/admins/confirm-event/${id}`, { status }),
