@@ -10,7 +10,7 @@ import { useMutation } from '@tanstack/react-query'
 import { ErrorResponse } from 'src/@types/utils.type'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { Link, useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AppContext } from 'src/context/app.context'
 import authAPI from 'src/apis/auth.api'
 // import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
@@ -21,6 +21,7 @@ import { UserRole } from 'src/@types/enum'
 export type FormData = LoginSchema
 
 const Login = () => {
+  const [errorLogin, setErrorLogin] = useState<string>('')
   const { setIsAuthenticated, setProfile } = useContext(AppContext)
   const navigate = useNavigate()
   const {
@@ -59,17 +60,7 @@ const Login = () => {
       onError: (error) => {
         console.log(error)
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
-          // console.log(error.response?.data.errors)
-          const formError = error.response?.data.errors
-
-          if (formError) {
-            Object.keys(formError).forEach((key) => {
-              setError(key as keyof FormData, {
-                message: formError[key as keyof FormData],
-                type: 'Server'
-              })
-            })
-          }
+          setErrorLogin(error.response?.data.errors?.email as string)
         }
       }
     })
@@ -121,8 +112,7 @@ const Login = () => {
                 <InputVerTwo
                   type='text'
                   name='email'
-                  placeholder={`your@email.com`}
-                  classNameInput='mt-2 rounded-[10px] border border-solid bg-white-A700 font-bold  w-full font-euclid p-2 outline-none
+                  classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none
                     '
                   register={register}
                   errorMessage={errors.email?.message}
@@ -147,18 +137,18 @@ const Login = () => {
                 <InputVerTwo
                   type='password'
                   name='password'
-                  placeholder={`Input your password`}
                   classNameInput='mt-2 rounded-[10px] border border-solid
-                   border-white-A700 font-bold sm:pr-5 w-full font-euclid p-2 outline-none
+                   border-white-A700 text-black-900 sm:pr-5 w-full font-euclid p-2 outline-none
                     bg-white-A700'
                   register={register}
                   errorMessage={errors.password?.message}
                 />
+                <span className=' text-red text-sm'>{errorLogin}</span>
               </div>
               <Button
                 size='xl'
                 color='white_A700'
-                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
+                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 hover:opacity-95'
               >
                 Continue with Email
               </Button>
@@ -176,13 +166,13 @@ const Login = () => {
               <div className='grid grid-cols-2 gap-2'>
                 <Link
                   to={googleAuthUrl}
-                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white-A700 hover:text-black-900'
+                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:opacity-80 text-white-A700'
                 >
                   Sign in with FPT EDU Email
                 </Link>
                 <Link
                   to={'/register'}
-                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white flex justify-center items-center hover:bg-white-A700 hover:text-black-900'
+                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white flex justify-center items-center hover:opacity-80 text-white-A700'
                 >
                   Register account
                 </Link>

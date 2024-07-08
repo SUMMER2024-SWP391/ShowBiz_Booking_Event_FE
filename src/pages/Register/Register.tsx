@@ -65,23 +65,27 @@ const Register = () => {
 
   return (
     <>
-      <div className='flex w-full flex-col gap-[175px] bg-gray-900  sm:gap-[87px]'>
+      <div className='flex w-full flex-col gap-[175px] bg-gradient_vistor  sm:gap-[87px]'>
         <div className='flex flex-col items-center gap-[79px] md:gap-[72px] sm:gao-12'>
-          <Header className='bg-gradient' _id={setProfile.name} />
+          <Header _id={setProfile.name} />
         </div>
-        <div className='container-xs pl-[313px] pr-[296px] flex justify-center md:p-5 md:px-5'>
+        <div className='container-xs pl-[313px] pr-[2p96px] flex justify-center md:p-5 md:px-5'>
           <div className='flex flex-col w-[55%] h-[100%] items-center gap-[21px] rounded-[15px] border border-solid border-white-A700 bg-gray-900_04 pb-5 pt-[26px] sm:pt-5'>
             <div className='ml-[46px] flex flex-col item-start gap-[18px] self-start'>
               <Button
-                color='blue_gray_900'
+                color='pink_normail'
                 size='4xl'
                 shape='circle'
                 className='w-[68px] !rounded-[34px]'
               >
-                <UserOutlined className='!text-gray-500_02' />
+                <UserOutlined className='!text-white-A700' />
               </Button>
               <div className='flex flex-col items-start gap-[13px]'>
-                <Heading size='2xl' as='h1' className='!font-bold'>
+                <Heading
+                  size='2xl'
+                  as='h1'
+                  className='!font-bold !text-white-A700'
+                >
                   Welcome to EventBok
                 </Heading>
                 <Heading size='xl' as='h2' className='!text-blue_gray-100_02'>
@@ -95,83 +99,84 @@ const Register = () => {
               onSubmit={onSubmit}
             >
               <div className='flex flex-col items-start gap-0 w-[90%]'>
-                <Heading size='lg' as='h3' className='!font-bold'>
+                <Heading
+                  size='lg'
+                  as='h3'
+                  className='!font-bold !text-white-A700'
+                >
                   Email
                 </Heading>
                 {/* <span className='text-rose-300'></span> */}
                 <InputVerTwo
                   type='text'
                   name='email'
-                  placeholder={`your@email.com`}
-                  className='mt-2 w-full'
-                  classNameInput='rounded-[10px] border border-solid
-               border-white-A700 sm:pr-5 w-full font-euclid p-2 outline-none text-white-A700
-                focus:border-gray-700'
+                  className='w-full'
+                  classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                   register={register}
                   errorMessage={errors.email?.message}
                 />
               </div>
               <div className='grid grid-cols-2 gap-2'>
                 <div className='flex flex-col items-start gap-0'>
-                  <Heading size='lg' as='h3' className='!font-bold'>
+                  <Heading
+                    size='lg'
+                    as='h3'
+                    className='!font-bold !text-white-A700'
+                  >
                     Your name
                   </Heading>
                   <InputVerTwo
                     type='text'
                     name='user_name'
-                    placeholder={`Input your full name`}
-                    className='mt-2'
-                    classNameInput='rounded-[10px] border border-solid
-               border-white-A700  sm:pr-5 font-euclid p-2 outline-none text-white-A700
-                focus:border-gray-700 w-[95%]'
+                    classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                     register={register}
                     errorMessage={errors.user_name?.message}
                   />
                 </div>
                 <div className='flex flex-col items-start gap-0'>
-                  <Heading size='lg' as='h3' className='!font-bold'>
-                    Identity key of student
+                  <Heading
+                    size='lg'
+                    as='h3'
+                    className='!font-bold !text-white-A700'
+                  >
+                    Student code
                   </Heading>
                   <InputVerTwo
                     type='text'
                     name='mssv'
-                    className='mt-2'
-                    placeholder={`Input your indentity key`}
-                    classNameInput='rounded-[10px] border border-solid
-               border-white-A700 sm:pr-5 w-full font-euclid p-2 outline-none text-white-A700
-                focus:border-gray-700'
+                    classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                     register={register}
                     errorMessage={errors.mssv?.message}
                   />
                 </div>
                 <div className='flex flex-col items-start gap-0'>
-                  <Heading size='lg' as='h3' className='!font-bold'>
+                  <Heading
+                    size='lg'
+                    as='h3'
+                    className='!font-bold !text-white-A700'
+                  >
                     Password
                   </Heading>
                   <InputVerTwo
                     type='password'
                     name='password'
-                    className='mt-2'
-                    placeholder={`Input your password`}
-                    classNameInput='rounded-[10px] border border-solid
-               border-white-A700 sm:pr-5 w-[90%] font-euclid p-2 outline-none text-white-A700
-                focus:border-gray-700'
+                    classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                     register={register}
                     errorMessage={errors.password?.message}
                   />
                 </div>
                 <div className='flex flex-col items-start gap-0'>
-                  <Heading size='lg' as='h3' className='!font-bold'>
+                  <Heading
+                    size='lg'
+                    as='h3'
+                    className='!font-bold !text-white-A700'
+                  >
                     Confirm Password
                   </Heading>
                   <InputVerTwo
                     type='password'
-                    className='mt-2'
                     name='confirm_password'
-                    placeholder={`Input your confirm password`}
-                    classNameInput='rounded-[10px] border border-solid
-               border-white-A700  sm:pr-5 w-[90%] font-euclid p-2 outline-none text-white-A700
-                focus:border-gray-700'
+                    classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                     register={register}
                     errorMessage={errors.confirm_password?.message}
                   />
@@ -180,17 +185,25 @@ const Register = () => {
               <Button
                 size='xl'
                 color='white_A700'
-                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
+                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 hover:opacity-95'
               >
                 Register your account
               </Button>
               <div className='h-px w-full self-stretch bg-white-A700' />
-              <Link
-                to={googleAuthUrl}
-                className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:text-black-900 hover:bg-white-A700'
-              >
-                Sign in with FPT EDU Email
-              </Link>
+              <div className='grid grid-cols-2 gap-2'>
+                <Link
+                  to={googleAuthUrl}
+                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:opacity-80 text-white-A700'
+                >
+                  Sign in with FPT EDU Email
+                </Link>
+                <Link
+                  to={'/login'}
+                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white flex justify-center items-center hover:opacity-80 text-white-A700'
+                >
+                  Login with account
+                </Link>
+              </div>
             </form>
           </div>
         </div>

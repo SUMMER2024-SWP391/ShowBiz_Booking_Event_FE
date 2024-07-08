@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 import { Heading } from '../Heading/Heading'
 import { BellOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons'
@@ -53,10 +53,7 @@ export default function Header({ ...props }: Props) {
             {isAuthenticated && profile?.role == UserRole.Admin && (
               <li>
                 <Link to='/admin'>
-                  <Heading
-                    as='h6'
-                    className=''
-                  >
+                  <Heading as='h6' className=''>
                     Dashboard
                   </Heading>
                 </Link>
@@ -64,47 +61,35 @@ export default function Header({ ...props }: Props) {
             )}
             {isAuthenticated && profile?.role == UserRole.EventOperator && (
               <Link to='/event-operator'>
-                <Heading
-                  as='h6'
-                  className=''
-                >
+                <Heading as='h6' className=''>
                   Event Operator
                 </Heading>
               </Link>
             )}
             <li>
-              <a href='/'>
+              <NavLink to='/'>
                 <Heading as='h6' className=' hover:text-white-A700'>
                   Home
                 </Heading>
-              </a>
+              </NavLink>
             </li>
             <li>
               <Link to='/event-list/users'>
-                <Heading
-                  as='h6'
-                  className='hover:text-white-A700'
-                >
+                <Heading as='h6' className='hover:text-white-A700'>
                   My Event
                 </Heading>
               </Link>
             </li>
             <li>
               <a href='#'>
-                <Heading
-                  as='h6'
-                  className='hover:text-white-A700'
-                >
+                <Heading as='h6' className='hover:text-white-A700'>
                   Calendar
                 </Heading>
               </a>
             </li>
             <li>
               <a href='#'>
-                <Heading
-                  as='h6'
-                  className='hover:text-white-A700'
-                >
+                <Heading as='h6' className='hover:text-white-A700'>
                   Events
                 </Heading>
               </a>

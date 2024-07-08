@@ -229,18 +229,18 @@ export type AddStaffCheckingSchema = yup.InferType<
 export const registerSchemaYup = yup.object().shape({
   mssv: yup
     .string()
-    .required('This field is required')
-    .matches(/[A-Z]{2}\d{6}/, 'Invalid MSSV'),
-  user_name: yup.string().required('This field is required'),
-  email: yup.string().required('This field is required').email('Invalid email'),
+    .required('Student code is required!')
+    .matches(/[A-Z]{2}\d{6}/, 'Invalid MSSV!'),
+  user_name: yup.string().required('User name is required!'),
+  email: yup.string().required('Email is required!').email('Invalid email!'),
   password: yup
     .string()
-    .required('This field is required')
+    .required('Password is required!')
     .min(8, 'Password must be at least 8 characters'),
   confirm_password: yup
     .string()
-    .required('This field is required')
-    .oneOf([yup.ref('password')], 'Confirm password must be same password')
+    .required('Confirm password is required!')
+    .oneOf([yup.ref('password')], 'Confirm password must be same password!')
 })
 
 export type RegisterSchema = yup.InferType<typeof registerSchemaYup>
