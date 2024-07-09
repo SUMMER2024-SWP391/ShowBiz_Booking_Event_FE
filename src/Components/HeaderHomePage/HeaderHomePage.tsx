@@ -11,6 +11,9 @@ import path from 'src/constants/path'
 import { getRefreshTokenFromLS } from 'src/utils/auth'
 import { UserRole } from 'src/@types/enum'
 import AvatarProfile from '../AvatarProfile/AvatarProfile'
+import HeaderEO from '../HeaderEventOperator'
+import HeaderAdmin from '../HeaderAdmin/HeaderAdmin'
+import HeaderVistor from '../HeaderVistor'
 
 interface Props {
   className?: string
@@ -26,6 +29,7 @@ export default function Header({ ...props }: Props) {
     onSuccess: () => {
       setIsAuthenticated(false)
       setProfile(null)
+
     },
     onError: (error) => {
       console.log(error)
@@ -42,7 +46,7 @@ export default function Header({ ...props }: Props) {
     <div className='w-full'>
       <header
         {...props}
-        className={`${props.className} w-full h-[100px] flex flex-row justify-around items-center md:w-full`}
+        className={`${props.className} w-full h-[100px] flex flex-row justify-around items-center md:w-full `}
       >
         <Heading as='h1' size='2xl' className=''>
           eventbok.
@@ -50,50 +54,7 @@ export default function Header({ ...props }: Props) {
 
         <div className='w-[500px] flex justify-center'>
           <ul className='w-full flex justify-around'>
-            {isAuthenticated && profile?.role == UserRole.Admin && (
-              <li>
-                <Link to='/admin'>
-                  <Heading as='h6' className=''>
-                    Dashboard
-                  </Heading>
-                </Link>
-              </li>
-            )}
-            {isAuthenticated && profile?.role == UserRole.EventOperator && (
-              <Link to='/event-operator'>
-                <Heading as='h6' className=''>
-                  Event Operator
-                </Heading>
-              </Link>
-            )}
-            <li>
-              <NavLink to='/'>
-                <Heading as='h6' className=' hover:text-white-A700'>
-                  Home
-                </Heading>
-              </NavLink>
-            </li>
-            <li>
-              <Link to='/event-list/users'>
-                <Heading as='h6' className='hover:text-white-A700'>
-                  My Event
-                </Heading>
-              </Link>
-            </li>
-            <li>
-              <a href='#'>
-                <Heading as='h6' className='hover:text-white-A700'>
-                  Calendar
-                </Heading>
-              </a>
-            </li>
-            <li>
-              <a href='#'>
-                <Heading as='h6' className='hover:text-white-A700'>
-                  Events
-                </Heading>
-              </a>
-            </li>
+            {(isAuthenticated && profile?.role == UserRole.Admin) ? <HeaderAdmin/> : (isAuthenticated && profile?.role == UserRole.EventOperator) ? <HeaderEO/> : <HeaderVistor/>}
           </ul>
         </div>
         <div className='flex justify-around items-center'>
@@ -114,15 +75,9 @@ export default function Header({ ...props }: Props) {
             </Link>
           ) : (
             <AvatarProfile onClick={handleLogout} />
-            // <Button
-            //   className='min-w-[69px] rounded-[10px] font-bold bg-blue_gray-900_03 text text-gray-500'
-            //   onClick={handleLogout}
-            // >
-            //   Logout
-            // </Button>
           )}
         </div>
       </header>
-    </div>
+      </div>
   )
 }

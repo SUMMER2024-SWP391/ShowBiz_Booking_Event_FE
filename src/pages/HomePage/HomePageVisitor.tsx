@@ -26,7 +26,7 @@ export default function HomePageVisitor() {
     queryFn: () => eventApi.getListEvent(queryConfig),
     placeholderData: keepPreviousData
   })
-
+  console.log(data?.data.data.events.map((event) => event.time_start))
   return (
     <>
       <div className='w-full bg-gradient_vistor pb-[376px] md:pb-5'>

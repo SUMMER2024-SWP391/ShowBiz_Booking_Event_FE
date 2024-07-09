@@ -118,6 +118,8 @@ export default {
         //background home page mới
         //page vistor
         gradient_vistor: 'linear-gradient(11deg, #f6d365 0%, #fda085 100%);',
+        //page eventOperator
+        gradient_eventOperator: ' linear-gradient(to top, #ebbba7 0%, #cfc7f8 100%)',
       }
     }
   },
