@@ -18,7 +18,6 @@ import CheckInWithOTP from './Components/CheckInWithOTP/CheckInWithOTP'
 import Register from './pages/Register/Register'
 import StaffPage from './pages/StaffPage/StaffPage'
 
-
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
   return isAuthenticated ? <Outlet /> : <Navigate to='/login' />
@@ -57,7 +56,7 @@ const useRouteElements = () => {
     },
     {
       path: '/staff',
-      element: <StaffPage/> 
+      element: <StaffPage />
     },
 
     {

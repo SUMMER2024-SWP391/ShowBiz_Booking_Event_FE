@@ -9,13 +9,14 @@ import { Button, Heading, Img, Text } from 'src/Components'
 import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import { Event } from 'src/@types/event.type'
-import HandleRegisterEvent from '../HandleRegisterEvent/HandleRegisterEvent'
+import { ReactNode } from 'react'
 
 interface Props {
   event: Event
+  renderProps?: ReactNode
 }
 
-const EventDetail = ({ event }: Props, className: string) => {
+const EventDetail = ({ event, renderProps }: Props, className: string) => {
   const time = event.date_event.split('/')
   const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
@@ -186,86 +187,7 @@ const EventDetail = ({ event }: Props, className: string) => {
                   </Text>
                 </div>
               </div>
-              <HandleRegisterEvent event={event} />
-
-              <Text size='s' as='p' className='!text-white-A700 ml-1.5 mt-[30px] md:ml-0'>
-                About Event
-              </Text>
-              <div className='flex flex-col items-start'>
-                <div className='mt-4 ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
-                <Text
-                  size='md'
-                  as='p'
-                  className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
-                >
-                  <>
-                    {/* ​Phát triển IQ luôn là xu hướng chung của xã hội hiện đại
-                  đề cao, trong khi vai trò của chỉ số cảm xúc (EQ) - một
-                  trong những yếu tố then chốt dẫn đến thành công, vẫn chưa
-                  được nhận thức đầy đủ. Saigon Talk kỳ 8 chính thức quay
-                  trở lại để “giải oan” cho EQ khỏi định kiến "không đáng
-                  lưu tâm", đồng thời giúp bạn giải mã sức mạnh tiềm ẩn của
-                  nó trên con đường phát triển sự nghiệp bản thân.
-                  <br />
-                  <br />
-                  Trong số kỳ này, Saigon Talk 8 mang đến chủ đề “FEELINK”
-                  với trọng tâm khai phá tiềm năng của EQ (chỉ số cảm xúc)
-                  trong việc phát triển sự nghiệp cá nhân. Góp phần đặc biệt
-                  tại sân khấu buổi chia sẻ lần này xin bật mí bộ đôi khách
-                  mời uy tín: ​🎙️ TIẾN SĨ TÂM LÝ HỌC TÔ NHI A: một trong
-                  những chuyên gia tâm lý học hàng đầu Việt Nam. Không chỉ ở
-                  vai trò giảng viên mà còn là nhà nghiên cứu tâm lý dày dặn
-                  kinh nghiệm, đang đảm nhiệm nhiều vị trí quan trọng: ​-
-                  Giảng viên Trường Đại học Kinh tế - Tài chính TP.HCM
-                  (UEF). ​- Nhà sáng lập Công ty đào tạo - truyền thông Khải
-                  Nguyên. ​- Giảng viên cao cấp và chuyên gia tham vấn trị
-                  liệu tâm lý tại Công ty đào tạo & Chăm sóc sức khỏe tâm
-                  thần Ý Tưởng Việt. ​ 🎙️ Á HẬU QUỐC TẾ PHẠM HỒNG THÚY VÂN:
-                  không chỉ là một Á hậu xinh đẹp, tài năng mà còn là một
-                  doanh nhân thành công với sứ mệnh truyền cảm hứng cho cộng
-                  đồng. Thuộc top 50 nữ lãnh đạo Châu Á cùng nhiều danh hiệu
-                  khác, Thúy Vân sẽ góp mặt tại buổi chia sẻ để mang đến
-                  những trải nghiệm, lời khuyên bổ ích dành cho các bạn tham
-                  dự. ​Với thông điệp “Feel cảm xúc, link sự nghiệp”,
-                  talkshow mang đến trải nghiệm: ​⭐ "Feel" cùng chuyên gia:
-                  Lắng nghe chia sẻ từ 2 diễn giả giàu kinh nghiệm về cách
-                  thức "Feel" (cảm nhận) cảm xúc một cách hiệu quả để ứng
-                  dụng EQ vào thực tế. ​⭐ "Link" với thành công: Tham gia
-                  thảo luận, kết nối và học hỏi bí quyết từ cộng đồng những
-                  người trẻ tại buổi chia sẻ, cùng nhau nối kết để khám phá
-                  giới hạn và chinh phục mục tiêu tương lai. ​⭐ Thưởng thức
-                  tiết mục trình diễn sôi động, hấp dẫn. ​⭐ Minigame cùng
-                  những phần quà xịn xò từ BTC. ​⭐ Nhâm nhi trà bánh tại
-                  tiệc tea break vào cuối buổi. ​📌 THÔNG TIN CHI TIẾT VỀ
-                  CHƯƠNG TRÌNH: ​👥 Đối tượng: toàn bộ học sinh, sinh viên
-                  trên khắp cả nước tham gia. ​⏳ Thời gian: 17:30 - 20:30,
-                  Thứ năm ngày 09/05/2024. ​🏫 Địa điểm: Hall Business,
-                  Trường Đại học FPT TP.HCM (Lô E2a-7, Đường D1, Khu Công
-                  Nghệ Cao, P.Long Thạnh Mỹ, Tp.Thủ Đức, TP.HCM) ​💥 Không
-                  chỉ là buổi chia sẻ mà là hành trình khai phá bản thân.
-                  Còn chần chờ gì nữa? Hãy đăng ký tham dự Saigon Talk Kỳ 8
-                  ngay thôi nào!
-                  <br />
-                  _______________________
-                  <br />
-                  <br />
-                  🧠 SAIGON TALK KỲ 8: FEELINK - FEEL CẢM XÚC, LINK SỰ
-                  NGHIỆP🧠 <br />
-                  ​Mọi thắc mắc vui lòng liên hệ với chúng mình qua:
-                  <br />
-                  ​Fanpage: Câu lạc bộ Truyền thông Cóc Sài Gòn
-                  <br /> ​Mail: saigontalk.csg@gmail.com <br />
-                  ​SĐT: 039 564 0607 (Project Leader: Hoàng Thiên Hương) */}
-                    {event.description}
-                  </>
-                </Text>
-                <div className='mt-9 flex flex-col items-start gap-2 self-stretch '>
-                  <Text size='s' as='p' className='!text-white-A700'>
-                    {`Location ${event.location}`}
-                  </Text>
-                  <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
-                </div>
-              </div>
+              {renderProps}
             </div>
           </div>
         </div>
