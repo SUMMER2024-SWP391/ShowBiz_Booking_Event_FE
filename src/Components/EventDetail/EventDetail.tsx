@@ -66,24 +66,6 @@ const EventDetail = ({ event }: Props, className: string) => {
                 </div>
               </div>
             </div>
-            {/* <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
-              <Text size='s' as='p' className='!text-white-A700_cc'>
-                Host by
-              </Text>
-              <div className='self-stretch'>
-                <div className='flex flex-col items-start gap-[11px]'>
-                  <div className='ml-5 h-px self-stretch bg-white-A700_5e md:ml-0' />
-                  <div className='flex w-[83%] flex-wrap items-start gap-[18px] md:w-full'>
-                    <Img className='h-[24px] w-[24px] rounded-[50%] bg-red' />
-                    <Heading size='md' as='h1' className='!font-monterat'>
-                     
-                      {event.event_operator.user_name}
-                    </Heading>
-                    <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <div className='mt-11 flex flex-col items-start gap-[11px] self-stretch pb-2.5'>
               <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
                 <Text size='s' as='p' className='!text-white-A700_cc'>

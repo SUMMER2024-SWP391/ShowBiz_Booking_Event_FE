@@ -21,6 +21,7 @@
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "classnames": "^2.5.1",
+    "date-fns": "^3.6.0",
     "drag-drop-file-tk": "^1.0.8",
     "firebase": "^10.12.2",
     "lodash": "^4.17.21",
