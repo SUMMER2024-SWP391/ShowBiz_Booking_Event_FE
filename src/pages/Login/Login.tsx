@@ -22,17 +22,20 @@ import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 export type FormData = LoginSchema
 
 const Login = () => {
-  const [errorLogin, setErrorLogin] = useState<string>('')
-  const {setListEvent, setIsAuthenticated, setProfile } = useContext(AppContext)
+  const { setListEvent, setIsAuthenticated, setProfile } =
+    useContext(AppContext)
   const navigate = useNavigate()
   const {
     register,
     handleSubmit,
-    setError,
+    // setError,
+    trigger,
     formState: { errors }
   } = useForm<FormData>({
     resolver: yupResolver(LoginSchemaYup)
   })
+
+  const [loginError, setLoginError] = useState<string>('')
 
   const loginMutation = useMutation({
     mutationFn: (body: FormData) => authAPI.login(body)
@@ -43,7 +46,7 @@ const Login = () => {
         setIsAuthenticated(true)
         setProfile(data.data.data.user)
         if (data.data.data.user.role == UserRole.Admin) {
-          navigate('/admin')
+          navigate('/admin/list-all-event')
         } else if (data.data.data.user.role == UserRole.EventOperator) {
           navigate('/event-operator')
         } else if (data.data.data.listEvent.length != 0) {
@@ -52,12 +55,13 @@ const Login = () => {
         } else {
           navigate('/')
         }
-        
       },
       onError: (error) => {
         console.log(error)
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
-          setErrorLogin(error.response?.data.errors?.email as string)
+          trigger()
+          const errors = error.response?.data.errors
+          setLoginError(errors?.email as string)
         }
       }
     })
@@ -135,12 +139,12 @@ const Login = () => {
                   type='password'
                   name='password'
                   classNameInput='mt-2 rounded-[10px] border border-solid
-                   border-white-A700 text-black-900 sm:pr-5 w-full font-euclid p-2 outline-none
-                    bg-white-A700'
+                   border-white-A700 text-black-900 sm:pr-5 font-euclid p-2 outline-none
+                    bg-white-A700 w-full'
                   register={register}
                   errorMessage={errors.password?.message}
                 />
-                <span className=' text-red text-sm'>{errorLogin}</span>
+                <span className=' text-red text-sm'>{loginError}</span>
               </div>
               <Button
                 size='xl'

@@ -101,10 +101,10 @@ const renderPaginate = (
           }}
           key={index}
           className={classNames(
-            'text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border',
+            'text-black-900 bg-white-A700 rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border',
             {
-              'border-pink-normail': pageNumber === page,
-              'border-transparent': pageNumber !== page
+              'border-gray-400': pageNumber === page,
+              'border-transparent opacity-95': pageNumber !== page
             }
           )}
         >
@@ -121,8 +121,8 @@ const Pagination = ({ queryConfig, pageSize }: Props): JSX.Element => {
   return (
     <div className='flex flex-wrap mt-6 justify-center'>
       {page === 1 ? (
-        <span className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-not-allowed border'>
-          Prev  
+        <span className='text-black-900 bg-white-A700  rounded px-3 py-2 shadow-sm mx-2 cursor-not-allowed border opacity-70'>
+          Prev
         </span>
       ) : (
         <Link
@@ -133,14 +133,14 @@ const Pagination = ({ queryConfig, pageSize }: Props): JSX.Element => {
               page: (page - 1).toString()
             }).toString()
           }}
-          className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border'
+          className='text-black-900 bg-white-A700 rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border'
         >
           Prev
         </Link>
       )}
       {renderPaginate(page, pageSize, queryConfig)}
       {page === pageSizeNumber ? (
-        <span className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-not-allowed border'>
+        <span className='text-black-900 bg-white-A700 rounded px-3 py-2 shadow-sm mx-2 cursor-not-allowed border opacity-70'>
           Next
         </span>
       ) : (
@@ -152,7 +152,7 @@ const Pagination = ({ queryConfig, pageSize }: Props): JSX.Element => {
               page: (page + 1).toString()
             }).toString()
           }}
-          className='text-pink-light rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border'
+          className='text-black-900 bg-white-A700 rounded px-3 py-2 shadow-sm mx-2 cursor-pointer border'
         >
           Next
         </Link>

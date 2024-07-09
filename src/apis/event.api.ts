@@ -39,9 +39,11 @@ const eventApi = {
   handleStatusEventAdmin: (id: string, status: EventStatus) =>
     http.patch(`/admins/confirm-event/${id}`, { status }),
   getEventListOperator: () =>
-    http.get<SuccessResponse<{ events: EventListOperator[] }>>(
-      '/events/list-event/event-operator'
-    ),
+    http.get<
+      SuccessResponse<{
+        events: Array<EventListOperator & { is_has_form_feedback: boolean }>
+      }>
+    >('/events/list-event/event-operator'),
   registerEvent: (id: string, body: FormEventRegister) =>
     http.post<SuccessResponse<{ url: string } | { register: RegisterSucces }>>(
       `/events/register-event/${id}`,
@@ -86,7 +88,12 @@ const eventApi = {
     http.post<SuccessResponse<{ register: RegisterSucces }>>(
       `/register-event/no-payment/has-form/${id}`,
       body
+    ),
+  getFormFeedback: (id: string) => {
+    return http.get<SuccessResponse<{ formQuestion: ListQuestion[] }>>(
+      `/forms/question/feedback/${id}`
     )
+  }
 }
 
 export default eventApi

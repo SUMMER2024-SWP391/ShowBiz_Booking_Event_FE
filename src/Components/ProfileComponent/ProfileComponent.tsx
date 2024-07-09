@@ -42,12 +42,6 @@ const ProfileComponent = ({ user }: UserProfile) => {
         classNameInput='btn'
         renderProps={<div className='mb-2'>Birthdate</div>}
       />
-      <InputVerTwo
-        disabled={true}
-        defaultValue={user.point}
-        classNameInput='btn'
-        renderProps={<div className='mb-2'>Point</div>}
-      />
     </div>
   )
 }
