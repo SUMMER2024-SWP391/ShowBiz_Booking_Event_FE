@@ -20,8 +20,7 @@ const UpdateFormFeedback = () => {
 
   const { data } = useQuery({
     queryKey: ['form_feedback_update'],
-    queryFn: () =>
-      eventApi.getListQuestion(id as string, EventQuestionType.FEEDBACK)
+    queryFn: () => eventApi.getFormFeedback(id as string)
   })
 
   const updateFormEventFeedBackMutation = useMutation({
@@ -123,7 +122,7 @@ const UpdateFormFeedback = () => {
               />
             ))}
           <button
-            className='mt-2 h-[54px] w-[300px] text-white-A700 bg-[#34B3F1] rounded-xl opacity-90 hover:opacity-100 hover:text-slate-50 hover:border-2 hover:border-[#42C2FF] duration-300'
+            className='mt-8 h-[54px] w-[300px] text-white-A700 bg-[#34B3F1] rounded-xl opacity-90 hover:opacity-100 hover:text-slate-50 hover:border-2 hover:border-[#42C2FF] duration-300'
             type='button'
             onClick={handleSubmit}
           >

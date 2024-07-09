@@ -29,7 +29,6 @@ export default function Header({ ...props }: Props) {
     onSuccess: () => {
       setIsAuthenticated(false)
       setProfile(null)
-
     },
     onError: (error) => {
       console.log(error)
@@ -43,7 +42,7 @@ export default function Header({ ...props }: Props) {
   }
 
   return (
-    <div className='w-full'>
+    <div className='w-full bg-gradient_vistor'>
       <header
         {...props}
         className={`${props.className} w-full h-[100px] flex flex-row justify-around items-center md:w-full `}
@@ -54,7 +53,13 @@ export default function Header({ ...props }: Props) {
 
         <div className='w-[500px] flex justify-center'>
           <ul className='w-full flex justify-around'>
-            {(isAuthenticated && profile?.role == UserRole.Admin) ? <HeaderAdmin/> : (isAuthenticated && profile?.role == UserRole.EventOperator) ? <HeaderEO/> : <HeaderVistor/>}
+            {isAuthenticated && profile?.role == UserRole.Admin ? (
+              <HeaderAdmin />
+            ) : isAuthenticated && profile?.role == UserRole.EventOperator ? (
+              <HeaderEO />
+            ) : (
+              <HeaderVistor />
+            )}
           </ul>
         </div>
         <div className='flex justify-around items-center'>
@@ -78,6 +83,6 @@ export default function Header({ ...props }: Props) {
           )}
         </div>
       </header>
-      </div>
+    </div>
   )
 }
