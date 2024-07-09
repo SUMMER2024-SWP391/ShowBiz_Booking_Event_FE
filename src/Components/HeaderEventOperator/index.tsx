@@ -27,14 +27,14 @@ export default function HeaderEO({ ...props }: Props) {
         className={`${props.className} w-full h-[100px] flex flex-row justify-around items-center md:w-full`}
       >
             <li>
-              <NavLink to='/event-operator/'>
+              <NavLink to='/event-operator/create'>
                 <Heading as='h6' className=' hover:text-white-A700'>
                   Create Event
                 </Heading>
               </NavLink>
             </li>
             <li>
-              <Link to='/event-operator/event-list'>
+              <Link to='/event-operator'>
                 <Heading as='h6' className='hover:text-white-A700'>
                   My Event
                 </Heading>

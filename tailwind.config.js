@@ -84,6 +84,7 @@ export default {
         blueDark: '#32363B',
         nav_color: '#9F9F9F',
         black_light: '#1C1E20',
+        black_dark: '#000',
         black_supper_light: '#62605D',
         navbar_theme: {
           start: 'rgb(49, 21, 53)',
@@ -119,7 +120,7 @@ export default {
         //page vistor
         gradient_vistor: 'linear-gradient(11deg, #f6d365 0%, #fda085 100%);',
         //page eventOperator
-        gradient_eventOperator: ' linear-gradient(to top, #ebbba7 0%, #cfc7f8 100%)',
+        gradient_eventOperator: ' linear-gradient(to top, #f4f5f6 0%, #f4f5f6 100%)',
       }
     }
   },

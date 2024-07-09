@@ -8,9 +8,15 @@ import EventListOperator from 'src/Components/EventListOperator/EventListOperato
 import FormFeedback from 'src/Components/FormFeedback/FormFeedback'
 import UpdateFormFeedback from 'src/Components/UpdateFormFeedback/UpdateFormFeedback'
 import AssignCheckingStaff from 'src/Components/AssignCheckingStaff/AssignCheckingStaff'
-import HeaderEO from 'src/Components/HeaderEventOperator'
+import { useQuery } from '@tanstack/react-query'
+import eventApi from 'src/apis/event.api'
+import EventList from 'src/Components/EventLists/EventList'
 
 export const EventOperatorHome = () => {
+  const { data, isFetching } = useQuery({
+    queryKey: ['event-list-operator'],
+    queryFn: () => eventApi.getEventListOperator()
+  })
   return (
     <>
       <div className='w-full bg-blue_gray-900 pb-[376px] md:pb-5 '>
@@ -20,35 +26,40 @@ export const EventOperatorHome = () => {
           </div>
           <div className='container-xs pl-[89px] pr-[70px] md:p-5 md:px-5'>
             <div className='flex flex-col gap-[73px] md:gap-[54px] sm:gap-9'>
-              <div className='w-[96%] md:w-full'>
+              <div className='w-[100%] md:w-full'>
                 <div className='flex flex-col'>
-                  <div className='container-xs relative mt-[-3px] flex flex-col items-start pl-[174px] pr-[633px] md:p-5 md:px-5'>
+                  <div className='container-xs '>
                     <Heading size='4xl' as='h1' className=''>
-                      Event Operator
+                      Events
                     </Heading>
-                  </div>
+                    {/* {data?.data.data.events.map((event) => (
+                      <EventList id={event._id} nameEvent={event.name} location={event.location} ap />
+                    ))} */}
 
-                  <div className='mt-10'>
-                    <Routes>
-                      <Route
-                        path='event-list'
-                        element={<EventListOperator />}
-                      />
-                      <Route index element={<Events />} />
-                      <Route
-                        path='update-form/:id'
-                        element={<UpdateFormFeedback />}
-                      />
-                      <Route path='create' element={<CreateEvent />} />
-                      <Route
-                        path='form-feedback/:id'
-                        element={<FormFeedback />}
-                      ></Route>
-                      <Route
-                        path='assign-checking-staff/:id'
-                        element={<AssignCheckingStaff />}
-                      ></Route>
-                    </Routes>
+                    <div className='mt-10'>
+                      <Routes>
+                        <Route
+                          path='/'
+                          element={<EventListOperator />}
+                        />
+                        {/* khi nào không có event thì mới dùg cái role dưới */}
+                        {/* <Route index element={<Events />} /> */}
+
+                        <Route
+                          path='update-form/:id'
+                          element={<UpdateFormFeedback />}
+                        />
+                        <Route path='create' element={<CreateEvent />} />
+                        <Route
+                          path='form-feedback/:id'
+                          element={<FormFeedback />}
+                        ></Route>
+                        <Route
+                          path='assign-checking-staff/:id'
+                          element={<AssignCheckingStaff />}
+                        ></Route>
+                      </Routes>
+                    </div>
                   </div>
                 </div>
               </div>
