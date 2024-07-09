@@ -89,11 +89,12 @@ const eventApi = {
       `/register-event/no-payment/has-form/${id}`,
       body
     ),
-  getFormFeedback: (id: string) => {
-    return http.get<SuccessResponse<{ formQuestion: ListQuestion[] }>>(
+  getFormFeedback: (id: string) =>
+    http.get<SuccessResponse<{ formQuestion: ListQuestion[] }>>(
       `/forms/question/feedback/${id}`
-    )
-  }
+    ),
+  cancelEvent: (id: string) =>
+    http.post<SuccessResponse<{}>>(`events/cancel-event/${id}`)
 }
 
 export default eventApi

@@ -161,7 +161,7 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                 </div>
                 <div className='flex flex-col items-start mt-[22px] gap-[5px] self-start'>
                   <Heading size='lg' as='h6' className='!text-white-A700'>
-                    Register to See Address
+                    Address
                   </Heading>
                   <Text size='md' as='p' className='!font-monterat'>
                     {/* Thành phố Thủ Đức, Thành Phố Hồ Chí Minh */}

@@ -7,3 +7,8 @@ export interface SuccessResponse<Data> {
   message: string
   data: Data
 }
+
+export enum StatusRegisterEvent {
+  SUCCESS = 'success',
+  CANCEL = 'cancel'
+}

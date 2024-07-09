@@ -67,18 +67,8 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     Number(event.ticket_price) !== 0
   ) {
     return (
-      // <div className={`flex flex-col view_detail fixed inset-0`}>
-      //   <Button
-      //     size='lg'
-      //     shape='round'
-      //     className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
-      //     onClick={handleClickForPaymentAPI}
-      //   >
-      //     Register now
-      //   </Button>
-      // </div>
-      <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-xl sm:pb-5'>
-        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-pink-normail px-6 pb-[7px] pt-3 sm:px-5'>
+      <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
+        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
           <Heading size='s' as='p' className='!font-semibold'>
             Registration
           </Heading>
@@ -90,7 +80,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
         <Button
           size='lg'
           shape='round'
-          className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
+          className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
           onClick={handleClickForPaymentAPI}
         >
           Register Now
@@ -99,33 +89,25 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     )
   }
   return (
-    // <Button
-    //   size='lg'
-    //   shape='round'
-    //   className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
-    //   onClick={handleRegisterNoPaymentNoForm(event._id)}
-    // >
-    //   Register now
-    // </Button>
-    <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-blue_gray-900_02 pb-[26px] shadow-xl sm:pb-5'>
-        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-gray-800 px-6 pb-[7px] pt-3 sm:px-5'>
-          <Heading size='s' as='p' className='!font-semibold'>
-            Registration
-          </Heading>
-        </div>
-        <Text size='s' as='p' className='ml-6 self-start '>
-          Welcome! To join the event, please register below.
-        </Text>
-
-        <Button
-          size='lg'
-          shape='round'
-          className='min-w-[423px] font-semibold shadow-2xl sm:px-5 bg-blue_gray-800 text-white-A700'
-          onClick={handleRegisterNoPaymentNoForm(event._id)}
-        >
-          Register Now
-        </Button>
+    <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
+      <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
+        <Heading size='s' as='p' className='!font-semibold'>
+          Registration
+        </Heading>
       </div>
+      <Text size='s' as='p' className='ml-6 self-start '>
+        Welcome! To join the event, please register below.
+      </Text>
+
+      <Button
+        size='lg'
+        shape='round'
+        className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+        onClick={handleRegisterNoPaymentNoForm(event._id)}
+      >
+        Register Now
+      </Button>
+    </div>
   )
 }
 const HandleRegisterEvent = ({ event }: Props) => {
