@@ -13,10 +13,10 @@ import eventApi from 'src/apis/event.api'
 import EventList from 'src/Components/EventLists/EventList'
 
 export const EventOperatorHome = () => {
-  const { data, isFetching } = useQuery({
-    queryKey: ['event-list-operator'],
-    queryFn: () => eventApi.getEventListOperator()
-  })
+  // const { data, isFetching } = useQuery({
+  //   queryKey: ['event-list-operator'],
+  //   queryFn: () => eventApi.getEventListOperator()
+  // })
   return (
     <>
       <div className='w-full bg-blue_gray-900 pb-[376px] md:pb-5 '>
