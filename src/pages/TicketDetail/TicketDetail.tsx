@@ -1,18 +1,31 @@
+import { useQuery } from '@tanstack/react-query'
+import { Skeleton } from 'antd'
 import { useParams } from 'react-router-dom'
+import eventApi from 'src/apis/event.api'
+import EventDetail from 'src/Components/EventDetail/EventDetail'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
-import InfoEventRegisterOfUser from 'src/Components/InfoEventRegisterOfUser/InfoEventRegisterOfUser'
 
 const TicketDetail = () => {
   const { id } = useParams()
+  const { isFetching, data } = useQuery({
+    queryKey: ['ticket-detail'],
+    queryFn: () => eventApi.getTicket(id as string)
+  })
+  console.log(data?.data.data.ticket)
   return (
-    <>
-      <Header />
-      <div className='container flex flex-col justify-center items-center w-[90%]'>
-        {id && <InfoEventRegisterOfUser id={id} />}
-      </div>
-      <Footer />
-    </>
+    <div className='flex w-full flex-col items-center gap-[61px] bg-gradient_vistor'>
+      <Header className='' />
+      {isFetching && (
+        <>
+          <Skeleton />
+        </>
+      )}
+      {data?.data.data.ticket && (
+        <EventDetail event={data.data.data.ticket.event} renderProps={<></>} />
+      )}
+      <Footer className='' />
+    </div>
   )
 }
 
