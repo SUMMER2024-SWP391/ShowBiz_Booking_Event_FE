@@ -46,7 +46,7 @@ const AvatarProfile = (prop: Props) => {
             <ul className='space-y-3 dark:text-white'>
               <li className='font-medium'>
                 <Link
-                  to='/profile'
+                  to='/profile/info'
                   className='flex items-center transform transition-colors duration-200 border-r-4 border-transparent'
                 >
                   <div className='mr-3'>

@@ -72,7 +72,7 @@ const CreateEventOperator = () => {
           errorMessage={errors.user_name?.message}
         />
         <InputVerTwo
-          className='flex flex-col'
+          className='flex flex-col w-[270px]'
           type='text'
           name='email'
           renderProps={<label className='mb-2'>Email</label>}
