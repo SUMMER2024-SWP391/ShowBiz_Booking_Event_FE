@@ -8,6 +8,7 @@ import EventListOperator from 'src/Components/EventListOperator/EventListOperato
 import FormFeedback from 'src/Components/FormFeedback/FormFeedback'
 import UpdateFormFeedback from 'src/Components/UpdateFormFeedback/UpdateFormFeedback'
 import AssignCheckingStaff from 'src/Components/AssignCheckingStaff/AssignCheckingStaff'
+import HeaderEO from 'src/Components/HeaderEventOperator'
 
 export const EventOperatorHome = () => {
   return (
@@ -26,42 +27,7 @@ export const EventOperatorHome = () => {
                       Event Operator
                     </Heading>
                   </div>
-                  <div role='tablist' className='tabs tabs-bordered '>
-                    <NavLink
-                      role='tab'
-                      className='tab tab-active !text-white-A700'
-                      to='/event-operator/'
-                    >
-                      Events
-                    </NavLink>
-                    <NavLink
-                      role='tab'
-                      className='tab !text-white-A700'
-                      to={''}
-                    >
-                      People
-                    </NavLink>
-                    <NavLink
-                      to='/event-operator/event-list'
-                      className='tab !text-white-A700'
-                    >
-                      Event List
-                    </NavLink>
-                    <NavLink
-                      role='tab'
-                      className='tab !text-white-A700'
-                      to={''}
-                    >
-                      Insights
-                    </NavLink>
-                    <NavLink
-                      role='tab'
-                      className='tab !text-white-A700'
-                      to={''}
-                    >
-                      Setting
-                    </NavLink>
-                  </div>
+
                   <div className='mt-10'>
                     <Routes>
                       <Route

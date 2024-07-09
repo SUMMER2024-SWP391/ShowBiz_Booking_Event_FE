@@ -2,7 +2,7 @@ import { UserOutlined } from '@ant-design/icons'
 import { useForm } from 'react-hook-form'
 import { Button, Heading } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
-import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
+
 import { LoginSchema, LoginSchemaYup } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
@@ -17,12 +17,13 @@ import authAPI from 'src/apis/auth.api'
 // import { auth } from '../../../firebase'
 import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
 import { UserRole } from 'src/@types/enum'
+import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 
 export type FormData = LoginSchema
 
 const Login = () => {
   const [errorLogin, setErrorLogin] = useState<string>('')
-  const { setIsAuthenticated, setProfile } = useContext(AppContext)
+  const {setListEvent, setIsAuthenticated, setProfile } = useContext(AppContext)
   const navigate = useNavigate()
   const {
     register,
@@ -32,12 +33,6 @@ const Login = () => {
   } = useForm<FormData>({
     resolver: yupResolver(LoginSchemaYup)
   })
-
-  // const onSignInWithGoogle = async () => {
-  //   const provider = new GoogleAuthProvider()
-  //   const user = await signInWithPopup(auth, provider)
-  //   console.log(user)
-  // }
 
   const loginMutation = useMutation({
     mutationFn: (body: FormData) => authAPI.login(body)
@@ -52,10 +47,12 @@ const Login = () => {
         } else if (data.data.data.user.role == UserRole.EventOperator) {
           navigate('/event-operator')
         } else if (data.data.data.listEvent.length != 0) {
-          navigate('/list-event-staff')
+          // setListEvent(data.data.data.listEvent)
+          navigate('/staff')
         } else {
           navigate('/')
         }
+        
       },
       onError: (error) => {
         console.log(error)
