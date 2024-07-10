@@ -18,6 +18,8 @@ interface Props {
   _id?: string
 }
 export default function HeaderVistor({ ...props }: Props) {
+  const { isStaff } = useContext(AppContext)
+  console.log(isStaff)
   return (
     <div className='w-full'>
       <header
@@ -45,13 +47,15 @@ export default function HeaderVistor({ ...props }: Props) {
             </Heading>
           </a>
         </li>
-        <li>
-          <Link to='/staff'>
-            <Heading as='h6' className='hover:text-white-A700'>
-              Staff
-            </Heading>
-          </Link>
-        </li>
+        {isStaff && (
+          <li>
+            <Link to='event-list/staff'>
+              <Heading as='h6' className='hover:text-white-A700'>
+                Staff
+              </Heading>
+            </Link>
+          </li>
+        )}
       </header>
     </div>
   )

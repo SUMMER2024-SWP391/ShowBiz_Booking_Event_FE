@@ -28,3 +28,12 @@ export const getProfileFormLS = (): User | null => {
 export const setProfileToLS = (profile: User): void => {
   localStorage.setItem('profile', JSON.stringify(profile))
 }
+
+export const getIsStaffFormLs = (): string => {
+  const isStaff = localStorage.getItem('isStaff')
+  return isStaff ? JSON.parse(isStaff) : ''
+}
+
+export const setIsStaffToLS = (isStaff: boolean): void => {
+  localStorage.setItem('isStaff', JSON.stringify(isStaff))
+}

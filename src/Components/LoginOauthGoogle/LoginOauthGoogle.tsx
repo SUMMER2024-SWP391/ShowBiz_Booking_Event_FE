@@ -3,10 +3,10 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UserRole, UserVerifyStatus } from 'src/@types/enum'
 import { User } from 'src/@types/users.type'
 import { AppContext } from 'src/context/app.context'
-import { setProfileToLS, setTokenToLS } from 'src/utils/auth'
+import { setIsStaffToLS, setProfileToLS, setTokenToLS } from 'src/utils/auth'
 import { convertIntToEnum } from 'src/utils/helper'
 const LoginOauthGoogle = () => {
-  const { setIsAuthenticated } = useContext(AppContext)
+  const { setIsAuthenticated, setIsStaff } = useContext(AppContext)
   const [params] = useSearchParams()
   const navigate = useNavigate()
   useEffect(() => {
@@ -21,6 +21,7 @@ const LoginOauthGoogle = () => {
       UserRole,
       parseInt(params.get('role') as string)
     )
+    const isStaff = params.get('isStaff')
     const user_id = params.get('user_id')
     const user_name = params.get('user_name')
     const userInfo: Pick<User, '_id' | 'user_name' | 'role' | 'status'> = {
@@ -32,6 +33,10 @@ const LoginOauthGoogle = () => {
     setIsAuthenticated(true)
     setTokenToLS(access_token as string, refresh_token as string)
     setProfileToLS(userInfo as User)
+    if (isStaff) {
+      setIsStaffToLS(true)
+      setIsStaff(true)
+    }
     navigate('/')
   }, [params])
   return <div>Login</div>

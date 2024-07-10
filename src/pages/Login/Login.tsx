@@ -18,12 +18,12 @@ import authAPI from 'src/apis/auth.api'
 import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
 import { UserRole } from 'src/@types/enum'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
+import { setIsStaffToLS } from 'src/utils/auth'
 
 export type FormData = LoginSchema
 
 const Login = () => {
-  const { setListEvent, setIsAuthenticated, setProfile } =
-    useContext(AppContext)
+  const { setIsAuthenticated, setProfile, setIsStaff } = useContext(AppContext)
   const navigate = useNavigate()
   const {
     register,
@@ -50,8 +50,9 @@ const Login = () => {
         } else if (data.data.data.user.role == UserRole.EventOperator) {
           navigate('/event-operator')
         } else if (data.data.data.listEvent.length != 0) {
-          // setListEvent(data.data.data.listEvent)
-          navigate('/staff')
+          setIsStaff(true)
+          setIsStaffToLS(true)
+          navigate('/')
         } else {
           navigate('/')
         }
