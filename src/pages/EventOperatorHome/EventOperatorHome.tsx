@@ -1,16 +1,13 @@
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { Heading } from 'src/Components'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
-import { Events } from '../Events/Events'
 import CreateEvent from '../../Components/CreateEvent/CreateEvent'
 import EventListOperator from 'src/Components/EventListOperator/EventListOperator'
 import FormFeedback from 'src/Components/FormFeedback/FormFeedback'
 import UpdateFormFeedback from 'src/Components/UpdateFormFeedback/UpdateFormFeedback'
 import AssignCheckingStaff from 'src/Components/AssignCheckingStaff/AssignCheckingStaff'
-import { useQuery } from '@tanstack/react-query'
-import eventApi from 'src/apis/event.api'
-import EventList from 'src/Components/EventLists/EventList'
+import ManagerEventPage from '../ManageEventPage/ManageEventPage'
 
 export const EventOperatorHome = () => {
   // const { data, isFetching } = useQuery({
@@ -32,18 +29,16 @@ export const EventOperatorHome = () => {
                     <Heading size='4xl' as='h1' className=''>
                       Events
                     </Heading>
-                    {/* {data?.data.data.events.map((event) => (
-                      <EventList id={event._id} nameEvent={event.name} location={event.location} ap />
-                    ))} */}
-
                     <div className='mt-10'>
                       <Routes>
                         <Route
-                          path='/'
-                          element={<EventListOperator />}
+                          index
+                          element={<EventListOperator /> 
+                          }
                         />
                         {/* khi nào không có event thì mới dùg cái role dưới */}
                         {/* <Route index element={<Events />} /> */}
+                        <Route path='manage/:id/' element={<ManagerEventPage/>}/>
 
                         <Route
                           path='update-form/:id'

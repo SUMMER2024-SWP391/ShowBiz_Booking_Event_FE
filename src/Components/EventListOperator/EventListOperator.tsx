@@ -13,6 +13,7 @@ import {
 } from '@ant-design/icons'
 import { Text } from '../Text/Text'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const EventListOperator = () => {
   const { data, isFetching } = useQuery({
@@ -75,9 +76,11 @@ const EventListOperator = () => {
                   </Heading>
                 </div>
                 <Button className='mt-[10px] flex items-center gap-1.5'>
-                  <Text size='md' as='p' className='!text-black-900'>
-                    Manager Event
-                  </Text>
+                  <Link to={`/event-operator/manage/${event._id}/`}>
+                    <Text size='md' as='p' className='!text-black-900'>
+                      Manager Event
+                    </Text>
+                  </Link>
                   <ArrowRightOutlined />
                 </Button>
               </div>
