@@ -40,19 +40,7 @@ export const EventOperatorHome = () => {
                         {/* <Route index element={<Events />} /> */}
                         <Route path='manage/:id/' element={<ManagerEventPage/>}/>
 
-                        <Route
-                          path='update-form/:id'
-                          element={<UpdateFormFeedback />}
-                        />
-                        <Route path='create' element={<CreateEvent />} />
-                        <Route
-                          path='form-feedback/:id'
-                          element={<FormFeedback />}
-                        ></Route>
-                        <Route
-                          path='assign-checking-staff/:id'
-                          element={<AssignCheckingStaff />}
-                        ></Route>
+                        
                       </Routes>
                     </div>
                   </div>
