@@ -8,6 +8,7 @@ import { EventQuestionType } from 'src/@types/form.type'
 import { formAPI } from 'src/apis/form.api'
 import EventOfForm from '../EventOfForm/EventOfForm'
 import InputQuestion from '../InputQuestion/InputQuestion'
+import { Heading } from '../Heading/Heading'
 
 type Question = {
   _id: string
@@ -141,8 +142,8 @@ const FormFeedback = () => {
 
   return (
     <>
-      <div className='flex flex-col justify-center items-center w-[95%]'>
-        <EventOfForm id={id as string} render={'Create form feedback'} />
+      <div className='mt-10 flex flex-col justify-center items-center w-[95%]'>
+        <Heading>Create Form Feedback</Heading>
         <div>
           {' '}
           <button

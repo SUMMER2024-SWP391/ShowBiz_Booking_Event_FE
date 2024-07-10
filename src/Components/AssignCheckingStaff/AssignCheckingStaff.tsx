@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from 'react-toastify'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
+import { Heading } from '../Heading/Heading'
 
 type FormData = AddStaffCheckingSchema
 
@@ -84,8 +85,8 @@ const AssignCheckingStaff = () => {
     }
 
   return (
-    <div className='flex flex-col gap-2 justify-center items-center'>
-      <EventOfForm id={id as string} render='List Staff' />
+    <div className='mt-10 m-auto flex flex-col gap-2 justify-center items-center'>
+      <Heading className='!text-white-A700'>List Staff</Heading>
       <div className='flex flex-col justify-center items-center gap-4'>
         <div className='flex justify-evenly items-center gap-3'>
           {data &&
