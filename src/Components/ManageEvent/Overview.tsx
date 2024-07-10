@@ -6,6 +6,7 @@ import { Event } from 'src/@types/event.type'
 import { Heading } from '../Heading/Heading'
 import { parse, format, compareAsc } from 'date-fns'
 import { EnvironmentOutlined } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
 interface Props {
   event: Event
@@ -49,7 +50,9 @@ export const Overview = ({ event }: Props) => {
               ></path>
             </svg>
             <Text className='!text-black-900 text-[16px] !font-euclid'>
-              Invite Guest
+              <Link to={`/event-operator/manage/${event._id}/staff`}>
+                Add checking staff
+              </Link>
             </Text>
           </div>
         </Button>
@@ -165,8 +168,12 @@ export const Overview = ({ event }: Props) => {
               <p>Check In Guests</p>
             </Button>
             <div className='mt-10 flex items-center justify-between'>
-              <Button className='w-[49%] bg-gray-100 shadow-2xl'>Edit Event</Button>
-              <Button className='w-[49%] bg-gray-100 shadow-2xl'>Change Photo</Button>
+              <Button className='w-[49%] bg-gray-100 shadow-2xl'>
+                Edit Event
+              </Button>
+              <Button className='w-[49%] bg-gray-100 shadow-2xl'>
+                Change Photo
+              </Button>
             </div>
           </div>
         </div>

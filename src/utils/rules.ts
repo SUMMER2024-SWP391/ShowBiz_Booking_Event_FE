@@ -210,7 +210,10 @@ export const CreateEventSchemaYup = yup.object().shape({
 export type CreateEventSchema = yup.InferType<typeof CreateEventSchemaYup>
 
 export const otpCheckInSchemaYup = yup.object().shape({
-  otp_check_in: yup.string().required('This field is required')
+  otp_check_in: yup
+    .string()
+    .matches(/^.{8}$/, 'Otp must be 8 characters')
+    .required('Otp is required')
 })
 
 export type OTPCheckInSchema = yup.InferType<typeof otpCheckInSchemaYup>

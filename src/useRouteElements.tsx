@@ -18,6 +18,7 @@ import CheckInWithOTP from './Components/CheckInWithOTP/CheckInWithOTP'
 import Register from './pages/Register/Register'
 import StaffPage from './pages/StaffPage/StaffPage'
 import ManagerEventPage from './pages/ManageEventPage/ManageEventPage'
+import EventListStaff from './pages/EventListStaff/EventListStaff'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -89,12 +90,16 @@ const useRouteElements = () => {
           element: <EventOperatorHome />
         },
         {
-          path:'/event-operator/manage/:id/*',
-          element: <ManagerEventPage/>
+          path: '/event-operator/manage/:id/*',
+          element: <ManagerEventPage />
         },
         {
           path: '/event-list/users',
           element: <EventListUser />
+        },
+        {
+          path: 'event-list/staff',
+          element: <EventListStaff />
         }
       ]
     },
@@ -102,7 +107,7 @@ const useRouteElements = () => {
       path: `/events/:id`,
       element: <EventDetailPage />
     },
-    
+
     {
       path: '',
       element: <RejectedRoute />,

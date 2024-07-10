@@ -43,7 +43,11 @@ export default function EventList({
             {time} | {date}
           </Heading>
 
-          <Heading size='xl' as='h5' className='w-[700px] !font-monterat !text-white-A700 whitespace-nowrap overflow-hidden text-ellipsis'>
+          <Heading
+            size='xl'
+            as='h5'
+            className='w-[700px] !font-monterat !text-white-A700 whitespace-nowrap overflow-hidden text-ellipsis'
+          >
             {nameEvent}
           </Heading>
           <div className='mt-[10px] flex gap-1.5'>
@@ -62,22 +66,19 @@ export default function EventList({
           </div>
 
           <div className='mt-[10px] flex gap-1.5'>
-            <EnvironmentOutlined
-              className='h-[18px] w-[18px] self-start !text-pink-light'
-              
-            />
-            <Heading
-              size='lg'
-              as='p'
-              className='self-end !font-monterat '
-            >
+            <EnvironmentOutlined className='h-[18px] w-[18px] self-start !text-pink-light' />
+            <Heading size='lg' as='p' className='self-end !font-monterat '>
               {`${location}, ${address}`}
             </Heading>
           </div>
           <div className='flex'>
             <Heading className='mt-[10px] flex'>
-              <Text as='h5' size='md' className='!text-white-A700_bf !font-euclid'>
-                Price : {`${price}`}
+              <Text
+                as='h5'
+                size='md'
+                className='!text-white-A700_bf !font-euclid'
+              >
+                {price == '0' ? 'Free' : `Price : ${price}`}
               </Text>
             </Heading>
           </div>
