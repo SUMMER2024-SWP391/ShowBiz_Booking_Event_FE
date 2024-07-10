@@ -94,7 +94,9 @@ const eventApi = {
       `/forms/question/feedback/${id}`
     ),
   cancelEvent: (id: string) =>
-    http.post<SuccessResponse<{}>>(`events/cancel-event/${id}`)
+    http.post<SuccessResponse<{}>>(`events/cancel-event/${id}`),
+  getListEventStaff: () =>
+    http.get<SuccessResponse<{ events: EventList[] }>>('events/staff/list')
 }
 
 export default eventApi
