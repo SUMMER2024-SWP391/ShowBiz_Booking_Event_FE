@@ -62,30 +62,34 @@ const ChangePassword = () => {
     <div className='flex justify-center items-center'>
       <form className='flex flex-col' onSubmit={onSubmit} noValidate>
         <InputVerTwo
-          renderProps={<div className='mb-2'>Old password</div>}
-          classNameInput='input border-slate-400 w-[300px]'
+          renderProps={<div className='mb-2 text-white-A700'>Old password</div>}
+          classNameInput='w-[300px] h-[45px] bg-white-A700 text-black-900 pl-2 rounded-lg outline-none'
           register={register}
           type='password'
           name='old_password'
           errorMessage={errors.old_password?.message}
         />
         <InputVerTwo
-          renderProps={<div className='mb-2'>New password</div>}
-          classNameInput='input border-slate-400 w-[300px]'
+          renderProps={<div className='mb-2 text-white-A700'>New password</div>}
+          classNameInput='w-[300px] h-[45px] bg-white-A700 text-black-900 pl-2 rounded-lg outline-none'
           type='password'
           register={register}
           name='password'
           errorMessage={errors.password?.message}
         />
         <InputVerTwo
-          renderProps={<div className='mb-2'>Confirm new password</div>}
-          classNameInput='input border-slate-400 w-[300px]'
+          renderProps={
+            <div className='mb-2 text-white-A700'>Confirm new password</div>
+          }
+          classNameInput='w-[300px] h-[45px] bg-white-A700 text-black-900 pl-2 rounded-lg outline-none'
           type='password'
           register={register}
           name='confirm_password'
           errorMessage={errors.confirm_password?.message}
         />
-        <button className='btn mt-1'>Change password</button>
+        <button className='h-[45px] rounded-lg bg-[#1677FF] text-white-A700 hover:opacity-95 mt-1'>
+          Change password
+        </button>
       </form>
     </div>
   )

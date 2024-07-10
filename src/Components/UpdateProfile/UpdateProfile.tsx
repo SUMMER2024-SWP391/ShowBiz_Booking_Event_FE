@@ -19,7 +19,7 @@ const UpdateProfile = () => {
     queryKey: ['profile-update'],
     queryFn: () => authAPI.getProfileToUpdate()
   })
-
+  console.log(getProfile.data?.data.data.user.date_of_birth.split('T')[0])
   useEffect(() => {
     if (getProfile.data) {
       setForm(getProfile.data.data.data.user)
@@ -55,24 +55,26 @@ const UpdateProfile = () => {
   return (
     <form className='grid grid-cols-2 gap-8' noValidate onSubmit={handleSubmit}>
       <div className='flex flex-col'>
-        <label className='mb-2'>User name</label>
+        <label className='mb-2 text-white-A700'>User name</label>
         <input
           type='text'
-          className='input w-[300px] border-slate-400'
+          className='w-[300px] h-[45px] bg-white-A700 text-black-900 pl-2 rounded-lg outline-none'
           value={form.user_name}
           onChange={handleChange('user_name')}
         />
       </div>
       <div className='flex flex-col'>
-        <label className='mb-2'>Birthdate</label>
+        <label className='mb-2 text-white-A700'>Birthdate</label>
         <input
           type='date'
-          className='input border-slate-400'
+          className='w-[300px] h-[45px] bg-white-A700 text-black-900 pl-2 rounded-lg outline-none'
           value={form.date_of_birth.split('T')[0]}
           onChange={handleChange('date_of_birth')}
         />
       </div>
-      <button className='btn'>Update profile</button>
+      <button className='h-[45px] rounded-lg bg-[#1677FF] text-white-A700 hover:opacity-95'>
+        Update profile
+      </button>
     </form>
   )
 }

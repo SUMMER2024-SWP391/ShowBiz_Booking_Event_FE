@@ -19,13 +19,13 @@ const Profile = () => {
       <div className='container h-96 flex flex-col justify-start items-center'>
         <div className='mb-4 mt-2'>
           <ul className='menu menu-vertical lg:menu-horizontal bg-white-A700 rounded-box'>
-            <li>
+            <li className='bg-white-A700 text-black-900'>
               <NavLink to={'/profile/info'}>Profile</NavLink>
             </li>
-            <li>
+            <li className='bg-white-A700 text-black-900'>
               <NavLink to={'/profile/update'}>Update Profile</NavLink>
             </li>
-            <li>
+            <li className='bg-white-A700 text-black-900'>
               <NavLink to={'/profile/change-password'}>Change password</NavLink>
             </li>
           </ul>

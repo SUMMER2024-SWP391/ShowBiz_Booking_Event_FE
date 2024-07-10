@@ -20,27 +20,20 @@ const ProfileComponent = ({ user }: UserProfile) => {
       <InputVerTwo
         disabled={true}
         defaultValue={user.user_name}
-        classNameInput='btn'
-        renderProps={<div className='mb-2'>Name</div>}
+        classNameInput='text-black-900 bg-white-A700 h-[45px] pl-2 rounded-lg w-[270px]'
+        renderProps={<div className='mb-2 text-white-A700'>Name</div>}
       />
       <InputVerTwo
         disabled={true}
         defaultValue={user.email}
-        classNameInput='btn'
-        renderProps={<div className='mb-2'>Email</div>}
-      />
-      <InputVerTwo
-        disabled={true}
-        className='basis-2'
-        defaultValue={user.phone_number}
-        classNameInput='btn'
-        renderProps={<div className='mb-2'>Phone number</div>}
+        classNameInput='text-black-900 bg-white-A700 h-[45px] pl-2 rounded-lg w-[270px]'
+        renderProps={<div className='mb-2 text-white-A700'>Email</div>}
       />
       <InputVerTwo
         disabled={true}
         defaultValue={birthdate as string}
-        classNameInput='btn'
-        renderProps={<div className='mb-2'>Birthdate</div>}
+        classNameInput='text-black-900 bg-white-A700 h-[45px] pl-2 rounded-lg w-[270px]'
+        renderProps={<div className='mb-2 text-white-A700'>Birthdate</div>}
       />
     </div>
   )
