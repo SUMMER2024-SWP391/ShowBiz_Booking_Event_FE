@@ -39,7 +39,7 @@ export const EventOperatorHome = () => {
                         {/* khi nào không có event thì mới dùg cái role dưới */}
                         {/* <Route index element={<Events />} /> */}
                         <Route path='manage/:id/' element={<ManagerEventPage/>}/>
-
+                        <Route path='create' element={<CreateEvent />} />
                         
                       </Routes>
                     </div>

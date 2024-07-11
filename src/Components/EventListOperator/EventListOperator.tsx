@@ -21,7 +21,6 @@ const EventListOperator = () => {
     queryFn: () => eventApi.getEventListOperator()
   })
   const filterDate = parse('01/01/2024', 'dd/MM/yyyy', new Date())
-  console.log(filterDate)
   return (
     <>
       {data?.data.data.events

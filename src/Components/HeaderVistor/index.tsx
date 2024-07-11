@@ -45,13 +45,13 @@ export default function HeaderVistor({ ...props }: Props) {
             </Heading>
           </a>
         </li>
-        <li>
+        {/* <li>
           <Link to='/staff'>
             <Heading as='h6' className='hover:text-white-A700'>
               Staff
             </Heading>
           </Link>
-        </li>
+        </li> */}
       </header>
     </div>
   )

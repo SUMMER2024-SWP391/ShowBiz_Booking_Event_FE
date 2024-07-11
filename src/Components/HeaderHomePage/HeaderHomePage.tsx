@@ -42,7 +42,7 @@ export default function Header({ ...props }: Props) {
   }
 
   return (
-    <div className='w-full bg-gradient_vistor'>
+    <div className='w-full'>
       <header
         {...props}
         className={`${props.className} w-full h-[100px] flex flex-row justify-around items-center md:w-full `}
