@@ -34,7 +34,6 @@ import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
 import { omit } from 'lodash'
 
-
 import EditorText from '../EditorText/EditorText'
 import RangeStatic from 'quill'
 import './style.css'
@@ -110,7 +109,7 @@ const CreateEvent = () => {
       setPreviewImage(url)
     }
   }
-//handlechange time
+  //handlechange time
   const handleChangeTime: (
     name: 'time_start' | 'time_end'
   ) => TimePickerProps['onChange'] = (name: 'time_start' | 'time_end') => {
@@ -197,6 +196,7 @@ const CreateEvent = () => {
             'time_end'
           ])
           setFormError((prev) => ({ ...prev, ...(err as typeof errorForm) }))
+          toast.error('Please check your input')
         }
       }
     })
@@ -355,7 +355,7 @@ const CreateEvent = () => {
                       </span>
                     </Heading>
                     <select
-                      className='bg-blue_gray-900_01 w-24 text-center max-w-xs rounded-lg text-white-A700 font-euclid'
+                      className='bg-blue_gray-900_01 text-[14px] max-w-xs rounded-lg text-white-A700 font-euclid'
                       value={form.type_event}
                       onChange={(event) => {
                         setForm((prev) => ({
@@ -369,7 +369,7 @@ const CreateEvent = () => {
                     </select>
                   </div>
                   <input
-                    className='mt-2 h-14 font-bold text-[20px] bg-blue_gray-900 !text-white-A700 outline-none border-none w-full'
+                    className='mt-2 h-14 font-bold text-[30px] bg-blue_gray-900 !text-white-A700 outline-none border-none w-full'
                     placeholder='Event Name'
                     value={form.name}
                     onChange={(event) =>
@@ -387,10 +387,8 @@ const CreateEvent = () => {
                           Time
                         </Text>
                       </Row>
-                     
                     </Col>
                     <Col>
-                      
                       <Row>
                         <DatePicker
                           size='middle'
@@ -423,7 +421,6 @@ const CreateEvent = () => {
                   </div>
                   <div className='flex flex-row  p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
                     <EnvironmentOutlined className='' />
-
                     <div className='flex flex-col items-start ml-2'>
                       <Text
                         as='p'
@@ -461,7 +458,7 @@ const CreateEvent = () => {
                     <div className='flex-col items-start ml-2 '>
                       <button
                         type='button'
-                        onClick={()=> setOpen(true)}
+                        onClick={() => setOpen(true)}
                         className='ml-3 !text-blue_gray-100 !font-bold '
                       >
                         Add Description
@@ -557,7 +554,7 @@ const CreateEvent = () => {
                         </div>
                         <div className='flex flex-row-reverse items-center w-[20%] '>
                           <Switch
-                            defaultChecked
+                            defaultChecked={false}
                             size='small'
                             onChange={onChangeSwitch}
                             className='ml-1'
@@ -589,7 +586,7 @@ const CreateEvent = () => {
                             Capacity
                           </Text>
                         </div>
-                        <div className='flex flex-row-reverse items-center w-[20%] relative h-[45psx] '>
+                        <div className='flex flex-row-reverse items-center w-[20%] h-[45psx] '>
                           <EditOutlined className='ml-1' />
                           <input
                             type='number'
@@ -603,11 +600,12 @@ const CreateEvent = () => {
                               }))
                             }}
                           />
-                          <div className='absolute flex justify-end items-center w-[200px] mt-1 text-sm text-red -bottom-[0.75rem] right-[340%]'>
-                            {formError.capacity}
-                          </div>
                         </div>
+                       
                       </div>
+                      <div className=' flex justify-end items-center w-[200px] mt-1 text-sm text-red '>
+                          {formError.capacity}
+                        </div>
                     </div>
                   </div>
                   <Button

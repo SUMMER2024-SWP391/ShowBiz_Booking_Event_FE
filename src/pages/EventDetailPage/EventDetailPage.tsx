@@ -15,6 +15,7 @@ export default function EventDetailPage() {
     queryFn: () => eventApi.getEventById(id as string)
   })
   const event = data?.data.data.event as Event
+  
 
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-gradient_vistor'>
