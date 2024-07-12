@@ -34,6 +34,16 @@ import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
 import { omit } from 'lodash'
 
+
+import EditorText from '../EditorText/EditorText'
+import RangeStatic from 'quill'
+import './style.css'
+import ModalPopup from '../ModalPopup/ModalPopup'
+
+interface LastChangeState {
+  ops?: any[]
+}
+
 const defaultValueOfTime = {
   timeStart: dayjs('15:00', 'HH:MM'),
   timeEnd: dayjs('17:00', 'HH:MM'),
@@ -73,7 +83,11 @@ const CreateEvent = () => {
   const [form, setForm] = useState<typeof initForm>(initForm)
   const [formError, setFormError] = useState<typeof errorForm>(errorForm)
   const [checked, setChecked] = useState<boolean>(true)
-
+  const [range, setRange] = useState<RangeStatic | null>(null)
+  const [lastChange, setLastChange] = useState<LastChangeState | null>(null)
+  const [readOnly, setReadOnly] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
+  // Use a ref to access the quill instance directly
   const createEventMutation = useMutation({
     mutationFn: (body: CreateEventBody) => eventApi.createEvent(body)
   })
@@ -96,7 +110,7 @@ const CreateEvent = () => {
       setPreviewImage(url)
     }
   }
-
+//handlechange time
   const handleChangeTime: (
     name: 'time_start' | 'time_end'
   ) => TimePickerProps['onChange'] = (name: 'time_start' | 'time_end') => {
@@ -148,7 +162,10 @@ const CreateEvent = () => {
   const onChangeSwitch = () => {
     setChecked((pre) => !pre)
   }
-
+  //handle change description
+  const handleDescriptionChange = (content: string) => {
+    setForm((prevForm) => ({ ...prevForm, description: content }))
+  }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const bodyCreateEvent = {
@@ -370,24 +387,10 @@ const CreateEvent = () => {
                           Time
                         </Text>
                       </Row>
-                      {/* <Row>
-                        <Text
-                          as='p'
-                          className='m-2 !text-blue_gray-100 !font-bold'
-                        >
-                          End
-                        </Text>
-                      </Row> */}
+                     
                     </Col>
                     <Col>
-                      {/* <Row>
-                        <DatePicker
-                          size='middle'
-                          onChange={onChangeDate}
-                          value={dayjs(form.date_event, 'DD/MM/YYYY')}
-                          format={'DD/MM/YYYY'}
-                        />
-                      </Row> */}
+                      
                       <Row>
                         <DatePicker
                           size='middle'
@@ -450,32 +453,29 @@ const CreateEvent = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='grid grid-cols-10  p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
+                  <div className='flex flex-row items-center p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
                     <div className='col-span-1 flex justify-center items-center'>
                       <AlignCenterOutlined />
                     </div>
 
-                    <div className='col-span-9 flex-col items-start ml-2 w-full h-[150px]'>
-                      <Text
-                        as='p'
-                        size='lg'
-                        className=' !text-blue_gray-100 !font-bold mb-2'
+                    <div className='flex-col items-start ml-2 '>
+                      <button
+                        type='button'
+                        onClick={()=> setOpen(true)}
+                        className='ml-3 !text-blue_gray-100 !font-bold '
                       >
                         Add Description
-                      </Text>
-                      <textarea
-                        className='font-normal h-[80%] !text-blue_gray-100 bg-gray-800_01 outline-none border-none text-sm max-ws-[400px]'
-                        placeholder='Content for event description'
-                        value={form.description}
-                        onChange={(event) => {
-                          setForm((prev) => ({
-                            ...prev,
-                            description: event.target.value
-                          }))
-                        }}
-                      />
+                      </button>
+                      <ModalPopup open={open} onClose={() => setOpen(false)}>
+                        <EditorText
+                          value={form.description}
+                          onChange={handleDescriptionChange}
+                          readOnly={readOnly}
+                        />
+                      </ModalPopup>
+
                       <div className='mt-1 text-sm text-red'>
-                        {errorForm.location}
+                        {errorForm.description}
                       </div>
                     </div>
                   </div>
@@ -611,6 +611,7 @@ const CreateEvent = () => {
                     </div>
                   </div>
                   <Button
+                    type='submit'
                     size='xl'
                     color='white_A700'
                     className='mt-5 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
