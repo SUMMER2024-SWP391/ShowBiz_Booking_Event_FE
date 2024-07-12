@@ -75,7 +75,7 @@ export const FormRegister = ({ className, setTrigger,setIsRegister, _id }: Props
           isReponseNoPaymentButHaveForm<RegisterSucces>(data.data.data)
         ) {
           toast.success('Register event success')
-          window.location.assign(`http://localhost:3000/ticket/${_id}`)
+          window.location.assign(`http://localhost:3000/events/${_id}`)
         }
 
         // setTrigger && setTrigger(false)

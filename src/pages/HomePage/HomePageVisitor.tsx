@@ -81,20 +81,6 @@ export default function HomePageVisitor() {
               </div>
               <div className='mt-10 md:w-full'>
                 <div className='flex flex-col'>
-                  {/* <div className='flex w-[14%] items-end md:w-full'>
-                    <div className='mb-1.5 h-[6px] w-[6px] rounded-[3px] border border-solid border-white-A700' />
-                    <Heading
-                      size='xl'
-                      as='h2'
-                      className='ml-[9px] !text-white-A700'
-                    >
-                      Today
-                    </Heading>
-                    <Text as='p' className='ml-1.5'>
-                      Saturday
-                    </Text>
-                  </div> */}
-
                   <div className='flex flex-col '>
                     <div className='flex flex-row items-start md:flex-col'>
                       <div className='flex flex-col md:self-stretch'>

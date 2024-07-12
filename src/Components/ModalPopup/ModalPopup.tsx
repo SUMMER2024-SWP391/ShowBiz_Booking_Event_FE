@@ -18,13 +18,18 @@ const ModalPopup: React.FC<Props> = ({ open, onClose, children }) => {
       >
         <button
           type='button'
-          className='absolute top-2 right-2
-         py-1 px-2 border rounded-md text-black-900 bg-white-A700 hover:bg-gray-700 hover:text-gray-100'
+          className='w-8 h-8 absolute top-2 right-2
+         py-1 px-1 border rounded-md text-black-900 bg-white-A700 hover:bg-gray-700 hover:text-gray-100'
           onClick={onClose}
         >
           X
         </button>
         {children}
+        <button type='button' onClick={onClose} className='w-[50px] '>
+          <div className='bg-blue_gray-800 hover:bg-white-A700 text-white-A700 hover:!text-black-900 font-bold border border-solid mt-3 rounded'>
+            Done
+          </div>
+        </button>
       </div>
     </div>
   )
