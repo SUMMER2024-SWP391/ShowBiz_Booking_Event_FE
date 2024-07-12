@@ -16,8 +16,6 @@ const TicketDetail = () => {
     queryFn: () => eventApi.getTicketDetailFailById(id as string)
   })
 
-  console.log(data?.data.data)
-
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-gradient_vistor'>
       <Header className='' />
@@ -38,15 +36,29 @@ const TicketDetail = () => {
                 <Text size='s' as='p' className='ml-6 self-start text-red'>
                   you were cancel event. This otp is not have effect
                 </Text>
-
-                <Button
-                  size='lg'
-                  shape='round'
-                  className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-                  disabled
+              </div>
+              <Text
+                size='s'
+                as='p'
+                className='!text-white-A700 ml-1.5 mt-[30px] md:ml-0'
+              >
+                About Event
+              </Text>
+              <div className='flex flex-col items-start'>
+                <div className='mt-4 ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
+                <Text
+                  size='md'
+                  as='p'
+                  className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
                 >
-                  {data.data.data.ticket.register.otp_check_in}
-                </Button>
+                  <>{data.data.data.ticket.event.description}</>
+                </Text>
+                <div className='mt-9 flex flex-col items-start gap-2 self-stretch '>
+                  <Text size='s' as='p' className='!text-white-A700'>
+                    {`Location ${data.data.data.ticket.event.location}`}
+                  </Text>
+                  <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
+                </div>
               </div>
             </>
           }
