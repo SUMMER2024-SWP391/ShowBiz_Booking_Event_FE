@@ -24,6 +24,7 @@ export interface Event {
 export type ListQuestion = {
   _id: string
   description: string
+  messageError: string
 }
 export type FormEventRegister = {
   answers: Array<{

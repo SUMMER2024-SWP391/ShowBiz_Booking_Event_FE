@@ -4,9 +4,6 @@ import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import CreateEvent from '../../Components/CreateEvent/CreateEvent'
 import EventListOperator from 'src/Components/EventListOperator/EventListOperator'
-import FormFeedback from 'src/Components/FormFeedback/FormFeedback'
-import UpdateFormFeedback from 'src/Components/UpdateFormFeedback/UpdateFormFeedback'
-import AssignCheckingStaff from 'src/Components/AssignCheckingStaff/AssignCheckingStaff'
 import ManagerEventPage from '../ManageEventPage/ManageEventPage'
 
 export const EventOperatorHome = () => {
