@@ -37,29 +37,6 @@ const TicketDetail = () => {
                   you were cancel event. This otp is not have effect
                 </Text>
               </div>
-              <Text
-                size='s'
-                as='p'
-                className='!text-white-A700 ml-1.5 mt-[30px] md:ml-0'
-              >
-                About Event
-              </Text>
-              <div className='flex flex-col items-start'>
-                <div className='mt-4 ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
-                <Text
-                  size='md'
-                  as='p'
-                  className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
-                >
-                  <>{data.data.data.ticket.event.description}</>
-                </Text>
-                <div className='mt-9 flex flex-col items-start gap-2 self-stretch '>
-                  <Text size='s' as='p' className='!text-white-A700'>
-                    {`Location ${data.data.data.ticket.event.location}`}
-                  </Text>
-                  <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
-                </div>
-              </div>
             </>
           }
         />

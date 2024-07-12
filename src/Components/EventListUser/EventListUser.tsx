@@ -18,7 +18,7 @@ interface Props {
   location?: string
   date?: string
   price?: string
-  status_register: StatusRegisterEvent
+  status_register?: StatusRegisterEvent
 }
 
 export default function EventUserList({
@@ -82,21 +82,6 @@ export default function EventUserList({
                 className='!text-white-A700_bf !font-euclid'
               >
                 {price == '0' ? 'Free' : `Price : ${price}`}
-              </Text>
-            </Heading>
-          </div>
-          <div className='flex'>
-            <Heading className='mt-[10px] flex'>
-              <Text
-                as='h5'
-                size='md'
-                className='!text-white-A700_bf !font-euclid'
-              >
-                {status_register == StatusRegisterEvent.SUCCESS ? (
-                  <span className='text-blue'>You are register this event</span>
-                ) : (
-                  <span className='text-red'>You are cancel this event</span>
-                )}
               </Text>
             </Heading>
           </div>

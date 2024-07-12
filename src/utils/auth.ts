@@ -12,6 +12,7 @@ export const clearLocalStorage = (): void => {
   localStorage.removeItem('access_token')
   localStorage.removeItem('profile')
   localStorage.removeItem('refresh_token')
+  localStorage.removeItem('isStaff')
 }
 
 export const getAccessTokenFromLS = (): string =>

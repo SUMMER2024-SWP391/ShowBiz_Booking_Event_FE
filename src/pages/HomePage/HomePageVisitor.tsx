@@ -28,10 +28,6 @@ export default function HomePageVisitor() {
     placeholderData: keepPreviousData
   })
 
-  const dataTicket = useQuery({
-    queryKey: ['event_list_user'],
-    queryFn: () => eventApi.getListEventUser()
-  })
   return (
     <>
       <div className='w-full bg-gradient_vistor pb-[376px] md:pb-5'>

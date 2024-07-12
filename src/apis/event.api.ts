@@ -108,7 +108,9 @@ const eventApi = {
       SuccessResponse<{
         ticket: { register: Ticket; user: User; event: Event }
       }>
-    >(`/register/ticket-detail/${id}`)
+    >(`/register/ticket-detail/${id}`),
+  getEventByKeyWord: (keyword: string) =>
+    http.get<SuccessResponse<{}>>(`/events/search/${keyword}`)
 }
 
 export default eventApi

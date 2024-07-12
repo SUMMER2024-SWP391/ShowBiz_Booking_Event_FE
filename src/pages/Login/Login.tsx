@@ -54,7 +54,7 @@ const Login = () => {
           setIsStaffToLS(true)
           navigate('/')
         } else {
-          navigate('/')
+          navigate('/event-list/users')
         }
       },
       onError: (error) => {

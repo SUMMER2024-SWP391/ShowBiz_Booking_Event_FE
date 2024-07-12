@@ -1,16 +1,9 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import { Heading } from '../Heading/Heading'
-import { BellOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons'
-import { Avatar, Button } from 'antd'
-import { useMutation } from '@tanstack/react-query'
-import authAPI from 'src/apis/auth.api'
+
 import { AppContext } from 'src/context/app.context'
 import { useContext } from 'react'
-import path from 'src/constants/path'
-import { getRefreshTokenFromLS } from 'src/utils/auth'
-import { UserRole } from 'src/@types/enum'
-import AvatarProfile from '../AvatarProfile/AvatarProfile'
 
 interface Props {
   className?: string
@@ -19,7 +12,6 @@ interface Props {
 }
 export default function HeaderVistor({ ...props }: Props) {
   const { isStaff } = useContext(AppContext)
-  console.log(isStaff)
   return (
     <div className='w-full'>
       <header
