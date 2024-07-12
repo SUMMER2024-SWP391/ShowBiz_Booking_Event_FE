@@ -8,12 +8,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ErrorResponse, StatusRegisterEvent } from 'src/@types/utils.type'
 import {
   isAxiosError,
-  isAxiosErrorConflictAndNotPermisson,
-  NoNullable
+  isAxiosErrorConflictAndNotPermisson
 } from 'src/utils/utils'
 import { toast } from 'react-toastify'
 import { Text } from '../Text/Text'
 import { Heading } from '../Heading/Heading'
+
+import { useState } from 'react'
+import { Modal, Button as ButtonAntd } from 'antd'
 
 type Props = {
   event: Event
@@ -21,6 +23,9 @@ type Props = {
 
 const handleComponentEvent = (event: Event): JSX.Element => {
   const navigate = useNavigate()
+
+  const [popupCancel, setPopupCancel] = useState(false)
+
   const { id } = useParams()
   const queryClient = useQueryClient()
   const { data } = useQuery({
@@ -44,9 +49,12 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     const newId = id ? id : ''
     const query = { id: newId, registerId }
     handleCancelEventMutation.mutate(query)
+    setPopupCancel(false)
   }
 
-  console.log(data)
+  const handleNotCancelEvent = () => {
+    setPopupCancel(false)
+  }
 
   const handlePayment = useMutation({
     mutationFn: (id: string) => paymentAPI.pay(id)
@@ -59,7 +67,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
   const handleRegisterNoPaymentNoForm = (id: string) => () => {
     handleRegisterEventNoFormNoPaymentMutation.mutate(id, {
       onSuccess: (data) => {
-        toast.success(`$${data.data.message}`)
+        toast.success(`${data.data.message}`)
         queryClient.invalidateQueries({
           queryKey: ['ticket-detail'],
           exact: true
@@ -165,14 +173,47 @@ const handleComponentEvent = (event: Event): JSX.Element => {
 
         {data?.data.data.ticket.register.status_register ==
           StatusRegisterEvent.SUCCESS && (
-          <Button
-            size='lg'
-            shape='round'
-            className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-red  text-white-A700'
-            onClick={handleCancelEvent(data.data.data.ticket.register._id)}
-          >
-            Cancel event
-          </Button>
+          <>
+            <Button
+              size='lg'
+              shape='round'
+              className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-red  text-white-A700'
+              onClick={() => setPopupCancel(true)}
+            >
+              Cancel event
+            </Button>
+            <Modal
+              title={
+                <div className='flex'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth={1.5}
+                    stroke='currentColor'
+                    className='size-5'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z'
+                    />
+                  </svg>
+                  <span className='ml-1 mb-2'>Confirm</span>
+                </div>
+              }
+              centered
+              open={popupCancel}
+              okButtonProps={{ danger: true }}
+              okText={'Confirm'}
+              onCancel={() => {
+                handleNotCancelEvent
+              }}
+              onOk={handleCancelEvent(data.data.data.ticket.register._id)}
+            >
+              <p>Are you really want to cancel this event?</p>
+            </Modal>
+          </>
         )}
       </div>
     </>
