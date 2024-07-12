@@ -10,6 +10,4 @@ export type Ticket = {
   time_register: string
   status_register: StatusRegisterEvent
   otp_check_in: string
-  event: Event
-  user_profile: User
 }

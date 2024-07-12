@@ -11,31 +11,12 @@ import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 
 const TicketDetail = () => {
   const { id } = useParams()
-  const queryClient = useQueryClient()
   const { isFetching, data } = useQuery({
-    queryKey: ['ticket-detail'],
-    queryFn: () => eventApi.getTicket(id as string)
+    queryKey: ['ticket-detail-fail'],
+    queryFn: () => eventApi.getTicketDetailFailById(id as string)
   })
 
-  console.log(
-    data?.data.data.ticket.status_register,
-    StatusRegisterEvent.SUCCESS
-  )
-
-  const handleCancelEventMutation = useMutation({
-    mutationFn: (id: string) => eventApi.cancelEvent(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['ticket-detail'],
-        exact: true
-      }),
-        toast.success('Cancel event successfully')
-    }
-  })
-
-  const handleCancelEvent = () => {
-    handleCancelEventMutation.mutate(id as string)
-  }
+  console.log(data?.data.data)
 
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-gradient_vistor'>
@@ -52,15 +33,10 @@ const TicketDetail = () => {
             <>
               <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
                 <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
-                  <Heading size='s' as='p' className='!font-semibold'>
-                    {data.data.data.ticket.status_register ==
-                    StatusRegisterEvent.SUCCESS
-                      ? 'You are in this event now'
-                      : 'You did cancel this event'}
-                  </Heading>
+                  <Heading size='s' as='p' className='!font-semibold'></Heading>
                 </div>
-                <Text size='s' as='p' className='ml-6 self-start '>
-                  This is your code to help you checkin in this event
+                <Text size='s' as='p' className='ml-6 self-start text-red'>
+                  you were cancel event. This otp is not have effect
                 </Text>
 
                 <Button
@@ -69,20 +45,8 @@ const TicketDetail = () => {
                   className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
                   disabled
                 >
-                  {data.data.data.ticket.otp_check_in}
+                  {data.data.data.ticket.register.otp_check_in}
                 </Button>
-
-                {data.data.data.ticket.status_register ==
-                  StatusRegisterEvent.SUCCESS && (
-                  <Button
-                    size='lg'
-                    shape='round'
-                    className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-red  text-white-A700'
-                    onClick={handleCancelEvent}
-                  >
-                    Cancel event
-                  </Button>
-                )}
               </div>
             </>
           }

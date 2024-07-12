@@ -56,7 +56,11 @@ const eventApi = {
   getListEventUser: () =>
     http.get<SuccessResponse<EventListUser>>('/users/list-register-event'),
   getTicket: (id: string) =>
-    http.get<SuccessResponse<{ ticket: Ticket }>>(`/events/ticket/${id}`),
+    http.get<
+      SuccessResponse<{
+        ticket: { register: Ticket; event: Event; user_profile: User }
+      }>
+    >(`/events/ticket/${id}`),
   createEvent: (body: CreateEvent) =>
     http.post<SuccessResponse<{}>>('/events/', body),
   checkInEvent: ({
@@ -93,10 +97,18 @@ const eventApi = {
     http.get<SuccessResponse<{ formQuestion: ListQuestion[] }>>(
       `/forms/question/feedback/${id}`
     ),
-  cancelEvent: (id: string) =>
-    http.post<SuccessResponse<{}>>(`events/cancel-event/${id}`),
+  cancelEvent: (id: string, registerId: string) =>
+    http.post<SuccessResponse<{}>>(
+      `events/cancel-event/${id}?registerId=${registerId}`
+    ),
   getListEventStaff: () =>
-    http.get<SuccessResponse<{ events: EventList[] }>>('events/staff/list')
+    http.get<SuccessResponse<{ events: EventList[] }>>('events/staff/list'),
+  getTicketDetailFailById: (id: string) =>
+    http.get<
+      SuccessResponse<{
+        ticket: { register: Ticket; user: User; event: Event }
+      }>
+    >(`/register/ticket-detail/${id}`)
 }
 
 export default eventApi
