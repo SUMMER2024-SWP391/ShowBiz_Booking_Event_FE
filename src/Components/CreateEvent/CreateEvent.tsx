@@ -38,6 +38,9 @@ import EditorText from '../EditorText/EditorText'
 import RangeStatic from 'quill'
 import './style.css'
 import ModalPopup from '../ModalPopup/ModalPopup'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { imageDB } from 'src/config/firebase.config'
+import { v4 } from 'uuid'
 
 interface LastChangeState {
   ops?: any[]
@@ -91,24 +94,27 @@ const CreateEvent = () => {
     mutationFn: (body: CreateEventBody) => eventApi.createEvent(body)
   })
 
-  const readFileAsDataURL = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = () => {
-        resolve(reader.result as string)
-      }
-      reader.onerror = (error) => reject(error)
-    })
-  }
+  // const readFileAsDataURL = (file: File): Promise<string> => {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader()
+  //     reader.readAsDataURL(file)
+  //     reader.onload = () => {
+  //       resolve(reader.result as string)
+  //     }
+  //     reader.onerror = (error) => reject(error)
+  //   })
+  // }
   //when image change you can call function to get url previewImage:
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const url = await readFileAsDataURL(event.target.files[0])
-      setPreviewImage(url)
+      const imgRef = ref(imageDB, `files/${v4()}`)
+      await uploadBytes(imgRef, event.target.files[0]).then((value) => {
+        getDownloadURL(value.ref).then((url) => setPreviewImage(url))
+      })
     }
   }
+
   //handlechange time
   const handleChangeTime: (
     name: 'time_start' | 'time_end'
@@ -227,7 +233,6 @@ const CreateEvent = () => {
                       className='h-[286px] w-[375px] rounded-[30px] object-cover mb-[40px]'
                     />
                   )}
-                  {/* <DragDropFile /> */}
                   <input
                     type='file'
                     className='absolute opacity-0 top-0 left-0 w-full h-full cursor-pointer'
@@ -463,7 +468,11 @@ const CreateEvent = () => {
                       >
                         Add Description
                       </button>
-                      <ModalPopup open={open} onClose={() => setOpen(false)}>
+                      <ModalPopup
+                        type=''
+                        open={open}
+                        onClose={() => setOpen(false)}
+                      >
                         <EditorText
                           value={form.description}
                           onChange={handleDescriptionChange}
@@ -601,11 +610,10 @@ const CreateEvent = () => {
                             }}
                           />
                         </div>
-                       
                       </div>
                       <div className=' flex justify-end items-center w-[200px] mt-1 text-sm text-red '>
-                          {formError.capacity}
-                        </div>
+                        {formError.capacity}
+                      </div>
                     </div>
                   </div>
                   <Button

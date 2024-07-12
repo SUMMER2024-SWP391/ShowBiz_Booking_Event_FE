@@ -1,5 +1,4 @@
 import { Button, Heading, Img, Text } from 'src/Components'
-import Banner from '../../assets/images/banner.png'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import { DownOutlined } from '@ant-design/icons'
 import EventList from 'src/Components/EventLists/EventList'
