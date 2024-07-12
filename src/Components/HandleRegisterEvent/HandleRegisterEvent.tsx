@@ -1,14 +1,15 @@
 import { Event } from 'src/@types/event.type'
 import { Register } from '../EventDetail/Register'
 import { Button } from '../Button/Button'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import paymentAPI from 'src/apis/payment.api'
 import eventApi from 'src/apis/event.api'
-import { useNavigate } from 'react-router-dom'
-import { ErrorResponse } from 'src/@types/utils.type'
+import { useNavigate, useParams } from 'react-router-dom'
+import { ErrorResponse, StatusRegisterEvent } from 'src/@types/utils.type'
 import {
   isAxiosError,
-  isAxiosErrorConflictAndNotPermisson
+  isAxiosErrorConflictAndNotPermisson,
+  NoNullable
 } from 'src/utils/utils'
 import { toast } from 'react-toastify'
 import { Text } from '../Text/Text'
@@ -20,6 +21,33 @@ type Props = {
 
 const handleComponentEvent = (event: Event): JSX.Element => {
   const navigate = useNavigate()
+  const { id } = useParams()
+  const queryClient = useQueryClient()
+  const { data } = useQuery({
+    queryKey: ['ticket-detail'],
+    queryFn: () => eventApi.getTicket(id as string)
+  })
+
+  const handleCancelEventMutation = useMutation({
+    mutationFn: ({ id, registerId }: { id: string; registerId: string }) =>
+      eventApi.cancelEvent(id, registerId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['ticket-detail'],
+        exact: true
+      }),
+        toast.success('Cancel event successfully')
+    }
+  })
+
+  const handleCancelEvent = (registerId: string) => () => {
+    const newId = id ? id : ''
+    const query = { id: newId, registerId }
+    handleCancelEventMutation.mutate(query)
+  }
+
+  console.log(data)
+
   const handlePayment = useMutation({
     mutationFn: (id: string) => paymentAPI.pay(id)
   })
@@ -32,7 +60,10 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     handleRegisterEventNoFormNoPaymentMutation.mutate(id, {
       onSuccess: (data) => {
         toast.success(`$${data.data.message}`)
-        navigate(`/event/${id}`)
+        queryClient.invalidateQueries({
+          queryKey: ['ticket-detail'],
+          exact: true
+        })
       },
       onError: (error) => {
         if (isAxiosErrorConflictAndNotPermisson<ErrorResponse<{}>>(error)) {
@@ -55,17 +86,40 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     })
   }
 
-  if (event.is_required_form_register && Number(event.ticket_price) !== 0) {
-    return <Register _id={event._id} event={event} />
-  } else if (
-    event.is_required_form_register &&
-    Number(event.ticket_price) === 0
-  ) {
-    return <Register _id={event._id} event={event} />
-  } else if (
-    !event.is_required_form_register &&
-    Number(event.ticket_price) !== 0
-  ) {
+  if (!data?.data.data.ticket.register) {
+    if (event.is_required_form_register && Number(event.ticket_price) !== 0) {
+      return <Register _id={event._id} event={event} />
+    } else if (
+      event.is_required_form_register &&
+      Number(event.ticket_price) === 0
+    ) {
+      return <Register _id={event._id} event={event} />
+    } else if (
+      !event.is_required_form_register &&
+      Number(event.ticket_price) !== 0
+    ) {
+      return (
+        <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
+          <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
+            <Heading size='s' as='p' className='!font-semibold'>
+              Registration
+            </Heading>
+          </div>
+          <Text size='s' as='p' className='ml-6 self-start '>
+            Welcome! To join the event, please register below.
+          </Text>
+
+          <Button
+            size='lg'
+            shape='round'
+            className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+            onClick={handleClickForPaymentAPI}
+          >
+            Register Now
+          </Button>
+        </div>
+      )
+    }
     return (
       <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
         <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
@@ -81,7 +135,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
           size='lg'
           shape='round'
           className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-          onClick={handleClickForPaymentAPI}
+          onClick={handleRegisterNoPaymentNoForm(event._id)}
         >
           Register Now
         </Button>
@@ -89,25 +143,39 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     )
   }
   return (
-    <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
-      <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
-        <Heading size='s' as='p' className='!font-semibold'>
-          Registration
-        </Heading>
-      </div>
-      <Text size='s' as='p' className='ml-6 self-start '>
-        Welcome! To join the event, please register below.
-      </Text>
+    <>
+      <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
+        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
+          <Heading size='s' as='p' className='!font-semibold'>
+            You are in this event now
+          </Heading>
+        </div>
+        <Text size='s' as='p' className='ml-6 self-start '>
+          This is your code to help you checkin in this event
+        </Text>
 
-      <Button
-        size='lg'
-        shape='round'
-        className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-        onClick={handleRegisterNoPaymentNoForm(event._id)}
-      >
-        Register Now
-      </Button>
-    </div>
+        <Button
+          size='lg'
+          shape='round'
+          className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+          disabled
+        >
+          {data?.data.data.ticket.register.otp_check_in}
+        </Button>
+
+        {data?.data.data.ticket.register.status_register ==
+          StatusRegisterEvent.SUCCESS && (
+          <Button
+            size='lg'
+            shape='round'
+            className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-red  text-white-A700'
+            onClick={handleCancelEvent(data.data.data.ticket.register._id)}
+          >
+            Cancel event
+          </Button>
+        )}
+      </div>
+    </>
   )
 }
 const HandleRegisterEvent = ({ event }: Props) => {

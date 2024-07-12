@@ -1,4 +1,5 @@
 import { User } from './users.type'
+import { StatusRegisterEvent } from './utils.type'
 
 export interface Event {
   _id: string
@@ -54,7 +55,17 @@ export type EventListPendingAdmin = Pick<
 
 export type EventListOperator = Pick<
   Event,
-  '_id' | 'capacity' | 'name' | 'ticket_price' | 'location' | 'status' | 'date_event' | 'image'| 'time_start'|'address'|'time_end'
+  | '_id'
+  | 'capacity'
+  | 'name'
+  | 'ticket_price'
+  | 'location'
+  | 'status'
+  | 'date_event'
+  | 'image'
+  | 'time_start'
+  | 'address'
+  | 'time_end'
 >
 
 export type EventListUser = {
@@ -64,6 +75,7 @@ export type EventListUser = {
     qr_code: string
     event: Array<Event>
     event_operator: Array<User>
+    status_register: StatusRegisterEvent
   }>
 }
 

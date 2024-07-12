@@ -12,7 +12,6 @@ import { EventListConfig } from 'src/@types/event.type'
 import useQueryParams from 'src/hooks/useQueryParams'
 import { parse, format, compareAsc } from 'date-fns'
 
-
 export type QueryConfig = {
   [key in keyof EventListConfig]: string
 }
@@ -28,7 +27,11 @@ export default function HomePageVisitor() {
     queryFn: () => eventApi.getListEvent(queryConfig),
     placeholderData: keepPreviousData
   })
-  console.log(data?.data.data.events.map((event) => event.time_start))
+
+  const dataTicket = useQuery({
+    queryKey: ['event_list_user'],
+    queryFn: () => eventApi.getListEventUser()
+  })
   return (
     <>
       <div className='w-full bg-gradient_vistor pb-[376px] md:pb-5'>
