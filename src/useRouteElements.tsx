@@ -41,10 +41,10 @@ const useRouteElements = () => {
       path: '/register',
       element: <Register />
     },
-    {
-      path: '/otp-check-in/:id', //event id
-      element: <CheckInWithOTP />
-    },
+    // {
+    //   path: '/checkin/:id', //event id
+    //   element: <CheckInWithOTP />
+    // },
 
     {
       path: '/',

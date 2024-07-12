@@ -8,6 +8,7 @@ import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import eventApi from 'src/apis/event.api'
 import { omit, pick } from 'lodash'
 import { StatusRegisterEvent } from 'src/@types/utils.type'
+import { parse, format, compareAsc } from 'date-fns'
 
 const EventListUserPage = () => {
   const { data, isFetching } = useQuery({
