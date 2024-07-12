@@ -93,7 +93,7 @@ export default function Header({ ...props }: Props) {
           </ul>
         </div>
         <div className='flex justify-around items-center'>
-          <button onClick={() => setOpen(true)}>
+          {/* <button onClick={() => setOpen(true)}>
             <SearchOutlined className='!text-pink-light h-[30px] w-[30px]' />
           </button>
           <ModalPopup
@@ -105,7 +105,7 @@ export default function Header({ ...props }: Props) {
               <form className='flex justify-center' onSubmit={onSubmit}>
                 <input
                   type='text'
-                  className='text-black-900 bg-white-A700 outline-none rounded-lg w-[200px] h-[30px] border border-black-900 pl-2'
+                  className='text-black-900 bg-white-A700 outline-none rounded-lg w-[300px] h-[40px] border border-black-900 pl-2'
                   {...register('keyword')}
                 />
                 <button className='ml-2'>
@@ -113,7 +113,7 @@ export default function Header({ ...props }: Props) {
                 </button>
               </form>
             }
-          />
+          /> */}
           {!isAuthenticated ? (
             <Link
               to={path.login}

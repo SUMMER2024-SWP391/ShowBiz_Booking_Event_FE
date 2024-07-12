@@ -18,12 +18,13 @@ import authAPI from 'src/apis/auth.api'
 import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
 import { UserRole } from 'src/@types/enum'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
-import { setIsStaffToLS } from 'src/utils/auth'
+import { clearEventIdFromLS, setIsStaffToLS } from 'src/utils/auth'
 
 export type FormData = LoginSchema
 
 const Login = () => {
-  const { setIsAuthenticated, setProfile, setIsStaff } = useContext(AppContext)
+  const { setIsAuthenticated, setProfile, setIsStaff, eventId, setEventId } =
+    useContext(AppContext)
   const navigate = useNavigate()
   const {
     register,
@@ -34,7 +35,7 @@ const Login = () => {
   } = useForm<FormData>({
     resolver: yupResolver(LoginSchemaYup)
   })
-
+  console.log(eventId)
   const [loginError, setLoginError] = useState<string>('')
 
   const loginMutation = useMutation({
@@ -52,9 +53,21 @@ const Login = () => {
         } else if (data.data.data.listEvent.length != 0) {
           setIsStaff(true)
           setIsStaffToLS(true)
-          navigate('/')
+          if (eventId) {
+            setEventId('')
+            clearEventIdFromLS()
+            navigate(`/events/${eventId}`)
+          } else {
+            navigate('/event-list/users')
+          }
         } else {
-          navigate('/event-list/users')
+          if (eventId) {
+            setEventId('')
+            clearEventIdFromLS()
+            navigate(`/events/${eventId}`)
+          } else {
+            navigate('/event-list/users')
+          }
         }
       },
       onError: (error) => {

@@ -3,12 +3,19 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UserRole, UserVerifyStatus } from 'src/@types/enum'
 import { User } from 'src/@types/users.type'
 import { AppContext } from 'src/context/app.context'
-import { setIsStaffToLS, setProfileToLS, setTokenToLS } from 'src/utils/auth'
+import {
+  clearEventIdFromLS,
+  getEventIdFromLS,
+  setIsStaffToLS,
+  setProfileToLS,
+  setTokenToLS
+} from 'src/utils/auth'
 import { convertIntToEnum } from 'src/utils/helper'
 const LoginOauthGoogle = () => {
   const { setIsAuthenticated, setIsStaff } = useContext(AppContext)
   const [params] = useSearchParams()
   const navigate = useNavigate()
+  const id = getEventIdFromLS()
   useEffect(() => {
     const access_token = params.get('access_token')
     const refresh_token = params.get('refresh_token')
@@ -33,12 +40,20 @@ const LoginOauthGoogle = () => {
     setIsAuthenticated(true)
     setTokenToLS(access_token as string, refresh_token as string)
     setProfileToLS(userInfo as User)
-    if (isStaff) {
+    if (isStaff && id) {
+      clearEventIdFromLS()
+      navigate(`/events/${id}`)
+    } else if (isStaff && !id) {
       setIsStaffToLS(true)
       setIsStaff(true)
+    } else if (role === UserRole.EventOperator) {
+      navigate('/event-operator/')
+    } else if (role === UserRole.Admin) {
+      navigate('/admin')
+    } else {
+      navigate(`/`)
     }
-    navigate('/')
-  }, [params])
+  }, [params, id])
   return <div>Login</div>
 }
 export default LoginOauthGoogle

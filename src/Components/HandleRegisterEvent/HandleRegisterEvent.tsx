@@ -17,6 +17,7 @@ import { Heading } from '../Heading/Heading'
 import { useContext, useState } from 'react'
 import { Modal, Button as ButtonAntd } from 'antd'
 import { AppContext } from 'src/context/app.context'
+import HandleLoginWhenRegisterEvent from '../HandleLoginWhenRegisterEvent/HandleLoginWhenRegisterEvent'
 
 type Props = {
   event: Event
@@ -123,14 +124,9 @@ const handleComponentEvent = (event: Event): JSX.Element => {
             Welcome! To join the event, please register below.
           </Text>
 
-          <Button
-            size='lg'
-            shape='round'
-            className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-            onClick={handleClickForPaymentAPI}
-          >
-            Register Now
-          </Button>
+          <HandleLoginWhenRegisterEvent
+            handleRegisterEvent={handleClickForPaymentAPI}
+          />
         </div>
       )
     }
@@ -145,14 +141,9 @@ const handleComponentEvent = (event: Event): JSX.Element => {
           Welcome! To join the event, please register below.
         </Text>
 
-        <Button
-          size='lg'
-          shape='round'
-          className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-          onClick={handleRegisterNoPaymentNoForm(event._id)}
-        >
-          Register Now
-        </Button>
+        <HandleLoginWhenRegisterEvent
+          handleRegisterEvent={handleRegisterNoPaymentNoForm(event._id)}
+        />
       </div>
     )
   }

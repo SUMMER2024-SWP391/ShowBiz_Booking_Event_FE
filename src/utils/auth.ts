@@ -38,3 +38,14 @@ export const getIsStaffFormLs = (): string => {
 export const setIsStaffToLS = (isStaff: boolean): void => {
   localStorage.setItem('isStaff', JSON.stringify(isStaff))
 }
+
+export const setEventIdToLS = (eventId: string): void => {
+  localStorage.setItem('eventId', eventId)
+}
+
+export const getEventIdFromLS = (): string =>
+  localStorage.getItem('eventId') || ''
+
+export const clearEventIdFromLS = (): void => {
+  localStorage.removeItem('eventId')
+}
