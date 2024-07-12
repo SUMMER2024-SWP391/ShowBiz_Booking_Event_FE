@@ -84,7 +84,7 @@ const CreateEvent = () => {
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [form, setForm] = useState<typeof initForm>(initForm)
   const [formError, setFormError] = useState<typeof errorForm>(errorForm)
-  const [checked, setChecked] = useState<boolean>(true)
+  const [checked, setChecked] = useState<boolean>(false)
   const [range, setRange] = useState<RangeStatic | null>(null)
   const [lastChange, setLastChange] = useState<LastChangeState | null>(null)
   const [readOnly, setReadOnly] = useState<boolean>(false)
@@ -148,6 +148,7 @@ const CreateEvent = () => {
     }
   }
 
+  console.log(checked)
   //handle onChange datetime
   const onChangeDate: DatePickerProps['onChange'] = (dateString) => {
     dateString !== null

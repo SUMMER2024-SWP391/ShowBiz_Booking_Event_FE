@@ -16,6 +16,8 @@ interface AppContextInterface {
   profile: User | null
   // setListEvent: React.Dispatch<React.SetStateAction<Event | null>>
   setProfile: React.Dispatch<React.SetStateAction<User | null>>
+  eventId: string
+  setEventId: React.Dispatch<React.SetStateAction<string>>
 }
 
 const initialAppContext: AppContextInterface = {
@@ -25,7 +27,9 @@ const initialAppContext: AppContextInterface = {
   setIsAuthenticated: () => null,
   profile: getProfileFormLS(),
   setProfile: () => null,
-  setIsStaff: () => null
+  setIsStaff: () => null,
+  eventId: '',
+  setEventId: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -37,6 +41,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
   // const [listEvent, setListEvent] = useState([])
   const [isStaff, setIsStaff] = useState<boolean>(initialAppContext.isStaff)
+  const [eventId, setEventId] = useState<string>(initialAppContext.eventId)
   return (
     <AppContext.Provider
       value={{
@@ -46,7 +51,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         // setListEvent,
         isStaff,
         setIsStaff,
-        setProfile
+        setProfile,
+        eventId,
+        setEventId
       }}
     >
       {children}
