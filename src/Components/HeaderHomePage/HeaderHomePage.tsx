@@ -6,7 +6,7 @@ import { Avatar, Button } from 'antd'
 import { useMutation } from '@tanstack/react-query'
 import authAPI from 'src/apis/auth.api'
 import { AppContext } from 'src/context/app.context'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import path from 'src/constants/path'
 import { getRefreshTokenFromLS } from 'src/utils/auth'
 import { UserRole } from 'src/@types/enum'
@@ -14,6 +14,7 @@ import AvatarProfile from '../AvatarProfile/AvatarProfile'
 import HeaderEO from '../HeaderEventOperator'
 import HeaderAdmin from '../HeaderAdmin/HeaderAdmin'
 import HeaderVistor from '../HeaderVistor'
+import Modal from '../Modal/Modal'
 
 interface Props {
   className?: string
@@ -21,6 +22,7 @@ interface Props {
   _id?: string
 }
 export default function Header({ ...props }: Props) {
+  const [open, setOpen] = useState<boolean>(false)
   const navigate = useNavigate()
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } =
     useContext(AppContext)
@@ -63,12 +65,22 @@ export default function Header({ ...props }: Props) {
           </ul>
         </div>
         <div className='flex justify-around items-center'>
-          <a href=''>
+          <button onClick={() => setOpen(true)}>
             <SearchOutlined className='!text-pink-light h-[30px] w-[30px]' />
-          </a>
-          <a href=''>
-            <BellOutlined className='!text-pink-light h-[30px] w-[30px]' />
-          </a>
+          </button>
+          <Modal
+            open={open}
+            onClose={() => setOpen(false)}
+            children={
+              <form className='flex'>
+                <input
+                  type='text'
+                  className='mr-2 bg-white-A700 text-black-900 h-[30px] w-[200px]'
+                />
+                <SearchOutlined className='!text-pink-light h-[30px] w-[30px]' />
+              </form>
+            }
+          ></Modal>
           {!isAuthenticated ? (
             <Link
               to={path.login}
