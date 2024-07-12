@@ -1,12 +1,12 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 import { Heading } from '../Heading/Heading'
-import { BellOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons'
+import { BellOutlined, SearchOutlined } from '@ant-design/icons'
 import { Avatar, Button } from 'antd'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import authAPI from 'src/apis/auth.api'
 import { AppContext } from 'src/context/app.context'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import path from 'src/constants/path'
 import { getRefreshTokenFromLS } from 'src/utils/auth'
 import { UserRole } from 'src/@types/enum'
@@ -14,25 +14,55 @@ import AvatarProfile from '../AvatarProfile/AvatarProfile'
 import HeaderEO from '../HeaderEventOperator'
 import HeaderAdmin from '../HeaderAdmin/HeaderAdmin'
 import HeaderVistor from '../HeaderVistor'
+import ModalPopup from '../ModalPopup/ModalPopup'
+import eventApi from 'src/apis/event.api'
+import { useForm } from 'react-hook-form'
+import { SearchEventSchema, searchEventSchemaYup } from 'src/utils/rules'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 interface Props {
   className?: string
   name?: string
   _id?: string
 }
+
+type SearchForm = SearchEventSchema
+
 export default function Header({ ...props }: Props) {
+  const [open, setOpen] = useState<boolean>(false)
   const navigate = useNavigate()
-  const { setIsAuthenticated, isAuthenticated, setProfile, profile } =
-    useContext(AppContext)
+  const {
+    setIsAuthenticated,
+    isAuthenticated,
+    setProfile,
+    profile,
+    setIsStaff
+  } = useContext(AppContext)
   const logoutMutation = useMutation({
     mutationFn: (refresh_token: string) => authAPI.logout({ refresh_token }),
     onSuccess: () => {
       setIsAuthenticated(false)
       setProfile(null)
+      setIsStaff(false)
     },
     onError: (error) => {
       console.log(error)
     }
+  })
+  console.log(isAuthenticated)
+
+  const { register, handleSubmit } = useForm<SearchForm>({
+    resolver: yupResolver(searchEventSchemaYup)
+  })
+
+  const searchEvent = useMutation({
+    mutationFn: (keyword: string) => eventApi.getEventByKeyWord(keyword)
+  })
+
+  const onSubmit = handleSubmit((data) => {
+    searchEvent.mutate(data.keyword, {
+      onSuccess: (data) => {}
+    })
   })
 
   const handleLogout = () => {
@@ -63,12 +93,27 @@ export default function Header({ ...props }: Props) {
           </ul>
         </div>
         <div className='flex justify-around items-center'>
-          <a href=''>
+          <button onClick={() => setOpen(true)}>
             <SearchOutlined className='!text-pink-light h-[30px] w-[30px]' />
-          </a>
-          <a href=''>
-            <BellOutlined className='!text-pink-light h-[30px] w-[30px]' />
-          </a>
+          </button>
+          <ModalPopup
+            key={new Date().toISOString()}
+            type='search'
+            open={open}
+            onClose={() => setOpen(false)}
+            children={
+              <form className='flex justify-center' onSubmit={onSubmit}>
+                <input
+                  type='text'
+                  className='text-black-900 bg-white-A700 outline-none rounded-lg w-[200px] h-[30px] border border-black-900 pl-2'
+                  {...register('keyword')}
+                />
+                <button className='ml-2'>
+                  <SearchOutlined className='!text-black-900 h-[30px] w-[30px]' />
+                </button>
+              </form>
+            }
+          />
           {!isAuthenticated ? (
             <Link
               to={path.login}

@@ -244,3 +244,9 @@ export const registerSchemaYup = yup.object().shape({
 })
 
 export type RegisterSchema = yup.InferType<typeof registerSchemaYup>
+
+export const searchEventSchemaYup = yup.object().shape({
+  keyword: yup.string().required('Keyword is required!')
+})
+
+export type SearchEventSchema = yup.InferType<typeof searchEventSchemaYup>

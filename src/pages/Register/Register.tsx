@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import { omit } from 'lodash'
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ErrorResponse } from 'src/@types/utils.type'
 import authAPI from 'src/apis/auth.api'
@@ -20,6 +20,7 @@ import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 type FormData = RegisterSchema
 
 const Register = () => {
+  const navigate = useNavigate()
   const { setProfile } = useContext(AppContext)
   const {
     register,
@@ -40,6 +41,7 @@ const Register = () => {
     registerMutation.mutate(body, {
       onSuccess: (data) => {
         toast.success(data.data.message)
+        navigate('/login')
       },
       onError: (error) => {
         if (
