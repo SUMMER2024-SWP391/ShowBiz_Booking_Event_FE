@@ -10,7 +10,7 @@ import subriceIcon from 'src/assets/images/subrice.png'
 import logoOperator from 'src/assets/images/4cfdb889-3c60-4e0f-be90-f3d8e01c504a.webp'
 import { Event } from 'src/@types/event.type'
 import { ReactNode } from 'react'
-
+import DOMPurify from 'dompurify'
 interface Props {
   event: Event
   renderProps?: ReactNode
@@ -170,6 +170,33 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                 </div>
               </div>
               {renderProps}
+              <Text
+                size='s'
+                as='p'
+                className='!text-white-A700 ml-1.5 mt-[30px] md:ml-0'
+              >
+                About Event
+              </Text>
+              <div className='flex flex-col items-start'>
+                <div className='mt-4 ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
+                <Text
+                  size='md'
+                  as='p'
+                  className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
+                >
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(event.description) //loại bỏ javascript khỏi đây
+                    }}
+                  ></div>
+                </Text>
+                <div className='mt-9 flex flex-col items-start gap-2 self-stretch '>
+                  <Text size='s' as='p' className='!text-white-A700'>
+                    {`Location ${event.location}`}
+                  </Text>
+                  <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
+                </div>
+              </div>
             </div>
           </div>
         </div>

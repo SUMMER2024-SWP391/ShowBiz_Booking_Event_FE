@@ -78,8 +78,8 @@ export const Overview = ({ event }: Props) => {
       <div className='mt-5'>
         <div className='bg-white-A700 rounded-[15px] w-[788px] h-[347px] p-3 flex flex-rol justify-between '>
           <div className='w-[49%] flex flex-col items-center '>
-            <div className='w-full'>
-              <Img src={event.image} className='rounded-[15px] shadow-2xl' />
+            <div className='w-[300px] h-[300px]'>
+              <Img src={event.image} className='w-full  object-fill rounded-[15px] shadow-2xl' />
             </div>
           </div>
           <div className='w-[49%] flex flex-col'>

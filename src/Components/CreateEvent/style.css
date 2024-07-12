@@ -1,0 +1,21 @@
+.parent-scroll {
+  height: 600px;
+  border: 1px solid red;
+  overflow-y: auto;
+}
+
+#scrolling-container {
+  border: 1px solid black;
+}
+
+.ql-clipboard {
+  position: fixed !important;
+}
+
+.ql-container {
+  height: auto !important;
+}
+
+.ql-editor {
+  height: auto !important;
+}
