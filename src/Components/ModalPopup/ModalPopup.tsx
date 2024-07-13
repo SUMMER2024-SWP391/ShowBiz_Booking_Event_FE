@@ -14,7 +14,7 @@ const ModalPopup: React.FC<Props> = ({ type, open, onClose, children }) => {
       onClick={onClose}
     >
       <div
-        className={`rounded-lg p-6 transition-all max-w-md ${open ? 'scale-100 opacity-100' : 'scale-110 opacity-0'} bg-white-A700`}
+        className={`rounded-lg p-6 bg-white-A700  max-w-md ${open ? 'scale-100 opacity-100' : 'scale-110 opacity-0'} bg-white-A700`}
         onClick={(e) => e.stopPropagation()}
       >
         {type != 'search' ? (
