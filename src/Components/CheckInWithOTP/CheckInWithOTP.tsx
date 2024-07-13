@@ -51,7 +51,7 @@ const CheckInWithOTP = () => {
     })
   })
   return (
-    <div className='flex  flex-col items-center '>
+    <div className='flex bg-white-A700  flex-col items-center '>
       <div className=' flex flex-col items-center w-[300px] self-stretch rounded-[15px] bg-white shadow-md sm:pb-5'>
         {/* <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
           <Heading size='s' as='p' className='!font-semibold'>
