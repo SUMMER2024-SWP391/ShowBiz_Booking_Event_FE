@@ -1,17 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
+import { UserRole } from 'src/@types/enum'
 import { UserList } from 'src/@types/users.type'
 import { adminApi } from 'src/apis/admin.api'
 
 interface Props {
   user: UserList
+  role: UserRole | string
 }
-const AdminUserList = ({ user }: Props) => {
+const AdminUserList = ({ user, role }: Props) => {
   const queryClient = useQueryClient()
   const deleteUserMutation = useMutation({
     mutationFn: (id: string) => adminApi.deleteUser(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user-list'], exact: true })
+      queryClient.invalidateQueries({
+        queryKey: ['user-list', role],
+        exact: true
+      })
       toast.success('Delete user success')
     }
   })

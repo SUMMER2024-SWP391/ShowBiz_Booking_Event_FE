@@ -21,11 +21,7 @@ export default function EventDetailPage() {
       {event && (
         <EventDetail
           event={event}
-          renderProps={
-            <>
-              <HandleRegisterEvent event={event} />
-            </>
-          }
+          renderProps={<HandleRegisterEvent event={event} />}
         />
       )}
       <Footer className='' />

@@ -7,8 +7,10 @@ import eventApi from 'src/apis/event.api'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ErrorResponse, StatusRegisterEvent } from 'src/@types/utils.type'
 import {
+  canCancelEvent,
   isAxiosError,
-  isAxiosErrorConflictAndNotPermisson
+  isAxiosErrorConflictAndNotPermisson,
+  isValidToFeeback
 } from 'src/utils/utils'
 import { toast } from 'react-toastify'
 import { Text } from '../Text/Text'
@@ -18,6 +20,7 @@ import { useContext, useState } from 'react'
 import { Modal, Button as ButtonAntd } from 'antd'
 import { AppContext } from 'src/context/app.context'
 import HandleLoginWhenRegisterEvent from '../HandleLoginWhenRegisterEvent/HandleLoginWhenRegisterEvent'
+import HandleFeedbackEventOfUser from '../HandleFeedbackEventOfUser/HandleFeedbackEventOfUser'
 
 type Props = {
   event: Event
@@ -170,7 +173,11 @@ const handleComponentEvent = (event: Event): JSX.Element => {
 
         {newData != undefined &&
           newData.data.data.ticket.register.status_register ==
-            StatusRegisterEvent.SUCCESS && (
+            StatusRegisterEvent.SUCCESS &&
+          canCancelEvent(
+            newData.data.data.ticket.event.date_event,
+            newData.data.data.ticket.event.time_start
+          ) && (
             <>
               <Button
                 size='lg'
@@ -210,6 +217,16 @@ const handleComponentEvent = (event: Event): JSX.Element => {
                 <p>Are you really want to cancel this event?</p>
               </Modal>
             </>
+          )}
+
+        {isAuthenticated &&
+          isValidToFeeback(
+            newData.data.data.ticket.event.date_event,
+            newData.data.data.ticket.event.time_end
+          ) && (
+            <HandleFeedbackEventOfUser
+              id={newData.data.data.ticket.event._id}
+            />
           )}
       </div>
     </>
