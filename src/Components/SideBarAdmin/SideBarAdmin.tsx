@@ -51,6 +51,11 @@ const SideBarAdmin = () => {
                 Reject Event
               </button>
             </li>
+            <li>
+              <button onClick={handleFilterEvent(EventStatus.CANCELED)}>
+                Cancel Event
+              </button>
+            </li>
           </ul>
         </details>
       </li>

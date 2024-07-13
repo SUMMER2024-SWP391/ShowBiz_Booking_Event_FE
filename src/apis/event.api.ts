@@ -113,7 +113,8 @@ const eventApi = {
   getEventByKeyWord: (keyword: string) =>
     http.get<SuccessResponse<{}>>(`/events/search/${keyword}`),
   feedbackEvent: (id: string, body: FormEventRegister) =>
-    http.post(`/events/feedback-event/${id}`, body)
+    http.post(`/events/feedback-event/${id}`, body),
+  removeEventById: (id: string) => http.patch(`/e-operators/event/${id}`)
 }
 
 export default eventApi
