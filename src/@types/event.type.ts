@@ -1,3 +1,4 @@
+import { StringMap } from 'quill'
 import { User } from './users.type'
 import { StatusRegisterEvent } from './utils.type'
 
@@ -122,4 +123,8 @@ export type RegisterSucces = {
   otp_check_in: string
   time_register: string
   status_register: boolean
+}
+export type getListUserRegisterEvent= {
+  dataUser: {event_id: string, listUser: Array<{email: string, user_name: string, _id: string, status_checkin: boolean}>}
+  
 }

@@ -9,7 +9,8 @@ import {
   EventListUser,
   CreateEvent,
   EventListConfig,
-  RegisterSucces
+  RegisterSucces,
+  getListUserRegisterEvent
 } from 'src/@types/event.type'
 import { EventQuestionType } from 'src/@types/form.type'
 import { Ticket } from 'src/@types/ticket.type'
@@ -111,7 +112,8 @@ const eventApi = {
       }>
     >(`/register/ticket-detail/${id}`),
   getEventByKeyWord: (keyword: string) =>
-    http.get<SuccessResponse<{}>>(`/events/search/${keyword}`)
+    http.get<SuccessResponse<{}>>(`/events/search/${keyword}`),
+  getListUserRegisterEvent: (id: string) => http.get<SuccessResponse<getListUserRegisterEvent>>(`/register/list-user/registed/${id}`)
 }
 
 export default eventApi

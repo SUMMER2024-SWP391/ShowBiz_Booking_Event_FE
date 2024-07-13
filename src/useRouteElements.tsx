@@ -56,10 +56,10 @@ const useRouteElements = () => {
       path: '/forgot-password',
       element: <ForgotPassword />
     },
-    {
-      path: '/staff',
-      element: <StaffPage />
-    },
+    // {
+    //   path: '/staff',
+    //   element: <StaffPage />
+    // },
 
     {
       path: '/recovery',
@@ -73,7 +73,11 @@ const useRouteElements = () => {
       path: '/ticket/:id',
       element: <TicketDetail />
     },
-    //chua set up protected routes
+    {
+      path: '/checkin/:id',
+      element: <StaffPage />
+    },
+    //chua set up  protected routes
     {
       path: '',
       element: <ProtectedRoute />,

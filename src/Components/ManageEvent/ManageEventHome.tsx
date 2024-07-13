@@ -10,6 +10,7 @@ import { Button } from '../Button/Button'
 import { Text } from '../Text/Text'
 import CheckInWithOTP from '../CheckInWithOTP/CheckInWithOTP'
 import FormFeedback  from '../FormFeedback/FormFeedback'
+import StaffPage from 'src/pages/StaffPage/StaffPage'
 
 interface Props {
   event: Event
@@ -70,8 +71,8 @@ export const ManageEventHome = ({ event }: Props) => {
         {/* <Route path='update-form' element={<UpdateFormFeedback />} /> */}
         <Route path='form-feedback' element={<FormFeedback />}></Route>
         <Route path='staff' element={<AssignCheckingStaff />}></Route>
-        <Route path='checkin' element={<CheckInWithOTP />}></Route>
-
+        <Route path='checkin' element={<StaffPage />}></Route>
+        
       </Routes>
     </div>
   )
