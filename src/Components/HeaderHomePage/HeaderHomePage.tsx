@@ -1,4 +1,9 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import {
+  createSearchParams,
+  Link,
+  NavLink,
+  useNavigate
+} from 'react-router-dom'
 
 import { Heading } from '../Heading/Heading'
 import { BellOutlined, SearchOutlined } from '@ant-design/icons'
@@ -19,6 +24,7 @@ import eventApi from 'src/apis/event.api'
 import { useForm } from 'react-hook-form'
 import { SearchEventSchema, searchEventSchemaYup } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { toast } from 'react-toastify'
 
 interface Props {
   className?: string
@@ -60,8 +66,20 @@ export default function Header({ ...props }: Props) {
   })
 
   const onSubmit = handleSubmit((data) => {
-    searchEvent.mutate(data.keyword, {
-      onSuccess: (data) => {}
+    const keyword = data.keyword
+    searchEvent.mutate(keyword, {
+      onSuccess: (data) => {
+        if (data.data.data.events.length == 0) {
+          toast.error('Not found events')
+          return
+        }
+        navigate({
+          pathname: '/search',
+          search: createSearchParams({
+            keyword: keyword
+          }).toString()
+        })
+      }
     })
   })
 
@@ -93,7 +111,7 @@ export default function Header({ ...props }: Props) {
           </ul>
         </div>
         <div className='flex justify-around items-center'>
-          {/* <button onClick={() => setOpen(true)}>
+          <button onClick={() => setOpen(true)}>
             <SearchOutlined className='!text-pink-light h-[30px] w-[30px]' />
           </button>
           <ModalPopup
@@ -113,7 +131,7 @@ export default function Header({ ...props }: Props) {
                 </button>
               </form>
             }
-          /> */}
+          />
           {!isAuthenticated ? (
             <Link
               to={path.login}

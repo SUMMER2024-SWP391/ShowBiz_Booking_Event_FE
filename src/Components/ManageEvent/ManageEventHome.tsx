@@ -9,7 +9,7 @@ import AssignCheckingStaff from '../AssignCheckingStaff/AssignCheckingStaff'
 import { Button } from '../Button/Button'
 import { Text } from '../Text/Text'
 import CheckInWithOTP from '../CheckInWithOTP/CheckInWithOTP'
-import FormFeedback  from '../FormFeedback/FormFeedback'
+import FormFeedback from '../FormFeedback/FormFeedback'
 import StaffPage from 'src/pages/StaffPage/StaffPage'
 
 interface Props {
@@ -27,7 +27,10 @@ export const ManageEventHome = ({ event }: Props) => {
         >
           {event.name}
         </Heading>
-        <Link to={`http://localhost:3000/events/${event._id}`} className='flex flex-row items-center px-2 py-1 rounded-xl bg-blue_gray-900 hover:bg-blue_gray-900_01 '>
+        <Link
+          to={`http://localhost:3000/events/${event._id}`}
+          className='flex flex-row items-center px-2 py-1 rounded-xl bg-blue_gray-900 hover:bg-blue_gray-900_01 '
+        >
           <p className='!text-[14px] text-white-A700_bf'>Event Page</p>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -40,7 +43,7 @@ export const ManageEventHome = ({ event }: Props) => {
             className='w-4 h-4 ml-2 '
           >
             <path d='M7 17 17 7M7 7h10v10'></path>
-          </svg>  
+          </svg>
         </Link>
       </div>
 
@@ -72,7 +75,6 @@ export const ManageEventHome = ({ event }: Props) => {
         <Route path='form-feedback' element={<FormFeedback />}></Route>
         <Route path='staff' element={<AssignCheckingStaff />}></Route>
         <Route path='checkin' element={<StaffPage />}></Route>
-        
       </Routes>
     </div>
   )

@@ -19,6 +19,7 @@ import Register from './pages/Register/Register'
 import StaffPage from './pages/StaffPage/StaffPage'
 import ManagerEventPage from './pages/ManageEventPage/ManageEventPage'
 import EventListStaff from './pages/EventListStaff/EventListStaff'
+import HomeForSearch from './pages/HomePage/HomeForSearch'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -33,6 +34,10 @@ function RejectedRoute() {
 
 const useRouteElements = () => {
   const routeElements = useRoutes([
+    {
+      path: '/search',
+      element: <HomeForSearch />
+    },
     {
       path: path.verify_account,
       element: <VerifyAccount />
