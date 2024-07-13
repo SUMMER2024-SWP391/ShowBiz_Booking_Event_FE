@@ -11,7 +11,7 @@ import ModalPopup from 'src/Components/ModalPopup/ModalPopup'
 import authAPI from 'src/apis/auth.api'
 import eventApi from 'src/apis/event.api'
 
-const StaffPage = () => {
+const PageOfStaff = () => {
   const { id } = useParams()
   const { data, isFetching } = useQuery({
     queryKey: ['list-user-register-event'],
@@ -78,4 +78,4 @@ const StaffPage = () => {
   )
 }
 
-export default StaffPage
+export default PageOfStaff

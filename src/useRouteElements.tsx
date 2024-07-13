@@ -61,10 +61,10 @@ const useRouteElements = () => {
       path: '/forgot-password',
       element: <ForgotPassword />
     },
-    // {
-    //   path: '/staff',
-    //   element: <StaffPage />
-    // },
+    {
+      path: '/staff/:id',
+      element: <StaffPage />
+    },
 
     {
       path: '/recovery',
@@ -107,7 +107,7 @@ const useRouteElements = () => {
           element: <EventListUser />
         },
         {
-          path: 'event-list/staff',
+          path: '/event-list/staff',
           element: <EventListStaff />
         }
       ]

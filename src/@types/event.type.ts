@@ -124,7 +124,11 @@ export type RegisterSucces = {
   time_register: string
   status_register: boolean
 }
-export type getListUserRegisterEvent= {
-  dataUser: {event_id: string, listUser: Array<{email: string, user_name: string, _id: string, status_checkin: boolean}>}
-  
+export type getListUserRegisterEvent = {
+  listUser: Array<{
+    email: string
+    user_name: string
+    _id: string
+    statusCheckIn: boolean
+  }>
 }

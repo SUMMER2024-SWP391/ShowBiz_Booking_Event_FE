@@ -28,7 +28,7 @@ const EventListStaff = () => {
           )}
           {data &&
             data.data.data.events.map((event) => (
-              <Link to={`/otp-check-in/${event._id}`} key={event._id}>
+              <Link to={`/staff/${event._id}`} key={event._id}>
                 <EventList
                   key={event._id}
                   id={event._id}
