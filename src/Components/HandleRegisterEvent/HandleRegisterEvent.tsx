@@ -162,14 +162,15 @@ const handleComponentEvent = (event: Event): JSX.Element => {
           This is your code to help you checkin in this event
         </Text>
 
-        <Button
+        <Text
+          
           size='lg'
-          shape='round'
-          className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-          disabled
+          
+          className='min-w-[423px] text-center rounded-md font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+          
         >
           {newData.data.data.ticket.register.otp_check_in}
-        </Button>
+        </Text>
 
         {newData != undefined &&
           newData.data.data.ticket.register.status_register ==

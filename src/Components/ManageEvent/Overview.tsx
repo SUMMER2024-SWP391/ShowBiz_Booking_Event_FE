@@ -98,7 +98,7 @@ export const Overview = ({ event }: Props) => {
             <div className='w-[300px] h-[300px]'>
               <Img
                 src={event.image}
-                className='w-full  object-fill rounded-[15px] shadow-2xl'
+                className='w-full h-full object-fill rounded-[15px] shadow-2xl'
               />
               <div className='mt-2 text-center text-black-900'>
                 {event.status}
