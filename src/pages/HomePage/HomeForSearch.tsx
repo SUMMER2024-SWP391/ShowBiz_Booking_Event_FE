@@ -18,7 +18,7 @@ const HomeForSearch = () => {
       <div className='flex flex-col items-center'>
         {data &&
           data.data.data.events.map((event) => (
-            <Link to={`/events/$${event._id}`}>
+            <Link to={`/events/${event._id}`}>
               <div className='flex flex-row justify-center' key={event._id}>
                 <EventList
                   className='mt-8'
