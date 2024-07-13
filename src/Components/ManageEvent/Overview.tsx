@@ -7,11 +7,28 @@ import { Heading } from '../Heading/Heading'
 import { parse, format, compareAsc } from 'date-fns'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import { EventStatus } from 'src/@types/enum'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import eventApi from 'src/apis/event.api'
+import { toast } from 'react-toastify'
 
 interface Props {
   event: Event
 }
 export const Overview = ({ event }: Props) => {
+  const queryClient = useQueryClient()
+  const cancelEventMutation = useMutation({
+    mutationFn: (id: string) => eventApi.removeEventById(id)
+  })
+
+  const handleCancelEvent = () => {
+    cancelEventMutation.mutate(event._id, {
+      onSuccess: () => {
+        toast.success('Cancel success')
+        queryClient.invalidateQueries({ queryKey: ['student', event._id] })
+      }
+    })
+  }
   const time = event.date_event.split('/')
   const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
@@ -83,6 +100,9 @@ export const Overview = ({ event }: Props) => {
                 src={event.image}
                 className='w-full  object-fill rounded-[15px] shadow-2xl'
               />
+              <div className='mt-2 text-center text-black-900'>
+                {event.status}
+              </div>
             </div>
           </div>
           <div className='w-[49%] flex flex-col'>
@@ -173,9 +193,18 @@ export const Overview = ({ event }: Props) => {
               </Button>
             </Link>
             <div className='mt-10 flex items-center justify-between'>
-              <Button className='w-[49%] bg-gray-100 shadow-2xl'>
-                Edit Event
-              </Button>
+              {event.status == EventStatus.PENDING ? (
+                <Button
+                  className='w-[49%] bg-gray-100 shadow-2xl'
+                  onClick={handleCancelEvent}
+                >
+                  Cancel this event
+                </Button>
+              ) : (
+                <Button className='w-[49%] bg-gray-100 shadow-2xl'>
+                  Edit Event
+                </Button>
+              )}
               <Button className='w-[49%] bg-gray-100 shadow-2xl'>
                 Change Photo
               </Button>
