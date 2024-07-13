@@ -9,7 +9,8 @@ import {
   EventListUser,
   CreateEvent,
   EventListConfig,
-  RegisterSucces
+  RegisterSucces,
+  getListUserRegisterEvent
 } from 'src/@types/event.type'
 import { EventQuestionType } from 'src/@types/form.type'
 import { Ticket } from 'src/@types/ticket.type'

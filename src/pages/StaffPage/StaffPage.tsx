@@ -1,53 +1,80 @@
 import { useQuery } from '@tanstack/react-query'
 import { Button, Skeleton } from 'antd'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { Heading } from 'src/Components'
+import CheckInWithOTP from 'src/Components/CheckInWithOTP/CheckInWithOTP'
 import EventList from 'src/Components/EventLists/EventList'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
+import ModalPopup from 'src/Components/ModalPopup/ModalPopup'
 import authAPI from 'src/apis/auth.api'
 import eventApi from 'src/apis/event.api'
 
 const StaffPage = () => {
+  const { id } = useParams()
   const { data, isFetching } = useQuery({
-    queryKey: ['login'],
-    queryFn: () => authAPI.login
+    queryKey: ['list-user-register-event'],
+    queryFn: () => eventApi.getListUserRegisterEvent(id as string)
   })
+  // console.log(
+  //   'hi',
+  //   data?.data.data.dataUser.listUser.map((user) => user.status_checkin)
+  // )
+  const handleStatus = () => {
+    const status = data?.data.data.dataUser.listUser
+
+  }
+  const [open, setOpen] = useState<boolean>(false)
 
   return (
     <>
-      <div className='bg-gradient_vistor'>
-        <Header />
-        <div className='container flex justify-center items-center'>
-          <div className='flex flex-col'>
-            {isFetching && (
-              <>
-                <Skeleton />
-                <Skeleton />
-                <Skeleton />
-                <Skeleton />
-              </>
-            )}
-            {!isFetching &&
-              data?.data.data.events.map((event) => {
-                const _event = event.event[0]
-                const _eventOperator = event.event_operator[0]
-                console.log(event)
-                return (
-                  <Link to={`/ticket/${event.event[0]._id}`} className='mt-10'>
-                    <EventList
-                      key={_event._id}
-                      imageUrl={_event.image}
-                      nameEvent={_event.name}
-                      location={_event.location}
-                      event_operator_name={_eventOperator.user_name}
-                      
-                    />
-                  </Link>
-                )
-              })}
+      <div className='w-full flex flex-col items-center'>
+        <Heading as='h1' size='2xl' className='mt-10 !text-white-A700'>
+          Checking Guest
+        </Heading>
+        <div className="">
+          <button type='button' onClick={()=>setOpen(true)}>CheckIn</button>
+        </div>
+        <ModalPopup type='' open={open} onClose={() => setOpen(false)} >
+          <CheckInWithOTP/>
+        </ModalPopup>
+        <div className='mt-10 text-white-A700 flex flex-col'>
+          <div className='overflow-x-auto'>
+            <table className='table w-[1000px]'>
+              <thead>
+                <tr className=''>
+                  <th>Id</th>
+                  <th>Email</th>
+                  <th>Full Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {isFetching && (
+                  <>
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                  </>
+                )}
+
+                {!isFetching &&
+                  data?.data.data.dataUser.listUser.map((user) => (
+                    <>
+                      <tr key={user._id}>
+                        <td>{user._id}</td>
+                        <td>{user.email}</td>
+                        <td>{user.user_name}</td>
+                        <td>{user.status_checkin}</td>
+                      </tr>
+                    </>
+                  ))}
+              </tbody>
+            </table>
           </div>
         </div>
-        <Footer />
       </div>
     </>
   )
