@@ -29,8 +29,10 @@ const initForm: FormFeedBack = {
     }
   ]
 }
-
-const CreateFormFeedBack = () => {
+type Props ={
+  isHaveForm: boolean
+}
+const CreateFormFeedBack = ({isHaveForm}: Props) => {
   const [form, setForm] = useState<FormFeedBack>(initForm)
   const { id } = useParams()
 
@@ -41,9 +43,9 @@ const CreateFormFeedBack = () => {
     }: {
       id?: string
       body: { questions: Array<string>; type: EventQuestionType }
-    }) => formAPI.createForm(id as string, body)
+    }) => {if(isHaveForm){ return formAPI.addNewQuestion(id as string, body)}else{return formAPI.createForm(id as string, body)}}
   })
-
+  
   const handleNewQuestion = () => {
     const question = {
       _id: new Date().toISOString(),

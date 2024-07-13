@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom'
-import EventOfForm from '../EventOfForm/EventOfForm'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import eventApi from 'src/apis/event.api'
 import { EventQuestionType } from 'src/@types/form.type'
 import { ReactNode, useEffect, useState } from 'react'
@@ -13,19 +12,24 @@ type Question = {
   description: string
   messageError: string
 }
-type Props={
-  renderProps?:ReactNode
-
+type Props = {
+  renderProps?: ReactNode
 }
-const UpdateFormFeedback = ({renderProps} : Props) => {
+const UpdateFormFeedback = ({ renderProps }: Props) => {
   const [form, setForm] = useState<Array<Question>>([])
   const { id } = useParams()
-
   const { data } = useQuery({
     queryKey: ['form_feedback_update'],
     queryFn: () => eventApi.getFormFeedback(id as string)
   })
-
+  const queryClient = useQueryClient()
+  const deleteQuestion = useMutation({
+    mutationFn: (id: string) => formAPI.deleteQuestion(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['form_feedback'], exact: true })
+      toast.success('Delete question success')
+    }
+  })
   const updateFormEventFeedBackMutation = useMutation({
     mutationFn: (body: {
       id?: string
@@ -43,7 +47,9 @@ const UpdateFormFeedback = ({renderProps} : Props) => {
       setForm(formQuestion as Array<Question>)
     }
   }, [data?.data.data.formQuestion])
-
+  const handleDeleteQuestion = (id: string) => {
+    deleteQuestion.mutate(id as string)
+  }
   const handleChangeElement =
     (id: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target
@@ -112,24 +118,37 @@ const UpdateFormFeedback = ({renderProps} : Props) => {
   return (
     <>
       <div className='flex flex-col justify-center items-center w-[95%]'>
-        <form className='grid grid-cols-2 gap-4'>
+        <form className='flex flex-col'>
           {data &&
             form.length !== 0 &&
             form.map((question, index) => (
-              <InputUpdate
-                index={index}
-                question={question}
-                key={question._id}
-                handleChangeElement={handleChangeElement}
-              />
+              <>
+                <div className='flex flex-row gap-5 mt-5'>
+                  <InputUpdate
+                    index={index}
+                    question={question}
+                    key={question._id}
+                    handleChangeElement={handleChangeElement}
+                  />
+                  <button
+                    className=' h-[54px] w-[60px] text-white-A700 bg-red rounded-xl opacity-90 hover:opacity-100 hover:text-slate-50 hover:border-2 hover:border-[#42C2FF] duration-300'
+                    type='button'
+                    onClick={()=> handleDeleteQuestion(question._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </>
             ))}
-          <button
-            className='mt-8 h-[54px] w-[300px] text-white-A700 bg-[#34B3F1] rounded-xl opacity-90 hover:opacity-100 hover:text-slate-50 hover:border-2 hover:border-[#42C2FF] duration-300'
-            type='button'
-            onClick={handleSubmit}
-          >
-            Update question
-          </button>
+          <div className='flex flex-row justify-center'>
+            <button
+              className='mt-8 h-[54px] w-[200px]  text-white-A700 bg-[#34B3F1] rounded-xl opacity-90 hover:opacity-100 hover:text-slate-50 hover:border-2 hover:border-[#42C2FF] duration-300'
+              type='button'
+              onClick={handleSubmit}
+            >
+              Update question
+            </button>
+          </div>
         </form>
         {renderProps}
       </div>

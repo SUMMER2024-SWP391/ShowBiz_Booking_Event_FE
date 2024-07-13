@@ -11,6 +11,7 @@ import {
   EventListConfig,
   RegisterSucces
 } from 'src/@types/event.type'
+import { EventQuestionType } from 'src/@types/form.type'
 import { Ticket } from 'src/@types/ticket.type'
 import { User } from 'src/@types/users.type'
 import { SuccessResponse } from 'src/@types/utils.type'
