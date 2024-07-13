@@ -29,14 +29,10 @@ const StaffPage = () => {
         <Heading as='h1' size='2xl' className='mt-10 !text-white-A700'>
           Checking Guest
         </Heading>
-        <div className=''>
-          <button type='button' onClick={() => setOpen(true)}>
-            CheckIn
-          </button>
+        <div className='mt-10 '>
+          <Button onClick={() => setOpen(true)}>Checking Guest</Button>
         </div>
-        <ModalPopup type='' open={open} onClose={() => setOpen(false)}>
-          <CheckInWithOTP />
-        </ModalPopup>
+
         <div className='mt-10 text-white-A700 flex flex-col'>
           <div className='overflow-x-auto'>
             <table className='table w-[1000px]'>
@@ -74,6 +70,9 @@ const StaffPage = () => {
           </div>
         </div>
       </div>
+      <ModalPopup type='' open={open} onClose={() => setOpen(false)}>
+        <CheckInWithOTP />
+      </ModalPopup>
     </>
   )
 }

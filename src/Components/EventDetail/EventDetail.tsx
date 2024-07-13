@@ -69,22 +69,22 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
             </div>
             <div className='mt-11 flex flex-col items-start gap-[11px] self-stretch pb-2.5'>
               <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
-                <Text size='s' as='p' className='!text-white-A700_cc'>
+                <Text size='s' as='p' className='!text-white-A700'>
                   Speacker
                 </Text>
-                <div className='h-px self-stretch bg-white-A700_5e' />
+                <div className='h-px self-stretch bg-white-A700' />
               </div>
               <div className='flex w-[77%] flex-col gap-3.5 md:w-full'>
                 <Text
                   size='s'
                   as='p'
-                  className='!text-white-A700_5e !font-monterat'
+                  className='!text-white-A700 !font-monterat'
                 >
                   {event.speaker_name}
                 </Text>
                 <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
                 <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
-                  <Text size='s' as='p' className='!text-white-A700_cc'>
+                  <Text size='s' as='p' className='!text-white-A700'>
                     Sponser
                   </Text>
                   <div className='h-px self-stretch bg-white-A700_5e' />
@@ -92,7 +92,7 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                 <Text
                   size='s'
                   as='p'
-                  className='!text-white-A700_5e !font-monterat'
+                  className='!text-white-A700 !font-monterat'
                 >
                   {event.sponsor_name}
                 </Text>
@@ -171,9 +171,9 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
               </div>
               {renderProps}
               <Text
-                size='s'
+                size='lg'
                 as='p'
-                className='!text-white-A700 ml-1.5 mt-[30px] md:ml-0'
+                className='!text-white-A700 !font-bold ml-1.5 mt-[30px] md:ml-0'
               >
                 About Event
               </Text>
@@ -185,19 +185,20 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                   className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
                 >
                   <div
+                  className='!text-white-A700'
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(event.description) //loại bỏ javascript khỏi đây
                     }}
                   ></div>
                 </Text>
                 <div className='mt-9 flex flex-col items-start gap-2 self-stretch '>
-                  <Text size='s' as='p' className='!text-white-A700'>
+                  <Text size='lg' as='p' className='!text-white-A700 !font-bold'>
                     {`Location ${event.location}`}
                   </Text>
                   <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
                   <iframe
                     src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.6099415305243!2d106.80730807603385!3d10.841132857994813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1720796162009!5m2!1svi!2s'
-                    width='650'
+                    width='700'
                     height='200'
                     style={{ border: 0 , borderRadius: '15px', marginTop: '10px'}}
                     allowFullScreen={true}

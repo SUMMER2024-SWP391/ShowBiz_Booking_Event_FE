@@ -20,6 +20,7 @@ import StaffPage from './pages/StaffPage/StaffPage'
 import ManagerEventPage from './pages/ManageEventPage/ManageEventPage'
 import EventListStaff from './pages/EventListStaff/EventListStaff'
 import HomeForSearch from './pages/HomePage/HomeForSearch'
+import EventListUserPage from './pages/EventListUserPage/EventListUserPage'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -104,7 +105,7 @@ const useRouteElements = () => {
         },
         {
           path: '/event-list/users',
-          element: <EventListUser />
+          element: <EventListUserPage />
         },
         {
           path: '/event-list/staff',
