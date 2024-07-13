@@ -115,7 +115,8 @@ const eventApi = {
     http.get<SuccessResponse<{ events: Event[] }>>(`/events/search/${keyword}`),
   feedbackEvent: (id: string, body: FormEventRegister) =>
     http.post(`/events/feedback-event/${id}`, body),
-  removeEventById: (id: string) => http.patch(`/e-operators/event/${id}`)
+  removeEventById: (id: string) => http.patch(`/e-operators/event/${id}`),
+  getListUserRegisterEvent: (id :string) => http.get<SuccessResponse<getListUserRegisterEvent>>(`/register/list-user/registed/${id}`)
 }
 
 export default eventApi
