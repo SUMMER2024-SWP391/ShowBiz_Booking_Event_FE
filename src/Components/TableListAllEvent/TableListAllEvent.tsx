@@ -7,16 +7,17 @@ import eventApi from 'src/apis/event.api'
 
 interface Props {
   event: Event
+  status: EventStatus | string
 }
 
-const TableListAllEvent = ({ event }: Props) => {
+const TableListAllEvent = ({ event, status }: Props) => {
   const queryClient = useQueryClient()
   const mutationEventStatus = useMutation({
     mutationFn: (status: EventStatus) =>
       eventApi.handleStatusEventAdmin(event._id, status),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['eventListPending'],
+        queryKey: ['event-list-all', status],
         exact: true
       })
     }

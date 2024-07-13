@@ -31,7 +31,11 @@ const AdminTableEventList = () => {
           {!isFetching &&
             data?.data.data.events.length != 0 &&
             data?.data.data.events.map((event) => (
-              <TableListAllEvent key={event._id} event={event} />
+              <TableListAllEvent
+                key={event._id}
+                event={event}
+                status={status}
+              />
             ))}
           {isFetching && (
             <tr>

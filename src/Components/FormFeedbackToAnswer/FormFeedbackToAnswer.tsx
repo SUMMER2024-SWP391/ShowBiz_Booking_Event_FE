@@ -1,36 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { Button } from '../Button/Button'
 import eventApi from 'src/apis/event.api'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { FormEventRegister, RegisterSucces } from 'src/@types/event.type'
 import { toast } from 'react-toastify'
-import {
-  isAxiosError,
-  isReponseNoPaymentButHaveForm,
-  isResponseNoFormHasPaymentType
-} from 'src/utils/utils'
+import { isAxiosError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
 
 type Props = {
-  className?: string
-  setTrigger?: (value: boolean) => void
   _id: string
-  setIsRegister?: (value: boolean) => void
 }
 export type FormDataEvent = FormEventRegister
 const initFormData: FormDataEvent = {
   answers: []
 }
 
-export const FormRegister = ({ _id }: Props) => {
+export const FormFeedbackToAnswer = ({ _id }: Props) => {
   const [form, setForm] = useState<FormDataEvent>(initFormData)
   const getQuestion = useQuery({
     queryKey: ['eventId', _id],
-    queryFn: () => eventApi.getListQuestion(_id)
+    queryFn: () => eventApi.getFormFeedback(_id)
   })
-  const registerEventMutation = useMutation({
-    mutationFn: (body: FormDataEvent) => eventApi.registerEvent(_id, body)
+  const feedbackEventMutation = useMutation({
+    mutationFn: (body: FormDataEvent) => eventApi.feedbackEvent(_id, body)
   })
 
   const handleChange =
@@ -67,18 +59,9 @@ export const FormRegister = ({ _id }: Props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    registerEventMutation.mutate(form as FormEventRegister, {
-      onSuccess: (data) => {
-        if (isResponseNoFormHasPaymentType(data.data.data)) {
-          window.location.assign(data.data.data.url)
-        } else if (
-          isReponseNoPaymentButHaveForm<RegisterSucces>(data.data.data)
-        ) {
-          toast.success('Register event success')
-          window.location.assign(`http://localhost:3000/events/${_id}`)
-        }
-
-        // setTrigger && setTrigger(false)
+    feedbackEventMutation.mutate(form as FormEventRegister, {
+      onSuccess: () => {
+        toast.success('Feedback event success')
       },
       onError: (error) => {
         if (isAxiosError<ErrorResponse<{}>>(error)) {
@@ -110,7 +93,7 @@ export const FormRegister = ({ _id }: Props) => {
                  border-blue_gray-100_04 font-semibold sm:px-5 text-white-A700 text-center 
                  flex justify-center items-center bg-[#0958d9] hover:bg-[#4096ff] mt-4'
       >
-        Register
+        Feedback
       </Button>
     </form>
   )

@@ -31,7 +31,7 @@ const TableUser = ({ role }: Props) => {
           <tbody>
             {!isFetching &&
               data?.data.data.users.map((user) => (
-                <AdminUserList key={user._id} user={user} />
+                <AdminUserList key={user._id} user={user} role={role} />
               ))}
             {isFetching && (
               <tr>

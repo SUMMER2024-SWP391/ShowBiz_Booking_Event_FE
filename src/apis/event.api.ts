@@ -96,7 +96,7 @@ const eventApi = {
     ),
   getFormFeedback: (id: string) =>
     http.get<SuccessResponse<{ formQuestion: ListQuestion[] }>>(
-      `/forms/question/feedback/${id}`
+      `/forms/get/question/feedback/${id}`
     ),
   cancelEvent: (id: string, registerId: string) =>
     http.post<SuccessResponse<{}>>(
@@ -111,7 +111,9 @@ const eventApi = {
       }>
     >(`/register/ticket-detail/${id}`),
   getEventByKeyWord: (keyword: string) =>
-    http.get<SuccessResponse<{}>>(`/events/search/${keyword}`)
+    http.get<SuccessResponse<{}>>(`/events/search/${keyword}`),
+  feedbackEvent: (id: string, body: FormEventRegister) =>
+    http.post(`/events/feedback-event/${id}`, body)
 }
 
 export default eventApi
