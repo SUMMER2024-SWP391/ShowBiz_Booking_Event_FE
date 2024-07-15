@@ -15,7 +15,7 @@ const AvatarProfile = (prop: Props) => {
     queryKey: ['get-profile'],
     queryFn: () => authAPI.getMe()
   })
-  console.log(data?.data.data.user.user_name)
+  // console.log(data?.data.data.user.user_name)
   const [open, setOpen] = useState(false)
 
   const toggleOpen = () => {

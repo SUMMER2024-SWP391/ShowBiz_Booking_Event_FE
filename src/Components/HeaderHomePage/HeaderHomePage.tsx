@@ -52,10 +52,9 @@ export default function Header({ ...props }: Props) {
       setIsStaff(false)
     },
     onError: (error) => {
-      console.log(error)
+      // console.log(error)
     }
   })
-  console.log(isAuthenticated)
 
   const { register, handleSubmit } = useForm<SearchForm>({
     resolver: yupResolver(searchEventSchemaYup)

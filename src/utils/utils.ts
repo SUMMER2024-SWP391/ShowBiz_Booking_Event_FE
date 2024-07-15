@@ -126,3 +126,10 @@ export function isValidToFeeback(
 
   return isToday && isValidTime
 }
+
+export function isUnAuthorized<T>(error: unknown): error is AxiosError<T> {
+  return (
+    isAxiosError(error) &&
+    error.response?.status === HttpStatusCode.Unauthorized
+  )
+}
