@@ -9,7 +9,9 @@ import {
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 import { toast } from 'react-toastify'
 import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
-import { isUnAuthorized } from './utils'
+import { isAxiosErrorJWTExpired, isUnAuthorized } from './utils'
+import { useContext } from 'react'
+import { AppContext } from 'src/context/app.context'
 
 //
 //https://showbiz-booking-event-be.onrender.com
@@ -63,7 +65,6 @@ class Http {
       },
       (error: AxiosError) => {
         //nếu là lỗi unprocessable entity hoặc unauthorized thì không hiện toast
-        const config = error.response?.config || { headers: {}, url: '' }
         if (
           ![
             HttpStatusCode.UnprocessableEntity,
@@ -76,21 +77,31 @@ class Http {
         }
 
         if (isUnAuthorized<ErrorResponse<{}>>(error)) {
-          this.refreshTokenRequest = this.refreshTokenRequest
-            ? this.refreshTokenRequest
-            : this.handleRefreshToken().finally(() => {
-                // Giữ refreshTokenRequest trong 10s cho những request tiếp theo nếu có 401 thì dùng
-                setTimeout(() => {
-                  this.refreshTokenRequest = null
-                }, 10000)
+          const config = error.response?.config || { headers: {}, url: '' }
+          if (
+            isAxiosErrorJWTExpired(error) &&
+            config.url != '/users/refresh-token'
+          ) {
+            this.refreshTokenRequest = this.refreshTokenRequest
+              ? this.refreshTokenRequest
+              : this.handleRefreshToken().finally(() => {
+                  // Giữ refreshTokenRequest trong 10s cho những request tiếp theo nếu có 401 thì dùng
+                  setTimeout(() => {
+                    this.refreshTokenRequest = null
+                  }, 10000)
+                })
+            return this.refreshTokenRequest.then((access_token) => {
+              // Nghĩa là chúng ta tiếp tục gọi lại request cũ vừa bị lỗi
+              return this.instance({
+                ...config,
+                headers: { ...config.headers, authorization: access_token }
               })
-          return this.refreshTokenRequest.then((access_token) => {
-            // Nghĩa là chúng ta tiếp tục gọi lại request cũ vừa bị lỗi
-            return this.instance({
-              ...config,
-              headers: { ...config.headers, authorization: access_token }
             })
-          })
+          }
+          clearLocalStorage()
+          this.accessToken = ''
+          this.refreshToken = ''
+          window.location.reload()
         }
 
         return Promise.reject(error)
