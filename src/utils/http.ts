@@ -10,8 +10,6 @@ import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 import { toast } from 'react-toastify'
 import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
 import { isAxiosErrorJWTExpired, isUnAuthorized } from './utils'
-import { useContext } from 'react'
-import { AppContext } from 'src/context/app.context'
 
 //
 //https://showbiz-booking-event-be.onrender.com

@@ -106,13 +106,13 @@ export function isValidToFeeback(
     new Date().getFullYear().toString()
   ]
 
-  const isToday = JSON.stringify(dateEvent) <= JSON.stringify(nowDate)
-
+  const isToday = compareDate(dateEvent, nowDate) //dang bug cho nay
   const timeEvent = time_end.split(':')
   const nowTime = [
     new Date().getHours().toString(),
     new Date().getMinutes().toString()
   ]
+
   let isValidTime = false
   if (
     Number(timeEvent[0]) * 60 +
@@ -142,4 +142,10 @@ export function isAxiosErrorJWTExpired(
     isUnAuthorized<ErrorResponse<{}>>(error) &&
     error.response?.data.message === 'Jwt token expired'
   )
+}
+
+function compareDate(date1: string[], date2: string[]): boolean {
+  const day1 = new Date(Number(date1[2]), Number(date1[1]), Number(date1[0]))
+  const day2 = new Date(Number(date2[2]), Number(date2[1]), Number(date2[0]))
+  return day1.getTime() <= day2.getTime()
 }

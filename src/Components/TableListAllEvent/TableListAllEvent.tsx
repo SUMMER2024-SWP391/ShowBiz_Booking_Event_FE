@@ -23,19 +23,10 @@ const TableListAllEvent = ({ event, status }: Props) => {
     }
   })
 
-  const handleApprovedEvent =
-    (status = EventStatus.APPROVED) =>
-    () => {
-      mutationEventStatus.mutate(status)
-      toast.success('Approved event success')
-    }
-
-  const handleRejectedEvent =
-    (status = EventStatus.REJECTED) =>
-    () => {
-      mutationEventStatus.mutate(status)
-      toast.success('Rejected event success')
-    }
+  const handleEvent = (status: EventStatus) => () => {
+    mutationEventStatus.mutate(status)
+    toast.success(`${status} event success`)
+  }
 
   return (
     <tr>
@@ -47,7 +38,7 @@ const TableListAllEvent = ({ event, status }: Props) => {
       <td>{event.status}</td>
       {EventStatus.PENDING === event.status && (
         <td>
-          <button className='btn' onClick={handleApprovedEvent()}>
+          <button className='btn' onClick={handleEvent(EventStatus.APPROVED)}>
             Approved
           </button>
         </td>
@@ -59,7 +50,7 @@ const TableListAllEvent = ({ event, status }: Props) => {
       </td>
       {EventStatus.PENDING === event.status && (
         <td>
-          <button className='btn' onClick={handleRejectedEvent()}>
+          <button className='btn' onClick={handleEvent(EventStatus.REJECTED)}>
             Reject
           </button>
         </td>

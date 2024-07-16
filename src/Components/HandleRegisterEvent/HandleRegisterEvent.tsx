@@ -20,7 +20,8 @@ import { useContext, useState } from 'react'
 import { Modal, Button as ButtonAntd } from 'antd'
 import { AppContext } from 'src/context/app.context'
 import HandleLoginWhenRegisterEvent from '../HandleLoginWhenRegisterEvent/HandleLoginWhenRegisterEvent'
-import HandleFeedbackEventOfUser from '../HandleFeedbackEventOfUser/HandleFeedbackEventOfUser'
+import FeedbackEventOfUser from '../FeedbackEventOfUser/FeedbackEventOfUser'
+import HandleFeedbackOfUser from '../HandleFeedbackOfUser/HandleFeedbackOfUser'
 
 type Props = {
   event: Event
@@ -34,7 +35,6 @@ const handleComponentEvent = (event: Event): JSX.Element => {
   const { id } = useParams()
   const queryClient = useQueryClient()
   let newData: any = null
-  console.log(isAuthenticated)
   if (isAuthenticated) {
     const { data } = useQuery({
       queryKey: ['ticket-detail'],
@@ -86,7 +86,6 @@ const handleComponentEvent = (event: Event): JSX.Element => {
       }
     })
   }
-
   const handleClickForPaymentAPI = () => {
     handlePayment.mutate(event._id, {
       onSuccess: (data) => {
@@ -99,7 +98,13 @@ const handleComponentEvent = (event: Event): JSX.Element => {
       }
     })
   }
-
+  console.log(
+    // isValidToFeeback(
+    //   newData.data.data.ticket.event.date_event,
+    //   newData.data.data.ticket.event.time_end
+    // ) &&
+    newData.data.data.ticket.register.status_check_in
+  )
   if (
     (newData && !newData.data.data.ticket.register) ||
     !isAuthenticated ||
@@ -158,19 +163,20 @@ const handleComponentEvent = (event: Event): JSX.Element => {
             You are in this event now
           </Heading>
         </div>
-        <Text size='s' as='p' className='ml-6 self-start '>
-          This is your code to help you checkin in this event
-        </Text>
 
-        <Text
-          
-          size='lg'
-          
-          className='min-w-[423px] text-center rounded-md font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-          
-        >
-          {newData.data.data.ticket.register.otp_check_in}
-        </Text>
+        {!newData.data.data.ticket.register.status_check_in && (
+          <>
+            <Text size='s' as='p' className='ml-6 self-start '>
+              This is your code to help you checkin in this event
+            </Text>
+            <Text
+              size='lg'
+              className='min-w-[423px] text-center rounded-md font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+            >
+              {newData.data.data.ticket.register.otp_check_in}
+            </Text>
+          </>
+        )}
 
         {newData != undefined &&
           newData.data.data.ticket.register.status_register ==
@@ -224,9 +230,14 @@ const handleComponentEvent = (event: Event): JSX.Element => {
           isValidToFeeback(
             newData.data.data.ticket.event.date_event,
             newData.data.data.ticket.event.time_end
-          ) && (
-            <HandleFeedbackEventOfUser
-              id={newData.data.data.ticket.event._id}
+          ) &&
+          newData.data.data.ticket.register.status_check_in && (
+            <HandleFeedbackOfUser
+              _id={newData.data.data.ticket.event._id as string}
+              isFeedback={newData.data.data.ticket.register.isFeedback}
+              isHasFormFeedBack={
+                newData.data.data.ticket.register.isHasFormFeedback
+              }
             />
           )}
       </div>

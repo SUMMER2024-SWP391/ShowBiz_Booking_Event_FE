@@ -9,7 +9,7 @@ import eventApi from 'src/apis/event.api'
 import { omit, pick } from 'lodash'
 import { StatusRegisterEvent } from 'src/@types/utils.type'
 import { compareAsc, parse } from 'date-fns'
-import HandleFeedbackEventOfUser from 'src/Components/HandleFeedbackEventOfUser/HandleFeedbackEventOfUser'
+import HandleFeedbackEventOfUser from 'src/Components/FeedbackEventOfUser/FeedbackEventOfUser'
 
 const EventListUserPage = () => {
   const { data, isFetching } = useQuery({
@@ -19,7 +19,7 @@ const EventListUserPage = () => {
 
   return (
     <>
-      <div className='bg-gradient_vistor'>
+      <div className='bg-gradient_vistor h-screen'>
         <Header />
         <div className='container flex justify-center items-center'>
           <div className='flex flex-col'>
@@ -32,6 +32,7 @@ const EventListUserPage = () => {
               </>
             )}
             {!isFetching &&
+              data?.data.data.events.length != 0 &&
               data?.data.data.events
                 .map((event) => {
                   const eventDetail = event.event[0]
@@ -125,6 +126,9 @@ const EventListUserPage = () => {
                     </Link>
                   )
                 })}
+            {!isFetching && data?.data.data.events.length == 0 && (
+              <h1 className='text-white-A700'>You didn't register any event</h1>
+            )}
           </div>
         </div>
         <Footer />

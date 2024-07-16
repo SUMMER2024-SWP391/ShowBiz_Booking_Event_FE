@@ -7,7 +7,7 @@ interface Props {
   id: string
 }
 
-const HandleFeedbackEventOfUser = ({ id }: Props) => {
+const FeedbackEventOfUser = ({ id }: Props) => {
   const [open, setOpen] = useState<boolean>(false)
   return (
     <>
@@ -28,4 +28,4 @@ const HandleFeedbackEventOfUser = ({ id }: Props) => {
   )
 }
 
-export default HandleFeedbackEventOfUser
+export default FeedbackEventOfUser

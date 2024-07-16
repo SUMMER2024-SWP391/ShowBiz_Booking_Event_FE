@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '../Button/Button'
 import eventApi from 'src/apis/event.api'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { FormEventRegister } from 'src/@types/event.type'
 import { toast } from 'react-toastify'
 import { isAxiosError } from 'src/utils/utils'
@@ -16,13 +16,17 @@ const initFormData: FormDataEvent = {
 }
 
 export const FormFeedbackToAnswer = ({ _id }: Props) => {
+  const queryClient = useQueryClient()
   const [form, setForm] = useState<FormDataEvent>(initFormData)
   const getQuestion = useQuery({
     queryKey: ['eventId', _id],
     queryFn: () => eventApi.getFormFeedback(_id)
   })
   const feedbackEventMutation = useMutation({
-    mutationFn: (body: FormDataEvent) => eventApi.feedbackEvent(_id, body)
+    mutationFn: (body: FormDataEvent) => eventApi.feedbackEvent(_id, body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ticket-detail'] })
+    }
   })
 
   const handleChange =
@@ -32,7 +36,8 @@ export const FormFeedbackToAnswer = ({ _id }: Props) => {
       setForm((pre) => ({
         ...pre,
         answers: pre.answers.map((item) => {
-          if (item._id === questionId) return { ...item, description: value }
+          if (item.question_id === questionId)
+            return { ...item, description: value }
           return item
         })
       }))
@@ -41,14 +46,14 @@ export const FormFeedbackToAnswer = ({ _id }: Props) => {
   useEffect(() => {
     if (getQuestion.data) {
       const answers: Array<{
-        _id: string
+        question_id: string
         description: string
         question: string
       }> = []
       const listQuestion = getQuestion.data.data.data.formQuestion
       for (let i = 0; i < listQuestion.length; i++) {
         answers.push({
-          _id: listQuestion[i]._id,
+          question_id: listQuestion[i]._id,
           question: listQuestion[i].description,
           description: ''
         })
@@ -56,7 +61,6 @@ export const FormFeedbackToAnswer = ({ _id }: Props) => {
       setForm((pre) => ({ ...pre, answers: [...answers] }))
     }
   }, [getQuestion.data])
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     feedbackEventMutation.mutate(form as FormEventRegister, {
@@ -75,14 +79,14 @@ export const FormFeedbackToAnswer = ({ _id }: Props) => {
     <form className='mt-1' onSubmit={handleSubmit}>
       {form.answers.length !== 0 &&
         form.answers.map((item) => (
-          <div className='flex flex-col gap-2 pb-2' key={item._id}>
+          <div className='flex flex-col gap-2 pb-2' key={item.question_id}>
             <div className='mb-2 text-black-900'>{item.question}</div>
             <input
               type='text'
               className='bg-white-A700_bf h-[35px] w-[300px] outline-none border focus:border-gray-300 text-black-900 pl-2 rounded-md'
-              name={item._id}
+              name={item.question_id}
               value={item.description}
-              onChange={handleChange(item._id)}
+              onChange={handleChange(item.question_id)}
             />
           </div>
         ))}

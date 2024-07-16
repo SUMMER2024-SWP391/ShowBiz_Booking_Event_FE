@@ -29,7 +29,7 @@ export type ListQuestion = {
 }
 export type FormEventRegister = {
   answers: Array<{
-    _id: string
+    question_id: string
     question: string
     description: string
   }>

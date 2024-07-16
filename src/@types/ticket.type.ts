@@ -1,5 +1,3 @@
-import { Event } from './event.type'
-import { User } from './users.type'
 import { StatusRegisterEvent } from './utils.type'
 
 export type Ticket = {
@@ -10,4 +8,6 @@ export type Ticket = {
   time_register: string
   status_register: StatusRegisterEvent
   otp_check_in: string
+  isFeedback: boolean
+  isHasFormFeedback: boolean
 }
