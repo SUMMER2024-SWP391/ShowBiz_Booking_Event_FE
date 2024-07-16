@@ -1,6 +1,7 @@
 import { Register } from './../Components/EventDetail/Register'
 import axios, { AxiosError } from 'axios'
 import { RegisterSucces } from 'src/@types/event.type'
+import { ErrorResponse } from 'src/@types/utils.type'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 
 type ResponsePaymentEvent = {
@@ -125,4 +126,20 @@ export function isValidToFeeback(
   }
 
   return isToday && isValidTime
+}
+
+export function isUnAuthorized<T>(error: unknown): error is AxiosError<T> {
+  return (
+    isAxiosError(error) &&
+    error.response?.status === HttpStatusCode.Unauthorized
+  )
+}
+
+export function isAxiosErrorJWTExpired(
+  error: unknown
+): error is AxiosError<ErrorResponse<{}>> {
+  return (
+    isUnAuthorized<ErrorResponse<{}>>(error) &&
+    error.response?.data.message === 'Jwt token expired'
+  )
 }

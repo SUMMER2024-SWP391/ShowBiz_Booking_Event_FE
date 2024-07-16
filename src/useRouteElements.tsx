@@ -71,18 +71,7 @@ const useRouteElements = () => {
       path: '/recovery',
       element: <Recovery />
     },
-    {
-      path: path.profile,
-      element: <Profile />
-    },
-    {
-      path: '/ticket/:id',
-      element: <TicketDetail />
-    },
-    {
-      path: '/checkin/:id',
-      element: <StaffPage />
-    },
+
     //chua set up  protected routes
     {
       path: '',
@@ -110,6 +99,18 @@ const useRouteElements = () => {
         {
           path: '/event-list/staff',
           element: <EventListStaff />
+        },
+        {
+          path: path.profile,
+          element: <Profile />
+        },
+        {
+          path: '/ticket/:id',
+          element: <TicketDetail />
+        },
+        {
+          path: '/checkin/:id',
+          element: <StaffPage />
         }
       ]
     },
