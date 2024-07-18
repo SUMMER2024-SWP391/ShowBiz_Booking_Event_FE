@@ -12,17 +12,19 @@ const HandleFeedbackOfUser = ({
 }: Props) => {
   return (
     <>
-      {!isFeedback && <FeedbackEventOfUser id={_id} />}
-      {/* {isFeedback && (
+      {isHasFormFeedBack ? (
+        isFeedback ? (
+          <div className='flex justify-center items-center text-blue'>
+            Thank you to go this event
+          </div>
+        ) : (
+          <FeedbackEventOfUser id={_id} />
+        )
+      ) : (
         <div className='flex justify-center items-center text-blue'>
           Thank you to go this event
         </div>
       )}
-      {isHasFormFeedBack && (
-        <div className='flex justify-center items-center text-blue'>
-          Thank you to go this event
-        </div>
-      )} */}
     </>
   )
 }

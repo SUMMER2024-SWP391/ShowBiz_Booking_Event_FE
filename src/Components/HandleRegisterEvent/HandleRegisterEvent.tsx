@@ -98,13 +98,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
       }
     })
   }
-  console.log(
-    // isValidToFeeback(
-    //   newData.data.data.ticket.event.date_event,
-    //   newData.data.data.ticket.event.time_end
-    // ) &&
-    newData.data.data.ticket.register.status_check_in
-  )
+
   if (
     (newData && !newData.data.data.ticket.register) ||
     !isAuthenticated ||

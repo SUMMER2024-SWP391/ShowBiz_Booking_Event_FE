@@ -95,11 +95,6 @@ const EventListUserPage = () => {
                           event_operator_name={
                             _event.event_operator.event_operator[0].user_name
                           }
-                          renderProps={
-                            <span className='text-blue'>
-                              This page is done click here to feedback
-                            </span>
-                          }
                         />
                       </Link>
                     )
