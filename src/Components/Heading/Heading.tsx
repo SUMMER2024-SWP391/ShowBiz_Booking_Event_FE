@@ -32,7 +32,7 @@ const Heading: React.FC<React.PropsWithChildren<HeadingProps>> = ({
 
   return (
     <Component
-      className={`text-pink-light font-euclid ${className} ${sizes[size]}`}
+      className={`text-black_supper_light font-euclid ${className} ${sizes[size]}`}
       {...restProps}
     >
       {children}

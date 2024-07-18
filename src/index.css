@@ -4,6 +4,6 @@
 
 @layer components{
   .container-xs{
-    @apply w-full mx-auto max-w-[1044px]
+    @apply w-full mx-auto max-w-[820px]
   }
 }

@@ -15,7 +15,6 @@ const EventListStaff = () => {
   console.log(data)
   return (
     <div className='containter bg-gradient_vistor'>
-      <Header />
       <div className='container flex justify-center items-center'>
         <div className='flex flex-col'>
           {isFetching && (
@@ -46,7 +45,6 @@ const EventListStaff = () => {
             ))}
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

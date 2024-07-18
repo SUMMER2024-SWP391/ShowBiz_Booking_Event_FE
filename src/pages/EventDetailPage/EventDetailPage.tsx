@@ -17,14 +17,12 @@ export default function EventDetailPage() {
 
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-gradient_vistor'>
-      <Header className='' />
       {event && (
         <EventDetail
           event={event}
           renderProps={<HandleRegisterEvent event={event} />}
         />
       )}
-      <Footer className='' />
     </div>
   )
 }

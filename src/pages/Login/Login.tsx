@@ -83,7 +83,7 @@ const Login = () => {
   return (
     <div className='flex w-full flex-col item-center bg-gradient_vistor'>
       <div className='flex flex-col items-center  '>
-        <Header _id={setProfile.name} />
+        {/* <Header _id={setProfile.name} /> */}
       </div>
       <div className='mt-10 container-xs flex justify-center md:p-5 md:px-5'>
         <div className='flex flex-col w-[500px] items-start rounded-[15px] border border-solid border-white-A700 pb-5 sm:pt-5'>
@@ -196,7 +196,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

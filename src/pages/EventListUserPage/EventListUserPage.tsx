@@ -20,7 +20,6 @@ const EventListUserPage = () => {
   return (
     <>
       <div className='bg-gradient_vistor h-screen'>
-        <Header />
         <div className='container flex justify-center items-center'>
           <div className='flex flex-col'>
             {isFetching && (
@@ -126,7 +125,6 @@ const EventListUserPage = () => {
             )}
           </div>
         </div>
-        <Footer />
       </div>
     </>
   )

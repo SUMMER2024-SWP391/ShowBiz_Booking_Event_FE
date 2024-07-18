@@ -35,9 +35,9 @@ export default function EventList({
   return (
     <div
       {...props}
-      className={`${props.className} w-[900px] h-auto flex items-center px-5 justify-around bg-pink-normail shadow-2xl rounded-[15px]`}
+      className={`${props.className}container-xs h-auto flex items-center px-5 justify-around bg-pink-normail shadow-2xl rounded-[15px]`}
     >
-      <div className='flex items-center justify-between sm:flex-row'>
+      <div className='flex items-center justify-between'>
         <div className='my-2 flex flex-col items-start justify-end '>
           <Heading size='lg' as='p' className=''>
             {time} | {date}
@@ -46,7 +46,7 @@ export default function EventList({
           <Heading
             size='xl'
             as='h5'
-            className='w-[700px] !font-monterat !text-white-A700 whitespace-nowrap overflow-hidden text-ellipsis'
+            className='!font-monterat !text-white-A700 whitespace-nowrap overflow-hidden text-ellipsis'
           >
             {nameEvent}
           </Heading>
@@ -59,7 +59,7 @@ export default function EventList({
             <Heading
               size='lg'
               as='p'
-              className='self-end !font-monterat md:ml-0'
+              className='self-end !font-monterat'
             >
               {event_operator_name}
             </Heading>

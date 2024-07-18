@@ -15,7 +15,6 @@ const Profile = () => {
 
   return (
     <div className='bg-gradient_vistor'>
-      <Header />
       <div className='container h-96 flex flex-col justify-start items-center'>
         <div className='mb-4 mt-2'>
           <ul className='menu menu-vertical lg:menu-horizontal bg-white-A700 rounded-box'>
@@ -41,7 +40,6 @@ const Profile = () => {
           </Routes>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

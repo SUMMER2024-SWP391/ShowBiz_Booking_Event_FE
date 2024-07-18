@@ -60,7 +60,6 @@ const Recovery = () => {
   })
   return (
     <>
-      <Header />
       <div className='container flex justify-center h-full'>
         <form
           className='flex flex-col justify-center items-center  h-[300px] w-[300px] border-cyan-900'
@@ -86,7 +85,6 @@ const Recovery = () => {
           <button className='mx-2 btn mt-2'>Reset password</button>
         </form>
       </div>
-      <Footer />
     </>
   )
 }

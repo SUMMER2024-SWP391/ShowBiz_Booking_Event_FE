@@ -15,9 +15,7 @@ export default function ManagerEventPage() {
   const event = data?.data.data.event as Event
   return (
     <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900_01'>
-      <Header className='' />
       {event && <ManageEventHome event={event} />}
-      <Footer className='' />
     </div>
   )
 }

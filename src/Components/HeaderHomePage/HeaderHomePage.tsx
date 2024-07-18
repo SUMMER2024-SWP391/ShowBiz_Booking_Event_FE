@@ -90,9 +90,10 @@ export default function Header({ ...props }: Props) {
 
   return (
     <div className='w-full'>
-      <header
+      <div></div>
+      <div
         {...props}
-        className={`${props.className} w-full h-[100px] flex flex-row justify-around items-center md:w-full `}
+        className={`${props.className} w-full flex flex-row justify-around items-center md:w-full `}
       >
         <Heading as='h1' size='2xl' className=''>
           eventbok.
@@ -144,7 +145,7 @@ export default function Header({ ...props }: Props) {
             <AvatarProfile onClick={handleLogout} />
           )}
         </div>
-      </header>
+      </div>
     </div>
   )
 }

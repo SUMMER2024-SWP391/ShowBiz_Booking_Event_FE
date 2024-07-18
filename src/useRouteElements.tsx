@@ -21,6 +21,7 @@ import ManagerEventPage from './pages/ManageEventPage/ManageEventPage'
 import EventListStaff from './pages/EventListStaff/EventListStaff'
 import HomeForSearch from './pages/HomePage/HomeForSearch'
 import EventListUserPage from './pages/EventListUserPage/EventListUserPage'
+import { MainLayout } from './layouts/MainLayout/MainLayout'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -36,100 +37,105 @@ function RejectedRoute() {
 const useRouteElements = () => {
   const routeElements = useRoutes([
     {
-      path: '/search',
-      element: <HomeForSearch />
-    },
-    {
-      path: path.verify_account,
-      element: <VerifyAccount />
-    },
-    {
-      path: '/register',
-      element: <Register />
-    },
-    // {
-    //   path: '/checkin/:id', //event id
-    //   element: <CheckInWithOTP />
-    // },
-
-    {
       path: '/',
-      index: true,
-      element: <HomePageVisitor />
-    },
-
-    {
-      path: '/forgot-password',
-      element: <ForgotPassword />
-    },
-    {
-      path: '/staff/:id',
-      element: <StaffPage />
-    },
-
-    {
-      path: '/recovery',
-      element: <Recovery />
-    },
-
-    //chua set up  protected routes
-    {
-      path: '',
-      element: <ProtectedRoute />,
+      element: <MainLayout />,
       children: [
-        //admin
         {
-          path: '/admin/*',
-          element: <Admin />
+          path: '/search',
+          element: <HomeForSearch />
         },
-        //event operator
+        {
+          path: path.verify_account,
+          element: <VerifyAccount />
+        },
+        {
+          path: '/register',
+          element: <Register />
+        },
+        // {
+        //   path: '/checkin/:id', //event id
+        //   element: <CheckInWithOTP />
+        // },
 
         {
-          path: '/event-operator/*',
-          element: <EventOperatorHome />
+          index: true,
+          element: <HomePageVisitor />
+        },
+
+        {
+          path: '/forgot-password',
+          element: <ForgotPassword />
         },
         {
-          path: '/event-operator/manage/:id/*',
-          element: <ManagerEventPage />
-        },
-        {
-          path: '/event-list/users',
-          element: <EventListUserPage />
-        },
-        {
-          path: '/event-list/staff',
-          element: <EventListStaff />
-        },
-        {
-          path: path.profile,
-          element: <Profile />
-        },
-        {
-          path: '/ticket/:id',
-          element: <TicketDetail />
-        },
-        {
-          path: '/checkin/:id',
+          path: '/staff/:id',
           element: <StaffPage />
-        }
-      ]
-    },
-    {
-      path: `/events/:id`,
-      element: <EventDetailPage />
-    },
+        },
 
-    {
-      path: '',
-      element: <RejectedRoute />,
-      children: [
         {
-          path: path.login,
-          element: <Login />
+          path: '/recovery',
+          element: <Recovery />
+        },
+
+        //chua set up  protected routes
+        {
+          path: '',
+          element: <ProtectedRoute />,
+          children: [
+            //admin
+            {
+              path: '/admin/*',
+              element: <Admin />
+            },
+            //event operator
+
+            {
+              path: '/event-operator/*',
+              element: <EventOperatorHome />
+            },
+            {
+              path: '/event-operator/manage/:id/*',
+              element: <ManagerEventPage />
+            },
+            {
+              path: '/event-list/users',
+              element: <EventListUserPage />
+            },
+            {
+              path: '/event-list/staff',
+              element: <EventListStaff />
+            },
+            {
+              path: path.profile,
+              element: <Profile />
+            },
+            {
+              path: '/ticket/:id',
+              element: <TicketDetail />
+            },
+            {
+              path: '/checkin/:id',
+              element: <StaffPage />
+            }
+          ]
         },
         {
-          path: path.loginOauthGoogle,
-          element: <LoginOauthGoogle />
+          path: `/events/:id`,
+          element: <EventDetailPage />
+        },
+
+        {
+          path: '',
+          element: <RejectedRoute />,
+          children: [
+            {
+              path: path.login,
+              element: <Login />
+            },
+            {
+              path: path.loginOauthGoogle,
+              element: <LoginOauthGoogle />
+            }
+          ]
         }
       ]
     }

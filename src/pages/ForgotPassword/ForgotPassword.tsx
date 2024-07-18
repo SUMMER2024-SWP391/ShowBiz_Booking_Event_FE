@@ -43,7 +43,6 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Header />
       <div className='container flex justify-center h-full'>
         <form
           className='flex justify-center items-center  h-[300px] w-[300px] border-cyan-900'
@@ -60,7 +59,6 @@ const ForgotPassword = () => {
           <button className='mx-2 btn mt-2'>Forgot password</button>
         </form>
       </div>
-      <Footer />
     </>
   )
 }
