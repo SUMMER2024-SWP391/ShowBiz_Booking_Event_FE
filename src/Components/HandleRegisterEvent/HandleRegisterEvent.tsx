@@ -14,6 +14,7 @@ import {
   canCancelEvent,
   isAxiosError,
   isAxiosErrorConflictAndNotPermisson,
+  isCanSeeOTPCheckIn,
   isValidToFeeback
 } from 'src/utils/utils'
 import { toast } from 'react-toastify'
@@ -177,20 +178,36 @@ const handleComponentEvent = (event: Event): JSX.Element => {
           </Heading>
         </div>
 
-        {!newData.data.data.ticket.register.status_check_in && (
-          <>
-            <Text size='s' as='p' className='ml-6 self-start '>
-              This is your code to help you checkin in this event
-            </Text>
-            <Text
+        {!isValidToFeeback(
+          //nếu chưa tới thời gian feedback thì
+          newData.data.data.ticket.event.date_event,
+          newData.data.data.ticket.event.time_end
+        ) ? (
+          newData.data.data.ticket.register.status_check_in ? ( //check tiếp người dùng đã check in chưa
+            <Button
               size='lg'
-              className='min-w-[423px] text-center rounded-md font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+              shape='round'
+              className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+              disabled
             >
-              {newData.data.data.ticket.register.otp_check_in}
-            </Text>
-          </>
+              You had check in this event
+            </Button>
+          ) : (
+            <>
+              <Text size='s' as='p' className='ml-6 self-start '>
+                This is your code to help you checkin in this event
+              </Text>
+              <Text
+                size='lg'
+                className='min-w-[423px] text-center rounded-md font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+              >
+                {newData.data.data.ticket.register.otp_check_in}
+              </Text>
+            </>
+          )
+        ) : (
+          <></>
         )}
-
         {newData != undefined &&
           newData.data.data.ticket.register.status_register ==
             StatusRegisterEvent.SUCCESS &&
@@ -243,8 +260,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
           isValidToFeeback(
             newData.data.data.ticket.event.date_event,
             newData.data.data.ticket.event.time_end
-          ) &&
-          newData.data.data.ticket.register.status_check_in && (
+          ) && (
             <HandleFeedbackOfUser
               _id={newData.data.data.ticket.event._id as string}
               isFeedback={newData.data.data.ticket.register.isFeedback}
@@ -253,6 +269,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
                   ? true
                   : false
               }
+              statusCheckIn={newData.data.data.ticket.register.status_check_in}
             />
           )}
       </div>

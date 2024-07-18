@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios'
 import { RegisterSucces } from 'src/@types/event.type'
 import { ErrorResponse } from 'src/@types/utils.type'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
-
+import duration from 'dayjs/plugin/duration'
 type ResponsePaymentEvent = {
   url: string
 }
@@ -104,10 +104,10 @@ export function isValidToFeeback(
   ).format('YYYY-MM-DD HH:mm')
   const nowDate = dayjs(new Date()).format('YYYY-MM-DD HH:mm')
   console.log(
-    Number(dayjs(timeEvent).minute()) - Number(dayjs(nowDate).minute()) <= 15
+    dayjs(timeEvent).valueOf() - dayjs(nowDate).valueOf(),
+    15 * 60 * 1000
   )
-  return dayjs(timeEvent).minute() - dayjs(nowDate).minute() <= 15
-  // const isToday = compareDate(dateEvent, nowDate) //dang bug cho nay
+  return dayjs(timeEvent).valueOf() - dayjs(nowDate).valueOf() <= 15 * 60 * 1000
 }
 
 export function isUnAuthorized<T>(error: unknown): error is AxiosError<T> {
@@ -126,8 +126,13 @@ export function isAxiosErrorJWTExpired(
   )
 }
 
-function compareDate(date1: string[], date2: string[]): boolean {
-  const day1 = new Date(Number(date1[2]), Number(date1[1]), Number(date1[0]))
-  const day2 = new Date(Number(date2[2]), Number(date2[1]), Number(date2[0]))
-  return day1.getTime() <= day2.getTime()
+export function isCanSeeOTPCheckIn(
+  dateEvent: string,
+  timeStart: string
+): boolean {
+  const timeEvent = dayjs(
+    dateEvent.split('/').reverse().join('/') + ' ' + timeStart
+  ).format('YYYY-MM-DD HH:mm')
+  const nowDate = dayjs(new Date()).format('YYYY-MM-DD HH:mm')
+  return -dayjs(timeEvent).minute() + dayjs(nowDate).minute() >= 60
 }
