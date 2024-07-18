@@ -1,4 +1,3 @@
-import React from 'react'
 import { Heading } from '../Heading/Heading'
 import { Event } from 'src/@types/event.type'
 import { Link, NavLink, Route, Routes } from 'react-router-dom'
@@ -7,15 +6,21 @@ import { Guest } from './Guest'
 import { Registration } from './Registration'
 import AssignCheckingStaff from '../AssignCheckingStaff/AssignCheckingStaff'
 import { Button } from '../Button/Button'
-import { Text } from '../Text/Text'
-import CheckInWithOTP from '../CheckInWithOTP/CheckInWithOTP'
 import FormFeedback from '../FormFeedback/FormFeedback'
 import StaffPage from 'src/pages/StaffPage/StaffPage'
+import { useQuery } from '@tanstack/react-query'
+import { formAPI } from 'src/apis/form.api'
+import { toast } from 'react-toastify'
+import { isValidToFeeback } from 'src/utils/utils'
 
 interface Props {
   event: Event
 }
 export const ManageEventHome = ({ event }: Props) => {
+  const { data } = useQuery({
+    queryKey: ['check-form-feedback'],
+    queryFn: () => formAPI.checkFormFeedbackIsExist(event._id)
+  })
   return (
     //name event
     <div className='flex flex-col  container-xs'>
@@ -60,9 +65,29 @@ export const ManageEventHome = ({ event }: Props) => {
         <NavLink role='tab' className='tab !text-white-A700' to='staff'>
           List Staff
         </NavLink>
-        <NavLink role='tab' className='tab !text-white-A700' to='form-feedback'>
-          Form Feedback
-        </NavLink>
+        {data &&
+        !data.data.data.formFeedBack &&
+        isValidToFeeback(event.date_event, event.time_end) ? ( //nếu chưa có form feedback và tới giờ feedback rồi mà chưa có form feedback thì ko cho tạo nữa
+          <span
+            className='tab !text-white-A700'
+            onClick={() => {
+              toast.error(
+                'Can not create form feedback before event end 15 minutes'
+              )
+            }}
+          >
+            Form Feedback
+          </span>
+        ) : (
+          <NavLink
+            role='tab'
+            className='tab !text-white-A700'
+            to='form-feedback'
+          >
+            Form Feedback
+          </NavLink>
+        )}
+
         <NavLink role='tab' className='tab !text-white-A700' to='update-form'>
           More
         </NavLink>

@@ -25,5 +25,15 @@ export const formAPI = {
       body
     ),
   deleteQuestion: (id: string) =>
-    http.delete<SuccessResponse<null>>(`forms/question/delete/feed-back/${id}`)
+    http.delete<SuccessResponse<null>>(`forms/question/delete/feed-back/${id}`),
+  checkFormFeedbackIsExist: (id: string) =>
+    http.get<
+      SuccessResponse<{
+        formFeedBack?: {
+          _id: string
+          event_id: string
+          type: EventQuestionType
+        }
+      }>
+    >(`forms/handle/check/has-form-feedback/${id}`)
 }
