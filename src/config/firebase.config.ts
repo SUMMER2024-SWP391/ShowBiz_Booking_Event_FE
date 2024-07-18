@@ -1,25 +1,15 @@
 import { getStorage } from 'firebase/storage'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-const {
-  FIREBASE_API_KEY,
-  FIRE_AUTH_DOMAIN,
-  FIREBASE_PROJECT_ID,
-  FIREBASE_STORERAGE_BUCKET,
-  FIREBASE_MESSAGING_SENDER_ID,
-  FIREBASE_APP_ID,
-  FIREBASE_MEASUREMENT_ID
-} = import.meta.env
-
-console.log(
-  FIREBASE_API_KEY,
-  FIRE_AUTH_DOMAIN,
-  FIREBASE_PROJECT_ID,
-  FIREBASE_STORERAGE_BUCKET,
-  FIREBASE_MESSAGING_SENDER_ID,
-  FIREBASE_APP_ID,
-  FIREBASE_MEASUREMENT_ID
-)
+// const {
+//   FIREBASE_API_KEY,
+//   FIRE_AUTH_DOMAIN,
+//   FIREBASE_PROJECT_ID,
+//   FIREBASE_STORERAGE_BUCKET,
+//   FIREBASE_MESSAGING_SENDER_ID,
+//   FIREBASE_APP_ID,
+//   FIREBASE_MEASUREMENT_ID
+// } = import.meta.env
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAP3bTlTid8bGoKiSEsPeuzJluEBnIlF6k',

@@ -5,7 +5,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import paymentAPI from 'src/apis/payment.api'
 import eventApi from 'src/apis/event.api'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ErrorResponse, StatusRegisterEvent } from 'src/@types/utils.type'
+import {
+  ErrorResponse,
+  StatusRegisterEvent,
+  SuccessResponse
+} from 'src/@types/utils.type'
 import {
   canCancelEvent,
   isAxiosError,
@@ -22,6 +26,9 @@ import { AppContext } from 'src/context/app.context'
 import HandleLoginWhenRegisterEvent from '../HandleLoginWhenRegisterEvent/HandleLoginWhenRegisterEvent'
 import FeedbackEventOfUser from '../FeedbackEventOfUser/FeedbackEventOfUser'
 import HandleFeedbackOfUser from '../HandleFeedbackOfUser/HandleFeedbackOfUser'
+import { AxiosResponse } from 'axios'
+import { Ticket } from 'src/@types/ticket.type'
+import { User } from 'src/@types/users.type'
 
 type Props = {
   event: Event
@@ -34,7 +41,19 @@ const handleComponentEvent = (event: Event): JSX.Element => {
 
   const { id } = useParams()
   const queryClient = useQueryClient()
-  let newData: any = null
+  let newData:
+    | AxiosResponse<
+        SuccessResponse<{
+          ticket: {
+            register: Ticket
+            event: Event
+            user_profile: User
+          }
+        }>,
+        any
+      >
+    | null
+    | undefined = null
   if (isAuthenticated) {
     const { data } = useQuery({
       queryKey: ['ticket-detail'],
@@ -42,7 +61,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     })
     newData = data ? data : null
   }
-
+  console.log(newData)
   const handleCancelEventMutation = useMutation({
     mutationFn: ({ id, registerId }: { id: string; registerId: string }) =>
       eventApi.cancelEvent(id, registerId),
@@ -231,6 +250,8 @@ const handleComponentEvent = (event: Event): JSX.Element => {
               isFeedback={newData.data.data.ticket.register.isFeedback}
               isHasFormFeedBack={
                 newData.data.data.ticket.register.isHasFormFeedback
+                  ? true
+                  : false
               }
             />
           )}

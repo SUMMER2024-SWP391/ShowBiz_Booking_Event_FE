@@ -1,4 +1,4 @@
-import { Register } from './../Components/EventDetail/Register'
+import dayjs from 'dayjs'
 import axios, { AxiosError } from 'axios'
 import { RegisterSucces } from 'src/@types/event.type'
 import { ErrorResponse } from 'src/@types/utils.type'
@@ -99,33 +99,15 @@ export function isValidToFeeback(
   date_event: string,
   time_end: string
 ): boolean {
-  const dateEvent = date_event.split('/')
-  const nowDate = [
-    new Date().getDate().toString(),
-    '0' + (new Date().getMonth() + 1).toString(),
-    new Date().getFullYear().toString()
-  ]
-
-  const isToday = compareDate(dateEvent, nowDate) //dang bug cho nay
-  const timeEvent = time_end.split(':')
-  const nowTime = [
-    new Date().getHours().toString(),
-    new Date().getMinutes().toString()
-  ]
-
-  let isValidTime = false
-  if (
-    Number(timeEvent[0]) * 60 +
-      Number(timeEvent[1]) -
-      (Number(nowTime[0]) * 60 + Number(nowTime[1])) <=
-    15
-  ) {
-    //check thời gian hiện tại so với thời gian event có bé hơn 15p ko nếu có thì
-    //hiển thị form feedback
-    isValidTime = true
-  }
-
-  return isToday && isValidTime
+  const timeEvent = dayjs(
+    date_event.split('/').reverse().join('/') + ' ' + time_end
+  ).format('YYYY-MM-DD HH:mm')
+  const nowDate = dayjs(new Date()).format('YYYY-MM-DD HH:mm')
+  console.log(
+    Number(dayjs(timeEvent).minute()) - Number(dayjs(nowDate).minute()) <= 15
+  )
+  return dayjs(timeEvent).minute() - dayjs(nowDate).minute() <= 15
+  // const isToday = compareDate(dateEvent, nowDate) //dang bug cho nay
 }
 
 export function isUnAuthorized<T>(error: unknown): error is AxiosError<T> {
