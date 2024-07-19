@@ -11,6 +11,7 @@ import { EventStatus } from 'src/@types/enum'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import eventApi from 'src/apis/event.api'
 import { toast } from 'react-toastify'
+import useClipboardCopy from 'src/hooks/useClipboardCopy'
 
 interface Props {
   event: Event
@@ -32,6 +33,7 @@ export const Overview = ({ event }: Props) => {
   const time = event.date_event.split('/')
   const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
+  const copyToClipboard = useClipboardCopy()
   return (
     <div className='mt-10 m-auto w-[820px] container'>
       <div className=' flex flex-row items-center justify-between'>
@@ -73,7 +75,13 @@ export const Overview = ({ event }: Props) => {
             </Text>
           </div>
         </Button>
-        <Button type='default' className='w-[257px] h-[56px] rounded-[15px]'>
+        <Button
+          type='default'
+          className='w-[257px] h-[56px] rounded-[15px]'
+          onClick={() =>
+            copyToClipboard(`http://localhost:3000/events/${event._id}`)
+          }
+        >
           <div className='flex flex-1 items-center gap-3'>
             <svg
               xmlns='http://www.w3.org/2000/svg'

@@ -1,14 +1,8 @@
-import {
-  createSearchParams,
-  Link,
-  NavLink,
-  useNavigate
-} from 'react-router-dom'
+import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 
 import { Heading } from '../Heading/Heading'
-import { BellOutlined, SearchOutlined } from '@ant-design/icons'
-import { Avatar, Button } from 'antd'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { SearchOutlined } from '@ant-design/icons'
+import { useMutation } from '@tanstack/react-query'
 import authAPI from 'src/apis/auth.api'
 import { AppContext } from 'src/context/app.context'
 import { useContext, useState } from 'react'
@@ -51,7 +45,7 @@ export default function Header({ ...props }: Props) {
       setProfile(null)
       setIsStaff(false)
     },
-    onError: (error) => {
+    onError: () => {
       // console.log(error)
     }
   })

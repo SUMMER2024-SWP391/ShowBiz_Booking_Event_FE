@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios'
 import { RegisterSucces } from 'src/@types/event.type'
 import { ErrorResponse } from 'src/@types/utils.type'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
-import duration from 'dayjs/plugin/duration'
+
 type ResponsePaymentEvent = {
   url: string
 }
