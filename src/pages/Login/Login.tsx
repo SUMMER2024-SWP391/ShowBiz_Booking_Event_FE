@@ -178,6 +178,7 @@ const Login = () => {
               >
                 Sign in with FPT EDU Email
               </Button> */}
+              <Link to={'/forgot-password'}>Forgot password</Link>
               <div className='grid grid-cols-2 gap-2'>
                 <Link
                   to={googleAuthUrl}
