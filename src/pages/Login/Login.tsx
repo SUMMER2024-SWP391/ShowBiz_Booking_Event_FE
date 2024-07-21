@@ -160,6 +160,9 @@ const Login = () => {
                 />
                 <span className=' text-red text-sm'>{loginError}</span>
               </div>
+              <Link to={'/forgot-password'} className='text-white-A700'>
+                Forgot password. Click here to get new password
+              </Link>
               <Button
                 size='xl'
                 color='white_A700'
@@ -178,7 +181,6 @@ const Login = () => {
               >
                 Sign in with FPT EDU Email
               </Button> */}
-              <Link to={'/forgot-password'}>Forgot password</Link>
               <div className='grid grid-cols-2 gap-2'>
                 <Link
                   to={googleAuthUrl}
