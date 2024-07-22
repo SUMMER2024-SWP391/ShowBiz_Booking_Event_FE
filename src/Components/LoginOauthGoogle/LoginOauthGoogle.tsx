@@ -29,6 +29,7 @@ const LoginOauthGoogle = () => {
       parseInt(params.get('role') as string)
     )
     const isStaff = params.get('isStaff')
+
     const user_id = params.get('user_id')
     const user_name = params.get('user_name')
     const userInfo: Pick<User, '_id' | 'user_name' | 'role' | 'status'> = {
@@ -44,8 +45,8 @@ const LoginOauthGoogle = () => {
       clearEventIdFromLS()
       navigate(`/events/${id}`)
     } else if (isStaff && !id) {
-      setIsStaffToLS(true)
-      setIsStaff(true)
+      setIsStaffToLS(isStaff == 'true' ? true : false)
+      setIsStaff(isStaff == 'true' ? true : false)
     } else if (role === UserRole.EventOperator) {
       navigate('/event-operator/')
     } else if (role === UserRole.Admin) {
