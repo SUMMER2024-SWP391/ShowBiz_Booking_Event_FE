@@ -22,7 +22,7 @@ import {
   TimePickerProps
 } from 'antd'
 import { useState } from 'react'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import {
   CreateEvent as CreateEventBody,
   EventTypeEnum,
@@ -36,20 +36,24 @@ import { ErrorResponse } from 'src/@types/utils.type'
 import { omit } from 'lodash'
 
 import EditorText from '../EditorText/EditorText'
-import RangeStatic from 'quill'
+
 import './style.css'
-import ModalPopup from '../ModalPopup/ModalPopup'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { imageDB } from 'src/config/firebase.config'
 import { v4 } from 'uuid'
-import weekday from 'dayjs/plugin/weekday'
-import localeData from 'dayjs/plugin/localeData'
+import advancedFormat from 'dayjs/plugin/advancedFormat'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import localeData from 'dayjs/plugin/localeData'
+import weekday from 'dayjs/plugin/weekday'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+import weekYear from 'dayjs/plugin/weekYear'
 
 dayjs.extend(customParseFormat)
-
+dayjs.extend(advancedFormat)
 dayjs.extend(weekday)
 dayjs.extend(localeData)
+dayjs.extend(weekOfYear)
+dayjs.extend(weekYear)
 
 const initForm = {
   type_event: 'Public',
@@ -111,7 +115,6 @@ const CreateEvent = () => {
       })
     }
   }
-
   //handlechange time
   const handleChangeTime: (
     name: 'time_start' | 'time_end'
@@ -135,19 +138,11 @@ const CreateEvent = () => {
 
   //handle onChange datetime
   const onChangeDate: DatePickerProps['onChange'] = (date, dateString) => {
-    // dateString !== null
-    // ?
     console.log(dateString)
     setForm((prevForm) => ({
       ...prevForm,
-      date_event: date as dayjs.Dayjs
+      date_event: date as any
     }))
-    // : setForm((prevForm) => ({
-    //     ...prevForm,
-    //     date_event: dayjs(defaultValueOfTime.dataEvent)
-    //       .format('DD/MM/YYYY')
-    //       .toString()
-    //   }))
   }
 
   //handle on change switch
@@ -162,10 +157,14 @@ const CreateEvent = () => {
     event.preventDefault()
     const bodyCreateEvent = {
       ...form,
+      date_event: form.date_event.format('DD/MM/YYYY'),
+      time_end: form.time_end.format('HH:mm'),
+      time_start: form.time_start.format('HH:mm'),
       ticket_price: form.ticket_price ? form.ticket_price : 0,
       image: previewImage,
       is_required_form_register: checked
     }
+    console.log(bodyCreateEvent)
     createEventMutation.mutate(bodyCreateEvent as any, {
       onSuccess: (data) => {
         toast.success(data.data.message)
@@ -386,7 +385,7 @@ const CreateEvent = () => {
                           size='middle'
                           onChange={onChangeDate}
                           format={'DD/MM/YYYY'}
-                          value={form.date_event}
+                          placeholder='Date event'
                         />
                       </Row>
                     </Col>
@@ -394,9 +393,10 @@ const CreateEvent = () => {
                       <Row>
                         <TimePicker
                           format='HH:mm'
+                          size='middle'
                           showNow={false}
                           onChange={handleChangeTime('time_start')}
-                          value={form.time_start}
+                          placeholder='Time start'
                         />
                       </Row>
                     </Col>
@@ -405,9 +405,10 @@ const CreateEvent = () => {
                       <Row>
                         <TimePicker
                           format='HH:mm'
+                          size='middle'
                           showNow={false}
                           onChange={handleChangeTime('time_end')}
-                          defaultValue={form.time_end}
+                          placeholder='Time end'
                         />
                       </Row>
                     </Col>
@@ -463,7 +464,6 @@ const CreateEvent = () => {
                         onCancel={() => setOpen(false)}
                       >
                         <EditorText
-                      
                           value={form.description}
                           onChange={handleDescriptionChange}
                           readOnly={readOnly}
