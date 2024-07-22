@@ -103,10 +103,6 @@ export function isValidToFeeback(
     date_event.split('/').reverse().join('/') + ' ' + time_end
   ).format('YYYY-MM-DD HH:mm')
   const nowDate = dayjs(new Date()).format('YYYY-MM-DD HH:mm')
-  console.log(
-    dayjs(timeEvent).valueOf() - dayjs(nowDate).valueOf(),
-    15 * 60 * 1000
-  )
   return dayjs(timeEvent).valueOf() - dayjs(nowDate).valueOf() <= 15 * 60 * 1000
 }
 

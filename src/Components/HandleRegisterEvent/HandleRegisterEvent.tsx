@@ -4,7 +4,7 @@ import { Button } from '../Button/Button'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import paymentAPI from 'src/apis/payment.api'
 import eventApi from 'src/apis/event.api'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
   ErrorResponse,
   StatusRegisterEvent,
@@ -14,7 +14,6 @@ import {
   canCancelEvent,
   isAxiosError,
   isAxiosErrorConflictAndNotPermisson,
-  isCanSeeOTPCheckIn,
   isValidToFeeback
 } from 'src/utils/utils'
 import { toast } from 'react-toastify'
@@ -22,10 +21,10 @@ import { Text } from '../Text/Text'
 import { Heading } from '../Heading/Heading'
 
 import { useContext, useState } from 'react'
-import { Modal, Button as ButtonAntd } from 'antd'
+import { Modal } from 'antd'
 import { AppContext } from 'src/context/app.context'
 import HandleLoginWhenRegisterEvent from '../HandleLoginWhenRegisterEvent/HandleLoginWhenRegisterEvent'
-import FeedbackEventOfUser from '../FeedbackEventOfUser/FeedbackEventOfUser'
+
 import HandleFeedbackOfUser from '../HandleFeedbackOfUser/HandleFeedbackOfUser'
 import { AxiosResponse } from 'axios'
 import { Ticket } from 'src/@types/ticket.type'
@@ -36,7 +35,6 @@ type Props = {
 }
 
 const handleComponentEvent = (event: Event): JSX.Element => {
-  const navigate = useNavigate()
   const { isAuthenticated } = useContext(AppContext)
   const [popupCancel, setPopupCancel] = useState(false)
 
@@ -49,6 +47,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
             register: Ticket
             event: Event
             user_profile: User
+            inforForm: { isFeedback: boolean; isHasFormFeedback: boolean }
           }
         }>,
         any
@@ -119,10 +118,15 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     })
   }
 
+  console.log(
+    Boolean(newData && !newData?.data.data.ticket.register),
+    Boolean(!isAuthenticated),
+    Boolean(!newData)
+  )
   if (
-    (newData && !newData.data.data.ticket.register) ||
     !isAuthenticated ||
-    !newData
+    !newData ||
+    (newData && !newData.data.data.ticket.register)
   ) {
     if (event.is_required_form_register && Number(event.ticket_price) !== 0) {
       return <Register _id={event._id} event={event} />
@@ -263,9 +267,9 @@ const handleComponentEvent = (event: Event): JSX.Element => {
           ) && (
             <HandleFeedbackOfUser
               _id={newData.data.data.ticket.event._id as string}
-              isFeedback={newData.data.data.ticket.register.isFeedback}
+              isFeedback={newData.data.data.ticket.inforForm.isFeedback}
               isHasFormFeedBack={
-                newData.data.data.ticket.register.isHasFormFeedback
+                newData.data.data.ticket.inforForm.isHasFormFeedback
                   ? true
                   : false
               }

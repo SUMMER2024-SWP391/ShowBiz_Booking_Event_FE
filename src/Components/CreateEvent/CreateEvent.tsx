@@ -41,16 +41,14 @@ import ModalPopup from '../ModalPopup/ModalPopup'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { imageDB } from 'src/config/firebase.config'
 import { v4 } from 'uuid'
+import weekday from 'dayjs/plugin/weekday'
+import localeData from 'dayjs/plugin/localeData'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 
-interface LastChangeState {
-  ops?: any[]
-}
+dayjs.extend(customParseFormat)
 
-const defaultValueOfTime = {
-  timeStart: dayjs('15:00', 'HH:MM'),
-  timeEnd: dayjs('17:00', 'HH:MM'),
-  dataEvent: dayjs('06/10/2024', 'DD/MM/YYYY')
-}
+dayjs.extend(weekday)
+dayjs.extend(localeData)
 
 const initForm = {
   type_event: 'Public',
@@ -60,10 +58,10 @@ const initForm = {
   description: '',
   ticket_price: '',
   capacity: '',
-  date_event: '06/12/2024',
+  date_event: dayjs(new Date(), 'DD/MM/YYYY'),
   location: LocationType.HALL_A,
-  time_start: '15:00',
-  time_end: '17:00'
+  time_start: dayjs('15:00', 'HH:mm'),
+  time_end: dayjs('17:00', 'HH:mm')
 }
 
 const errorForm = {
@@ -85,9 +83,7 @@ const CreateEvent = () => {
   const [form, setForm] = useState<typeof initForm>(initForm)
   const [formError, setFormError] = useState<typeof errorForm>(errorForm)
   const [checked, setChecked] = useState<boolean>(false)
-  const [range, setRange] = useState<RangeStatic | null>(null)
-  const [lastChange, setLastChange] = useState<LastChangeState | null>(null)
-  const [readOnly, setReadOnly] = useState<boolean>(false)
+  const [readOnly] = useState<boolean>(false)
   const [open, setOpen] = useState<boolean>(false)
   // Use a ref to access the quill instance directly
   const createEventMutation = useMutation({
@@ -121,47 +117,36 @@ const CreateEvent = () => {
   ) => TimePickerProps['onChange'] = (name: 'time_start' | 'time_end') => {
     return (timeString) => {
       if (name === 'time_start') {
-        timeString !== null
-          ? setForm((prevForm) => ({
-              ...prevForm,
-              time_start: timeString.format('HH:MM').toString()
-            }))
-          : setForm((prevForm) => ({
-              ...prevForm,
-              time_start: defaultValueOfTime.timeStart
-                .format('HH:MM')
-                .toString()
-            }))
+        setForm((prevForm) => ({
+          ...prevForm,
+          time_start: timeString as dayjs.Dayjs
+        }))
       }
 
       if (name === 'time_end') {
-        timeString !== null
-          ? setForm((prevForm) => ({
-              ...prevForm,
-              time_end: timeString.format('HH:MM').toString()
-            }))
-          : setForm((prevForm) => ({
-              ...prevForm,
-              time_end: defaultValueOfTime.timeEnd.format('HH:MM').toString()
-            }))
+        setForm((prevForm) => ({
+          ...prevForm,
+          time_end: timeString as dayjs.Dayjs
+        }))
       }
     }
   }
 
-  console.log(checked)
   //handle onChange datetime
-  const onChangeDate: DatePickerProps['onChange'] = (dateString) => {
-    dateString !== null
-      ? setForm((prevForm) => ({
-          ...prevForm,
-          date_event: dateString.format('DD/MM/YYYY').toString()
-        }))
-      : setForm((prevForm) => ({
-          ...prevForm,
-          date_event: defaultValueOfTime.dataEvent
-            .format('DD/MM/YYYY')
-            .toString()
-        }))
+  const onChangeDate: DatePickerProps['onChange'] = (date, dateString) => {
+    // dateString !== null
+    // ?
+    console.log(dateString)
+    setForm((prevForm) => ({
+      ...prevForm,
+      date_event: date as dayjs.Dayjs
+    }))
+    // : setForm((prevForm) => ({
+    //     ...prevForm,
+    //     date_event: dayjs(defaultValueOfTime.dataEvent)
+    //       .format('DD/MM/YYYY')
+    //       .toString()
+    //   }))
   }
 
   //handle on change switch
@@ -400,6 +385,7 @@ const CreateEvent = () => {
                           size='middle'
                           onChange={onChangeDate}
                           format={'DD/MM/YYYY'}
+                          value={form.date_event}
                         />
                       </Row>
                     </Col>
@@ -409,7 +395,7 @@ const CreateEvent = () => {
                           format='HH:mm'
                           showNow={false}
                           onChange={handleChangeTime('time_start')}
-                          value={dayjs(form.time_start, 'HH:MM')}
+                          value={form.time_start}
                         />
                       </Row>
                     </Col>
@@ -420,7 +406,7 @@ const CreateEvent = () => {
                           format='HH:mm'
                           showNow={false}
                           onChange={handleChangeTime('time_end')}
-                          value={dayjs(form.time_end, 'HH:MM')}
+                          defaultValue={form.time_end}
                         />
                       </Row>
                     </Col>

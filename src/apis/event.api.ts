@@ -60,7 +60,12 @@ const eventApi = {
   getTicket: (id: string) =>
     http.get<
       SuccessResponse<{
-        ticket: { register: Ticket; event: Event; user_profile: User }
+        ticket: {
+          register: Ticket
+          event: Event
+          user_profile: User
+          inforForm: { isFeedback: boolean; isHasFormFeedback: boolean }
+        }
       }>
     >(`/events/ticket/${id}`),
   createEvent: (body: CreateEvent) =>

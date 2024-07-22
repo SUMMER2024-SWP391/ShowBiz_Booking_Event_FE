@@ -8,6 +8,4 @@ export type Ticket = {
   time_register: string
   status_register: StatusRegisterEvent
   otp_check_in: string
-  isFeedback: boolean
-  isHasFormFeedback: boolean
 }
