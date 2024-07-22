@@ -124,18 +124,18 @@ export default {
       }
     }
   },
-  plugins: [
-    require('daisyui'),
-    plugin(function ({ addComponents, theme }) {
-      addComponents({
-        '.container': {
-          maxWidth: '1440px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          paddingLeft: theme('spacing.4'),
-          paddingRight: theme('spacing.4')
-        }
-      })
-    })
-  ]
+  // plugins: [
+  //   require('daisyui'),
+  //   plugin(function ({ addComponents, theme }) {
+  //     addComponents({
+  //       '.container': {
+  //         maxWidth: '1440px',
+  //         marginLeft: 'auto',
+  //         marginRight: 'auto',
+  //         paddingLeft: theme('spacing.4'),
+  //         paddingRight: theme('spacing.4')
+  //       }
+  //     })
+  //   })
+  // ]
 }

@@ -11,7 +11,7 @@ interface TextEditorProps {
 const EditorText: React.FC<TextEditorProps> = ({
   value,
   onChange,
-  readOnly = false,
+  readOnly = false
 }) => {
   const modules = {
     toolbar: [
@@ -24,15 +24,16 @@ const EditorText: React.FC<TextEditorProps> = ({
   }
 
   return (
+    <div className='mt-10'>
       <ReactQuill
-        className='bg-white-A700 !text-black-900'
+        className='bg-white-A700 !text-black-900 !border-none'
         theme='snow'
         value={value}
         onChange={onChange}
         readOnly={readOnly}
         modules={modules}
-        
       />
+    </div>
   )
 }
 

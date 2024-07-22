@@ -7,19 +7,27 @@ import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import eventApi from 'src/apis/event.api'
 import { omit, pick } from 'lodash'
 import { compareAsc, parse } from 'date-fns'
+import { checkEventDate } from 'src/utils/checkEventDate'
+import { Heading } from 'src/Components'
+import EventList from 'src/Components/EventLists/EventList'
 
 const EventListUserPage = () => {
   const { data, isFetching } = useQuery({
     queryKey: ['event_list_user'],
     queryFn: () => eventApi.getListEventUser()
   })
-
+  console.log(data?.data.data.events.map((event) => event.event[0]))
   return (
     <>
-      <div className='bg-gradient_vistor h-screen'>
+      <div className=' h-screen'>
         <Header />
-        <div className='container flex justify-center items-center'>
-          <div className='flex flex-col'>
+        <div className='container-xs '>
+          <div className='flex flex-col mt-10'>
+            <div className='flex flex-row items-center justify-between  '>
+              <Heading as='h1' size='4xl' className=''>
+                My Events
+              </Heading>
+            </div>
             {isFetching && (
               <>
                 <Skeleton />
@@ -42,34 +50,41 @@ const EventListUserPage = () => {
                 })
                 .map((event) => ({
                   ...event,
-                  parsedDate: parse(event.date_event, 'dd/MM/yyyy', new Date())
+                  parsedDate: parse(event.date_event, 'dd/MM/yyyy', new Date()),
+                  displayDate: checkEventDate(event.date_event)
                 }))
                 .sort((a, b) => compareAsc(a.parsedDate, b.parsedDate))
-                .map((_event) => {
+                .map((event) => {
+                  console.log(event)
                   return (
-                    <Link
-                      key={_event._id}
-                      to={`/events/${_event.event_id}`}
-                      className='mt-10'
+                    <div
+                      className={`w-full h-auto flex items-center justify-between `}
+                      key={event.event_id}
                     >
-                      <EventUserList
-                        key={_event._id}
-                        imageUrl={_event.image}
-                        nameEvent={_event.name}
-                        location={_event.location}
-                        // event_operator_name={_eventOperator.user_name}
-                        date={_event.date_event}
-                        time={_event.time_start}
-                        price={_event.ticket_price}
-                        event_operator_name={
-                          _event.event_operator.event_operator[0].user_name
-                        }
-                      />
-                    </Link>
+                      <div className='w-[10%]'>
+                        <Heading>{event.displayDate}</Heading>
+                      </div>
+                      <div className='mt-3 w-[80%] flex items-center'>
+                        <EventList
+                          className='mt-8'
+                          id={event.event_id}
+                          date={event.date_event}
+                          time_start={event.time_start}
+                          time_end={event.time_end}
+                          nameEvent={event.name}
+                          event_operator_name={event.event_operator.event_operator[0].user_name}
+                          address={event.address}
+                          imageUrl={event.image}
+                          location={event.location}
+                          price={event.ticket_price}
+                        />
+                      </div>
+                    </div>
                   )
                 })}
+                <div className=""></div>
             {!isFetching && data?.data.data.events.length == 0 && (
-              <h1 className='text-white-A700'>You didn't register any event</h1>
+              <h1 className='text-black-900'>You didn't register any event</h1>
             )}
           </div>
         </div>

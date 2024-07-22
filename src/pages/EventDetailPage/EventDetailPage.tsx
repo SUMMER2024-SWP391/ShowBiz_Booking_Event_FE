@@ -16,7 +16,7 @@ export default function EventDetailPage() {
   const event = data?.data.data.event as Event
 
   return (
-    <div className='flex w-full flex-col items-center gap-[61px] bg-gradient_vistor'>
+    <div className='flex w-full flex-col items-center '>
       <Header className='' />
       {event && (
         <EventDetail

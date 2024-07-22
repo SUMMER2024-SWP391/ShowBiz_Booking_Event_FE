@@ -15,30 +15,21 @@ export const EventOperatorHome = () => {
     <>
       <div className='w-full bg-blue_gray-900 pb-[376px] md:pb-5 '>
         <div className='flex flex-col items-center gap-14 sm:gap-7'>
-          <div className='flex flex-col items-center self-stretch'>
-            <Header className='bg-blue_gray-900' />
-          </div>
-          <div className='container-xs pl-[89px] pr-[70px] md:p-5 md:px-5'>
-            <div className='flex flex-col gap-[73px] md:gap-[54px] sm:gap-9'>
-              <div className='w-[100%] md:w-full'>
-                <div className='flex flex-col'>
-                  <div className='container-xs '>
-                    <Heading size='4xl' as='h1' className=''>
-                      Events
-                    </Heading>
-                    <div className='mt-10'>
-                      <Routes>
-                        <Route index element={<EventListOperator />} />
-                        {/* khi nào không có event thì mới dùg cái role dưới */}
-                        {/* <Route index element={<Events />} /> */}
-                        <Route path='manage/:id/' element={<ManagerEventPage/>}/>
-                        <Route path='create' element={<CreateEvent />} />
-                        
-                      </Routes>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <Header />
+
+          <div className='flex flex-col items-center self-stretch'></div>
+          <div className='container-xs'>
+            <Heading size='4xl' as='h1' className=''>
+              Events
+            </Heading>
+            <div className='mt-10'>
+              <Routes>
+                <Route index element={<EventListOperator />} />
+                {/* khi nào không có event thì mới dùg cái role dưới */}
+                {/* <Route index element={<Events />} /> */}
+                <Route path='manage/:id/' element={<ManagerEventPage />} />
+                <Route path='create' element={<CreateEvent />} />
+              </Routes>
             </div>
           </div>
         </div>
