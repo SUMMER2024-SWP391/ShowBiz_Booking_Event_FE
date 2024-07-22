@@ -20,6 +20,7 @@ export interface Event {
   location: string
   speaker_name: string
   sponsor_name: string
+  dateTime: string
   is_required_form_register: boolean
 }
 export type ListQuestion = {
@@ -48,6 +49,8 @@ export type EventList = Pick<
   | 'address'
   | 'location'
   | 'is_required_form_register'
+  | 'dateTime'
+
 >
 
 export type EventListPendingAdmin = Pick<

@@ -15,6 +15,7 @@ import {
   Col,
   DatePicker,
   DatePickerProps,
+  Modal,
   Row,
   Switch,
   TimePicker,
@@ -469,17 +470,19 @@ const CreateEvent = () => {
                       >
                         Add Description
                       </button>
-                      <ModalPopup
-                        type=''
+                      <Modal
+                        centered
                         open={open}
-                        onClose={() => setOpen(false)}
+                        onOk={() => setOpen(false)}
+                        onCancel={() => setOpen(false)}
                       >
                         <EditorText
+                      
                           value={form.description}
                           onChange={handleDescriptionChange}
                           readOnly={readOnly}
                         />
-                      </ModalPopup>
+                      </Modal>
 
                       <div className='mt-1 text-sm text-red'>
                         {errorForm.description}

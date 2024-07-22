@@ -31,16 +31,22 @@ const EventListOperator = () => {
         .sort((a, b) => compareAsc(a.parsedDate, b.parsedDate)) // Sort events by date in increasing order
 
         .map((event) => (
-          <div className={`w-full h-auto flex items-center  `}>
-            <div className='w-[30%]'>
+          <div className={`flex flex-row items-center justify-between w-full`}>
+            <div className='w-[15%]'>
               <Heading>
                 {format(
                   parse(event.date_event, 'dd/MM/yyyy', new Date()),
-                  'MMM dd EEEE'
+                  'MMM dd'
+                )}
+              </Heading>
+              <Heading>
+                {format(
+                  parse(event.date_event, 'dd/MM/yyyy', new Date()),
+                  'EEEE'
                 )}
               </Heading>
             </div>
-            <div className='w-[70%] bg-blue_gray-900_01 flex items-center px-5 mt-5 justify-between sm:flex-row shadow-2xl rounded-[15px] '>
+            <div className='w-[85%] bg-blue_gray-900_01 flex items-center px-3 mt-5 justify-between sm:flex-row shadow-2xl rounded-[15px] '>
               <div className=' my-5 flex flex-col items-baseline justify-center '>
                 {/* time */}
                 <Text size='lg' as='p' className=''>
@@ -84,7 +90,7 @@ const EventListOperator = () => {
                 </Button>
               </div>
               <div>
-                <div className='my-5 w-[150px] h-[150px]'>
+                <div className='w-[150px] h-[150px]'>
                   <Img
                     src={event.image}
                     alt='banner-event'

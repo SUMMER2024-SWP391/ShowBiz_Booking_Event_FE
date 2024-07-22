@@ -28,7 +28,7 @@ const AvatarProfile = (prop: Props) => {
         className={`relative border-b-4 border-transparent py-3 `}
       >
         <div className='flex items-center space-x-2 cursor-pointer'>
-          <div className='font-semibold dark:text-white text-white-A700 text-[14px]'>
+          <div className='font-semibold text-[14px]'>
             <div className='cursor-pointer'>
               {data?.data.data.user.user_name}
             </div>

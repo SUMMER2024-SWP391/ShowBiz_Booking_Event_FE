@@ -5,41 +5,41 @@ const Footer = ({ ...props }: Props) => {
   return (
     <div
       {...props}
-      className={`${props.className} py-16 text-pink-light w-full `}
+      className={`${props.className} py-16 text-black_light w-full `}
     >
-      <div className='h-[0.5px] w-full self-stretch opacity-50 bg-white-A700' />
+      <div className='h-[0.5px] w-full self-stretch bg-black_light opacity-20' />
       <div className='mx-auto px-4 flex justify-around capitalize container '>
         <div className='cursor-pointer'>
-          <div className='mt-4 mb-7 font-bold hover:text-white-A700 '>
+          <div className='mt-4 mb-7 font-bold hover:text-black_supper_light '>
             Product
           </div>
-          <div className='mb-4 hover:text-white-A700'>key features</div>
-          <div className='mb-4 hover:text-white-A700'>pricing</div>
-          <div className='mb-4 hover:text-white-A700'>event ticketing</div>
-          <div className='mb-4 hover:text-white-A700'>booking</div>
-          <div className='mb-4 hover:text-white-A700'>online promotion</div>
-          <div className='mb-4 hover:text-white-A700'>developers</div>
+          <div className='mb-4 hover:text-black_supper_light'>key features</div>
+          <div className='mb-4 hover:text-black_supper_light'>pricing</div>
+          <div className='mb-4 hover:text-black_supper_light'>event ticketing</div>
+          <div className='mb-4 hover:text-black_supper_light'>booking</div>
+          <div className='mb-4 hover:text-black_supper_light'>online promotion</div>
+          <div className='mb-4 hover:text-black_supper_light'>developers</div>
         </div>
         <div>
-          <div className='mt-4 mb-7 font-bold hover:text-white-A700'>
+          <div className='mt-4 mb-7 font-bold hover:text-black_supper_light'>
             explore more
           </div>
-          <div className='mb-4 hover:text-white-A700'>how it work</div>
-          <div className='mb-4 hover:text-white-A700'>dowload app</div>
-          <div className='mb-4 hover:text-white-A700'>event promoter</div>
-          <div className='mb-4 hover:text-white-A700'>sell tickets</div>
-          <div className='mb-4 hover:text-white-A700'>event organiser</div>
-          <div className='mb-4 hover:text-white-A700'>
+          <div className='mb-4 hover:text-black_supper_light'>how it work</div>
+          <div className='mb-4 hover:text-black_supper_light'>dowload app</div>
+          <div className='mb-4 hover:text-black_supper_light'>event promoter</div>
+          <div className='mb-4 hover:text-black_supper_light'>sell tickets</div>
+          <div className='mb-4 hover:text-black_supper_light'>event organiser</div>
+          <div className='mb-4 hover:text-black_supper_light'>
             nonprofits & fundraisers
           </div>
         </div>
         <div>
-          <div className='mt-4 mb-7 font-bold hover:text-white-A700'>
+          <div className='mt-4 mb-7 font-bold hover:text-black_supper_light'>
             contact with us
           </div>
-          <div className='mb-4 hover:text-white-A700'>customer support</div>
-          <div className='mb-4 hover:text-white-A700'>dowload app</div>
-          <div className='mb-4 hover:text-white-A700'>new feeds</div>
+          <div className='mb-4 hover:text-black_supper_light'>customer support</div>
+          <div className='mb-4 hover:text-black_supper_light'>dowload app</div>
+          <div className='mb-4 hover:text-black_supper_light'>new feeds</div>
           <div className='mb-4 flex justify-start'>
             <div className='mr-2'>
               <svg
@@ -47,18 +47,18 @@ const Footer = ({ ...props }: Props) => {
                 viewBox='-2 -2 24 24'
                 width='28'
                 fill='currentColor'
-                className='w-[1.5rem] h-[1.5] hover:text-white-A700'
+                className='w-[1.5rem] h-[1.5] hover:text-black_supper_light'
               >
                 <path d='M8.695 6.937v1.377H7.687v1.683h1.008V15h2.072V9.997h1.39s.131-.807.194-1.69h-1.576v-1.15c0-.173.226-.404.45-.404h1.128V5h-1.535C8.644 5 8.695 6.685 8.695 6.937z'></path>
                 <path d='M4 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4zm0-2h12a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'></path>
               </svg>
             </div>
-            <span className='hover:text-white-A700'>facebook</span>
+            <span className='hover:text-black_supper_light'>facebook</span>
           </div>
-          <div className='mb-4 flex justify-start items-center hover:text-white-A700'>
+          <div className='mb-4 flex justify-start items-center hover:text-black_supper_light'>
             <div className='mr-2 '>
               <svg
-                className='w-6 h-6 text-pink-light hover:text-white-A700'
+                className='w-6 h-6 text-black-900  hover:text-black_supper_light'
                 aria-hidden='true'
                 xmlns='http://www.w3.org/2000/svg'
                 width='24'
@@ -73,12 +73,12 @@ const Footer = ({ ...props }: Props) => {
                 />
               </svg>
             </div>
-            <span className='hover:text-white-A700'>twitter</span>
+            <span className='hover:text-black_supper_light'>twitter</span>
           </div>
           <div className='mb-4 flex justify-start'>
             <div className='mr-2'>
               <svg
-                className='w-5 h-5 text-pink-light hover:text-white-A700'
+                className='w-5 h-5 text-black-900 hover:text-black_supper_light'
                 aria-hidden='true'
                 xmlns='http://www.w3.org/2000/svg'
                 width='24'
@@ -94,7 +94,7 @@ const Footer = ({ ...props }: Props) => {
                 />
               </svg>
             </div>
-            <span className='hover:text-white-A700'>instagram</span>
+            <span className='hover:text-black_supper_light'>instagram</span>
           </div>
         </div>
       </div>

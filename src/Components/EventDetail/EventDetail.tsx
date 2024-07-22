@@ -22,9 +22,11 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
 
   return (
-    <div className={`${className} flex container-xs`}>
+    <div
+      className={`${className} mt-5 flex container-xl flex-row justify-between`}
+    >
       <div className='flex md:flex-col'>
-        <div className='flex w-[41%] flex-row items-start pb-[31px] md:w-full sm:pb-5 container-xs'>
+        <div className='flex w-[41%] flex-row items-start pb-[31px] md:w-full sm:pb-5'>
           <div className='w-[40%] mr-[40px]'>
             <Img
               src={event.image}
@@ -40,20 +42,16 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                     className='h-[32px] w-[32px] rounded-[5px] object-cover'
                   />
                   <div className='flex flex-col items-start gap-0.5'>
-                    <Text
-                      size='xs'
-                      as='p'
-                      className='!font-medium !text-white-A700_cc'
-                    >
+                    <Text size='xs' as='p' className='!font-medium !'>
                       Presented by
                     </Text>
                     <Text size='s' as='p'>
-                      <span className='font-semibold text-white-A700'>
+                      <span className='font-semibold'>
                         {event.event_operator.user_name}
                       </span>
                     </Text>
                   </div>
-                  <RightOutlined className='mt-4 text-white-A700_cc' />
+                  <RightOutlined className='mt-4 ' />
                   <Img
                     src={subriceIcon}
                     alt='subriceicon'
@@ -61,48 +59,49 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                   />
                 </div>
                 <div className='flex gap-[15px]'>
-                  <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                  <YoutubeOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                  <FacebookOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
+                  <InstagramOutlined className='h-[16px] w-[16px] ' />
+                  <YoutubeOutlined className='h-[16px] w-[16px] ' />
+                  <FacebookOutlined className='h-[16px] w-[16px] ' />
                 </div>
               </div>
             </div>
             <div className='mt-11 flex flex-col items-start gap-[11px] self-stretch pb-2.5'>
               <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
-                <Text size='s' as='p' className='!text-white-A700'>
+                <Heading size='md' as='h6' className=''>
                   Speacker
-                </Text>
-                <div className='h-px self-stretch bg-white-A700' />
+                </Heading>
+                <div className='h-[0.5px] w-full self-stretch bg-black_light opacity-20' />
               </div>
               <div className='flex w-[77%] flex-col gap-3.5 md:w-full'>
-                <Text
-                  size='s'
-                  as='p'
-                  className='!text-white-A700 !font-monterat'
-                >
+                <Text size='md' as='p' className=' !font-monterat'>
                   {event.speaker_name}
                 </Text>
-                <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
-                  <Text size='s' as='p' className='!text-white-A700'>
-                    Sponser
-                  </Text>
-                  <div className='h-px self-stretch bg-white-A700_5e' />
+                <div className='flex gap-[15px]'>
+                  <InstagramOutlined className='h-[16px] w-[16px]  ' />
+                  <YoutubeOutlined className='h-[16px] w-[16px] ' />
+                  <FacebookOutlined className='h-[16px] w-[16px] ' />
                 </div>
-                <Text
-                  size='s'
-                  as='p'
-                  className='!text-white-A700 !font-monterat'
-                >
+                <div className='flex w-[93%] flex-col items-start gap-2 md:w-full'>
+                  <Heading size='md' as='h6' className=''>
+                    Sponser
+                  </Heading>
+                  <div className='h-[0.5px] w-full self-stretch bg-black_light opacity-20' />
+
+                </div>
+                <Text size='s' as='p' className=' !font-monterat'>
                   {event.sponsor_name}
                 </Text>
-                <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
+                <div className='flex gap-[15px]'>
+                  <InstagramOutlined className='h-[16px] w-[16px] ' />
+                  <YoutubeOutlined className='h-[16px] w-[16px] ' />
+                  <FacebookOutlined className='h-[16px] w-[16px] ' />
+                </div>
               </div>
             </div>
-            <Text size='s' as='p' className='mt-[19px] !text-white-A700_cc'>
+            <Text size='s' as='p' className='mt-[19px] cursor-pointer'>
               Contact the Host
             </Text>
-            <Text size='s' as='p' className='mt-[19px] !text-white-A700_cc'>
+            <Text size='s' as='p' className='mt-[19px] cursor-pointer'>
               Report Event
             </Text>
           </div>
@@ -111,22 +110,22 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
               <Heading
                 size='s'
                 as='h1'
-                className='flex items-center justify-center rounded-[10px] bg-pink-normail p-[3px] '
+                className='flex items-center justify-center bg-orange-600 bg-pink-normail rounded-[10px] bg- p-[3px] '
               >
-                <span className='text-pink-light p-1'>Featured in</span>
+                <span className='text-white-A700_cc p-1'>Featured in</span>
                 <span className='text-white-A700 p-1'>Ho Chi Minh City</span>
               </Heading>
               <Heading
                 size='4xl'
                 as='h3'
-                className='mt-[20px] !text-white-A700 w-full !font-monterat leading-[39px]'
+                className='mt-[20px]  w-full !font-monterat leading-[39px]'
               >
                 {/* SaiGon Talk kỳ 8: Feelink - Feel Cảm Xúc, Link Sự Nghiệp */}
                 {event.name}
               </Heading>
-              <div className='mt-[15px] flex items-center gap-[21px]'>
-                <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
-                  <div className='flex w-[33px] justify-center rounded-tl-md rounded-tr-md border border-solid border-white-A700 bg-pink-normail px-[3px] pb-0.5 pt-[3px]'>
+              <div className='mt-5 flex items-center gap-[21px]'>
+                <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid  pb-0.5 shadow-sm'>
+                  <div className='flex w-[40px] justify-center rounded-tl-md rounded-tr-md border border-solid bg-pink-normail px-[3px] pb-0.5 pt-[3px]'>
                     <Heading size='xs' as='h4' className='!font-monterat '>
                       {dateObj.toLocaleString('en-US', {
                         month: 'short'
@@ -138,7 +137,7 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                   </Text>
                 </div>
                 <div className='flex flex-col items-start gap-1 self-start'>
-                  <Heading size='lg' as='h5' className='!text-white-A700'>
+                  <Heading size='lg' as='h5' className=''>
                     {/* Thursday, May 9 */}
                     {event.date_event}
                   </Heading>
@@ -154,13 +153,13 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                     size='2xl'
                     variant='outline'
                     shape='round'
-                    className='w-[33px] h-[33px] !rounded-md'
+                    className='w-[40px] h-[33px] border !rounded-md'
                   >
-                    <EnvironmentOutlined className='text-white-A700_cc' />
+                    <EnvironmentOutlined className='' />
                   </Button>
                 </div>
                 <div className='flex flex-col items-start mt-[22px] gap-[5px] self-start'>
-                  <Heading size='lg' as='h6' className='!text-white-A700'>
+                  <Heading size='lg' as='h6' className=''>
                     Address
                   </Heading>
                   <Text size='md' as='p' className='!font-monterat'>
@@ -173,7 +172,7 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
               <Text
                 size='lg'
                 as='p'
-                className='!text-white-A700 !font-bold ml-1.5 mt-[30px] md:ml-0'
+                className=' !font-bold ml-1.5 mt-[30px] md:ml-0'
               >
                 About Event
               </Text>
@@ -185,14 +184,14 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                   className='mt-[17px] w-[98%] leading-4 md:w-full !font-medium !font-monterat'
                 >
                   <div
-                  className='!text-white-A700'
+                    className=''
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(event.description) //loại bỏ javascript khỏi đây
                     }}
                   ></div>
                 </Text>
                 <div className='mt-9 flex flex-col items-start gap-2 self-stretch '>
-                  <Text size='lg' as='p' className='!text-white-A700 !font-bold'>
+                  <Text size='lg' as='p' className=' !font-bold'>
                     {`Location ${event.location}`}
                   </Text>
                   <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
@@ -200,7 +199,11 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                     src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.6099415305243!2d106.80730807603385!3d10.841132857994813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1720796162009!5m2!1svi!2s'
                     width='700'
                     height='200'
-                    style={{ border: 0 , borderRadius: '15px', marginTop: '10px'}}
+                    style={{
+                      border: 0,
+                      borderRadius: '15px',
+                      marginTop: '10px'
+                    }}
                     allowFullScreen={true}
                     loading='lazy'
                     referrerPolicy='no-referrer-when-downgrade'
