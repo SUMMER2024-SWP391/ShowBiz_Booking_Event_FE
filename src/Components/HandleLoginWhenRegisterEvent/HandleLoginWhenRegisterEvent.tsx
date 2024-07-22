@@ -12,7 +12,6 @@ const HandleLoginWhenRegisterEvent = ({ handleRegisterEvent }: Props) => {
   const navigate = useNavigate()
   const { id } = useParams()
   const { isAuthenticated, setEventId } = useContext(AppContext)
-  console.log(1)
   const handleLogin = () => {
     setEventIdToLS(id as string)
     setEventId(id as string)
