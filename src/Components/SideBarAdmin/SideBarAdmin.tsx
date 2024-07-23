@@ -14,6 +14,9 @@ const SideBarAdmin = () => {
   return (
     <ul className='menu bg-base-200 w-56 rounded-box'>
       <li>
+        <NavLink to='/admin/chart'>Analyst</NavLink>
+      </li>
+      <li>
         <details open>
           <summary>
             <svg

@@ -61,7 +61,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     })
     newData = data ? data : null
   }
-  console.log(newData)
+
   const handleCancelEventMutation = useMutation({
     mutationFn: ({ id, registerId }: { id: string; registerId: string }) =>
       eventApi.cancelEvent(id, registerId),
@@ -118,11 +118,6 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     })
   }
 
-  console.log(
-    Boolean(newData && !newData?.data.data.ticket.register),
-    Boolean(!isAuthenticated),
-    Boolean(!newData)
-  )
   if (
     !isAuthenticated ||
     !newData ||
