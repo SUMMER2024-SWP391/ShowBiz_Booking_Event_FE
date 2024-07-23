@@ -19,6 +19,7 @@ import { useForm } from 'react-hook-form'
 import { SearchEventSchema, searchEventSchemaYup } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from 'react-toastify'
+import { Text } from '../Text/Text'
 
 interface Props {
   className?: string
@@ -83,10 +84,11 @@ export default function Header({ ...props }: Props) {
   }
 
   return (
-    <div className='w-full'>
-      <header
+    <div className='w-full flex flex-col'>
+      <div className="bg-gradient_header h-[180px] fixed z-[1] w-full opacity-[1]"></div>
+      <div
         {...props}
-        className={`${props.className} w-full h-[100px] flex flex-row justify-around items-center md:w-full `}
+        className={`${props.className} w-full relative z-[10] flex flex-row justify-around items-center md:w-full `}
       >
         <Heading as='h1' size='2xl' className=''>
           eventbok.
@@ -104,7 +106,7 @@ export default function Header({ ...props }: Props) {
           </ul>
         </div>
 
-        <div className='flex justify-around items-center'>
+        <div className='flex flex-row justify-between items-center'>
           <button onClick={() => setOpen(true)}>
             <SearchOutlined className=' h-[30px] w-[30px]' />
           </button>
@@ -129,16 +131,15 @@ export default function Header({ ...props }: Props) {
           {!isAuthenticated ? (
             <Link
               to={path.login}
-              className='w-20 h-8 rounded-[10px] font-bold  text 
-            flex justify-center items-center'
+              className='w-20 h-8 '
             >
-              Log In
+              <div className='border border-solid border-black-900 rounded-lg text-center font-euclid font-bold'>Log In</div>
             </Link>
           ) : (
             <AvatarProfile onClick={handleLogout} />
           )}
         </div>
-      </header>
+      </div>
     </div>
   )
 }

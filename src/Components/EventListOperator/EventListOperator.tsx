@@ -14,6 +14,7 @@ import {
 import { Text } from '../Text/Text'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { checkEventDate } from 'src/utils/checkEventDate'
 
 const EventListOperator = () => {
   const { data, isFetching } = useQuery({
@@ -26,13 +27,14 @@ const EventListOperator = () => {
       {data?.data.data.events
         .map((event) => ({
           ...event,
-          parsedDate: parse(event.date_event, 'dd/MM/yyyy', new Date()) // Parse and attach the parsed date for sorting
+          parsedDate: parse(`${event.date_event} ${event.time_start}`, 'dd/MM/yyyy HH:mm', new Date()), // Parse and attach the parsed date for sorting
+          displayDate: checkEventDate(event.date_event)
         }))
         .sort((a, b) => compareAsc(a.parsedDate, b.parsedDate)) // Sort events by date in increasing order
 
         .map((event) => (
           <div className={`flex flex-row items-center justify-between w-full`}>
-            <div className='w-[15%]'>
+            <div className='w-[10%]'>
               <Heading>
                 {format(
                   parse(event.date_event, 'dd/MM/yyyy', new Date()),
@@ -46,7 +48,7 @@ const EventListOperator = () => {
                 )}
               </Heading>
             </div>
-            <div className='w-[85%] bg-blue_gray-900_01 flex items-center px-3 mt-5 justify-between sm:flex-row shadow-2xl rounded-[15px] '>
+            <div className='w-[80%] flex items-center px-3 mt-5 justify-between sm:flex-row shadow-2xl rounded-[15px] '>
               <div className=' my-5 flex flex-col items-baseline justify-center '>
                 {/* time */}
                 <Text size='lg' as='p' className=''>
@@ -55,7 +57,7 @@ const EventListOperator = () => {
                 <Heading
                   size='xl'
                   as='h4'
-                  className='mt-3 w-[500px] !font-monterat !text-white-A700 whitespace-nowrap overflow-hidden text-ellipsis'
+                  className='mt-3 w-[500px] !font-monterat  whitespace-nowrap overflow-hidden text-ellipsis'
                 >
                   {event.name}
                 </Heading>
@@ -102,44 +104,7 @@ const EventListOperator = () => {
           </div>
         ))}
     </>
-    // <div>
-    //   <div className='overflow-x-auto mt-4'>
-    //     <table className='table'>
-    //       {/* head */}
-    //       <thead>
-    //         <tr>
-    //           <th>Event Name</th>
-    //           <th>Member register</th>
-    //           <th>Ticket price</th>
-    //           <th>Location</th>
-    //           <th>Status</th>
-    //           <th>Action</th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         {data?.data.data.events.map((event) => (
-    //           <TableEventListOperator event={event} key={event._id} />
-    //         ))}
-    //         {isFetching && (
-    //           <tr>
-    //             <td>
-    //               <Skeleton />
-    //             </td>
-    //             <td>
-    //               <Skeleton />
-    //             </td>
-    //             <td>
-    //               <Skeleton />
-    //             </td>
-    //             <td>
-    //               <Skeleton />
-    //             </td>
-    //           </tr>
-    //         )}
-    //       </tbody>
-    //     </table>
-    //   </div>
-    // </div>
+    
   )
 }
 

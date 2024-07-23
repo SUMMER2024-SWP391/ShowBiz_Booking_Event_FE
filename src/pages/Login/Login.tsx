@@ -84,12 +84,12 @@ const Login = () => {
     })
   })
   return (
-    <div className='flex w-full flex-col item-center bg-gradient_vistor'>
+    <div className='flex w-full flex-col item-center '>
       <div className='flex flex-col items-center  '>
         <Header _id={setProfile.name} />
       </div>
       <div className='mt-10 container-xs flex justify-center md:p-5 md:px-5'>
-        <div className='flex flex-col w-[500px] items-start rounded-[15px] border border-solid border-white-A700 pb-5 sm:pt-5'>
+        <div className='flex flex-col w-[500px] items-start rounded-[15px] border border-solid border-black_light pb-5 sm:pt-5'>
           <div className='mx-[30px] w-[430px]'>
             <div className='flex flex-col items-start'>
               <Button
@@ -98,13 +98,13 @@ const Login = () => {
                 shape='circle'
                 className='w-[68px] !rounded-[34px]'
               >
-                <UserOutlined className='!text-white-A700' />
+                <UserOutlined className='' />
               </Button>
               <div className=' flex flex-col items-start mt-5'>
                 <Heading
                   size='2xl'
                   as='h1'
-                  className='!font-bold !text-white-A700'
+                  className='!font-bold'
                 >
                   Welcome to EventBok
                 </Heading>
@@ -122,7 +122,7 @@ const Login = () => {
                 <Heading
                   size='lg'
                   as='h3'
-                  className='!font-bold !text-white-A700'
+                  className='!font-bold '
                 >
                   Email
                 </Heading>
@@ -130,7 +130,7 @@ const Login = () => {
                 <InputVerTwo
                   type='text'
                   name='email'
-                  classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none
+                  classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700 w-full font-euclid p-2 outline-none
                     '
                   register={register}
                   errorMessage={errors.email?.message}
@@ -141,14 +141,14 @@ const Login = () => {
                   name='email'
                   placeholder={`your@email.com`}
                   addonBefore=''
-                  className='rounded-[10px] border border-solid border-white-A700 font-bold sm:pr-5 w-full '
+                  className='rounded-[10px] border border-solid border-black_light font-bold sm:pr-5 w-full '
                 /> */}
               </div>
               <div className='flex flex-col w-full'>
                 <Heading
                   size='lg'
                   as='h3'
-                  className='!text-white-A700 !font-bold'
+                  className=' !font-bold'
                 >
                   Password
                 </Heading>
@@ -156,7 +156,7 @@ const Login = () => {
                   type='password'
                   name='password'
                   classNameInput='mt-2 rounded-[10px] border border-solid
-                   border-white-A700 text-black-900 sm:pr-5 font-euclid p-2 outline-none
+                   text-black-900 sm:pr-5 font-euclid p-2 outline-none
                     bg-white-A700 w-full'
                   register={register}
                   errorMessage={errors.password?.message}
@@ -172,7 +172,7 @@ const Login = () => {
               <Button
                 size='xl'
                 color='white_A700'
-                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 hover:opacity-95'
+                className='mt-[10px] w-full rounded-[10px] border border-solid border-black_light bg-pink-normail font-medium sm:px-5 hover:opacity-95'
               >
                 Continue with Email
               </Button>
@@ -190,13 +190,13 @@ const Login = () => {
               <div className='grid grid-cols-2 gap-2'>
                 <Link
                   to={googleAuthUrl}
-                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:opacity-80 text-white-A700'
+                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-black_light font-medium sm:px-5 text-center hover:opacity-80 '
                 >
                   Sign in with FPT EDU Email
                 </Link>
                 <Link
                   to={'/register'}
-                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white flex justify-center items-center hover:opacity-80 text-white-A700'
+                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-black_light font-medium sm:px-5 text-center hover:bg-white flex justify-center items-center hover:opacity-80 '
                 >
                   Register account
                 </Link>
