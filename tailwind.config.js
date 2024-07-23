@@ -125,21 +125,21 @@ export default {
       }
     }
   },
-  // plugins: [
-  //   require('daisyui'),
-  //   plugin(function ({ addComponents }) {
-  //     addComponents({
-  //       '.container': {
-  //         maxWidth: '1440px',
-  //         marginLeft: 'auto',
-  //         marginRight: 'auto',
-  //         // paddingLeft: theme('spacing.4'),
-  //         // paddingRight: theme('spacing.4')
-  //       }
-  //     })
-  //   })
-  // ],
-  // daisyui: {
-  //   themes: false, // This disables DaisyUI's theme mode
-  // },
+  plugins: [
+    require('daisyui'),
+    plugin(function ({ addComponents }) {
+      addComponents({
+        '.container': {
+          maxWidth: '1440px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          // paddingLeft: theme('spacing.4'),
+          // paddingRight: theme('spacing.4')
+        }
+      })
+    })
+  ],
+  daisyui: {
+    themes: false, // This disables DaisyUI's theme mode
+  },
 }

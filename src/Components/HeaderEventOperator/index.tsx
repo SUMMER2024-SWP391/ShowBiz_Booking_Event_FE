@@ -16,14 +16,14 @@ export default function HeaderEO({ ...props }: Props) {
       >
         <li>
           <NavLink to='/event-operator/create'>
-            <Heading as='h6' className=' hover:text-white-A700'>
+            <Heading as='h6' className=' hover:text-black_supper_light'>
               Create Event
             </Heading>
           </NavLink>
         </li>
         <li>
           <Link to='/event-operator'>
-            <Heading as='h6' className='hover:text-white-A700'>
+            <Heading as='h6' className='hover:text-black_supper_light'>
               My Event
             </Heading>
           </Link>

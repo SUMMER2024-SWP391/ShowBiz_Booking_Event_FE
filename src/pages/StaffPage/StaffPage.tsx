@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { Button, Skeleton } from 'antd'
+import { Modal, Skeleton } from 'antd'
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Heading } from 'src/Components'
+import { Button, Heading } from 'src/Components'
 import CheckInWithOTP from 'src/Components/CheckInWithOTP/CheckInWithOTP'
 import EventList from 'src/Components/EventLists/EventList'
 import Footer from 'src/Components/Footer/Footer'
@@ -25,19 +25,16 @@ const StaffPage = () => {
 
   return (
     <>
-      <div className='w-full flex flex-col items-center'>
-        <Heading as='h1' size='2xl' className='mt-10 !text-white-A700'>
-          Checking Guest
-        </Heading>
-        <div className='mt-10 '>
-          <Button onClick={() => setOpen(true)}>Checking Guest</Button>
+      <div className='w-full flex flex-col items-start'>
+        <div className='mt-10 flex flex-row items-start'>
+          <Button className='bg-pink-normail rounded-lg !text-white-A700 font-bold' size="lg" onClick={() => setOpen(true)}>Checking Guest</Button>
         </div>
 
-        <div className='mt-10 text-white-A700 flex flex-col'>
-          <div className='overflow-x-auto'>
-            <table className='table w-[1000px]'>
+        <div className='mt-5 text-black_light flex flex-col container-xs '>
+          <div className='overflow-x-auto '>
+            <table className='table w-full'>
               <thead>
-                <tr className=''>
+                <tr className='text-black_dark text-center'>
                   <th>Id</th>
                   <th>Email</th>
                   <th>Full Name</th>
@@ -70,9 +67,16 @@ const StaffPage = () => {
           </div>
         </div>
       </div>
-      <ModalPopup type='' open={open} onClose={() => setOpen(false)}>
+      <Modal
+        centered
+        open={open}
+        onCancel={() => setOpen(false)}
+        onOk={() => setOpen(false)}
+        width='300px'
+        footer
+      >
         <CheckInWithOTP />
-      </ModalPopup>
+      </Modal>
     </>
   )
 }

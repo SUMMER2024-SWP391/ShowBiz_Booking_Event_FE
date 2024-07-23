@@ -22,20 +22,20 @@ export const ManageEventHome = ({ event }: Props) => {
   })
   return (
     //name event
-    <div className='flex flex-col  container-xs'>
+    <div className='flex flex-col container-xs'>
       <div className='flex flex-row items-center justify-between'>
         <Heading
           as='h1'
           size='2xl'
-          className='flex items-start !text-white-A700 !font-monterat'
+          className='flex items-start !font-monterat'
         >
           {event.name}
         </Heading>
         <Link
           to={`http://localhost:3000/events/${event._id}`}
-          className='flex flex-row items-center px-2 py-1 rounded-xl bg-blue_gray-900 hover:bg-blue_gray-900_01 '
+          className='flex flex-row bg-pink-normail items-center px-2 py-1 rounded-xl border border-solid '
         >
-          <p className='!text-[14px] text-white-A700_bf'>Event Page</p>
+          <p className='!text-[14px] text-white-A700'>Event Page</p>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -44,7 +44,7 @@ export const ManageEventHome = ({ event }: Props) => {
             stroke-linejoin='round'
             stroke-width='2'
             viewBox='0 0 24 24'
-            className='w-4 h-4 ml-2 '
+            className='w-4 h-4 ml-2 text-white-A700 '
           >
             <path d='M7 17 17 7M7 7h10v10'></path>
           </svg>
@@ -52,23 +52,23 @@ export const ManageEventHome = ({ event }: Props) => {
       </div>
 
       <div role='tablist' className='tabs tabs-bordered w-full mt-10 '>
-        <NavLink role='tab' className='tab tab-active !text-white-A700' to=''>
+        <NavLink role='tab' className='tab tab-active ' to=''>
           Overview
         </NavLink>
-        <NavLink role='tab' className='tab !text-white-A700' to='guest'>
+        <NavLink role='tab' className='tab ' to='guest'>
           Guest
         </NavLink>
-        <NavLink to='registration' className='tab !text-white-A700'>
+        <NavLink to='registration' className='tab '>
           Registration
         </NavLink>
-        <NavLink role='tab' className='tab !text-white-A700' to='staff'>
+        <NavLink role='tab' className='tab ' to='staff'>
           List Staff
         </NavLink>
         {data &&
         !data.data.data.formFeedBack &&
         isValidToFeeback(event.date_event, event.time_end) ? ( //nếu chưa có form feedback và tới giờ feedback rồi mà chưa có form feedback thì ko cho tạo nữa
           <span
-            className='tab !text-white-A700'
+            className='tab '
             onClick={() => {
               toast.error(
                 'Can not create form feedback before event end 15 minutes'
@@ -80,20 +80,20 @@ export const ManageEventHome = ({ event }: Props) => {
         ) : (
           <NavLink
             role='tab'
-            className='tab !text-white-A700'
+            className='tab '
             to='form-feedback'
           >
             Form Feedback
           </NavLink>
         )}
 
-        <NavLink role='tab' className='tab !text-white-A700' to='update-form'>
+        <NavLink role='tab' className='tab ' to='update-form'>
           More
         </NavLink>
       </div>
       <Routes>
         <Route path='/' element={<Overview event={event} />} />
-        <Route path='guest' element={<Guest />} />
+        <Route path='guest' element={<StaffPage />} />
         <Route path='registration' element={<Registration />} />
         {/* <Route path='update-form' element={<UpdateFormFeedback />} /> */}
         <Route path='form-feedback' element={<FormFeedback />}></Route>
