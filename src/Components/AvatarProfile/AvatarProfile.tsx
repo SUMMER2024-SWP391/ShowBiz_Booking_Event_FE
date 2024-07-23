@@ -70,7 +70,7 @@ const AvatarProfile = (prop: Props) => {
               </li>
               <li className='font-medium'>
                 <Link
-                  to='/profile/update'
+                  to='/profile/change_password'
                   className='flex items-center transform transition-colors duration-200 border-r-4 border-transparent'
                 >
                   <div className='mr-3'>

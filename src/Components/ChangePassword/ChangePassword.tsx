@@ -10,6 +10,9 @@ import {
   isAxiosUnprocessableEntityError
 } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
+import Header from '../HeaderHomePage/HeaderHomePage'
+import { Heading } from '../Heading/Heading'
+import Footer from '../Footer/Footer'
 
 type FormData = ChangePasswordSchema
 
@@ -59,39 +62,62 @@ const ChangePassword = () => {
   })
 
   return (
-    <div className='flex justify-center items-center'>
-      <form className='flex flex-col' onSubmit={onSubmit} noValidate>
-        <InputVerTwo
-          renderProps={<div className='mb-2 text-white-A700'>Old password</div>}
-          classNameInput='w-[300px] h-[45px] bg-white-A700 text-black-900 pl-2 rounded-lg outline-none'
-          register={register}
-          type='password'
-          name='old_password'
-          errorMessage={errors.old_password?.message}
-        />
-        <InputVerTwo
-          renderProps={<div className='mb-2 text-white-A700'>New password</div>}
-          classNameInput='w-[300px] h-[45px] bg-white-A700 text-black-900 pl-2 rounded-lg outline-none'
-          type='password'
-          register={register}
-          name='password'
-          errorMessage={errors.password?.message}
-        />
-        <InputVerTwo
-          renderProps={
-            <div className='mb-2 text-white-A700'>Confirm new password</div>
-          }
-          classNameInput='w-[300px] h-[45px] bg-white-A700 text-black-900 pl-2 rounded-lg outline-none'
-          type='password'
-          register={register}
-          name='confirm_password'
-          errorMessage={errors.confirm_password?.message}
-        />
-        <button className='h-[45px] rounded-lg bg-[#1677FF] text-white-A700 hover:opacity-95 mt-1'>
-          Change password
-        </button>
-      </form>
-    </div>
+    <>
+      <div className='w-full h-auto'>
+        <Header />
+        <div className='container-xs  flex flex-col '>
+          <div className='mt-10 flex flex-row justify-between items-center'>
+            <Heading size='2xl' as='h1'>
+              My Profile
+            </Heading>
+          </div>
+
+          {/* UserName */}
+          <div className='mt-10 container-xs'>
+            <form onSubmit={onSubmit} noValidate>
+              <div className='flex flex-col items-center'>
+                <Heading size='xl' as='h2' className='mb-2'>
+                  Old Password
+                </Heading>
+                <InputVerTwo
+                  classNameInput='w-[300px] h-[45px] border border-solid text-black-900 pl-2 rounded-lg outline-none'
+                  register={register}
+                  type='password'
+                  name='old_password'
+                  errorMessage={errors.old_password?.message}
+                />
+                <Heading size='xl' as='h2' className='mb-2'>
+                  New Password
+                </Heading>
+                <InputVerTwo
+                  classNameInput='w-[300px] h-[45px] border border-solid text-black-900 pl-2 rounded-lg outline-none'
+                  register={register}
+                  type='password'
+                  name='old_password'
+                  errorMessage={errors.old_password?.message}
+                />
+                <Heading size='xl' as='h2' className='mb-2'>
+                  Confirm new password
+                </Heading>
+                <InputVerTwo
+                  classNameInput='w-[300px] h-[45px] border border-solid text-black-900 pl-2 rounded-lg outline-none'
+                  register={register}
+                  type='password'
+                  name='old_password'
+                  errorMessage={errors.old_password?.message}
+                />
+
+                <button className='mt-10 h-[45px] rounded-lg bg-pink-normail p-2 text-white-A700 hover:opacity-95'>
+                  Change password
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      <Footer />
+
+      </div>
+    </>
   )
 }
 
