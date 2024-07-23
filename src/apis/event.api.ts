@@ -133,7 +133,9 @@ const eventApi = {
           user_name: string
         }>
       >
-    >(`/e-operators/list-registered-visitor/${id}`)
+    >(`/e-operators/list-registered-visitor/${id}`),
+  inviteUser: (id: string, body: { email: string; user_name: string }) =>
+    http.post<SuccessResponse<{}>>(`/e-operators/invite/user/${id}`, body)
 }
 
 export default eventApi

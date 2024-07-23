@@ -34,14 +34,14 @@ export const Registed = ({ id }: Props) => {
     queryKey: ['list-registed-event'],
     queryFn: () => eventApi.getListUserRegistedEvent(id)
   })
-  console.log(data)
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex items-center justify-center mt-5'>
       {data && (
         <Table
           dataSource={data.data.data}
           columns={columns}
           pagination={false}
+          className='rounded-lg'
         />
       )}
     </div>

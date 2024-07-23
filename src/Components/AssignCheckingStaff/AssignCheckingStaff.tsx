@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import EventOfForm from '../EventOfForm/EventOfForm'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import eventApi from 'src/apis/event.api'
 import { useForm } from 'react-hook-form'
@@ -25,7 +24,6 @@ const AssignCheckingStaff = () => {
     queryKey: ['checking-staff-list'],
     queryFn: () => eventApi.getListCheckingStaff(id as string)
   })
-  console.log(data?.data.data.result)
 
   const addStaffMutation = useMutation({
     mutationFn: (body: { email: string; event_id: string }) =>
@@ -93,13 +91,19 @@ const AssignCheckingStaff = () => {
     <div className='mt-10 m-auto flex flex-col gap-3 justify-center items-center'>
       <Heading className=''>List Staff</Heading>
       <div className='w-full flex flex-row justify-start items-center'>
-        <Button className='bg-pink-normail rounded-lg !text-white-A700 font-bold' size='lg' onClick={() => setOpen(true)}>Add Staff</Button>
+        <Button
+          className='bg-pink-normail rounded-lg !text-white-A700 font-bold'
+          size='lg'
+          onClick={() => setOpen(true)}
+        >
+          Add Staff
+        </Button>
       </div>
       <div className='flex flex-col justify-center items-center gap-4'>
         <div className='flex justify-evenly items-center gap-3'>
           {data &&
             data.data.data.result.length !== 0 &&
-            data.data.data.result.map((user) => (
+            data.data.data.result.map((_) => (
               <div className='mt-5 text-black_light flex flex-col container-xs '>
                 <div className='overflow-x-auto '>
                   <table className='table w-full'>

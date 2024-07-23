@@ -1,10 +1,10 @@
-import { Button } from 'antd'
-import React from 'react'
+import { Button, Modal } from 'antd'
+import { useState } from 'react'
 import { Text } from '../Text/Text'
 import { Img } from '../Img/Img'
 import { Event } from 'src/@types/event.type'
 import { Heading } from '../Heading/Heading'
-import { parse, format, compareAsc } from 'date-fns'
+import { parse, format } from 'date-fns'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { EventStatus } from 'src/@types/enum'
@@ -12,14 +12,40 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import eventApi from 'src/apis/event.api'
 import { toast } from 'react-toastify'
 import useClipboardCopy from 'src/hooks/useClipboardCopy'
+import { useForm } from 'react-hook-form'
+import { InviteUserSchema, inviteUserSchemaYup } from 'src/utils/rules'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 interface Props {
   event: Event
 }
+
+type FormInvite = InviteUserSchema
+
 export const Overview = ({ event }: Props) => {
+  const {
+    formState: { errors },
+    handleSubmit,
+    register
+  } = useForm<FormInvite>({
+    resolver: yupResolver(inviteUserSchemaYup)
+  })
   const queryClient = useQueryClient()
   const cancelEventMutation = useMutation({
     mutationFn: (id: string) => eventApi.removeEventById(id)
+  })
+
+  const inviteUserMutation = useMutation({
+    mutationFn: (body: { email: string; user_name: string }) =>
+      eventApi.inviteUser(event._id, body)
+  })
+
+  const onSubmit = handleSubmit((data) => {
+    inviteUserMutation.mutate(data, {
+      onSuccess: () => {
+        toast.success('Inivte user success')
+      }
+    })
   })
 
   const handleCancelEvent = () => {
@@ -31,12 +57,10 @@ export const Overview = ({ event }: Props) => {
     })
   }
 
-  const handleCopyEvent = (eventStatus: EventStatus) => {
-    return () => copyToClipboard(`http://localhost:3000/events/${event._id}`)
-  }
   const time = event.date_event.split('/')
   const [dayStr, monthStr, yearStr] = time.map((item) => item.trim())
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
+  const [open, setOpen] = useState<boolean>(false)
   const copyToClipboard = useClipboardCopy()
   return (
     <div className='mt-10 m-auto w-[820px]flex flex-col justify-center items-center '>
@@ -121,6 +145,7 @@ export const Overview = ({ event }: Props) => {
             <Button
               type='default'
               className='w-[257px] h-[56px] rounded-[15px] !bg-white-A700'
+              onClick={() => setOpen(true)}
             >
               <div className='flex flex-1 items-center gap-3'>
                 <svg
@@ -139,6 +164,44 @@ export const Overview = ({ event }: Props) => {
                 </Text>
               </div>
             </Button>
+            <Modal
+              open={open}
+              onCancel={() => setOpen(false)}
+              width={'350px'}
+              title='Invite user here'
+            >
+              <form
+                className='flex flex-col justify-center items-center'
+                onSubmit={onSubmit}
+              >
+                <div className='flex flex-col mb-1'>
+                  <div className=' text-sm mb-2 mt-3'>Full name</div>
+                  <input
+                    type='text'
+                    className='text-black-900 w-[300px] h-[40px] outline-none border-2 hover:border-slate-400 rounded-lg bg-slate-50 pl-3 duration-500'
+                    {...register('user_name')}
+                  />
+                  <span className='text-red mt-1 text-sm'>
+                    {errors.user_name?.message}
+                  </span>
+                </div>
+                <div className='flex flex-col mb-1'>
+                  <div className=' text-sm mb-2 mt-3'>Email</div>
+                  <input
+                    type='text'
+                    className='text-black-900 w-[300px] h-[40px] outline-none border-2 hover:border-slate-400 rounded-lg bg-slate-50 pl-3 duration-500'
+                    {...register('email')}
+                  />
+                  <span className='text-red mt-1 text-sm'>
+                    {errors.email?.message}
+                  </span>
+                </div>
+
+                <button className='mt-1 w-[300px] h-[40px] text-slate-50 bg-[#0958d9] rounded-lg opacity-90 hover:opacity-100 duration-300'>
+                  Send mail
+                </button>
+              </form>
+            </Modal>
             <Button
               type='default'
               className='w-[257px] h-[56px] rounded-[15px]'
