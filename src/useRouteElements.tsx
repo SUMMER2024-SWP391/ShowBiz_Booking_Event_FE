@@ -12,9 +12,7 @@ import Admin from './pages/AdminPage/AdminPage'
 import VerifyAccount from './Components/VerifyAccount/VerifyAccount'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import Recovery from './pages/Recovery/Recovery'
-import EventListUser from './pages/EventListUserPage/EventListUserPage'
 import TicketDetail from './pages/TicketDetail/TicketDetail'
-import CheckInWithOTP from './Components/CheckInWithOTP/CheckInWithOTP'
 import Register from './pages/Register/Register'
 import StaffPage from './pages/StaffPage/StaffPage'
 import ManagerEventPage from './pages/ManageEventPage/ManageEventPage'
@@ -35,6 +33,10 @@ function RejectedRoute() {
 
 const useRouteElements = () => {
   const routeElements = useRoutes([
+    // {
+    //   path: '/login-error',
+    //   element: <LoginError />
+    // },
     {
       path: '/search',
       element: <HomeForSearch />
