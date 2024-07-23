@@ -1,4 +1,12 @@
+import { useQuery } from '@tanstack/react-query'
+import { adminApi } from 'src/apis/admin.api'
+
 const Chart = () => {
+  const { data } = useQuery({
+    queryKey: ['statistical-admin'],
+    queryFn: () => adminApi.getStatistical()
+  })
+  console.log(data)
   return (
     <div>
       <div className='stats shadow'>

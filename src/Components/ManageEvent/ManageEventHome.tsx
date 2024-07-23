@@ -2,7 +2,7 @@ import { Heading } from '../Heading/Heading'
 import { Event } from 'src/@types/event.type'
 import { Link, NavLink, Route, Routes } from 'react-router-dom'
 import { Overview } from './Overview'
-import { Guest } from './Guest'
+import { Registed } from './Registed'
 import { Registration } from './Registration'
 import AssignCheckingStaff from '../AssignCheckingStaff/AssignCheckingStaff'
 import FormFeedback from '../FormFeedback/FormFeedback'
@@ -20,6 +20,7 @@ export const ManageEventHome = ({ event }: Props) => {
     queryKey: ['check-form-feedback'],
     queryFn: () => formAPI.checkFormFeedbackIsExist(event._id)
   })
+
   return (
     //name event
     <div className='flex flex-col  container-xs'>
@@ -55,8 +56,8 @@ export const ManageEventHome = ({ event }: Props) => {
         <NavLink role='tab' className='tab tab-active !text-white-A700' to=''>
           Overview
         </NavLink>
-        <NavLink role='tab' className='tab !text-white-A700' to='guest'>
-          Guest
+        <NavLink role='tab' className='tab !text-white-A700' to='registed'>
+          Registed
         </NavLink>
         <NavLink to='registration' className='tab !text-white-A700'>
           Registration
@@ -93,7 +94,7 @@ export const ManageEventHome = ({ event }: Props) => {
       </div>
       <Routes>
         <Route path='/' element={<Overview event={event} />} />
-        <Route path='guest' element={<Guest />} />
+        <Route path='registed' element={<Registed id={event._id} />} />
         <Route path='registration' element={<Registration />} />
         {/* <Route path='update-form' element={<UpdateFormFeedback />} /> */}
         <Route path='form-feedback' element={<FormFeedback />}></Route>

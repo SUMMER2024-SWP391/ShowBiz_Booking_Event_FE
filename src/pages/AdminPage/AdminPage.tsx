@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { UserRole } from 'src/@types/enum'
 import AdminTableEventList from 'src/Components/AdminAllEventList/AdminAllEventList'
+import Chart from 'src/Components/Chart/Chart'
 import CreateEventOperator from 'src/Components/CreateEventOperator/CreateEventOperator'
 import HeaderAdmin from 'src/Components/HeaderAdmin/HeaderAdmin'
 import SideBarAdmin from 'src/Components/SideBarAdmin/SideBarAdmin'
@@ -16,6 +17,7 @@ const AdminPage = () => {
         </div>
         <div className='col-span-8'>
           <Routes>
+            <Route path='chart' element={<Chart />}></Route>
             <Route path='list-all-user' element={<TableUser role={''} />} />
             <Route
               path='list-event-operator'

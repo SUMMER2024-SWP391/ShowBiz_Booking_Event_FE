@@ -1,3 +1,4 @@
+import { getListUserRegisterEvent } from './../@types/event.type'
 import { EventStatus } from 'src/@types/enum'
 import {
   Event,
@@ -9,13 +10,12 @@ import {
   EventListUser,
   CreateEvent,
   EventListConfig,
-  RegisterSucces,
-  getListUserRegisterEvent
+  RegisterSucces
 } from 'src/@types/event.type'
 import { EventQuestionType } from 'src/@types/form.type'
 import { Ticket } from 'src/@types/ticket.type'
 import { User } from 'src/@types/users.type'
-import { SuccessResponse } from 'src/@types/utils.type'
+import { StatusRegisterEvent, SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
 
 const eventApi = {
@@ -124,7 +124,17 @@ const eventApi = {
   getListUserRegisterEvent: (id: string) =>
     http.get<SuccessResponse<getListUserRegisterEvent>>(
       `/register/list-user/registed/${id}`
-    )
+    ),
+  getListUserRegistedEvent: (id: string) =>
+    http.get<
+      SuccessResponse<
+        Array<{
+          _id: string
+          status_register: StatusRegisterEvent
+          user_name: string
+        }>
+      >
+    >(`/e-operators/list-registered-visitor/${id}`)
 }
 
 export default eventApi
