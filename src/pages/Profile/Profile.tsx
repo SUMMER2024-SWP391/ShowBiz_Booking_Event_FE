@@ -67,12 +67,11 @@ const Profile = () => {
   return (
     <div className='w-full'>
       <Header />
-      <div className='container-xs h-96 flex flex-col '>
+      <div className='container-xs flex flex-col '>
         <div className='mt-10 flex flex-row justify-between items-center'>
-          <Heading size='2xl' as='h1' >
+          <Heading size='2xl' as='h1'>
             My Profile
           </Heading>
-          
         </div>
 
         {/* UserName */}
@@ -97,6 +96,15 @@ const Profile = () => {
                 value={form.email}
                 onChange={handleChange('email')}
               />
+              <Heading size='xl' as='h2' className='mt-5 mb-2'>
+                BirthDay
+              </Heading>
+                <input
+                  type='date'
+                  className='w-[300px] h-[45px] p-2 outline-none rounded-md border border-solid text-center'
+                  value={form.date_of_birth.split('T')[0]}
+                  onChange={handleChange('date_of_birth')}
+                />
               <button className='mt-10 h-[45px] rounded-lg bg-pink-normail p-2 text-white-A700 hover:opacity-95'>
                 Update profile
               </button>

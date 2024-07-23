@@ -13,7 +13,7 @@ export const EventOperatorHome = () => {
   // })
   return (
     <>
-      <div className='w-full bg-blue_gray-900 pb-[376px] md:pb-5 '>
+      <div className='w-full pb-[376px] md:pb-5 '>
         <div className='flex flex-col items-center gap-14 sm:gap-7'>
           <Header />
 
