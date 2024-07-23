@@ -1,20 +1,14 @@
-import { Button, Heading, Img, Text } from 'src/Components'
+import { Heading } from 'src/Components'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
-import {
-  ArrowRightOutlined,
-  DownOutlined,
-  EnvironmentOutlined,
-  UserOutlined
-} from '@ant-design/icons'
+
 import EventList from 'src/Components/EventLists/EventList'
 import Footer from 'src/Components/Footer/Footer'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
 import eventApi from 'src/apis/event.api'
 import Pagination from 'src/Components/Pagination/Pagination'
 import { EventListConfig } from 'src/@types/event.type'
 import useQueryParams from 'src/hooks/useQueryParams'
-import { parse, format, compareAsc } from 'date-fns'
+import { parse } from 'date-fns'
 import { checkEventDate } from 'src/utils/checkEventDate'
 
 export type QueryConfig = {
@@ -80,20 +74,17 @@ export default function HomePageVisitor() {
                           imageUrl={event.image}
                           location={event.location}
                           price={event.ticket_price}
-                          
                         />
                       </div>
                     </div>
                   ))}
-                  {data && (
-                    <Pagination
-                      pageSize={data.data.data.paginate.sum_page}
-                      queryConfig={queryConfig}
-                    />
-                  )}
+                {data && (
+                  <Pagination
+                    pageSize={data.data.data.paginate.sum_page}
+                    queryConfig={queryConfig}
+                  />
+                )}
               </div>
-
-              
             </div>
           </div>
         </div>

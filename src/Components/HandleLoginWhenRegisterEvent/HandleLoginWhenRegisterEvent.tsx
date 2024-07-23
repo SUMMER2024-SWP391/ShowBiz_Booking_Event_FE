@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from 'src/context/app.context'
 import { Button } from '../Button/Button'
 import { setEventIdToLS } from 'src/utils/auth'
+import { useQuery } from '@tanstack/react-query'
+import eventApi from 'src/apis/event.api'
 
 interface Props {
   handleRegisterEvent: () => void
@@ -17,6 +19,7 @@ const HandleLoginWhenRegisterEvent = ({ handleRegisterEvent }: Props) => {
     setEventId(id as string)
     navigate('/login')
   }
+
   if (!isAuthenticated) {
     return (
       <Button
