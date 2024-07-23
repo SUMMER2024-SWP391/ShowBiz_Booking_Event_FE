@@ -51,32 +51,25 @@ const CheckInWithOTP = () => {
     })
   })
   return (
-    <div className='flex bg-white-A700  flex-col items-center '>
-      <div className=' flex flex-col items-center w-[300px] self-stretch rounded-[15px] bg-white shadow-md sm:pb-5'>
-        {/* <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
-          <Heading size='s' as='p' className='!font-semibold'>
-            Welcome this event
-          </Heading>
-        </div> */}
-        <Text size='xl' as='p' className=' self-center mt-10 !text-black-900 '>
-          Input code of visitor to checkin
-        </Text>
-        <InputVerTwo
-          classNameInput='mt-10 h-[50px] outline-none  rounded-lg text-white'
-          className='w-full flex flex-col justify-center items-center !text-white-A700'
-          register={register}
-          name='otp_check_in'
-          errorMessage={errors.otp_check_in?.message}
-        />
-        <Button
-          size='lg'
-          shape='round'
-          className='min-w-[100px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-          onClick={onSubmit}
-        >
-          Submit OTP
-        </Button>
-      </div>
+    <div className='flex bg-white-A700 flex-col m-5 items-center justify-center '>
+      <Text size='xl' as='p' className=' self-center mt-2 !text-black-900 '>
+        Input code
+      </Text>
+      <InputVerTwo
+        classNameInput='mt-5 h-[40px] outline-none border border-solid border-black_light rounded-lg px-1 '
+        className='w-full flex flex-col justify-center items-center '
+        register={register}
+        name='otp_check_in'
+        errorMessage={errors.otp_check_in?.message}
+      />
+      <Button
+        size='lg'
+        shape='round'
+        className='min-w-[100px] mt-3 font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+        onClick={onSubmit}
+      >
+        Submit OTP
+      </Button>
     </div>
   )
 }

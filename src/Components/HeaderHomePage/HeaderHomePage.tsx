@@ -84,11 +84,11 @@ export default function Header({ ...props }: Props) {
   }
 
   return (
-    <div className='w-full flex flex-col'>
-      <div className="bg-gradient_header h-[180px] fixed z-[1] w-full opacity-[1]"></div>
+    <div className='w-full flex flex-col '>
+      <div className='bg-gradient_header h-[150px] fixed z-[1] w-full opacity-[1]'></div>
       <div
         {...props}
-        className={`${props.className} w-full relative z-[10] flex flex-row justify-around items-center md:w-full `}
+        className={`${props.className} w-full relative z-[100]  flex flex-row justify-around items-center md:w-full `}
       >
         <Heading as='h1' size='2xl' className=''>
           eventbok.
@@ -129,11 +129,10 @@ export default function Header({ ...props }: Props) {
             }
           />
           {!isAuthenticated ? (
-            <Link
-              to={path.login}
-              className='w-20 h-8 '
-            >
-              <div className='border border-solid border-black-900 rounded-lg text-center font-euclid font-bold'>Log In</div>
+            <Link to={path.login} className='w-20 h-8 '>
+              <div className='border border-solid border-black-900 rounded-lg text-center font-euclid font-bold'>
+                Log In
+              </div>
             </Link>
           ) : (
             <AvatarProfile onClick={handleLogout} />

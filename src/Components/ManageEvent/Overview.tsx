@@ -39,7 +39,7 @@ export const Overview = ({ event }: Props) => {
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
   const copyToClipboard = useClipboardCopy()
   return (
-    <div className='mt-10 m-auto w-[820px] container'>
+    <div className='mt-10 m-auto w-[820px]flex flex-col justify-center items-center '>
       <div className=' flex flex-row items-center justify-between'>
         {[
           EventStatus.REJECTED,
@@ -190,8 +190,8 @@ export const Overview = ({ event }: Props) => {
         )}
       </div>
       <div className='mt-5'>
-        <div className='bg-white-A700 rounded-[15px] w-[788px] h-[347px] p-3 flex flex-rol justify-between '>
-          <div className='w-[49%] flex flex-col items-center '>
+        <div className='bg-white-A700 border border-solid shadow-2xl rounded-[15px] w-[788px] h-[347px] p-3 flex flex-row justify-between items-center'>
+          <div className='w-[45%] flex flex-col items-center '>
             <div className='w-[300px] h-[300px]'>
               <Img
                 src={event.image}
@@ -199,14 +199,37 @@ export const Overview = ({ event }: Props) => {
               />
             </div>
           </div>
-          <div className='w-[49%] flex flex-col'>
-            <div className=''>
+          <div className='w-[50%] flex flex-col mr-5'>
+            <div className='flex flex-row justify-between items-center'>
               <Heading
                 as='h3'
                 className='!text-black-900 m-1 text-[20px] !font-medium'
               >
                 When & Where
               </Heading>
+              <div>
+                {event.status === EventStatus.PENDING ? (
+                  <div className='flex justify-between items-center'>
+                    <span className='flex w-3 h-3 me-3 bg-blue rounded-full'></span>
+                    {event.status}
+                  </div>
+                ) : event.status === EventStatus.APPROVED ? (
+                  <div className='flex justify-between items-center'>
+                    <span className='flex w-3 h-3 me-3 bg-green rounded-full'></span>
+                    {event.status}
+                  </div>
+                ) : event.status === EventStatus.REJECTED ? (
+                  <div className='flex justify-between items-center'>
+                    <span className='flex w-3 h-3 me-3 bg-red rounded-full'></span>
+                    {event.status}
+                  </div>
+                ) : (
+                  <div className='flex justify-between items-center'>
+                    <span className='flex w-3 h-3 me-3 bg-red rounded-full'></span>
+                    {event.status}
+                  </div>
+                )}
+              </div>
             </div>
             <div className='mt-[15px] flex items-center gap-[10px]'>
               <div className='w-11 h-11 flex flex-col items-center justify-start rounded-md border border-solid border-gray-300 shadow-sm'>

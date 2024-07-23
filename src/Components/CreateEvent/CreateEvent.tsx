@@ -195,7 +195,7 @@ const CreateEvent = () => {
   }
 
   return (
-    <div className='flex w-full flex-col items-center gap-[61px] bg-blue_gray-900'>
+    <div className='flex w-full flex-col items-center gap-[61px] '>
       <div className='flex container-xs justify-center'>
         <form
           className='flex justify-center'
@@ -235,20 +235,16 @@ const CreateEvent = () => {
                         className='h-[32px] w-[32px] rounded-[5px] object-cover'
                       />
                       <div className='flex flex-col items-start gap-0.5'>
-                        <Text
-                          size='xs'
-                          as='p'
-                          className='!font-medium !text-white-A700_cc'
-                        >
+                        <Text size='xs' as='p' className='!font-medium '>
                           Presented by
                         </Text>
                         <Text size='s' as='p'>
-                          <span className='font-semibold text-white-A700'>
+                          <span className='font-semibold '>
                             CLB Cóc Sài Gòn
                           </span>
                         </Text>
                       </div>
-                      <RightOutlined className='mt-4 text-white-A700_cc' />
+                      <RightOutlined className='mt-4 ' />
                       <Img
                         src={subriceIcon}
                         alt='subriceicon'
@@ -256,9 +252,9 @@ const CreateEvent = () => {
                       />
                     </div>
                     <div className='flex gap-[15px]'>
-                      <InstagramOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                      <YoutubeOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
-                      <FacebookOutlined className='h-[16px] w-[16px] text-white-A700_cc' />
+                      <InstagramOutlined className='h-[16px] w-[16px] ' />
+                      <YoutubeOutlined className='h-[16px] w-[16px] ' />
+                      <FacebookOutlined className='h-[16px] w-[16px] ' />
                     </div>
                   </div>
                 </div>
@@ -266,16 +262,12 @@ const CreateEvent = () => {
                   <div className='self-stretch'>
                     <div className='flex flex-col w-full items-start gap-[11px]'>
                       <div className='flex flex-row w-full'>
-                        <Text
-                          size='lg'
-                          as='p'
-                          className='!text-white-A700_cc w-[50%]'
-                        >
+                        <Text size='lg' as='p' className=' w-[50%]'>
                           Speaker by
                         </Text>
                         <input
                           type='text'
-                          className='w-[50%] text-[14px] bg-blue_gray-900 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                          className='w-[50%] text-[14px]  outline-none border-none text-end [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
                           placeholder='Name of Host'
                           value={form.speaker_name}
                           onChange={(event) => {
@@ -289,7 +281,7 @@ const CreateEvent = () => {
                           {formError.speaker_name}
                         </div>
                       </div>
-                      <div className='ml-5 h-px self-stretch bg-white-A700_5e md:ml-0' />
+                      <div className='ml-5 h-px self-stretch md:ml-0' />
                     </div>
                   </div>
                 </div>
@@ -297,16 +289,12 @@ const CreateEvent = () => {
                   <div className='self-stretch'>
                     <div className='flex flex-col w-full items-start gap-[11px]'>
                       <div className='flex flex-row w-full'>
-                        <Text
-                          size='lg'
-                          as='p'
-                          className='!text-white-A700_cc w-[50%]'
-                        >
+                        <Text size='lg' as='p' className=' w-[50%]'>
                           Sponsor
                         </Text>
                         <input
                           type='text'
-                          className='w-[50%] text-[14px] bg-blue_gray-900 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                          className='w-[50%] text-[14px]  outline-none border-none text-end [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
                           placeholder='Name of Speacker'
                           value={form.sponsor_name}
                           onChange={(event) => {
@@ -320,15 +308,15 @@ const CreateEvent = () => {
                           {formError.sponsor_name}
                         </div>
                       </div>
-                      <div className='ml-5 h-px self-stretch bg-white-A700_5e md:ml-0' />
+                      <div className='ml-5 h-px self-stretch md:ml-0' />
                     </div>
                   </div>
                 </div>
 
-                <Text size='s' as='p' className='mt-[19px] !text-white-A700_cc'>
+                <Text size='s' as='p' className='mt-[19px] '>
                   Contact the Host
                 </Text>
-                <Text size='s' as='p' className='mt-[19px] !text-white-A700_cc'>
+                <Text size='s' as='p' className='mt-[19px] '>
                   Report Event
                 </Text>
               </div>
@@ -338,15 +326,17 @@ const CreateEvent = () => {
                     <Heading
                       size='s'
                       as='h1'
-                      className='flex items-center justify-center rounded-[10px] bg-gray-800_01 p-2 !text-black-900'
+                      className='flex items-center justify-center bg-orange-600 bg-pink-normail rounded-[10px] bg- p-[3px] '
                     >
-                      <span className='text-white-A700_bf'>Featured in</span>
-                      <span className='text-white-A700 ml-2'>
+                      <span className='text-white-A700_cc p-1'>
+                        Featured in
+                      </span>
+                      <span className='text-white-A700 p-1'>
                         Ho Chi Minh City
                       </span>
                     </Heading>
-                    <select
-                      className='bg-blue_gray-900_01 text-[14px] max-w-xs rounded-lg text-white-A700 font-euclid'
+                    {/* <select
+                      className='_01 text-[14px] max-w-xs rounded-lg  font-euclid'
                       value={form.type_event}
                       onChange={(event) => {
                         setForm((prev) => ({
@@ -357,10 +347,10 @@ const CreateEvent = () => {
                     >
                       <option value={EventTypeEnum.PRIVATE}>Private</option>
                       <option value={EventTypeEnum.PUBLIC}>Public</option>
-                    </select>
+                    </select> */}
                   </div>
                   <input
-                    className='mt-2 h-14 font-bold text-[30px] bg-blue_gray-900 !text-white-A700 outline-none border-none w-full'
+                    className='mt-2 h-14 font-bold text-[30px] outline-none border-none w-full'
                     placeholder='Event Name'
                     value={form.name}
                     onChange={(event) =>
@@ -368,12 +358,12 @@ const CreateEvent = () => {
                     }
                   />
                   <div className='mt-1 text-sm text-red'>{formError.name}</div>
-                  <div className='mt-2 flex justify-around items-center gap-5 rounded-[10px] p-3 h-auto w-full bg-gray-800_01 sm:pl-5'>
+                  <div className='mt-2 flex justify-between items-center gap-5 rounded-[10px] p-3 h-auto w-full bg-white-A700_99 border border-solid border-opacity-30 sm:pl-5 shadow-2xl'>
                     <Col>
                       <Row>
                         <Text
                           as='p'
-                          className='m-2 !text-blue_gray-100 !font-bold'
+                          className=' !font-bold'
                         >
                           Time
                         </Text>
@@ -386,6 +376,7 @@ const CreateEvent = () => {
                           onChange={onChangeDate}
                           format={'DD/MM/YYYY'}
                           placeholder='Date event'
+
                         />
                       </Row>
                     </Col>
@@ -413,18 +404,18 @@ const CreateEvent = () => {
                       </Row>
                     </Col>
                   </div>
-                  <div className='flex flex-row  p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
+                  <div className='flex flex-row  p-2 mt-5 rounded-[10px] h-auto w-full bg-white-A700_99 border border-solid border-opacity-30 shadow-2xl sm:pl-5'>
                     <EnvironmentOutlined className='' />
-                    <div className='flex flex-col items-start ml-2'>
+                    <div className='flex flex-col items-start ml-2 '>
                       <Text
                         as='p'
                         size='lg'
-                        className=' !text-blue_gray-100 !font-bold'
+                        className=' !font-bold'
                       >
                         Add Event Location
                       </Text>
                       <select
-                        className='font-normal !text-blue_gray-100 bg-gray-800_01 outline-none border-none text-sm w-full'
+                        className='font-normal bg-white-A700_99 border border-solid border-opacity-30 sm:pl-5 shadow-2xl outline-none rounded-md text-sm w-full'
                         value={form.location}
                         onChange={(event) => {
                           setForm((prev) => ({
@@ -444,7 +435,7 @@ const CreateEvent = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='flex flex-row items-center p-2 mt-5 rounded-[10px] h-auto w-full bg-gray-800_01 sm:pl-5'>
+                  <div className='flex flex-row items-center p-2 mt-5 rounded-[10px] h-auto w-full bg-white-A700_99 border border-solid border-opacity-30 sm:pl-5 shadow-2xl'>
                     <div className='col-span-1 flex justify-center items-center'>
                       <AlignCenterOutlined />
                     </div>
@@ -453,7 +444,7 @@ const CreateEvent = () => {
                       <button
                         type='button'
                         onClick={() => setOpen(true)}
-                        className='ml-3 !text-blue_gray-100 !font-bold '
+                        className='ml-3  !font-bold '
                       >
                         Add Description
                       </button>
@@ -475,10 +466,10 @@ const CreateEvent = () => {
                       </div>
                     </div>
                   </div>
-                  <Text as='h1' size='lg' className='mt-3 !font-medium'>
+                  <Text as='h1' size='lg' className='mt-5 !font-bold'>
                     Event Option
                   </Text>
-                  <div className='mt-2 flex flex-col gap-5 rounded-[10px] p-3 h-auto w-full bg-gray-800_01 sm:pl-5'>
+                  <div className='mt-2 flex flex-col gap-5 rounded-[10px] p-3 h-auto w-full bg-white-A700_99 border border-solid border-opacity-30 sm:pl-5 shadow-2xl'>
                     <div className='flex flex-col'>
                       <div className='flex flex-row'>
                         <div className='flex self-center m-auto w-[10%]'>
@@ -500,7 +491,7 @@ const CreateEvent = () => {
                         <div className='flex items-center w-[40%]'>
                           <Text
                             as='p'
-                            className='!text-[16px] !font-medium !text-white-A700_bf'
+                            className='!text-[16px] !font-medium'
                           >
                             Tickets
                           </Text>
@@ -509,7 +500,7 @@ const CreateEvent = () => {
                           <EditOutlined className='ml-1' />
                           <input
                             type='text'
-                            className='bg-gray-800_01 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                            className=' outline-none border-none text-end  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
                             placeholder='Free'
                             value={form.ticket_price}
                             onChange={(event) => {
@@ -524,7 +515,7 @@ const CreateEvent = () => {
                           </div>
                         </div>
                       </div>
-                      <div className='mt-2 ml-5 h-[0.4px] opacity-20 self-stretch bg-white-A700_5e md:ml-0' />
+                      <div className='mt-2 ml-5 h-[0.4px] opacity-20 self-stretch md:ml-0' />
                     </div>
                     <div className='flex flex-col'>
                       <div className='flex flex-row'>
@@ -546,7 +537,7 @@ const CreateEvent = () => {
                         <div className='flex w-[70%]'>
                           <Text
                             as='p'
-                            className='w-full !text-[16px] !font-medium !text-white-A700_bf'
+                            className='w-full !text-[16px] !font-medium'
                           >
                             Require Approval
                           </Text>
@@ -560,7 +551,7 @@ const CreateEvent = () => {
                           />
                         </div>
                       </div>
-                      <div className='mt-2 ml-5 h-[0.2px] opacity-20 self-stretch bg-white-A700_5e md:ml-0' />
+                      <div className='mt-2 ml-5 h-[0.2px] opacity-20 self-stretch md:ml-0' />
                     </div>
                     <div className='flex flex-col'>
                       <div className='flex flex-row'>
@@ -580,7 +571,7 @@ const CreateEvent = () => {
                         <div className='flex w-[70%]'>
                           <Text
                             as='p'
-                            className='w-full !text-[16px] !font-medium !text-white-A700_bf'
+                            className='w-full !text-[16px] !font-medium'
                           >
                             Capacity
                           </Text>
@@ -589,7 +580,7 @@ const CreateEvent = () => {
                           <EditOutlined className='ml-1' />
                           <input
                             type='number'
-                            className='bg-gray-800_01 outline-none border-none text-end !text-white-A700_bf [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                            className=' outline-none border-none text-end [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
                             placeholder='Unlimited'
                             value={form.capacity}
                             onChange={(event) => {
@@ -610,7 +601,7 @@ const CreateEvent = () => {
                     type='submit'
                     size='xl'
                     color='white_A700'
-                    className='mt-5 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5'
+                    className='mt-10 w-full rounded-[10px] !text-white-A700 !bg-pink-normail bg-white-A700_99 border border-solid border-opacity-30 sm:pl-5 shadow-2xl font-medium sm:px-5'
                   >
                     Create Event
                   </Button>

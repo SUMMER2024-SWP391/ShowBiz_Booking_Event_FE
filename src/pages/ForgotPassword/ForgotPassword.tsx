@@ -54,7 +54,9 @@ const ForgotPassword = () => {
             type='text'
             name='email'
             register={register}
-            classNameInput='btn w-[300px] h-[30px]'
+            classNameInput='mt-2 rounded-[10px] border border-solid
+                   text-black-900 sm:pr-5 font-euclid p-2 outline-none
+                    bg-white-A700 w-full'
             errorMessage={errors.email?.message}
           />
           <button className='mx-2 btn mt-2'>Forgot password</button>

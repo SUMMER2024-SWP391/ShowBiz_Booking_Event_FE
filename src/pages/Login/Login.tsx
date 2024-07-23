@@ -101,11 +101,7 @@ const Login = () => {
                 <UserOutlined className='' />
               </Button>
               <div className=' flex flex-col items-start mt-5'>
-                <Heading
-                  size='2xl'
-                  as='h1'
-                  className='!font-bold'
-                >
+                <Heading size='2xl' as='h1' className='!font-bold'>
                   Welcome to EventBok
                 </Heading>
                 <Heading size='xl' as='h2' className='mt-5'>
@@ -119,11 +115,7 @@ const Login = () => {
               onSubmit={onSubmit}
             >
               <div className='w-full flex flex-col  '>
-                <Heading
-                  size='lg'
-                  as='h3'
-                  className='!font-bold '
-                >
+                <Heading size='lg' as='h3' className='!font-bold '>
                   Email
                 </Heading>
                 {/* <span className='text-rose-300'></span> */}
@@ -145,11 +137,7 @@ const Login = () => {
                 /> */}
               </div>
               <div className='flex flex-col w-full'>
-                <Heading
-                  size='lg'
-                  as='h3'
-                  className=' !font-bold'
-                >
+                <Heading size='lg' as='h3' className=' !font-bold'>
                   Password
                 </Heading>
                 <InputVerTwo
@@ -165,7 +153,7 @@ const Login = () => {
               </div>
               <Link
                 to={'/forgot-password'}
-                className='text-white-A700 hover:text-black-900 hover:underline'
+                className='mt-5 text-black-900 hover:text-black-900 hover:underline'
               >
                 Forgot password. Click here to get new password
               </Link>
@@ -174,31 +162,23 @@ const Login = () => {
                 color='white_A700'
                 className='mt-[10px] w-full rounded-[10px] border border-solid border-black_light bg-pink-normail font-medium sm:px-5 hover:opacity-95'
               >
-                Continue with Email
+                Sign In 
               </Button>
-              <div className='my-3 h-px w-full self-stretch bg-white-A700' />
-              {/* <Button
-                onClick={onSignInWithGoogle}
-                color='blue_gray_900'
-                size='xl'
-                className='min-w-[345px] p-5 h-[37px] gap-1.5 rounded-[10px] border border-solid
-                 border-blue_gray-100_04 font-semibold sm:px-5 text-white-A700 text-center 
-                 flex justify-center items-center hover:bg-white-A700 hover:text-black-900'
-              >
-                Sign in with FPT EDU Email
-              </Button> */}
+              <div className='my-3 h-px w-full self-stretch bg-black_light opacity-50' />
+              
               <div className='grid grid-cols-2 gap-2'>
                 <Link
                   to={googleAuthUrl}
-                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-black_light font-medium sm:px-5 text-center hover:opacity-80 '
+                  className=' flex flex-row bg-pink-normail mt-[10px] p-2 w-full rounded-[10px] border border-solid border-black_light font-medium sm:px-5 text-center hover:opacity-80 '
                 >
+                  <div className=""></div>
                   Sign in with FPT EDU Email
                 </Link>
                 <Link
                   to={'/register'}
                   className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-black_light font-medium sm:px-5 text-center hover:bg-white flex justify-center items-center hover:opacity-80 '
                 >
-                  Register account
+                  Sign Up
                 </Link>
               </div>
             </form>
