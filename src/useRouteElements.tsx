@@ -21,6 +21,7 @@ import ManagerEventPage from './pages/ManageEventPage/ManageEventPage'
 import EventListStaff from './pages/EventListStaff/EventListStaff'
 import HomeForSearch from './pages/HomePage/HomeForSearch'
 import EventListUserPage from './pages/EventListUserPage/EventListUserPage'
+import ChangePassword from './Components/ChangePassword/ChangePassword'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -38,6 +39,10 @@ const useRouteElements = () => {
     {
       path: '/search',
       element: <HomeForSearch />
+    },
+    {
+      path:'/profile/change_password',
+      element: <ChangePassword />
     },
     {
       path: path.verify_account,

@@ -69,7 +69,7 @@ export default {
           normail: '#F48A6C',
         },
         //---------------------
-        black: { 900: '#000000' },
+        black: { 900: '#32363B' },
         indigo: { '100_7f': '#b8c6e07f' },
         white_A700_7f: '#ffffff7f',
         blue: '#0317fc',
@@ -114,28 +114,32 @@ export default {
         }
       },
       backgroundImage: {
-        gradient: 'linear-gradient(180deg, #301535cc, #2a131ccc, #131517)',
-        gradient1: 'linear-gradient(180deg, #fb7b0433,#ffffff33)',
+        gradient: '#f4f5f6',
+        gradient1: '#f4f5f6',
         //background home page mới
         //page vistor
-        gradient_vistor: 'linear-gradient(11deg, #f6d365 0%, #fda085 100%);',
+        gradient_vistor: '#f4f5f6',
         //page eventOperator
-        gradient_eventOperator: ' linear-gradient(to top, #f4f5f6 0%, #f4f5f6 100%)',
+        gradient_eventOperator: '#f4f5f6',
+        gradient_header: 'linear-gradient(rgba(115, 69, 214, 0.2) 0%, rgba(0, 93, 233, 0.1) 52.58%, rgba(106, 147, 207, 0) 100%)'
       }
     }
   },
   // plugins: [
   //   require('daisyui'),
-  //   plugin(function ({ addComponents, theme }) {
+  //   plugin(function ({ addComponents }) {
   //     addComponents({
   //       '.container': {
   //         maxWidth: '1440px',
   //         marginLeft: 'auto',
   //         marginRight: 'auto',
-  //         paddingLeft: theme('spacing.4'),
-  //         paddingRight: theme('spacing.4')
+  //         // paddingLeft: theme('spacing.4'),
+  //         // paddingRight: theme('spacing.4')
   //       }
   //     })
   //   })
-  // ]
+  // ],
+  // daisyui: {
+  //   themes: false, // This disables DaisyUI's theme mode
+  // },
 }

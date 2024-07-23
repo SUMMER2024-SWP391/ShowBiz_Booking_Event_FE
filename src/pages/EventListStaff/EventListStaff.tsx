@@ -14,7 +14,7 @@ const EventListStaff = () => {
   })
   console.log(data)
   return (
-    <div className='containter bg-gradient_vistor'>
+    <div className='containter-xs'>
       <Header />
       <div className='container flex justify-center items-center'>
         <div className='flex flex-col'>
@@ -39,7 +39,8 @@ const EventListStaff = () => {
                   event_operator_name={event.event_operator.user_name}
                   price={event.ticket_price}
                   nameEvent={event.name}
-                  time={event.time_start}
+                  time_start={event.time_start}
+                  time_end={event.time_end}
                   className='mt-8'
                 />
               </Link>

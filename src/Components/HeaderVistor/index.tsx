@@ -20,21 +20,21 @@ export default function HeaderVistor({ ...props }: Props) {
       >
         <li>
           <NavLink to='/'>
-            <Heading as='h6' className=' hover:text-white-A700'>
+            <Heading as='h6' className='  hover:text-black-900'>
               Home
             </Heading>
           </NavLink>
         </li>
         <li>
           <Link to='/event-list/users'>
-            <Heading as='h6' className='hover:text-white-A700'>
+            <Heading as='h6' className=' hover:text-black_dark'>
               My Event
             </Heading>
           </Link>
         </li>
         <li>
           <a href='#'>
-            <Heading as='h6' className='hover:text-white-A700'>
+            <Heading as='h6' className=' hover:text-black-900'>
               Calendar
             </Heading>
           </a>
@@ -42,7 +42,7 @@ export default function HeaderVistor({ ...props }: Props) {
         {isStaff ? (
           <li>
             <Link to='/event-list/staff'>
-              <Heading as='h6' className='hover:text-white-A700'>
+              <Heading as='h6' className=' hover:text-black-900'>
                 Staff
               </Heading>
             </Link>
