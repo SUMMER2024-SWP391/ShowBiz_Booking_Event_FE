@@ -86,7 +86,6 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                     Sponser
                   </Heading>
                   <div className='h-[0.5px] w-full self-stretch bg-black_light opacity-20' />
-
                 </div>
                 <Text size='s' as='p' className=' !font-monterat'>
                   {event.sponsor_name}

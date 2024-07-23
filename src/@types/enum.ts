@@ -5,9 +5,10 @@ export enum UserRole {
   Admin = 'Admin' //3
 }
 export enum UserVerifyStatus {
-  UNVERIFIED,
-  VERIFIED,
-  BANNED
+  UNVERIFIED = 'Unverified',
+  VERIFIED = 'Verified',
+  BANNED = 'Banned',
+  DELETE = 'Delete'
 }
 export enum EventStatus {
   PENDING = 'Pending', //0

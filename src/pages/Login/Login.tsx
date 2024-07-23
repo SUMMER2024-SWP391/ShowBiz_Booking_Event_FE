@@ -8,7 +8,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import InputVerTwo from 'src/Components/InputVerTwo/InputVerTwo'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorResponse } from 'src/@types/utils.type'
-import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import {
+  isAxiosUnauthorized,
+  isAxiosUnprocessableEntityError
+} from 'src/utils/utils'
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { AppContext } from 'src/context/app.context'
@@ -19,13 +22,14 @@ import { googleAuthUrl } from 'src/utils/getGoogleAuthUrl'
 import { UserRole } from 'src/@types/enum'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import { clearEventIdFromLS, setIsStaffToLS } from 'src/utils/auth'
+import { toast } from 'react-toastify'
 
 export type FormData = LoginSchema
 
 const Login = () => {
+  const navigate = useNavigate()
   const { setIsAuthenticated, setProfile, setIsStaff, eventId, setEventId } =
     useContext(AppContext)
-  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -35,7 +39,7 @@ const Login = () => {
   } = useForm<FormData>({
     resolver: yupResolver(LoginSchemaYup)
   })
-  console.log(eventId)
+
   const [loginError, setLoginError] = useState<string>('')
 
   const loginMutation = useMutation({
@@ -71,9 +75,8 @@ const Login = () => {
         }
       },
       onError: (error) => {
-        console.log(error)
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
-          trigger()
+          // trigger()
           const errors = error.response?.data.errors
           setLoginError(errors?.email as string)
         }
@@ -160,7 +163,10 @@ const Login = () => {
                 />
                 <span className=' text-red text-sm'>{loginError}</span>
               </div>
-              <Link to={'/forgot-password'} className=''>
+              <Link
+                to={'/forgot-password'}
+                className='text-white-A700 hover:text-black-900 hover:underline'
+              >
                 Forgot password. Click here to get new password
               </Link>
               <Button
