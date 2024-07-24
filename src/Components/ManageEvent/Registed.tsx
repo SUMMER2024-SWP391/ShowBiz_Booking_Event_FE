@@ -3,6 +3,8 @@ import eventApi from 'src/apis/event.api'
 
 import { Table, TableColumnsType, Tag } from 'antd'
 import { StatusRegisterEvent } from 'src/@types/utils.type'
+import { Heading } from '../Heading/Heading'
+import { useState } from 'react'
 
 interface Props {
   id: string
@@ -21,29 +23,33 @@ const columns: TableColumnsType<{
     title: 'Status register',
     dataIndex: 'status_register',
     render: (status_register) =>
-      status_register == StatusRegisterEvent.SUCCESS ? (
-        <Tag color='success'>{status_register}</Tag>
-      ) : (
-        <Tag color='error'>{status_register}</Tag>
-      )
+      status_register == StatusRegisterEvent.SUCCESS ? <Tag color='success'>{status_register}</Tag> : <Tag color='error'>{status_register}</Tag>
   }
 ]
-
 export const Registed = ({ id }: Props) => {
   const { data } = useQuery({
     queryKey: ['list-registed-event'],
     queryFn: () => eventApi.getListUserRegistedEvent(id)
   })
+
   return (
-    <div className='flex items-center justify-center mt-5'>
-      {data && (
-        <Table
-          dataSource={data.data.data}
-          columns={columns}
-          pagination={false}
-          className='rounded-lg'
-        />
-      )}
-    </div>
+    <>
+      <div className='mt-5 flex flex-col justify-center '>
+        <Heading as='h6' size='md' className='flex items-start !font-monterat !text-[20px]'>
+          Guest List
+        </Heading>
+        <div className='mt-10'>{data && <Table dataSource={data.data.data} columns={columns} pagination={false} className='rounded-lg' />}</div>
+      </div>
+    </>
+    // <div className='flex items-center justify-center mt-5'>
+    //   {data && (
+    //     <Table
+    //       dataSource={data.data.data}
+    //       columns={columns}
+    //       pagination={false}
+    //       className='rounded-lg'
+    //     />
+    //   )}
+    // </div>
   )
 }

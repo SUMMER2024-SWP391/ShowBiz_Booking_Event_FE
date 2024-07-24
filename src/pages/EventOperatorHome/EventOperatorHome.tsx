@@ -19,11 +19,7 @@ export const EventOperatorHome = () => {
           <div className='flex flex-col items-center self-stretch'></div>
           <div className='container-xs'>
             <div className='flex flex-col mt-5'>
-              <div className='flex flex-row items-center justify-between'>
-                <Heading size='4xl' as='h1' className=''>
-                  Events
-                </Heading>
-              </div>
+              
 
               <div className='container-xs mt-10'>
                   <Routes>

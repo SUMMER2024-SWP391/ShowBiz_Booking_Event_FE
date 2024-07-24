@@ -77,9 +77,9 @@ export const Registration = () => {
         </Button>
       </div>
       <div className='mt-5 flex flex-row justify-between'>
-        <Heading size='2xl' className='!text-white-A700'>
+        <Text size='xl' className='!font-semibold'>
           Tickets
-        </Heading>
+        </Text>
         <Button className='bg-gray-100 flex flex-row items-center gap-3'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -96,7 +96,7 @@ export const Registration = () => {
         </Button>
       </div>
       <div className='mt-10'>
-        <div className='w-[386px] h-[178px] bg-white-A700 rounded-[15px] p-4 justify-between'>
+        <div className='w-[386px] h-[178px] border border-solid shadow-2xl rounded-[15px] p-4 justify-between'>
           <div className='flex flex-row justify-between'>
             <Heading className='!text-black-900'>Standard</Heading>
             <svg
@@ -136,10 +136,10 @@ export const Registration = () => {
       </div>
       <div className='mt-5 h-px w-full self-stretch bg-black_supper_light' />
       <div className='mt-5'>
-        <Heading className='text-[25px] !text-white-A700'>
+        <Heading className='text-[25px] '>
           Registration Questions
         </Heading>
-        <Text className='mt-3 !text-gray-100 text-[16px]'>
+        <Text className='mt-3  text-[16px]'>
           We will ask guests the following questions when they register for the
           event.
         </Text>
@@ -155,7 +155,7 @@ export const Registration = () => {
                 d='M7.752 44.553h34.843c4.532 0 6.952-2.4 6.952-6.89V12.765c0-4.492-2.42-6.891-6.952-6.891H7.752C3.22 5.875.8 8.254.8 12.765v24.897c0 4.512 2.42 6.89 6.952 6.89m9.106-19.36c-2.482 0-4.492-2.091-4.492-4.901 0-2.625 2.01-4.82 4.492-4.82 2.502 0 4.49 2.195 4.49 4.82 0 2.81-1.988 4.901-4.49 4.901m13.494-6.624c-.82 0-1.395-.594-1.395-1.374 0-.758.574-1.353 1.395-1.353H40.81c.779 0 1.353.595 1.353 1.353 0 .78-.574 1.374-1.353 1.374zm0 8.04c-.82 0-1.395-.616-1.395-1.395 0-.759.574-1.354 1.395-1.354H40.81c.779 0 1.353.595 1.353 1.354 0 .78-.574 1.394-1.353 1.394zm-21.205 8.1c-.8 0-1.23-.574-1.23-1.333 0-1.907 2.788-6.83 8.94-6.83 6.173 0 8.963 4.923 8.963 6.83 0 .759-.41 1.333-1.23 1.333zm21.205-.103c-.82 0-1.395-.574-1.395-1.353 0-.78.574-1.374 1.395-1.374H40.81c.779 0 1.353.595 1.353 1.374s-.574 1.353-1.353 1.353z'
               ></path>
             </svg>
-            <Text className='ml-3 text-[20px] !text-white-A700_bf'>
+            <Text className='ml-3 text-[20px] _bf'>
               Identity
             </Text>
           </div>
@@ -172,7 +172,7 @@ export const Registration = () => {
                     d='M40.031 39.156c6.813 0 12.594-6.062 12.594-13.906 0-7.656-5.812-13.531-12.594-13.531-6.812 0-12.656 5.969-12.625 13.594 0 7.78 5.782 13.843 12.625 13.843M59.47 68.22c5.156 0 6.937-1.563 6.937-4.438 0-8.031-10.187-19.093-26.406-19.093-16.187 0-26.406 11.062-26.406 19.093 0 2.875 1.781 4.438 6.937 4.438z'
                   ></path>
                 </svg>
-                <Heading as='h3' size='xl' className='ml-2 !text-white-A700_bf'>
+                <Heading as='h3' size='xl' className='ml-2 _bf'>
                   Name
                 </Heading>
                 <Button
@@ -193,7 +193,7 @@ export const Registration = () => {
                     d='M40.031 39.156c6.813 0 12.594-6.062 12.594-13.906 0-7.656-5.812-13.531-12.594-13.531-6.812 0-12.656 5.969-12.625 13.594 0 7.78 5.782 13.843 12.625 13.843M59.47 68.22c5.156 0 6.937-1.563 6.937-4.438 0-8.031-10.187-19.093-26.406-19.093-16.187 0-26.406 11.062-26.406 19.093 0 2.875 1.781 4.438 6.937 4.438z'
                   ></path>
                 </svg>
-                <Heading as='h3' size='xl' className='ml-2 !text-white-A700_bf'>
+                <Heading as='h3' size='xl' className='ml-2 _bf'>
                   MSSV
                 </Heading>
                 <Button
@@ -218,7 +218,7 @@ export const Registration = () => {
                 <Heading
                   as='h3'
                   size='xl'
-                  className='ml-2  !text-white-A700_bf'
+                  className='ml-2  _bf'
                 >
                   Phone Number
                 </Heading>
