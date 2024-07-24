@@ -5,8 +5,6 @@ import { useQuery } from '@tanstack/react-query'
 import eventApi from 'src/apis/event.api'
 import EventDetail from 'src/Components/EventDetail/EventDetail'
 import HandleRegisterEvent from 'src/Components/HandleRegisterEvent/HandleRegisterEvent'
-import { isValidToRegister } from 'src/utils/checkEventDate'
-import { Button, Heading } from 'src/Components'
 
 export default function EventDetailPage() {
   const { id } = useParams()
