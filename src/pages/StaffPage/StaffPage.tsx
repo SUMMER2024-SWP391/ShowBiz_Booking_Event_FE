@@ -1,14 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { Modal, Skeleton } from 'antd'
 import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { Button, Heading } from 'src/Components'
+import { useParams } from 'react-router-dom'
+import { Button } from 'src/Components'
 import CheckInWithOTP from 'src/Components/CheckInWithOTP/CheckInWithOTP'
-import EventList from 'src/Components/EventLists/EventList'
-import Footer from 'src/Components/Footer/Footer'
-import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
-import ModalPopup from 'src/Components/ModalPopup/ModalPopup'
-import authAPI from 'src/apis/auth.api'
 import eventApi from 'src/apis/event.api'
 
 const StaffPage = () => {
@@ -17,17 +12,19 @@ const StaffPage = () => {
     queryKey: ['list-user-register-event'],
     queryFn: () => eventApi.getListUserRegisterEvent(id as string)
   })
-  // console.log(
-  //   'hi',
-  //   data?.data.data.dataUser.listUser.map((user) => user.status_checkin)
-  // )
   const [open, setOpen] = useState<boolean>(false)
 
   return (
     <>
       <div className='w-full flex flex-col items-start'>
         <div className='mt-10 flex flex-row items-start'>
-          <Button className='bg-pink-normail rounded-lg !text-white-A700 font-bold' size="lg" onClick={() => setOpen(true)}>Checking Guest</Button>
+          <Button
+            className='bg-pink-normail rounded-lg !text-white-A700 font-bold'
+            size='lg'
+            onClick={() => setOpen(true)}
+          >
+            Checking Guest
+          </Button>
         </div>
 
         <div className='mt-5 text-black_light flex flex-col container-xs '>

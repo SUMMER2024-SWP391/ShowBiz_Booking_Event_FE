@@ -48,6 +48,7 @@ import weekday from 'dayjs/plugin/weekday'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import weekYear from 'dayjs/plugin/weekYear'
 import { AppContext } from 'src/context/app.context'
+import { useNavigate } from 'react-router-dom'
 
 dayjs.extend(customParseFormat)
 dayjs.extend(advancedFormat)
@@ -90,6 +91,7 @@ const errorForm = {
 
 const CreateEvent = () => {
   const { profile } = useContext(AppContext)
+  const nav = useNavigate()
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [form, setForm] = useState<typeof initForm>(initForm)
   const [formError, setFormError] = useState<typeof errorForm>(errorForm)
@@ -101,18 +103,7 @@ const CreateEvent = () => {
     mutationFn: (body: CreateEventBody) => eventApi.createEvent(body)
   })
 
-  // const readFileAsDataURL = (file: File): Promise<string> => {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader()
-  //     reader.readAsDataURL(file)
-  //     reader.onload = () => {
-  //       resolve(reader.result as string)
-  //     }
-  //     reader.onerror = (error) => reject(error)
-  //   })
-  // }
   //when image change you can call function to get url previewImage:
-
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const imgRef = ref(imageDB, `files/${v4()}`)
@@ -173,6 +164,7 @@ const CreateEvent = () => {
     createEventMutation.mutate(bodyCreateEvent as any, {
       onSuccess: (data) => {
         toast.success(data.data.message)
+        window.location.href = `http://localhost:3000/event-operator/manage/${data.data.data.event._id}/overview`
       },
       onError: (error) => {
         if (

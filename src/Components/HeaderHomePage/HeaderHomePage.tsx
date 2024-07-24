@@ -19,7 +19,6 @@ import { useForm } from 'react-hook-form'
 import { SearchEventSchema, searchEventSchemaYup } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from 'react-toastify'
-import { Text } from '../Text/Text'
 
 interface Props {
   className?: string

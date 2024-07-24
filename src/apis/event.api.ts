@@ -68,7 +68,7 @@ const eventApi = {
       }>
     >(`/events/ticket/${id}`),
   createEvent: (body: CreateEvent) =>
-    http.post<SuccessResponse<{}>>('/events/', body),
+    http.post<SuccessResponse<{ event: Event }>>('/events/', body),
   checkInEvent: ({
     id,
     body

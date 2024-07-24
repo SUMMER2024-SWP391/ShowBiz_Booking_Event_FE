@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from 'antd'
 import { Link } from 'react-router-dom'
 import eventApi from 'src/apis/event.api'
-import EventDetail from 'src/Components/EventDetail/EventDetail'
+import EventListOfStaff from 'src/Components/EventListOfStaff/EventListOfStaff'
 import EventList from 'src/Components/EventLists/EventList'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
@@ -12,7 +12,6 @@ const EventListStaff = () => {
     queryKey: ['list-event-staff'],
     queryFn: () => eventApi.getListEventStaff()
   })
-  console.log(data)
   return (
     <div className='containter-xs'>
       <Header />
@@ -28,8 +27,11 @@ const EventListStaff = () => {
           )}
           {data &&
             data.data.data.events.map((event) => (
-              <Link to={`/staff/${event._id}`} key={event._id}>
-                <EventList
+              <Link
+                to={`/event-operator/manage/${event._id}/checkin`}
+                key={event._id}
+              >
+                <EventListOfStaff
                   key={event._id}
                   id={event._id}
                   address={event.address}
