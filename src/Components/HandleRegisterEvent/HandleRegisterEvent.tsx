@@ -5,17 +5,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import paymentAPI from 'src/apis/payment.api'
 import eventApi from 'src/apis/event.api'
 import { useParams } from 'react-router-dom'
-import {
-  ErrorResponse,
-  StatusRegisterEvent,
-  SuccessResponse
-} from 'src/@types/utils.type'
-import {
-  canCancelEvent,
-  isAxiosError,
-  isAxiosErrorConflictAndNotPermisson,
-  isValidToFeeback
-} from 'src/utils/utils'
+import { ErrorResponse, StatusRegisterEvent, SuccessResponse } from 'src/@types/utils.type'
+import { canCancelEvent, isAxiosError, isAxiosErrorConflictAndNotPermisson, isValidToFeeback } from 'src/utils/utils'
 import { toast } from 'react-toastify'
 import { Text } from '../Text/Text'
 import { Heading } from '../Heading/Heading'
@@ -38,7 +29,7 @@ type Props = {
 const handleComponentEvent = (event: Event): JSX.Element => {
   const { isAuthenticated } = useContext(AppContext)
   const [popupCancel, setPopupCancel] = useState(false)
-
+  console.log(event.date_event)
   const { id } = useParams()
   const queryClient = useQueryClient()
   let newData:
@@ -64,8 +55,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
   }
 
   const handleCancelEventMutation = useMutation({
-    mutationFn: ({ id, registerId }: { id: string; registerId: string }) =>
-      eventApi.cancelEvent(id, registerId),
+    mutationFn: ({ id, registerId }: { id: string; registerId: string }) => eventApi.cancelEvent(id, registerId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['ticket-detail'],
@@ -118,97 +108,51 @@ const handleComponentEvent = (event: Event): JSX.Element => {
       }
     })
   }
-
-  if (
-    !isAuthenticated ||
-    !newData ||
-    (newData && !newData.data.data.ticket.register)
-  ) {
-    if (
-      newData &&
-      isValidToRegister(
-        newData?.data.data.ticket.event.date_event,
-        newData?.data.data.ticket.event.ticket_price
-      )
-    ) {
+  if (!isAuthenticated || !newData || (newData && !newData.data.data.ticket.register)) {
+    if (newData && !isValidToRegister(newData?.data.data.ticket.event.date_event, newData?.data.data.ticket.event.time_start)) {
       if (event.is_required_form_register && Number(event.ticket_price) !== 0) {
         return <Register _id={event._id} event={event} />
-      } else if (
-        event.is_required_form_register &&
-        Number(event.ticket_price) === 0
-      ) {
+      } else if (event.is_required_form_register && Number(event.ticket_price) === 0) {
         return <Register _id={event._id} event={event} />
-      } else if (
-        !event.is_required_form_register &&
-        Number(event.ticket_price) !== 0
-      ) {
+      } else if (!event.is_required_form_register && Number(event.ticket_price) !== 0) {
         return (
           <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-[#51606E] pb-[26px] shadow-md sm:pb-5'>
             <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#51606E] px-6 pb-[7px] pt-3 sm:px-5'>
-              <Heading
-                size='s'
-                as='p'
-                className='!font-semibold !text-white-A700'
-              >
+              <Heading size='s' as='p' className='!font-semibold !text-white-A700'>
                 Registration
               </Heading>
             </div>
-            <Text
-              size='s'
-              as='p'
-              className='ml-6 self-start !text-white-A700 !text-[16px]'
-            >
+            <Text size='s' as='p' className='ml-6 self-start !text-white-A700 !text-[16px]'>
               Welcome! To join the event, please register below.
             </Text>
 
-            <HandleLoginWhenRegisterEvent
-              handleRegisterEvent={handleClickForPaymentAPI}
-            />
+            <HandleLoginWhenRegisterEvent handleRegisterEvent={handleClickForPaymentAPI} />
           </div>
         )
       }
       return (
         <div className='mt-[37px] flex flex-col items-center gap-[10px] self-stretch rounded-[20px] bg-[#51606E] pb-[26px] shadow-md sm:pb-5'>
           <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#51606E] px-6 pb-[7px] pt-3 sm:px-5'>
-            <Heading
-              size='2xl'
-              as='h1'
-              className='!font-semibold !text-white-A700'
-            >
+            <Heading size='2xl' as='h1' className='!font-semibold !text-white-A700'>
               Registration
             </Heading>
           </div>
-          <Text
-            size='s'
-            as='p'
-            className='ml-6 self-start !text-white-A700 !text-[16px]'
-          >
+          <Text size='s' as='p' className='ml-6 self-start !text-white-A700 !text-[16px]'>
             Welcome! To join the event, please register below.
           </Text>
 
-          <HandleLoginWhenRegisterEvent
-            handleRegisterEvent={handleRegisterNoPaymentNoForm(event._id)}
-          />
+          <HandleLoginWhenRegisterEvent handleRegisterEvent={handleRegisterNoPaymentNoForm(event._id)} />
         </div>
       )
     }
     return (
       <div className='mt-[37px] flex flex-col items-center gap-[10px] self-stretch rounded-[20px] bg-[#51606E] pb-[26px] shadow-md sm:pb-5'>
         <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#51606E] px-6 pb-[7px] pt-3 sm:px-5'>
-          <Heading
-            size='2xl'
-            as='h1'
-            className='!font-semibold !text-white-A700'
-          >
+          <Heading size='2xl' as='h1' className='!font-semibold !text-white-A700'>
             Notification
           </Heading>
         </div>
-        <Button
-          size='lg'
-          shape='round'
-          className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 !bg-[#F5222D] text-white-A700'
-          disabled
-        >
+        <Button size='lg' shape='round' className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 !bg-[#F5222D] text-white-A700' disabled>
           This event was end
         </Button>
       </div>
@@ -218,11 +162,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     <>
       <div className='mt-[37px] flex flex-col items-center gap-[10px] self-stretch rounded-[20px] bg-[#51606E] pb-[26px] shadow-md sm:pb-5'>
         <div className='mt-3 flex flex-col self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#51606E] px-6 pb-[7px] pt-3 sm:px-5'>
-          <Heading
-            size='2xl'
-            as='h1'
-            className='!font-semibold !text-white-A700'
-          >
+          <Heading size='2xl' as='h1' className='!font-semibold !text-white-A700'>
             You're In
           </Heading>
         </div>
@@ -232,25 +172,15 @@ const handleComponentEvent = (event: Event): JSX.Element => {
           newData.data.data.ticket.event.time_end
         ) ? (
           newData.data.data.ticket.register.status_check_in ? ( //check tiếp người dùng đã check in chưa
-            <Text
-              size='lg'
-              className='min-w-[423px] text-center !text-[20px] font-semibold hover:shadow-md sm:px-5 bg-[#9DADBC] text-white-A700'
-            >
+            <Text size='lg' className='min-w-[423px] text-center !text-[20px] font-semibold hover:shadow-md sm:px-5 bg-[#9DADBC] text-white-A700'>
               You had check in this event
             </Text>
           ) : (
             <>
-              <Text
-                size='lg'
-                as='p'
-                className='mt-3 !text-white-A700 !text-[16px]'
-              >
+              <Text size='lg' as='p' className='mt-3 !text-white-A700 !text-[16px]'>
                 A confirmation email has been sent to your email.
               </Text>
-              <Text
-                size='lg'
-                className='mt-5 !text-[20px] text-center rounded-md font-semibold hover:shadow-md sm:px-5 text-white-A700'
-              >
+              <Text size='lg' className='mt-5 !text-[20px] text-center rounded-md font-semibold hover:shadow-md sm:px-5 text-white-A700'>
                 {newData.data.data.ticket.register.otp_check_in}
               </Text>
             </>
@@ -260,12 +190,8 @@ const handleComponentEvent = (event: Event): JSX.Element => {
         )}
 
         {newData != undefined &&
-          newData.data.data.ticket.register.status_register ==
-            StatusRegisterEvent.SUCCESS &&
-          canCancelEvent(
-            newData.data.data.ticket.event.date_event,
-            newData.data.data.ticket.event.time_start
-          ) && (
+          newData.data.data.ticket.register.status_register == StatusRegisterEvent.SUCCESS &&
+          canCancelEvent(newData.data.data.ticket.event.date_event, newData.data.data.ticket.event.time_start) && (
             <>
               <Button
                 size='lg'
@@ -307,22 +233,14 @@ const handleComponentEvent = (event: Event): JSX.Element => {
             </>
           )}
 
-        {isAuthenticated &&
-          isValidToFeeback(
-            newData.data.data.ticket.event.date_event,
-            newData.data.data.ticket.event.time_end
-          ) && (
-            <HandleFeedbackOfUser
-              _id={newData.data.data.ticket.event._id as string}
-              isFeedback={newData.data.data.ticket.inforForm.isFeedback}
-              isHasFormFeedBack={
-                newData.data.data.ticket.inforForm.isHasFormFeedback
-                  ? true
-                  : false
-              }
-              statusCheckIn={newData.data.data.ticket.register.status_check_in}
-            />
-          )}
+        {isAuthenticated && isValidToFeeback(newData.data.data.ticket.event.date_event, newData.data.data.ticket.event.time_end) && (
+          <HandleFeedbackOfUser
+            _id={newData.data.data.ticket.event._id as string}
+            isFeedback={newData.data.data.ticket.inforForm.isFeedback}
+            isHasFormFeedBack={newData.data.data.ticket.inforForm.isHasFormFeedback ? true : false}
+            statusCheckIn={newData.data.data.ticket.register.status_check_in}
+          />
+        )}
       </div>
     </>
   )

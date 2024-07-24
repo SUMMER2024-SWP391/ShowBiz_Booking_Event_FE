@@ -15,17 +15,10 @@ export function checkEventDate(date_event: string): string {
   }
 }
 
-export function isValidToRegister(
-  date_event: string,
-  time_start: string
-): boolean {
+export function isValidToRegister(date_event: string, time_start: string): boolean {
   dayjs.extend(isSameOrBefore)
   const currentDate = dayjs()
-  const parsedDate = parse(
-    date_event + ' ' + time_start,
-    'dd/MM/yyyy HH:mm',
-    new Date()
-  )
+  const parsedDate = parse(date_event + ' ' + time_start, 'dd/MM/yyyy HH:mm', new Date())
   if (currentDate.isSameOrBefore(parsedDate)) {
     return false
   }

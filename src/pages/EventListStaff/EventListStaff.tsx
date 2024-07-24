@@ -3,7 +3,6 @@ import { Skeleton } from 'antd'
 import { Link } from 'react-router-dom'
 import eventApi from 'src/apis/event.api'
 import EventListOfStaff from 'src/Components/EventListOfStaff/EventListOfStaff'
-import EventList from 'src/Components/EventLists/EventList'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 
