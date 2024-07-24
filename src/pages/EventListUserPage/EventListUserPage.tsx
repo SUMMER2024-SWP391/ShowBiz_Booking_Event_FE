@@ -6,17 +6,26 @@ import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import eventApi from 'src/apis/event.api'
 import { omit, pick } from 'lodash'
-import { compareAsc, parse } from 'date-fns'
+import {
+  compareAsc,
+  isAfter,
+  isBefore,
+  isWithinInterval,
+  parse
+} from 'date-fns'
 import { checkEventDate } from 'src/utils/checkEventDate'
 import { Heading } from 'src/Components'
 import EventList from 'src/Components/EventLists/EventList'
+import { useState } from 'react'
 
 const EventListUserPage = () => {
+  const [currentSelection, setCurrentSelection] = useState('Upcoming')
+
   const { data, isFetching } = useQuery({
     queryKey: ['event_list_user'],
     queryFn: () => eventApi.getListEventUser()
   })
-  console.log(data?.data.data.events.map((event) => event.event[0]))
+
   return (
     <>
       <div className=' h-screen'>
@@ -27,6 +36,28 @@ const EventListUserPage = () => {
               <Heading as='h1' size='4xl' className=''>
                 My Events
               </Heading>
+              <div className=''>
+                <button
+                  onClick={() => setCurrentSelection('Upcoming')}
+                  className={`${
+                    currentSelection === 'Upcoming'
+                      ? 'bg-pink-normail text-white-A700'
+                      : 'bg-white-A700 text-black'
+                  } px-2 py-1 rounded-l-lg transition-colors duration-300 border border-l-2 `}
+                >
+                  Upcoming
+                </button>
+                <button
+                  onClick={() => setCurrentSelection('Past')}
+                  className={`${
+                    currentSelection === 'Past'
+                      ? 'bg-pink-normail text-white-A700'
+                      : 'bg-white-A700 text-black-900'
+                  } px-2 py-1 rounded-r-lg transition-colors duration-300 border border-r-2`}
+                >
+                  Past
+                </button>
+              </div>
             </div>
             {isFetching && (
               <>
@@ -41,6 +72,7 @@ const EventListUserPage = () => {
               data?.data.data.events
                 .map((event) => {
                   const eventDetail = event.event[0]
+
                   return {
                     ...eventDetail,
                     event_id: eventDetail._id,
@@ -50,10 +82,32 @@ const EventListUserPage = () => {
                 })
                 .map((event) => ({
                   ...event,
-                  parsedDate: parse(event.date_event, 'dd/MM/yyyy', new Date()),
+                  parsedStartDate: parse(
+                    `${event.date_event} ${event.time_start}`,
+                    'dd/MM/yyyy HH:mm',
+                    new Date()
+                  ),
+                  parsedEndDate: parse(
+                    `${event.date_event} ${event.time_end}`, // Assuming `time_end` exists
+                    'dd/MM/yyyy HH:mm',
+                    new Date()
+                  ),
                   displayDate: checkEventDate(event.date_event)
                 }))
-                .sort((a, b) => compareAsc(a.parsedDate, b.parsedDate))
+                .filter((event) => {
+                  const now = new Date()
+                  if (currentSelection === 'Upcoming') {
+                    return (
+                      isAfter(event.parsedEndDate, now) ||
+                      isWithinInterval(now, {
+                        start: event.parsedStartDate,
+                        end: event.parsedEndDate
+                      })
+                    )
+                  } else {
+                    return isBefore(event.parsedEndDate, now)
+                  }
+                })
                 .map((event) => {
                   console.log(event)
                   return (
@@ -72,7 +126,9 @@ const EventListUserPage = () => {
                           time_start={event.time_start}
                           time_end={event.time_end}
                           nameEvent={event.name}
-                          event_operator_name={event.event_operator.event_operator[0].user_name}
+                          event_operator_name={
+                            event.event_operator.event_operator[0].user_name
+                          }
                           address={event.address}
                           imageUrl={event.image}
                           location={event.location}
@@ -82,7 +138,7 @@ const EventListUserPage = () => {
                     </div>
                   )
                 })}
-                <div className=""></div>
+            <div className=''></div>
             {!isFetching && data?.data.data.events.length == 0 && (
               <h1 className='text-black-900'>You didn't register any event</h1>
             )}
