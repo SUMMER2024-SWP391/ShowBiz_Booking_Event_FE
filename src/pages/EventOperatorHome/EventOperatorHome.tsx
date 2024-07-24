@@ -18,18 +18,16 @@ export const EventOperatorHome = () => {
           <Header />
           <div className='flex flex-col items-center self-stretch'></div>
           <div className='container-xs'>
-            <div className='flex flex-col mt-5'>
-              
-
-              <div className='container-xs mt-10'>
-                  <Routes>
-                    <Route index element={<EventListOperator />} />
-                    {/* khi nào không có event thì mới dùg cái role dưới */}
-                    {/* <Route index element={<Events />} /> */}
-                    <Route path='manage/:id/' element={<ManagerEventPage />} />
-                    <Route path='create' element={<CreateEvent />} />
-                  </Routes>
-                </div>
+            <div className='flex flex-col'>
+              <div className='container-xs'>
+                <Routes>
+                  <Route index element={<EventListOperator />} />
+                  {/* khi nào không có event thì mới dùg cái role dưới */}
+                  {/* <Route index element={<Events />} /> */}
+                  <Route path='manage/:id/' element={<ManagerEventPage />} />
+                  <Route path='create' element={<CreateEvent />} />
+                </Routes>
+              </div>
             </div>
           </div>
         </div>
