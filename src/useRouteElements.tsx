@@ -51,6 +51,10 @@ const useRouteElements = () => {
       element: <VerifyAccount />
     },
     {
+      path: '/event/:id',
+      element: <EventDetailPage />
+    },
+    {
       path: '/register',
       element: <Register />
     },

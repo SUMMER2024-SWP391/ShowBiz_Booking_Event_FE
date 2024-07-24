@@ -1,5 +1,6 @@
 import { Button } from '../Button/Button'
 import FeedbackEventOfUser from '../FeedbackEventOfUser/FeedbackEventOfUser'
+import { Text } from '../Text/Text'
 
 type Props = {
   _id: string
@@ -18,38 +19,35 @@ const HandleFeedbackOfUser = ({
       {statusCheckIn ? ( //nếu status check in true thì vô cái này
         isHasFormFeedBack ? ( //có form feedback
           isFeedback ? ( //feedback rồi thì hiển thị ra lời cảm ơn
-            <Button
+            <Text
               size='lg'
-              shape='round'
-              className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-              disabled
+              as='p'
+              className='!text-[16px] text-center font-semibold hover:shadow-md sm:px-5 text-white-A700'
             >
               Thank you to go this event
-            </Button>
+            </Text>
           ) : (
             <FeedbackEventOfUser id={_id} />
           )
         ) : (
           //ko có form feedback rồi thì hiển thị ra lời cảm ơn
-          <Button
+          <Text
             size='lg'
-            shape='round'
-            className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-            disabled
+            as='p'
+            className='!text-[16px] text-center font-semibold hover:shadow-md sm:px-5 text-white-A700'
           >
             Thank you to go this event
-          </Button>
+          </Text>
         )
       ) : (
         //ko đi sự kiện thì sẽ hiển thị ra bạn đã miss sự kiện
-        <Button
+        <Text
           size='lg'
-          shape='round'
-          className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#F5222D] hover:bg-[#ff4d4f] text-white-A700'
-          disabled
+          as='p'
+          className='!text-[16px] text-center font-semibold hover:shadow-md sm:px-5 text-white-A700'
         >
-          You was missed this event
-        </Button>
+          You missed this event
+        </Text>
       )}
     </>
   )

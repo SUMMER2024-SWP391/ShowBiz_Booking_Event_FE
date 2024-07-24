@@ -16,13 +16,17 @@ export const Register = ({ _id }: Props) => {
   const [open, setOpen] = useState<boolean>(false)
 
   return (
-    <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
-      <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
+    <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-[#51606E] pb-[26px] shadow-md sm:pb-5'>
+      <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#51606E] px-6 pb-[7px] pt-3 sm:px-5'>
         <Heading size='s' as='p' className='!font-semibold !text-white-A700'>
           Registration
         </Heading>
       </div>
-      <Text size='s' as='p' className='ml-6 self-start !text-white-A700'>
+      <Text
+        size='s'
+        as='p'
+        className='ml-6 self-start !text-white-A700 !text-[16px]'
+      >
         Welcome! To join the event, please register below.
       </Text>
       <HandleLoginWhenRegisterEvent

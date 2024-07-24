@@ -109,10 +109,10 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
               <Heading
                 size='s'
                 as='h1'
-                className='flex items-center justify-center bg-orange-600 bg-pink-normail rounded-[10px] bg- p-[3px] '
+                className='flex items-center justify-center bg-orange-600 bg-[#51606E] border  rounded-[10px] bg- p-[3px] '
               >
-                <span className='text-white-A700_cc p-1'>Featured in</span>
-                <span className='text-white-A700 p-1'>Ho Chi Minh City</span>
+                <span className='text-white-A700 p-1'>Featured in</span>
+                <span className='text-[#F4F5F6] p-1'>Ho Chi Minh City</span>
               </Heading>
               <Heading
                 size='4xl'
@@ -123,9 +123,9 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                 {event.name}
               </Heading>
               <div className='mt-5 flex items-center gap-[21px]'>
-                <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid  pb-0.5 shadow-sm'>
-                  <div className='flex w-[40px] justify-center rounded-tl-md rounded-tr-md border border-solid bg-pink-normail px-[3px] pb-0.5 pt-[3px]'>
-                    <Heading size='xs' as='h4' className='!font-monterat '>
+                <div className='flex flex-col items-center gap-[3px] rounded-md border border-solid border-black_dark  pb-0.5 shadow-sm'>
+                  <div className='flex w-[40px] justify-center rounded-tl-md rounded-tr-md border border-solid  bg-[#51606E] px-[3px] pb-0.5 pt-[3px]'>
+                    <Heading size='xs' as='h4' className='!font-monterat !text-white-A700 '>
                       {dateObj.toLocaleString('en-US', {
                         month: 'short'
                       })}
@@ -147,7 +147,7 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                 </div>
               </div>
               <div className='flex items-center gap-[21px]'>
-                <div className='mt-[22px] flex items-center gap-[21px] rounded-md border border-solid border-white-A700 pb-0.5 shadow-sm'>
+                <div className='mt-[22px] flex items-center gap-[21px] rounded-md border border-solid border-black_dark  pb-0.5 shadow-sm'>
                   <Button
                     size='2xl'
                     variant='outline'
@@ -176,7 +176,7 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                 About Event
               </Text>
               <div className='flex flex-col items-start'>
-                <div className='mt-4 ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
+                <div className='mt-4 ml-6 h-px self-stretch bg-black_supper_light opacity-50 md:ml-0' />
                 <Text
                   size='md'
                   as='p'
@@ -193,7 +193,7 @@ const EventDetail = ({ event, renderProps }: Props, className: string) => {
                   <Text size='lg' as='p' className=' !font-bold'>
                     {`Location ${event.location}`}
                   </Text>
-                  <div className='ml-6 h-px self-stretch bg-white-A700_99 md:ml-0' />
+                  <div className='ml-6 h-px self-stretch bg-black_supper_light opacity-50 md:ml-0' />
                   <iframe
                     src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.6099415305243!2d106.80730807603385!3d10.841132857994813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1720796162009!5m2!1svi!2s'
                     width='700'
