@@ -21,7 +21,9 @@ interface Props {
   price?: string
   status_register?: StatusRegisterEvent
 }
-
+const formatPriceToVND = (price: any) => {
+  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+};
 export default function EventUserList({
   id,
   time = '9:30 AM',
@@ -70,10 +72,10 @@ export default function EventUserList({
               </Heading>
             </div>
 
-            <div className='mt-[10px] flex gap-1.5'>
-              <EnvironmentOutlined className='h-[18px] w-[18px] self-start !text-pink-light' />
+            <div className='mt-[10px] flex flex-row items-center justify-center'>
+              <EnvironmentOutlined className='h-[18px] w-[18px] self-start ' />
               <Heading size='lg' as='p' className='self-end !font-monterat '>
-                {`${location}, ${address}`}
+                {`${location}, FPT University`}
               </Heading>
             </div>
             <div className='flex'>
@@ -83,7 +85,7 @@ export default function EventUserList({
                   size='md'
                   className='!text-white-A700_bf !font-euclid'
                 >
-                  {price == '0' ? 'Free' : `Price : ${price}`}
+                  {price == '0' ? 'Free' : ` ${formatPriceToVND(price)}`}
                 </Text>
               </Heading>
             </div>

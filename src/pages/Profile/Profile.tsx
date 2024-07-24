@@ -96,15 +96,7 @@ const Profile = () => {
                 value={form.email}
                 onChange={handleChange('email')}
               />
-              <Heading size='xl' as='h2' className='mt-5 mb-2'>
-                BirthDay
-              </Heading>
-                <input
-                  type='date'
-                  className='w-[300px] h-[45px] p-2 outline-none rounded-md border border-solid text-center'
-                  value={form.date_of_birth.split('T')[0]}
-                  onChange={handleChange('date_of_birth')}
-                />
+              
               <button className='mt-10 h-[45px] rounded-lg bg-pink-normail p-2 text-white-A700 hover:opacity-95'>
                 Update profile
               </button>

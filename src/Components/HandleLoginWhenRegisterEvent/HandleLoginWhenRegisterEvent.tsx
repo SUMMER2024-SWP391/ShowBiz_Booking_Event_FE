@@ -25,7 +25,7 @@ const HandleLoginWhenRegisterEvent = ({ handleRegisterEvent }: Props) => {
       <Button
         size='lg'
         shape='round'
-        className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+        className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#9DADBC] text-white-A700'
         onClick={handleLogin}
       >
         Register Now
@@ -36,7 +36,7 @@ const HandleLoginWhenRegisterEvent = ({ handleRegisterEvent }: Props) => {
     <Button
       size='lg'
       shape='round'
-      className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+      className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#9DADBC] text-white-A700'
       onClick={handleRegisterEvent}
     >
       Register Now

@@ -85,7 +85,7 @@ export default function HomePageVisitor() {
                     onClick={() => setCurrentSelection('Upcoming')}
                     className={`${
                       currentSelection === 'Upcoming'
-                        ? 'bg-pink-normail text-white-A700'
+                        ? 'bg-[#51606E] text-white-A700'
                         : 'bg-white-A700 text-black'
                     } px-2 py-1 rounded-l-lg transition-colors duration-300 border border-l-2 `}
                   >
@@ -95,7 +95,7 @@ export default function HomePageVisitor() {
                     onClick={() => setCurrentSelection('Past')}
                     className={`${
                       currentSelection === 'Past'
-                        ? 'bg-pink-normail text-white-A700'
+                        ? 'bg-[#51606E] text-white-A700'
                         : 'bg-white-A700 text-black-900'
                     } px-2 py-1 rounded-r-lg transition-colors duration-300 border border-r-2`}
                   >

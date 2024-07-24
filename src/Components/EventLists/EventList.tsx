@@ -21,7 +21,9 @@ interface Props {
   price?: string
   dateTime?: string
 }
-
+const formatPriceToVND = (price: any) => {
+  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+};
 export default function EventList({
   id,
   time_start = '9:30 AM',
@@ -53,7 +55,7 @@ export default function EventList({
               <Heading
                 size='xl'
                 as='h2'
-                className='mt-2 w-[500px] !font-monterat !text-[20px] whitespace-nowrap overflow-hidden text-ellipsis'
+                className='mt-2 w-[450px] !font-monterat !text-[20px] whitespace-nowrap overflow-hidden text-ellipsis'
               >
                 {nameEvent}
               </Heading>
@@ -78,16 +80,16 @@ export default function EventList({
                   {`${location}, ${address}`}
                 </Heading>
               </div>
-              <div className='flex'>
-                <Heading className='mt-[10px] flex'>
-                  <Text as='h5' size='md' className=' !font-euclid'>
-                    {price == '0' ? 'Free' : `Price : ${price}`}
+              <div className='mt-[10px] px-2 py-1 rounded-lg flex !bg-[#51606E]  border border-solid'>
+                <Heading className='flex'>
+                  <Text as='p' size='md' className=' !font-monterat !text-white-A700'>
+                    {price == '0' ? 'Free' : `${formatPriceToVND(price)}`}
                   </Text>
                 </Heading>
               </div>
             </div>
             <div>
-              <div className='w-[150px] h-[150px]'>
+              <div className='ml-2 w-[150px] h-[150px]'>
                 <Img
                   src={imageUrl}
                   alt='banner-event'

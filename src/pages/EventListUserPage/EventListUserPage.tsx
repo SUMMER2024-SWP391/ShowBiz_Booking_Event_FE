@@ -1,13 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from 'antd'
-import { Link } from 'react-router-dom'
-import EventUserList from 'src/Components/EventListUser/EventListUser'
 import Footer from 'src/Components/Footer/Footer'
 import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import eventApi from 'src/apis/event.api'
 import { omit, pick } from 'lodash'
 import {
-  compareAsc,
   isAfter,
   isBefore,
   isWithinInterval,
@@ -41,7 +38,7 @@ const EventListUserPage = () => {
                   onClick={() => setCurrentSelection('Upcoming')}
                   className={`${
                     currentSelection === 'Upcoming'
-                      ? 'bg-pink-normail text-white-A700'
+                      ? 'bg-[#51606E] text-white-A700'
                       : 'bg-white-A700 text-black'
                   } px-2 py-1 rounded-l-lg transition-colors duration-300 border border-l-2 `}
                 >
@@ -51,7 +48,7 @@ const EventListUserPage = () => {
                   onClick={() => setCurrentSelection('Past')}
                   className={`${
                     currentSelection === 'Past'
-                      ? 'bg-pink-normail text-white-A700'
+                      ? 'bg-[#51606E] text-white-A700'
                       : 'bg-white-A700 text-black-900'
                   } px-2 py-1 rounded-r-lg transition-colors duration-300 border border-r-2`}
                 >

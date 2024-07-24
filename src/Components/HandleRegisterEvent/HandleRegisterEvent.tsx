@@ -143,13 +143,21 @@ const handleComponentEvent = (event: Event): JSX.Element => {
         Number(event.ticket_price) !== 0
       ) {
         return (
-          <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
-            <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
-              <Heading size='s' as='p' className='!font-semibold'>
+          <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-[#51606E] pb-[26px] shadow-md sm:pb-5'>
+            <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#51606E] px-6 pb-[7px] pt-3 sm:px-5'>
+              <Heading
+                size='s'
+                as='p'
+                className='!font-semibold !text-white-A700'
+              >
                 Registration
               </Heading>
             </div>
-            <Text size='s' as='p' className='ml-6 self-start '>
+            <Text
+              size='s'
+              as='p'
+              className='ml-6 self-start !text-white-A700 !text-[16px]'
+            >
               Welcome! To join the event, please register below.
             </Text>
 
@@ -160,13 +168,21 @@ const handleComponentEvent = (event: Event): JSX.Element => {
         )
       }
       return (
-        <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
-          <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
-            <Heading size='s' as='p' className='!font-semibold'>
+        <div className='mt-[37px] flex flex-col items-center gap-[10px] self-stretch rounded-[20px] bg-[#51606E] pb-[26px] shadow-md sm:pb-5'>
+          <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#51606E] px-6 pb-[7px] pt-3 sm:px-5'>
+            <Heading
+              size='2xl'
+              as='h1'
+              className='!font-semibold !text-white-A700'
+            >
               Registration
             </Heading>
           </div>
-          <Text size='s' as='p' className='ml-6 self-start '>
+          <Text
+            size='s'
+            as='p'
+            className='ml-6 self-start !text-white-A700 !text-[16px]'
+          >
             Welcome! To join the event, please register below.
           </Text>
 
@@ -177,9 +193,13 @@ const handleComponentEvent = (event: Event): JSX.Element => {
       )
     }
     return (
-      <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
-        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
-          <Heading size='s' as='p' className='!font-semibold'>
+      <div className='mt-[37px] flex flex-col items-center gap-[10px] self-stretch rounded-[20px] bg-[#51606E] pb-[26px] shadow-md sm:pb-5'>
+        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#51606E] px-6 pb-[7px] pt-3 sm:px-5'>
+          <Heading
+            size='2xl'
+            as='h1'
+            className='!font-semibold !text-white-A700'
+          >
             Notification
           </Heading>
         </div>
@@ -196,35 +216,40 @@ const handleComponentEvent = (event: Event): JSX.Element => {
   }
   return (
     <>
-      <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
-        <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
-          <Heading size='s' as='p' className='!font-semibold'>
-            You are in this event now
+      <div className='mt-[37px] flex flex-col items-center gap-[10px] self-stretch rounded-[20px] bg-[#51606E] pb-[26px] shadow-md sm:pb-5'>
+        <div className='mt-3 flex flex-col self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#51606E] px-6 pb-[7px] pt-3 sm:px-5'>
+          <Heading
+            size='2xl'
+            as='h1'
+            className='!font-semibold !text-white-A700'
+          >
+            You're In
           </Heading>
         </div>
-
         {!isValidToFeeback(
           //nếu chưa tới thời gian feedback thì
           newData.data.data.ticket.event.date_event,
           newData.data.data.ticket.event.time_end
         ) ? (
           newData.data.data.ticket.register.status_check_in ? ( //check tiếp người dùng đã check in chưa
-            <Button
+            <Text
               size='lg'
-              shape='round'
-              className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
-              disabled
+              className='min-w-[423px] text-center !text-[20px] font-semibold hover:shadow-md sm:px-5 bg-[#9DADBC] text-white-A700'
             >
               You had check in this event
-            </Button>
+            </Text>
           ) : (
             <>
-              <Text size='s' as='p' className='ml-6 self-start '>
-                This is your code to help you checkin in this event
+              <Text
+                size='lg'
+                as='p'
+                className='mt-3 !text-white-A700 !text-[16px]'
+              >
+                A confirmation email has been sent to your email.
               </Text>
               <Text
                 size='lg'
-                className='min-w-[423px] text-center rounded-md font-semibold hover:shadow-md sm:px-5 bg-[#E67A5B] text-white-A700'
+                className='mt-5 !text-[20px] text-center rounded-md font-semibold hover:shadow-md sm:px-5 text-white-A700'
               >
                 {newData.data.data.ticket.register.otp_check_in}
               </Text>
@@ -233,6 +258,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
         ) : (
           <></>
         )}
+
         {newData != undefined &&
           newData.data.data.ticket.register.status_register ==
             StatusRegisterEvent.SUCCESS &&
@@ -244,7 +270,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
               <Button
                 size='lg'
                 shape='round'
-                className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 bg-red  text-white-A700'
+                className='min-w-[200px] font-semibold hover:shadow-md sm:px-5 bg-red  text-white-A700'
                 onClick={() => setPopupCancel(true)}
               >
                 Cancel event
