@@ -26,8 +26,16 @@ const StaffPage = () => {
   return (
     <>
       <div className='w-full flex flex-col items-start'>
-        <div className='mt-10 flex flex-row items-start'>
-          <Button className='bg-pink-normail rounded-lg !text-white-A700 font-bold' size="lg" onClick={() => setOpen(true)}>Checking Guest</Button>
+        <div className='flex flex-row'>
+          <div className='mt-10 items-start'>
+            <Button
+              className='bg-pink-normail rounded-lg !text-white-A700 font-bold'
+              size='lg'
+              onClick={() => setOpen(true)}
+            >
+              Checking Guest
+            </Button>
+          </div>
         </div>
 
         <div className='mt-5 text-black_light flex flex-col container-xs '>

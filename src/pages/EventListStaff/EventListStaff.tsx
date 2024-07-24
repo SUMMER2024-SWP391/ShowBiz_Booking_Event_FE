@@ -28,8 +28,8 @@ const EventListStaff = () => {
           )}
           {data &&
             data.data.data.events.map((event) => (
-              <Link to={`/staff/${event._id}`} key={event._id}>
-                <EventList
+              <Link to={`/checkin/${event._id}`} key={event._id}>
+                <EventListOfStaff
                   key={event._id}
                   id={event._id}
                   address={event.address}

@@ -20,6 +20,8 @@ import EventListStaff from './pages/EventListStaff/EventListStaff'
 import HomeForSearch from './pages/HomePage/HomeForSearch'
 import EventListUserPage from './pages/EventListUserPage/EventListUserPage'
 import ChangePassword from './Components/ChangePassword/ChangePassword'
+import Header from './Components/HeaderHomePage/HeaderHomePage'
+import Footer from './Components/Footer/Footer'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -43,7 +45,7 @@ const useRouteElements = () => {
       element: <HomeForSearch />
     },
     {
-      path:'/profile/change_password',
+      path: '/profile/change_password',
       element: <ChangePassword />
     },
     {
@@ -117,7 +119,15 @@ const useRouteElements = () => {
         },
         {
           path: '/checkin/:id',
-          element: <StaffPage />
+          element: (
+            <>
+              <Header />
+              <div className='container-xs'>
+                <StaffPage />
+              </div>
+              <Footer />
+            </>
+          )
         }
       ]
     },
