@@ -20,7 +20,7 @@ export function isValidToRegister(date_event: string, time_start: string): boole
   const currentDate = dayjs()
   const parsedDate = parse(date_event + ' ' + time_start, 'dd/MM/yyyy HH:mm', new Date())
   if (currentDate.isSameOrBefore(parsedDate)) {
-    return false
+    return true
   }
-  return true
+  return false
 }
