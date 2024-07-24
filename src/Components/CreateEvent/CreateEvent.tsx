@@ -21,7 +21,7 @@ import {
   TimePicker,
   TimePickerProps
 } from 'antd'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import {
   CreateEvent as CreateEventBody,
@@ -47,6 +47,7 @@ import localeData from 'dayjs/plugin/localeData'
 import weekday from 'dayjs/plugin/weekday'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import weekYear from 'dayjs/plugin/weekYear'
+import { AppContext } from 'src/context/app.context'
 
 dayjs.extend(customParseFormat)
 dayjs.extend(advancedFormat)
@@ -59,7 +60,9 @@ const initForm = {
   type_event: 'Public',
   name: '',
   speaker_name: '',
+  speaker_mail: '',
   sponsor_name: '',
+  sponsor_mail: '',
   description: '',
   ticket_price: '',
   capacity: '',
@@ -73,7 +76,9 @@ const errorForm = {
   type_event: '',
   name: '',
   speaker_name: '',
+  speaker_mail: '',
   sponsor_name: '',
+  sponsor_mail: '',
   description: '',
   ticket_price: '',
   capacity: '',
@@ -84,6 +89,7 @@ const errorForm = {
 }
 
 const CreateEvent = () => {
+  const { profile } = useContext(AppContext)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [form, setForm] = useState<typeof initForm>(initForm)
   const [formError, setFormError] = useState<typeof errorForm>(errorForm)
@@ -164,7 +170,6 @@ const CreateEvent = () => {
       image: previewImage,
       is_required_form_register: checked
     }
-    console.log(bodyCreateEvent)
     createEventMutation.mutate(bodyCreateEvent as any, {
       onSuccess: (data) => {
         toast.success(data.data.message)
@@ -240,7 +245,7 @@ const CreateEvent = () => {
                         </Text>
                         <Text size='s' as='p'>
                           <span className='font-semibold '>
-                            CLB Cóc Sài Gòn
+                            {profile?.user_name}
                           </span>
                         </Text>
                       </div>
@@ -268,7 +273,7 @@ const CreateEvent = () => {
                         <input
                           type='text'
                           className='w-[50%] text-[14px]  outline-none border-none text-end [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-                          placeholder='Name of Host'
+                          placeholder='Name of Speaker'
                           value={form.speaker_name}
                           onChange={(event) => {
                             setForm((prev) => ({
@@ -290,12 +295,39 @@ const CreateEvent = () => {
                     <div className='flex flex-col w-full items-start gap-[11px]'>
                       <div className='flex flex-row w-full'>
                         <Text size='lg' as='p' className=' w-[50%]'>
+                          Speaker mail
+                        </Text>
+                        <input
+                          type='text'
+                          className='w-[50%] text-[14px]  outline-none border-none text-end [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                          placeholder='Email of speaker'
+                          value={form.speaker_mail}
+                          onChange={(event) => {
+                            setForm((prev) => ({
+                              ...prev,
+                              speaker_mail: event.target.value
+                            }))
+                          }}
+                        />
+                        <div className='mt-1 text-sm text-red'>
+                          {formError.speaker_mail}
+                        </div>
+                      </div>
+                      <div className='ml-5 h-px self-stretch md:ml-0' />
+                    </div>
+                  </div>
+                </div>
+                <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
+                  <div className='self-stretch'>
+                    <div className='flex flex-col w-full items-start gap-[11px]'>
+                      <div className='flex flex-row w-full'>
+                        <Text size='lg' as='p' className=' w-[50%]'>
                           Sponsor
                         </Text>
                         <input
                           type='text'
                           className='w-[50%] text-[14px]  outline-none border-none text-end [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-                          placeholder='Name of Speacker'
+                          placeholder='Name of Sponsor'
                           value={form.sponsor_name}
                           onChange={(event) => {
                             setForm((prev) => ({
@@ -306,6 +338,33 @@ const CreateEvent = () => {
                         />
                         <div className='mt-1 text-sm text-red'>
                           {formError.sponsor_name}
+                        </div>
+                      </div>
+                      <div className='ml-5 h-px self-stretch md:ml-0' />
+                    </div>
+                  </div>
+                </div>
+                <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
+                  <div className='self-stretch'>
+                    <div className='flex flex-col w-full items-start gap-[11px]'>
+                      <div className='flex flex-row w-full'>
+                        <Text size='lg' as='p' className=' w-[50%]'>
+                          Sponsor mail
+                        </Text>
+                        <input
+                          type='text'
+                          className='w-[50%] text-[14px]  outline-none border-none text-end [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                          placeholder='Email of sponsor'
+                          value={form.sponsor_mail}
+                          onChange={(event) => {
+                            setForm((prev) => ({
+                              ...prev,
+                              sponsor_mail: event.target.value
+                            }))
+                          }}
+                        />
+                        <div className='mt-1 text-sm text-red'>
+                          {formError.sponsor_mail}
                         </div>
                       </div>
                       <div className='ml-5 h-px self-stretch md:ml-0' />
@@ -361,10 +420,7 @@ const CreateEvent = () => {
                   <div className='mt-2 flex justify-between items-center gap-5 rounded-[10px] p-3 h-auto w-full bg-white-A700_99 border border-solid border-opacity-30 sm:pl-5 shadow-2xl'>
                     <Col>
                       <Row>
-                        <Text
-                          as='p'
-                          className=' !font-bold'
-                        >
+                        <Text as='p' className=' !font-bold'>
                           Time
                         </Text>
                       </Row>
@@ -376,7 +432,6 @@ const CreateEvent = () => {
                           onChange={onChangeDate}
                           format={'DD/MM/YYYY'}
                           placeholder='Date event'
-
                         />
                       </Row>
                     </Col>
@@ -407,11 +462,7 @@ const CreateEvent = () => {
                   <div className='flex flex-row  p-2 mt-5 rounded-[10px] h-auto w-full bg-white-A700_99 border border-solid border-opacity-30 shadow-2xl sm:pl-5'>
                     <EnvironmentOutlined className='' />
                     <div className='flex flex-col items-start ml-2 '>
-                      <Text
-                        as='p'
-                        size='lg'
-                        className=' !font-bold'
-                      >
+                      <Text as='p' size='lg' className=' !font-bold'>
                         Add Event Location
                       </Text>
                       <select
@@ -489,10 +540,7 @@ const CreateEvent = () => {
                           </svg>
                         </div>
                         <div className='flex items-center w-[40%]'>
-                          <Text
-                            as='p'
-                            className='!text-[16px] !font-medium'
-                          >
+                          <Text as='p' className='!text-[16px] !font-medium'>
                             Tickets
                           </Text>
                         </div>
