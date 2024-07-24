@@ -25,11 +25,7 @@ export const ManageEventHome = ({ event }: Props) => {
     //name event
     <div className='flex flex-col container-xs'>
       <div className='flex flex-row items-center justify-between'>
-        <Heading
-          as='h1'
-          size='2xl'
-          className='flex items-start !font-monterat'
-        >
+        <Heading as='h1' size='2xl' className='flex items-start !font-monterat'>
           {event.name}
         </Heading>
         <Link
@@ -53,16 +49,31 @@ export const ManageEventHome = ({ event }: Props) => {
       </div>
 
       <div role='tablist' className='tabs tabs-bordered w-full mt-10 '>
-        <NavLink role='tab' className='tab tab-active ' to=''>
+        <NavLink
+          role='tab'
+          className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
+          to='overview'
+        >
           Overview
         </NavLink>
-        <NavLink role='tab' className='tab !text-white-A700' to='registed'>
+        <NavLink
+          role='tab'
+          className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
+          to='registed'
+        >
           Registed
         </NavLink>
-        <NavLink to='registration' className='tab '>
+        <NavLink
+          to='registration'
+          className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
+        >
           Registration
         </NavLink>
-        <NavLink role='tab' className='tab ' to='staff'>
+        <NavLink
+          role='tab'
+          className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
+          to='staff'
+        >
           List Staff
         </NavLink>
         {data &&
@@ -81,19 +92,15 @@ export const ManageEventHome = ({ event }: Props) => {
         ) : (
           <NavLink
             role='tab'
-            className='tab '
+            className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
             to='form-feedback'
           >
             Form Feedback
           </NavLink>
         )}
-
-        <NavLink role='tab' className='tab ' to='update-form'>
-          More
-        </NavLink>
       </div>
       <Routes>
-        <Route path='/' element={<Overview event={event} />} />
+        <Route path='overview' element={<Overview event={event} />} />
         <Route path='registed' element={<Registed id={event._id} />} />
         <Route path='registration' element={<Registration />} />
         {/* <Route path='update-form' element={<UpdateFormFeedback />} /> */}

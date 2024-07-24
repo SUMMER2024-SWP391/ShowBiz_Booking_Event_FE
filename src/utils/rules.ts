@@ -250,3 +250,10 @@ export const searchEventSchemaYup = yup.object().shape({
 })
 
 export type SearchEventSchema = yup.InferType<typeof searchEventSchemaYup>
+
+export const inviteUserSchemaYup = yup.object().shape({
+  email: yup.string().required('Email is required!').email('Invalid email!'),
+  user_name: yup.string().required('User name is required!')
+})
+
+export type InviteUserSchema = yup.InferType<typeof inviteUserSchemaYup>

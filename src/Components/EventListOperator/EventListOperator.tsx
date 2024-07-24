@@ -103,7 +103,9 @@ const EventListOperator = () => {
                         )}
                       </div>
                       <Button className='mt-[10px] flex items-center gap-1.5'>
-                        <Link to={`/event-operator/manage/${event._id}/`}>
+                        <Link
+                          to={`/event-operator/manage/${event._id}/overview`}
+                        >
                           <Text size='md' as='p' className='!text-black-900'>
                             Manager Event
                           </Text>
