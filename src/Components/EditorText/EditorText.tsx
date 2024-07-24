@@ -24,10 +24,11 @@ const EditorText: React.FC<TextEditorProps> = ({
   }
 
   return (
-    <div className='mt-10'>
+    <div id='#editorcontainer' className='mt-10 min-h-[100px] h-[200px] overflow-y-auto'>
       <ReactQuill
-        className='bg-white-A700 !text-black-900 !border-none'
+        className='bg-white-A700 !text-black-900 !border-none h-full '
         theme='snow'
+        scrollingContainer={'#editorcontainer'}
         value={value}
         onChange={onChange}
         readOnly={readOnly}
