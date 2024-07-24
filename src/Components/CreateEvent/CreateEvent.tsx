@@ -257,10 +257,10 @@ const CreateEvent = () => {
                 </div>
                 <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
                   <div className='self-stretch'>
-                    <div className='flex flex-col w-full items-start gap-[11px]'>
+                    <div className='flex flex-col w-full items-start'>
                       <div className='flex flex-row w-full'>
                         <Text size='lg' as='p' className=' w-[50%]'>
-                          Speaker by
+                          Speaker Name
                         </Text>
                         <input
                           type='text'
@@ -278,16 +278,9 @@ const CreateEvent = () => {
                           {formError.speaker_name}
                         </div>
                       </div>
-                      <div className='ml-5 h-px self-stretch md:ml-0' />
-                    </div>
-                  </div>
-                </div>
-                <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
-                  <div className='self-stretch'>
-                    <div className='flex flex-col w-full items-start gap-[11px]'>
-                      <div className='flex flex-row w-full'>
+                      <div className='mt-4 flex flex-row w-full'>
                         <Text size='lg' as='p' className=' w-[50%]'>
-                          Speaker mail
+                          Speaker Mail
                         </Text>
                         <input
                           type='text'
@@ -305,13 +298,13 @@ const CreateEvent = () => {
                           {formError.speaker_mail}
                         </div>
                       </div>
-                      <div className='ml-5 h-px self-stretch md:ml-0' />
+                      <div className='mt-5 ml-5 h-px self-stretch md:ml-0 border ' />
                     </div>
                   </div>
                 </div>
-                <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
+                <div className='mt-[10px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
                   <div className='self-stretch'>
-                    <div className='flex flex-col w-full items-start gap-[11px]'>
+                    <div className='flex flex-col w-full items-start'>
                       <div className='flex flex-row w-full'>
                         <Text size='lg' as='p' className=' w-[50%]'>
                           Sponsor
@@ -332,14 +325,7 @@ const CreateEvent = () => {
                           {formError.sponsor_name}
                         </div>
                       </div>
-                      <div className='ml-5 h-px self-stretch md:ml-0' />
-                    </div>
-                  </div>
-                </div>
-                <div className='mt-[34px] flex w-[93%] flex-col items-start gap-2 md:w-full'>
-                  <div className='self-stretch'>
-                    <div className='flex flex-col w-full items-start gap-[11px]'>
-                      <div className='flex flex-row w-full'>
+                      <div className='mt-5 flex flex-row w-full'>
                         <Text size='lg' as='p' className=' w-[50%]'>
                           Sponsor mail
                         </Text>
@@ -359,12 +345,13 @@ const CreateEvent = () => {
                           {formError.sponsor_mail}
                         </div>
                       </div>
-                      <div className='ml-5 h-px self-stretch md:ml-0' />
+                      <div className='ml-5 h-px self-stretch md:ml-0 border mt-5' />
                     </div>
                   </div>
                 </div>
+                
 
-                <Text size='s' as='p' className='mt-[19px] '>
+                <Text size='s' as='p' className='mt-[30px] '>
                   Contact the Host
                 </Text>
                 <Text size='s' as='p' className='mt-[19px] '>
@@ -377,12 +364,12 @@ const CreateEvent = () => {
                     <Heading
                       size='s'
                       as='h1'
-                      className='flex items-center justify-center bg-orange-600 bg-pink-normail rounded-[10px] bg- p-[3px] '
+                      className='flex items-center justify-center bg-orange-600 bg-[#51606E] rounded-[10px] bg- p-[3px] '
                     >
-                      <span className='text-white-A700_cc p-1'>
+                      <span className='text-white-A700 p-1'>
                         Featured in
                       </span>
-                      <span className='text-white-A700 p-1'>
+                      <span className='text-[#F4F5F6] p-1'>
                         Ho Chi Minh City
                       </span>
                     </Heading>
@@ -458,7 +445,7 @@ const CreateEvent = () => {
                         Add Event Location
                       </Text>
                       <select
-                        className='font-normal bg-white-A700_99 border border-solid border-opacity-30 sm:pl-5 shadow-2xl outline-none rounded-md text-sm w-full'
+                        className='font-normal mt-1 bg-white-A700_99 border border-solid border-opacity-30 sm:pl-5 shadow-2xl outline-none rounded-md text-sm w-full'
                         value={form.location}
                         onChange={(event) => {
                           setForm((prev) => ({
@@ -491,18 +478,6 @@ const CreateEvent = () => {
                       >
                         Add Description
                       </button>
-                      <Modal
-                        centered
-                        open={open}
-                        onOk={() => setOpen(false)}
-                        onCancel={() => setOpen(false)}
-                      >
-                        <EditorText
-                          value={form.description}
-                          onChange={handleDescriptionChange}
-                          readOnly={readOnly}
-                        />
-                      </Modal>
 
                       <div className='mt-1 text-sm text-red'>
                         {errorForm.description}
@@ -641,7 +616,7 @@ const CreateEvent = () => {
                     type='submit'
                     size='xl'
                     color='white_A700'
-                    className='mt-10 w-full rounded-[10px] !text-white-A700 !bg-pink-normail bg-white-A700_99 border border-solid border-opacity-30 sm:pl-5 shadow-2xl font-medium sm:px-5'
+                    className='mt-10 w-full rounded-[10px] !text-white-A700 !bg-[#51606E] border border-solid border-opacity-30 sm:pl-5 shadow-2xl font-medium sm:px-5'
                   >
                     Create Event
                   </Button>
@@ -651,6 +626,18 @@ const CreateEvent = () => {
           </div>
         </form>
       </div>
+      <Modal
+        centered
+        open={open}
+        onOk={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
+      >
+        <EditorText
+          value={form.description}
+          onChange={handleDescriptionChange}
+          readOnly={readOnly}
+        />
+      </Modal>
     </div>
   )
 }
