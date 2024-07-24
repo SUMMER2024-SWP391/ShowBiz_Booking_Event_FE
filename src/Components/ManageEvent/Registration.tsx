@@ -1,19 +1,16 @@
 import { Button, Switch } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 import { Text } from '../Text/Text'
 import { Heading } from '../Heading/Heading'
 
 export const Registration = () => {
+  const [open, setOpen] = useState(false)
   return (
     <div className='mt-10 m-auto w-[820px] container'>
       <div className=' flex flex-row items-center justify-between'>
         <Button type='default' className='w-[257px] h-[56px] rounded-[15px]  '>
           <div className='flex flex-1 items-center gap-3'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 32 32'
-              className='w-7'
-            >
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' className='w-7'>
               <path
                 fill='currentColor'
                 fill-rule='evenodd'
@@ -21,9 +18,7 @@ export const Registration = () => {
               ></path>
             </svg>
             <div className='flex flex-col items-start'>
-              <Text className='!text-black-900 text-[16px] !font-euclid'>
-                Registration
-              </Text>
+              <Text className='!text-black-900 text-[16px] !font-euclid'>Registration</Text>
               <Text size='md' as='p' className='!text-black_supper_light'>
                 Open
               </Text>
@@ -32,11 +27,7 @@ export const Registration = () => {
         </Button>
         <Button type='default' className='w-[257px] h-[56px] rounded-[15px]  '>
           <div className='flex flex-1 items-center gap-3'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 16 16'
-              className='w-7'
-            >
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' className='w-7'>
               <path
                 fill='currentColor'
                 fill-rule='evenodd'
@@ -44,9 +35,7 @@ export const Registration = () => {
               ></path>
             </svg>
             <div className='flex flex-col items-start'>
-              <Text className='!text-black-900 text-[16px] !font-euclid'>
-                Event Capacity
-              </Text>
+              <Text className='!text-black-900 text-[16px] !font-euclid'>Event Capacity</Text>
               <Text size='md' as='p' className='!text-black_supper_light'>
                 50 - Waitlist Off
               </Text>
@@ -55,20 +44,14 @@ export const Registration = () => {
         </Button>
         <Button type='default' className='w-[257px] h-[56px] rounded-[15px]  '>
           <div className='flex flex-1 items-center gap-3'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 24 24'
-              className='w-7'
-            >
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' className='w-7'>
               <g fill='currentColor' fill-rule='evenodd'>
                 <path d='M14.925 8.246a.853.853 0 1 0 1.705 0v-1.72c0-.377.305-.682.682-.682h1.677c1.778 0 3.22 1.774 3.22 3.965l.001 2.147c0 .233 0 .35-.051.422s-.2.125-.496.232c-.76.271-1.313 1.095-1.313 2.069 0 .973.553 1.797 1.313 2.069.297.106.445.16.496.231.051.073.051.19.051.422v2.148c0 2.19-1.441 3.965-3.22 3.965h-1.678a.68.68 0 0 1-.682-.682v-1.72a.852.852 0 1 0-1.705 0v1.72a.68.68 0 0 1-.682.682H4.97c-1.779 0-3.22-1.775-3.22-3.965V17.4c0-.233 0-.35.05-.422.052-.072.2-.125.497-.231.76-.272 1.313-1.096 1.313-2.07s-.553-1.797-1.313-2.068c-.297-.107-.445-.16-.496-.232s-.051-.189-.05-.422V9.81c0-2.19 1.442-3.965 3.22-3.965h9.272c.377 0 .682.305.682.682zm0 8.37a.853.853 0 1 0 1.705 0v-3.875a.852.852 0 1 0-1.705 0z'></path>
                 <path d='M15.44 2.636a3.64 3.64 0 0 0-3.295.56l-5.842 4.4a.982.982 0 0 1-1.181-1.568l5.842-4.4a5.6 5.6 0 0 1 7.85 1.112l.104.14a3.93 3.93 0 0 1 .178 4.456.982.982 0 1 1-1.66-1.048c.436-.69.4-1.577-.089-2.23l-.104-.14a3.64 3.64 0 0 0-1.803-1.282'></path>
               </g>
             </svg>
             <div className='flex flex-col items-start'>
-              <Text className='!text-black-900 text-[16px] !font-euclid'>
-                Group Registration
-              </Text>
+              <Text className='!text-black-900 text-[16px] !font-euclid'>Group Registration</Text>
               <Text size='md' as='p' className='!text-black_supper_light'>
                 Off
               </Text>
@@ -81,11 +64,7 @@ export const Registration = () => {
           Tickets
         </Text>
         <Button className='bg-gray-100 flex flex-row items-center gap-3'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 16 16'
-            className='w-3'
-          >
+          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' className='w-3'>
             <path
               fill='currentColor'
               fill-rule='evenodd'
@@ -114,20 +93,14 @@ export const Registration = () => {
               <circle cx='5' cy='12' r='1'></circle>
             </svg>
           </div>
-          <Text
-            as='p'
-            size='xl'
-            className='mt-5 font-euclid text-[30px] !text-black-900'
-          >
+          <Text as='p' size='xl' className='mt-5 font-euclid text-[30px] !text-black-900'>
             Free
           </Text>
-          <div className='mt-5 flex flex-row justify-between'>
-            <Text className='!text-black-900 text-[16px]'>
-              Require Approval
-            </Text>
-            <Switch size='small' defaultChecked />
+          <div className='mt-3 flex flex-row justify-between'>
+            <Text className='!text-black-900 text-[16px]'>Require Approval</Text>
+            <Switch size='small' defaultChecked disabled />
           </div>
-          <div className='h-px w-full self-stretch bg-black_supper_light opacity-25' />
+          <div className='mt-3 h-px w-full self-stretch bg-black_supper_light opacity-25' />
           <div className='flex flex-row justify-between mt-2 '>
             <Text className='!text-black-900'>Avaliable</Text>
             <Text className='!text-black-900'>0 Registered</Text>
@@ -136,115 +109,113 @@ export const Registration = () => {
       </div>
       <div className='mt-5 h-px w-full self-stretch bg-black_supper_light' />
       <div className='mt-5'>
-        <Heading className='text-[25px] '>
-          Registration Questions
-        </Heading>
-        <Text className='mt-3  text-[16px]'>
-          We will ask guests the following questions when they register for the
-          event.
-        </Text>
-        <div className='w-[788px] h-[138px] flex flex-col'>
-          <div className='mt-3 flex flex-row'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 50 50'
-              className='w-6'
-            >
+        <Heading className='text-[25px] '>Registration Questions</Heading>
+        <Text className='mt-3  text-[16px]'>We will ask guests the following questions when they register for the event.</Text>
+        <div className=' flex flex-col'>
+          <div className='mt-3 flex flex-row items-center'>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' className='w-[16px] h-[16px]'>
               <path
                 fill='currentColor'
-                d='M7.752 44.553h34.843c4.532 0 6.952-2.4 6.952-6.89V12.765c0-4.492-2.42-6.891-6.952-6.891H7.752C3.22 5.875.8 8.254.8 12.765v24.897c0 4.512 2.42 6.89 6.952 6.89m9.106-19.36c-2.482 0-4.492-2.091-4.492-4.901 0-2.625 2.01-4.82 4.492-4.82 2.502 0 4.49 2.195 4.49 4.82 0 2.81-1.988 4.901-4.49 4.901m13.494-6.624c-.82 0-1.395-.594-1.395-1.374 0-.758.574-1.353 1.395-1.353H40.81c.779 0 1.353.595 1.353 1.353 0 .78-.574 1.374-1.353 1.374zm0 8.04c-.82 0-1.395-.616-1.395-1.395 0-.759.574-1.354 1.395-1.354H40.81c.779 0 1.353.595 1.353 1.354 0 .78-.574 1.394-1.353 1.394zm-21.205 8.1c-.8 0-1.23-.574-1.23-1.333 0-1.907 2.788-6.83 8.94-6.83 6.173 0 8.963 4.923 8.963 6.83 0 .759-.41 1.333-1.23 1.333zm21.205-.103c-.82 0-1.395-.574-1.395-1.353 0-.78.574-1.374 1.395-1.374H40.81c.779 0 1.353.595 1.353 1.374s-.574 1.353-1.353 1.353z'
+                fill-rule='evenodd'
+                d='M6.414 1c-1.17 0-2.293.465-3.121 1.293a1 1 0 1 0 1.414 1.414A2.41 2.41 0 0 1 6.414 3h11.172c.64 0 1.254.254 1.707.707a1 1 0 1 0 1.414-1.414A4.41 4.41 0 0 0 17.586 1zM0 14c0-3.75 0-5.625.955-6.939A5 5 0 0 1 2.06 5.955C3.375 5 5.251 5 9 5h6c3.75 0 5.625 0 6.939.955a5 5 0 0 1 1.106 1.106C24 8.375 24 10.251 24 14s0 5.625-.955 6.939a5 5 0 0 1-1.106 1.106C20.625 23 18.749 23 15 23H9c-3.75 0-5.625 0-6.939-.955A5 5 0 0 1 .955 20.94C0 19.625 0 17.749 0 14m10.398.36v-.002c0-.265-.17-.476-.377-.734-.325-.406-.743-.927-.743-1.957 0-1.563 1.208-2.85 2.722-2.85 1.513 0 2.721 1.287 2.721 2.85 0 1.03-.418 1.551-.743 1.957-.207.258-.376.469-.376.734v.002c0 .425.536.677 1.15.965.822.387 1.784.838 1.784 1.856 0 2.006-3.093 2.004-4.457 2.003h-.158c-1.365 0-4.457.003-4.457-2.003 0-1.018.961-1.47 1.783-1.856.615-.288 1.151-.54 1.151-.965'
               ></path>
             </svg>
-            <Text className='ml-3 text-[20px] _bf'>
-              Identity
-            </Text>
+            <Text className='ml-3 text-[16px] _bf'>Personal Information</Text>
           </div>
-          <div className='mt-5 flex flex-row gap-3'>
-            <div className='w-[49%] flex flex-col'>
-              <div className='flex flex-row items-center'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 80 80'
-                  className='w-5'
-                >
-                  <path
-                    fill='currentColor'
-                    d='M40.031 39.156c6.813 0 12.594-6.062 12.594-13.906 0-7.656-5.812-13.531-12.594-13.531-6.812 0-12.656 5.969-12.625 13.594 0 7.78 5.782 13.843 12.625 13.843M59.47 68.22c5.156 0 6.937-1.563 6.937-4.438 0-8.031-10.187-19.093-26.406-19.093-16.187 0-26.406 11.062-26.406 19.093 0 2.875 1.781 4.438 6.937 4.438z'
-                  ></path>
-                </svg>
-                <Heading as='h3' size='xl' className='ml-2 _bf'>
-                  Name
-                </Heading>
-                <Button
-                  size='small'
-                  className='ml-[200px] bg-gray-100 w-[100px] font-bold'
-                >
-                  Required
-                </Button>
-              </div>
-              <div className='mt-3 flex flex-row items-center'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 80 80'
-                  className='w-5'
-                >
-                  <path
-                    fill='currentColor'
-                    d='M40.031 39.156c6.813 0 12.594-6.062 12.594-13.906 0-7.656-5.812-13.531-12.594-13.531-6.812 0-12.656 5.969-12.625 13.594 0 7.78 5.782 13.843 12.625 13.843M59.47 68.22c5.156 0 6.937-1.563 6.937-4.438 0-8.031-10.187-19.093-26.406-19.093-16.187 0-26.406 11.062-26.406 19.093 0 2.875 1.781 4.438 6.937 4.438z'
-                  ></path>
-                </svg>
-                <Heading as='h3' size='xl' className='ml-2 _bf'>
-                  MSSV
-                </Heading>
-                <Button
-                  size='small'
-                  className='ml-[200px] bg-gray-100 w-[100px] font-bold'
-                >
-                  Required
-                </Button>
-              </div>
-              <div className='mt-3 flex flex-row items-center'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 16 16'
-                  className='w-5'
-                >
-                  <path
-                    fill='currentColor'
-                    fill-rule='evenodd'
-                    d='M12.5 10V6c0-1.352-.002-2.234-.08-2.893-.075-.627-.198-.854-.306-.985a1.7 1.7 0 0 0-.236-.236c-.13-.108-.358-.232-.985-.306-.214-.025-.394.147-.457.354A1.5 1.5 0 0 1 9 3H7a1.5 1.5 0 0 1-1.436-1.066c-.063-.207-.243-.379-.457-.354-.627.074-.854.198-.985.306a1.7 1.7 0 0 0-.236.236c-.108.13-.232.358-.306.985-.078.66-.08 1.541-.08 2.893v4c0 1.352.002 2.234.08 2.893.074.627.198.854.306.986q.106.129.236.235c.13.108.358.231.985.306.66.078 1.541.08 2.893.08s2.234-.002 2.893-.08c.627-.075.854-.198.986-.306q.129-.106.235-.236c.108-.13.231-.358.306-.985.078-.66.08-1.541.08-2.893m.33-9.274c-.754-.618-1.82-.71-3.745-.724L9 0H7q-.042 0-.085.002C4.99.016 3.924.108 3.17.726a3.2 3.2 0 0 0-.444.444C2 2.055 2 3.37 2 6v4c0 2.63 0 3.945.726 4.83q.2.243.444.444C4.055 16 5.37 16 8 16s3.945 0 4.83-.726q.243-.2.444-.444C14 13.945 14 12.63 14 10V6c0-2.63 0-3.945-.726-4.83a3.2 3.2 0 0 0-.444-.444M7.5 11.7a.8.8 0 0 0 0 1.6h1a.8.8 0 0 0 0-1.6z'
-                  ></path>
-                </svg>
-                <Heading
-                  as='h3'
-                  size='xl'
-                  className='ml-2  _bf'
-                >
-                  Phone Number
-                </Heading>
-                <Button
-                  size='small'
-                  className='ml-[130px] bg-gray-100 w-[100px] font-bold'
-                >
-                  Required
-                </Button>
-                
-              </div>
-              <Button className='mt-5 bg-gray-100 flex flex-row items-center gap-3'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 16 16'
-                    className='w-3'
-                  >
+          <div className='mt-5 w-full flex flex-row items-center justify-between'>
+            <div className='border rounded-lg shadow-md px-4 py-2 w-full flex flex-row items-center justify-between'>
+              <div className='flex flex-row items-center '>
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' className='!text-black-900 w-[16px] h-[16px]'>
+                  <g clip-path='url(#UserFilled16_svg__a)'>
                     <path
                       fill='currentColor'
-                      fill-rule='evenodd'
-                      d='M8.5 1.75a.75.75 0 0 0-1.5 0V7H1.75a.75.75 0 0 0 0 1.5H7v5.25a.75.75 0 0 0 1.5 0V8.5h5.25a.75.75 0 0 0 0-1.5H8.5z'
+                      d='m5.529 8.556-.001-.003C5.528 7.5 3.8 7 3.8 4.4 3.8 1.987 5.664 0 8 0s4.2 1.987 4.2 4.4c0 2.6-1.728 3.1-1.728 4.153v.003c0 1.531 4.528 1.609 4.528 4.353C15 16.066 10.036 16 8 16s-7 .066-7-3.09c0-2.745 4.529-2.823 4.529-4.354'
                     ></path>
-                  </svg>
-                  <p>Add Question</p>
-                </Button>
+                  </g>
+                  <defs>
+                    <clipPath id='UserFilled16_svg__a'>
+                      <path fill='currentColor' d='M0 0h16v16H0z'></path>
+                    </clipPath>
+                  </defs>
+                </svg>
+                <Text className='ml-1'>Full Name</Text>
+              </div>
+              <Text as='p' size='lg' className='text-opacity-50'>
+                Require
+              </Text>
             </div>
+            <div className='border rounded-lg shadow-md px-4 py-2 w-full ml-10 flex flex-row items-center justify-between'>
+              <div className='flex flex-row items-center '>
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' className='!text-black-900 w-[16px] h-[16px]'>
+                  <g clip-path='url(#UserFilled16_svg__a)'>
+                    <path
+                      fill='currentColor'
+                      d='m5.529 8.556-.001-.003C5.528 7.5 3.8 7 3.8 4.4 3.8 1.987 5.664 0 8 0s4.2 1.987 4.2 4.4c0 2.6-1.728 3.1-1.728 4.153v.003c0 1.531 4.528 1.609 4.528 4.353C15 16.066 10.036 16 8 16s-7 .066-7-3.09c0-2.745 4.529-2.823 4.529-4.354'
+                    ></path>
+                  </g>
+                  <defs>
+                    <clipPath id='UserFilled16_svg__a'>
+                      <path fill='currentColor' d='M0 0h16v16H0z'></path>
+                    </clipPath>
+                  </defs>
+                </svg>
+                <Text className='ml-1'>Student Id</Text>
+              </div>
+              <Text as='p' size='lg' className='text-opacity-50'>
+                Require
+              </Text>
+            </div>
+            <div className='border rounded-lg shadow-md px-4 py-2 w-full ml-10 flex flex-row items-center justify-between'>
+              <div className='flex flex-row items-center '>
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' className='!text-black-900 w-[16px] h-[16px]'>
+                  <g clip-path='url(#UserFilled16_svg__a)'>
+                    <path
+                      fill='currentColor'
+                      d='m5.529 8.556-.001-.003C5.528 7.5 3.8 7 3.8 4.4 3.8 1.987 5.664 0 8 0s4.2 1.987 4.2 4.4c0 2.6-1.728 3.1-1.728 4.153v.003c0 1.531 4.528 1.609 4.528 4.353C15 16.066 10.036 16 8 16s-7 .066-7-3.09c0-2.745 4.529-2.823 4.529-4.354'
+                    ></path>
+                  </g>
+                  <defs>
+                    <clipPath id='UserFilled16_svg__a'>
+                      <path fill='currentColor' d='M0 0h16v16H0z'></path>
+                    </clipPath>
+                  </defs>
+                </svg>
+                <Text className='ml-1'>Phone Number</Text>
+              </div>
+              <Text as='p' size='lg' className='text-opacity-50'>
+                Require
+              </Text>
+            </div>
+          </div>
+        </div>
+        <div className='mt-5 flex flex-col'>
+          <div className='mt-3 flex flex-row items-center'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' className='w-[16px] h-[16px]'>
+              <path
+                fill='currentColor'
+                fill-rule='evenodd'
+                d='M6.414 0c-1.17 0-2.293.465-3.121 1.293a1 1 0 1 0 1.414 1.414A2.41 2.41 0 0 1 6.414 2h11.172c.64 0 1.254.254 1.707.707a1 1 0 1 0 1.414-1.414A4.41 4.41 0 0 0 17.586 0zM0 13c0-3.75 0-5.625.955-6.939A5 5 0 0 1 2.06 4.955C3.375 4 5.251 4 9 4h6c3.75 0 5.625 0 6.939.955a5 5 0 0 1 1.106 1.106C24 7.375 24 9.251 24 13s0 5.625-.955 6.939a5 5 0 0 1-1.106 1.106C20.625 22 18.749 22 15 22H9c-3.75 0-5.625 0-6.939-.955A5 5 0 0 1 .955 19.94C0 18.625 0 16.749 0 13m10.84-2.943c0-.476.183-.689.376-.82C11.46 9.066 11.79 9 12 9s.539.068.784.236c.193.132.376.345.376.821 0 .285-.104.401-.73.938-.583.499-1.43 1.27-1.43 2.765a1 1 0 1 0 2 0c0-.563.233-.82.73-1.246l.111-.093c.484-.406 1.319-1.105 1.319-2.364 0-1.17-.537-1.985-1.245-2.47A3.5 3.5 0 0 0 12 7c-.51 0-1.261.138-1.916.587-.707.485-1.244 1.3-1.244 2.47a1 1 0 1 0 2 0M12 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5'
+                clip-rule='evenodd'
+              ></path>
+            </svg>
+            <Text className='ml-3 text-[16px] _bf'>Custom Questions</Text>
+          </div>
+          <div className='mt-3  flex flex-col'>
+            <Button className='w-[150px] bg-gray-500 !hover:bg-gray-400 flex flex-row items-center justify-between'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                stroke='currentColor'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                viewBox='0 0 24 24'
+                className='w-[16px] h-[16px]'
+              >
+                <path d='M12 5v14M5 12h14'></path>
+              </svg>
+              <Text>Add Question</Text>
+            </Button>
           </div>
         </div>
       </div>
