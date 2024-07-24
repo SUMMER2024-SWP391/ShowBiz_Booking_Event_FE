@@ -2,7 +2,7 @@ import { UserOutlined } from '@ant-design/icons'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -64,15 +64,16 @@ const Register = () => {
       }
     })
   })
+  const [open, setOpen] = useState<boolean>(false)
 
   return (
     <>
-      <div className='flex w-full flex-col gap-[175px] bg-gradient_vistor  sm:gap-[87px]'>
+      <div className='flex w-full flex-col gap-[175px]  sm:gap-[87px]'>
         <div className='flex flex-col items-center gap-[79px] md:gap-[72px] sm:gao-12'>
           <Header _id={setProfile.name} />
         </div>
         <div className='container-xs pl-[313px] pr-[2p96px] flex justify-center md:p-5 md:px-5'>
-          <div className='flex flex-col w-[55%] h-[100%] items-center gap-[21px] rounded-[15px] border border-solid border-white-A700 bg-gray-900_04 pb-5 pt-[26px] sm:pt-5'>
+          <div className='flex flex-col w-[55%] h-[100%] items-center gap-[21px] rounded-[15px] border border-solid border-black-900 shadow-2xl bg-gray-900_04 pb-5 pt-[26px] sm:pt-5'>
             <div className='ml-[46px] flex flex-col item-start gap-[18px] self-start'>
               <Button
                 color='pink_normail'
@@ -80,17 +81,17 @@ const Register = () => {
                 shape='circle'
                 className='w-[68px] !rounded-[34px]'
               >
-                <UserOutlined className='!text-white-A700' />
+                <UserOutlined className='' />
               </Button>
               <div className='flex flex-col items-start gap-[13px]'>
                 <Heading
                   size='2xl'
                   as='h1'
-                  className='!font-bold !text-white-A700'
+                  className='!font-bold '
                 >
                   Welcome to EventBok
                 </Heading>
-                <Heading size='xl' as='h2' className='!text-blue_gray-100_02'>
+                <Heading size='xl' as='h2' className='!text-blue_gray-900'>
                   Please sign in or sign up below
                 </Heading>
               </div>
@@ -104,7 +105,7 @@ const Register = () => {
                 <Heading
                   size='lg'
                   as='h3'
-                  className='!font-bold !text-white-A700'
+                  className='!font-bold '
                 >
                   Email
                 </Heading>
@@ -113,7 +114,7 @@ const Register = () => {
                   type='text'
                   name='email'
                   className='w-full'
-                  classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
+                  classNameInput='mt-2 rounded-[10px] border text-black-900 hover:border-black_dark border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                   register={register}
                   errorMessage={errors.email?.message}
                 />
@@ -123,14 +124,14 @@ const Register = () => {
                   <Heading
                     size='lg'
                     as='h3'
-                    className='!font-bold !text-white-A700'
+                    className='!font-bold '
                   >
                     Your name
                   </Heading>
                   <InputVerTwo
                     type='text'
                     name='user_name'
-                    classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
+                    classNameInput='mt-2 rounded-[10px] border text-black-900 hover:border-black_dark border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                     register={register}
                     errorMessage={errors.user_name?.message}
                   />
@@ -139,14 +140,14 @@ const Register = () => {
                   <Heading
                     size='lg'
                     as='h3'
-                    className='!font-bold !text-white-A700'
+                    className='!font-bold '
                   >
                     Student code
                   </Heading>
                   <InputVerTwo
                     type='text'
                     name='mssv'
-                    classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
+                    classNameInput='mt-2 rounded-[10px] border text-black-900 hover:border-black_dark border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                     register={register}
                     errorMessage={errors.mssv?.message}
                   />
@@ -155,14 +156,14 @@ const Register = () => {
                   <Heading
                     size='lg'
                     as='h3'
-                    className='!font-bold !text-white-A700'
+                    className='!font-bold '
                   >
                     Password
                   </Heading>
                   <InputVerTwo
                     type='password'
                     name='password'
-                    classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
+                    classNameInput='mt-2 rounded-[10px] border text-black-900 hover:border-black_dark border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                     register={register}
                     errorMessage={errors.password?.message}
                   />
@@ -171,14 +172,14 @@ const Register = () => {
                   <Heading
                     size='lg'
                     as='h3'
-                    className='!font-bold !text-white-A700'
+                    className='!font-bold '
                   >
                     Confirm Password
                   </Heading>
                   <InputVerTwo
                     type='password'
                     name='confirm_password'
-                    classNameInput='mt-2 rounded-[10px] border text-black-900  border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
+                    classNameInput='mt-2 rounded-[10px] border text-black-900 hover:border-black_dark border-solid bg-white-A700  w-full font-euclid p-2 outline-none'
                     register={register}
                     errorMessage={errors.confirm_password?.message}
                   />
@@ -187,21 +188,21 @@ const Register = () => {
               <Button
                 size='xl'
                 color='white_A700'
-                className='mt-[10px] w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 hover:opacity-95'
+                className='mt-[10px] w-full rounded-[10px] border border-solid border-black_dark font-medium sm:px-5 hover:opacity-95'
               >
                 Register your account
               </Button>
-              <div className='h-px w-full self-stretch bg-white-A700' />
-              <div className='grid grid-cols-2 gap-2'>
+              <div className='h-px w-full self-stretch bg-black_light ' />
+              <div className='flex flex-row justify-between'>
                 <Link
                   to={googleAuthUrl}
-                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:opacity-80 text-white-A700'
+                  className='w-[45%] mt-[10px] p-2  rounded-[10px] border border-solid border-black_dark font-medium sm:px-5 text-center hover:opacity-80'
                 >
                   Sign in with FPT EDU Email
                 </Link>
                 <Link
                   to={'/login'}
-                  className='mt-[10px] p-2 w-full rounded-[10px] border border-solid border-white-A700 font-medium sm:px-5 text-center hover:bg-white flex justify-center items-center hover:opacity-80 text-white-A700'
+                  className='mt-[10px] p-2 w-[45%] rounded-[10px] border border-solid border-black_dark font-medium sm:px-5 text-center hover:bg-white flex justify-center items-center hover:opacity-80'
                 >
                   Login with account
                 </Link>
