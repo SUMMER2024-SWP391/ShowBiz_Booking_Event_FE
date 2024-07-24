@@ -29,6 +29,7 @@ import HandleFeedbackOfUser from '../HandleFeedbackOfUser/HandleFeedbackOfUser'
 import { AxiosResponse } from 'axios'
 import { Ticket } from 'src/@types/ticket.type'
 import { User } from 'src/@types/users.type'
+import { isValidToRegister } from 'src/utils/checkEventDate'
 
 type Props = {
   event: Event
@@ -123,17 +124,41 @@ const handleComponentEvent = (event: Event): JSX.Element => {
     !newData ||
     (newData && !newData.data.data.ticket.register)
   ) {
-    if (event.is_required_form_register && Number(event.ticket_price) !== 0) {
-      return <Register _id={event._id} event={event} />
-    } else if (
-      event.is_required_form_register &&
-      Number(event.ticket_price) === 0
+    if (
+      newData &&
+      isValidToRegister(
+        newData?.data.data.ticket.event.date_event,
+        newData?.data.data.ticket.event.ticket_price
+      )
     ) {
-      return <Register _id={event._id} event={event} />
-    } else if (
-      !event.is_required_form_register &&
-      Number(event.ticket_price) !== 0
-    ) {
+      if (event.is_required_form_register && Number(event.ticket_price) !== 0) {
+        return <Register _id={event._id} event={event} />
+      } else if (
+        event.is_required_form_register &&
+        Number(event.ticket_price) === 0
+      ) {
+        return <Register _id={event._id} event={event} />
+      } else if (
+        !event.is_required_form_register &&
+        Number(event.ticket_price) !== 0
+      ) {
+        return (
+          <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
+            <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
+              <Heading size='s' as='p' className='!font-semibold'>
+                Registration
+              </Heading>
+            </div>
+            <Text size='s' as='p' className='ml-6 self-start '>
+              Welcome! To join the event, please register below.
+            </Text>
+
+            <HandleLoginWhenRegisterEvent
+              handleRegisterEvent={handleClickForPaymentAPI}
+            />
+          </div>
+        )
+      }
       return (
         <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
           <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
@@ -146,7 +171,7 @@ const handleComponentEvent = (event: Event): JSX.Element => {
           </Text>
 
           <HandleLoginWhenRegisterEvent
-            handleRegisterEvent={handleClickForPaymentAPI}
+            handleRegisterEvent={handleRegisterNoPaymentNoForm(event._id)}
           />
         </div>
       )
@@ -155,16 +180,17 @@ const handleComponentEvent = (event: Event): JSX.Element => {
       <div className='mt-[37px] flex flex-col items-center gap-[21px] self-stretch rounded-[20px] bg-pink-normail pb-[26px] shadow-md sm:pb-5'>
         <div className='flex self-stretch rounded-tl-[17px] rounded-tr-[17px] bg-[#E67A5B] px-6 pb-[7px] pt-3 sm:px-5'>
           <Heading size='s' as='p' className='!font-semibold'>
-            Registration
+            Notification
           </Heading>
         </div>
-        <Text size='s' as='p' className='ml-6 self-start '>
-          Welcome! To join the event, please register below.
-        </Text>
-
-        <HandleLoginWhenRegisterEvent
-          handleRegisterEvent={handleRegisterNoPaymentNoForm(event._id)}
-        />
+        <Button
+          size='lg'
+          shape='round'
+          className='min-w-[423px] font-semibold hover:shadow-md sm:px-5 !bg-[#F5222D] text-white-A700'
+          disabled
+        >
+          This event was end
+        </Button>
       </div>
     )
   }
