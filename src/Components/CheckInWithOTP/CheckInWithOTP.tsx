@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { OTPCheckInSchema, otpCheckInSchemaYup } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import eventApi from 'src/apis/event.api'
 import { toast } from 'react-toastify'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
@@ -15,6 +15,7 @@ type FormData = OTPCheckInSchema
 
 const CheckInWithOTP = () => {
   const { id } = useParams()
+  const queryClient = useQueryClient()
   const {
     register,
     handleSubmit,
@@ -33,6 +34,9 @@ const CheckInWithOTP = () => {
       onSuccess: (data) => {
         console.log(data)
         toast.success(data.data.message)
+        queryClient.invalidateQueries({
+          queryKey: ['list-user-register-event']
+        })
       },
       onError(error) {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
