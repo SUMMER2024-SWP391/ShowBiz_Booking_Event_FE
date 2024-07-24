@@ -23,7 +23,7 @@ const InputVerTwo = ({
   register,
   rules,
   autoComplete,
-  classNameInput = 'rounded-[10px] border border-solid border-black-900 font-bold sm:pr-5 w-full',
+  classNameInput = 'rounded-[10px] border border-solid border-black_dark font-bold sm:pr-5 w-full',
   classNameError = 'mt-1 min-h-[1.25rem] text-sm text-red',
   renderProps,
   defaultValue,
@@ -39,7 +39,7 @@ const InputVerTwo = ({
         type={type}
         value={defaultValue}
         autoComplete={autoComplete}
-        className={classNameInput}
+        className={`${classNameInput} 'rounded-[10px] border border-solid border-black_dark font-bold sm:pr-5 w-full'`}
         placeholder={placeholder}
         // onChange={onChange}
         {...registerResult} //react hook form tự override lại name của tag input do khi chạy register
