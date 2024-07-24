@@ -59,9 +59,9 @@ export const ManageEventHome = ({ event }: Props) => {
         <NavLink
           role='tab'
           className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
-          to='registed'
+          to='guest'
         >
-          Registed
+          Guests
         </NavLink>
         <NavLink
           to='registration'
@@ -101,7 +101,7 @@ export const ManageEventHome = ({ event }: Props) => {
       </div>
       <Routes>
         <Route path='overview' element={<Overview event={event} />} />
-        <Route path='registed' element={<Registed id={event._id} />} />
+        <Route path='guest' element={<Registed id={event._id} />} />
         <Route path='registration' element={<Registration />} />
         {/* <Route path='update-form' element={<UpdateFormFeedback />} /> */}
         <Route path='form-feedback' element={<FormFeedback />}></Route>

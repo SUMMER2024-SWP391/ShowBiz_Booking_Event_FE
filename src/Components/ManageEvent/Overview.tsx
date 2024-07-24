@@ -169,6 +169,7 @@ export const Overview = ({ event }: Props) => {
               onCancel={() => setOpen(false)}
               width={'350px'}
               title='Invite user here'
+              centered
             >
               <form
                 className='flex flex-col justify-center items-center'

@@ -66,7 +66,6 @@ export default function HomePageVisitor() {
       }
     })
 
-  console.log('ho', filteredEvent)
   return (
     <>
       <div className='w-full pb-[376px] md:pb-5'>

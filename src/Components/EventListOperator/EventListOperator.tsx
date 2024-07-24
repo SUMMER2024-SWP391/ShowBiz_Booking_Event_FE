@@ -4,13 +4,8 @@ import eventApi from 'src/apis/event.api'
 import { Button, Skeleton } from 'antd'
 import { Heading } from '../Heading/Heading'
 import { Img } from '../Img/Img'
-import { parse, format, compareAsc } from 'date-fns'
-import {
-  ArrowRightOutlined,
-  EnvironmentOutlined,
-  RightOutlined,
-  UserOutlined
-} from '@ant-design/icons'
+import { parse, format, compareAsc, isAfter, isWithinInterval, isBefore } from 'date-fns'
+import { ArrowRightOutlined, EnvironmentOutlined, RightOutlined, UserOutlined } from '@ant-design/icons'
 import { Text } from '../Text/Text'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -18,26 +13,65 @@ import { checkEventDate } from 'src/utils/checkEventDate'
 import { EventStatus } from 'src/@types/enum'
 
 const EventListOperator = () => {
+  const [currentSelection, setCurrentSelection] = useState('Upcoming')
+
   const { data, isFetching } = useQuery({
     queryKey: ['event-list-operator'],
     queryFn: () => eventApi.getEventListOperator()
   })
-  const filterDate = parse('01/01/2024', 'dd/MM/yyyy', new Date())
+  const filteredEvent = data?.data.data.events
+    .map((event) => ({
+      ...event,
+      parsedStartDate: parse(`${event.date_event} ${event.time_start}`, 'dd/MM/yyyy HH:mm', new Date()),
+      parsedEndDate: parse(
+        `${event.date_event} ${event.time_end}`, // Assuming `time_end` exists
+        'dd/MM/yyyy HH:mm',
+        new Date()
+      ),
+      displayDate: checkEventDate(event.date_event)
+    }))
+    .filter((event) => {
+      const now = new Date()
+      if (currentSelection === 'Upcoming') {
+        return (
+          isAfter(event.parsedEndDate, now) ||
+          isWithinInterval(now, {
+            start: event.parsedStartDate,
+            end: event.parsedEndDate
+          })
+        )
+      } else {
+        return isBefore(event.parsedEndDate, now)
+      }
+    })
   return (
     <>
-      {data?.data.data.events
-        .map((event) => ({
-          ...event,
-          parsedDate: parse(
-            `${event.date_event} ${event.time_start}`,
-            'dd/MM/yyyy HH:mm',
-            new Date()
-          ), // Parse and attach the parsed date for sorting
-          displayDate: checkEventDate(event.date_event)
-        }))
-        .sort((a, b) => compareAsc(a.parsedDate, b.parsedDate)) // Sort events by date in increasing order
+      <div className='flex flex-row items-center justify-between'>
+        <Heading size='4xl' as='h1' className=''>
+          Events
+        </Heading>
+        <div className='self-end'>
+          <button
+            onClick={() => setCurrentSelection('Upcoming')}
+            className={`${
+              currentSelection === 'Upcoming' ? 'bg-[#51606E] text-white-A700' : 'bg-white-A700 text-black'
+            } px-2 py-1 rounded-l-lg transition-colors duration-300 border border-l-2 `}
+          >
+            Upcoming
+          </button>
+          <button
+            onClick={() => setCurrentSelection('Past')}
+            className={`${
+              currentSelection === 'Past' ? 'bg-[#51606E] text-white-A700' : 'bg-white-A700 text-black-900'
+            } px-2 py-1 rounded-r-lg transition-colors duration-300 border border-r-2`}
+          >
+            Past
+          </button>
+        </div>
+      </div>
 
-        .map((event) => (
+      {filteredEvent &&
+        filteredEvent.map((event) => (
           <div className={`flex flex-row items-center justify-between `}>
             <div className='w-[10%]'>
               <Heading>{event.displayDate}</Heading>
@@ -61,21 +95,13 @@ const EventListOperator = () => {
 
                       <div className='mt-[10px] flex gap-1.5'>
                         <EnvironmentOutlined className='h-[18px] w-[18px] self-start ' />
-                        <Heading
-                          size='lg'
-                          as='p'
-                          className='self-end !font-monterat '
-                        >
+                        <Heading size='lg' as='p' className='self-end !font-monterat '>
                           {`${event.location}, Trường Đại Học FPT HCM`}
                         </Heading>
                       </div>
                       <div className='mt-[10px] flex gap-1.5'>
                         <UserOutlined className='h-[18px] w-[18px] self-start ' />
-                        <Heading
-                          size='lg'
-                          as='p'
-                          className='self-end !font-monterat '
-                        >
+                        <Heading size='lg' as='p' className='self-end !font-monterat '>
                           {`${event.capacity}`}
                         </Heading>
                       </div>
@@ -102,25 +128,25 @@ const EventListOperator = () => {
                           </div>
                         )}
                       </div>
-                      <Button className='mt-[10px] flex items-center gap-1.5'>
-                        <Link
-                          to={`/event-operator/manage/${event._id}/overview`}
-                        >
-                          <Text size='md' as='p' className='!text-black-900'>
-                            Manager Event
-                          </Text>
-                        </Link>
-                        <ArrowRightOutlined />
-                      </Button>
+                      {currentSelection === 'Upcoming' ? (
+                        <Button className='mt-[10px] flex items-center gap-1.5'>
+                          <Link to={`/event-operator/manage/${event._id}/overview`}>
+                            <Text size='md' as='p' className='!text-black-900'>
+                              Manager Event
+                            </Text>
+                          </Link>
+                          <ArrowRightOutlined />
+                        </Button>
+                      ): (<>
+                      <div className="mt-[10px] px-2 py-1 border shadow-2xl rounded-lg bg-red ">
+                        <Heading size='xl' as='h6' className='!text-white-A700'>Event was end</Heading>
+                      </div>
+                      </>)}
                     </div>
 
                     <div>
                       <div className='w-[150px] h-[150px]'>
-                        <Img
-                          src={event.image}
-                          alt='banner-event'
-                          className=' w-full h-full rounded-[15px] object-cover justify-end'
-                        />
+                        <Img src={event.image} alt='banner-event' className=' w-full h-full rounded-[15px] object-cover justify-end' />
                       </div>
                     </div>
                   </div>
