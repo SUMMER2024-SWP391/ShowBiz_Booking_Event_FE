@@ -60,7 +60,6 @@ const ChangePassword = () => {
       }
     })
   })
-
   return (
     <>
       <div className='w-full h-auto'>
@@ -106,16 +105,17 @@ const ChangePassword = () => {
                   name='old_password'
                   errorMessage={errors.old_password?.message}
                 />
-
-                <button className='mt-10 h-[45px] rounded-lg bg-pink-normail p-2 text-white-A700 hover:opacity-95'>
+                <button
+                  type='submit'
+                  className='mt-10 h-[45px] rounded-lg bg-pink-normail p-2 text-white-A700 hover:opacity-95'
+                >
                   Change password
                 </button>
               </div>
             </form>
           </div>
         </div>
-      <Footer />
-
+        <Footer />
       </div>
     </>
   )
