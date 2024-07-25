@@ -6,13 +6,13 @@ type Props = {
     description: string
     messageError: string
   }
-  // index: number
+  index: number
   handleChangeElement: (id: string) => (event: React.ChangeEvent<HTMLInputElement>) => void
   // handleDeleteQuestion: (id: string) => () => void
 }
 
 const InputQuestion = ({
-  // index,
+  index,
   question,
   handleChangeElement
   // handleDeleteQuestion

@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query'
 import { formAPI } from 'src/apis/form.api'
 import { toast } from 'react-toastify'
 import { isValidToFeeback } from 'src/utils/utils'
-import { FormFeedback } from '../FormFeedback/FormFeedback'
+import FormFeedback from '../FormFeedback/FormFeedback'
 
 interface Props {
   event: Event

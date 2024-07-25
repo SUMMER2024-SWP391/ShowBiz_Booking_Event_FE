@@ -50,19 +50,18 @@ const UpdateFormFeedback = ({ renderProps }: Props) => {
   const handleDeleteQuestion = (id: string) => {
     deleteQuestion.mutate(id as string)
   }
-  const handleChangeElement =
-    (id: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.target
+  const handleChangeElement = (id: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
 
-      setForm((prevForm) =>
-        prevForm.map((question) => {
-          if (question._id === id) {
-            return { ...question, description: value }
-          }
-          return question
-        })
-      )
-    }
+    setForm((prevForm) =>
+      prevForm.map((question) => {
+        if (question._id === id) {
+          return { ...question, description: value }
+        }
+        return question
+      })
+    )
+  }
 
   const handleValidateQuestion = (): {
     listQuestionError: Array<Question>
@@ -124,16 +123,11 @@ const UpdateFormFeedback = ({ renderProps }: Props) => {
             form.map((question, index) => (
               <>
                 <div className='flex flex-row gap-5 mt-5'>
-                  <InputUpdate
-                    index={index}
-                    question={question}
-                    key={question._id}
-                    handleChangeElement={handleChangeElement}
-                  />
+                  <InputUpdate index={index} question={question} key={question._id} handleChangeElement={handleChangeElement} />
                   <button
                     className=' h-[54px] w-[60px] text-white-A700 bg-red rounded-xl opacity-90 hover:opacity-100 hover:text-slate-50 hover:border-2 hover:border-[#42C2FF] duration-300'
                     type='button'
-                    onClick={()=> handleDeleteQuestion(question._id)}
+                    onClick={() => handleDeleteQuestion(question._id)}
                   >
                     Delete
                   </button>
@@ -150,7 +144,7 @@ const UpdateFormFeedback = ({ renderProps }: Props) => {
             </button>
           </div>
         </form>
-        {renderProps}
+        <div className='mt-3'>{renderProps}</div>
       </div>
     </>
   )
