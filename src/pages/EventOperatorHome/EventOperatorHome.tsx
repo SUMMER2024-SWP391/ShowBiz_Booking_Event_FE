@@ -4,7 +4,7 @@ import Header from 'src/Components/HeaderHomePage/HeaderHomePage'
 import CreateEvent from '../../Components/CreateEvent/CreateEvent'
 import EventListOperator from 'src/Components/EventListOperator/EventListOperator'
 import ManagerEventPage from '../ManageEventPage/ManageEventPage'
-import ListAnswer from 'src/Components/ListAnswer/ListAnswer'
+// import ListAnswer from 'src/Components/ListAnswer/ListAnswer'
 
 export const EventOperatorHome = () => {
   // const { data, isFetching } = useQuery({
@@ -26,7 +26,7 @@ export const EventOperatorHome = () => {
                   {/* <Route index element={<Events />} /> */}
                   <Route path='manage/:id/' element={<ManagerEventPage />} />
                   <Route path='create' element={<CreateEvent />} />
-                  <Route path='statistical-answer/:id' element={<ListAnswer />}></Route>
+                  {/* <Route path='statistical-answer/:id' element={<ListAnswer />}></Route> */}
                 </Routes>
               </div>
             </div>
