@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Text } from '../Text/Text'
 import { Button, Modal } from 'antd'
-
+import { CreateFormRegister } from './CreateFormRegister'
 import eventApi from 'src/apis/event.api'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
@@ -9,7 +9,6 @@ import InputUpdate from '../InputUpdate/InputUpdate'
 import { EventQuestionType } from 'src/@types/form.type'
 import { formAPI } from 'src/apis/form.api'
 import { toast } from 'react-toastify'
-import CreateFormFeedBack from './CreateFormFeedBack'
 
 type Props = {
   isOpen: boolean
@@ -19,11 +18,11 @@ type Question = {
   description: string
   messageError: string
 }
-export const FormFeedback = () => {
+export const FormRegister = () => {
   const { id } = useParams()
   const { data } = useQuery({
     queryKey: ['form_feedback'],
-    queryFn: () => eventApi.getFormFeedback(id as string)
+    queryFn: () => eventApi.getListQuestion(id as string)
   })
   const [form, setForm] = useState<Array<Question>>([])
   const [open, setOpen] = useState(false)
@@ -32,7 +31,7 @@ export const FormFeedback = () => {
   const deleteQuestion = useMutation({
     mutationFn: (id: string) => formAPI.deleteQuestion(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['form_feedback'], exact: true })
+      queryClient.invalidateQueries({ queryKey: ['form_register'], exact: true })
       toast.success('Delete question success')
     }
   })
@@ -106,12 +105,15 @@ export const FormFeedback = () => {
         id,
         body: {
           questions,
-          type: EventQuestionType.FEEDBACK
+          type: EventQuestionType.REGISTER
         }
       },
       {
         onSuccess: () => {
-          toast.success('Update form feedback event sucessfully')
+          toast.success('Update form register event sucessfully')
+        },
+        onError : () => {
+          toast.error('Event had approve by admin, you can not update')
         }
       }
     )
@@ -130,15 +132,15 @@ export const FormFeedback = () => {
             clip-rule='evenodd'
           ></path>
         </svg>
-        <Text className='ml-3 text-[16px] !font-bold'>Form Feedback</Text>
+        <Text className='ml-3 text-[16px] _bf'>Custom Questions</Text>
       </div>
       <div className='mt-3 flex flex-col'>
         <div className='w-full '>
           <form className=''>
             <div className='w-full  rounded-xl flex flex-col items-stretch justify-between'>
               {data &&
-                form.length > 0 &&
-                form.map((question, index) => (
+                form.length > 3 &&
+                form.slice(3).map((question, index) => (
                   <>
                     <div className='border shadow-md px-4 py-2 rounded-xl flex flex-row items-center justify-between mt-3'>
                       <InputUpdate index={index} question={question} key={question._id} handleChangeElement={handleChangeElement} />
@@ -180,7 +182,7 @@ export const FormFeedback = () => {
         </Button>
       </div>
       <Modal title='Add New Question' footer centered open={open} onOk={() => setOpen(false)} onCancel={() => setOpen(false)}>
-        <CreateFormFeedBack  isHaveForm={true} />
+        <CreateFormRegister  isHaveForm={true} />
       </Modal>
     </div>
   )

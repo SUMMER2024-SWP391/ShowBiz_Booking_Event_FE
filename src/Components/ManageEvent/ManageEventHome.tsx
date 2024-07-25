@@ -5,12 +5,13 @@ import { Overview } from './Overview'
 import { Registed } from './Registed'
 import { Registration } from './Registration'
 import AssignCheckingStaff from '../AssignCheckingStaff/AssignCheckingStaff'
-import FormFeedback from '../FormFeedback/FormFeedback'
+
 import StaffPage from 'src/pages/StaffPage/StaffPage'
 import { useQuery } from '@tanstack/react-query'
 import { formAPI } from 'src/apis/form.api'
 import { toast } from 'react-toastify'
 import { isValidToFeeback } from 'src/utils/utils'
+import { FormFeedback } from '../FormFeedback/FormFeedback'
 
 interface Props {
   event: Event
