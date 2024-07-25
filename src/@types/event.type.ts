@@ -27,6 +27,7 @@ export type ListQuestion = {
   _id: string
   description: string
   messageError: string
+  answer: Array<{ description: string; user_name: string }>
 }
 export type FormEventRegister = {
   answers: Array<{
@@ -50,27 +51,13 @@ export type EventList = Pick<
   | 'location'
   | 'is_required_form_register'
   | 'dateTime'
-
 >
 
-export type EventListPendingAdmin = Pick<
-  Event,
-  '_id' | 'capacity' | 'name' | 'ticket_price' | 'event_operator' | 'location'
->
+export type EventListPendingAdmin = Pick<Event, '_id' | 'capacity' | 'name' | 'ticket_price' | 'event_operator' | 'location'>
 
 export type EventListOperator = Pick<
   Event,
-  | '_id'
-  | 'capacity'
-  | 'name'
-  | 'ticket_price'
-  | 'location'
-  | 'status'
-  | 'date_event'
-  | 'image'
-  | 'time_start'
-  | 'address'
-  | 'time_end'
+  '_id' | 'capacity' | 'name' | 'ticket_price' | 'location' | 'status' | 'date_event' | 'image' | 'time_start' | 'address' | 'time_end'
 >
 
 export type EventListUser = {

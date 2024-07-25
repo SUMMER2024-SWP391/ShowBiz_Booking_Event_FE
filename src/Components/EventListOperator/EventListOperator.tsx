@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import TableEventListOperator from '../TableEventListOperator/TableEventListOperator'
 import eventApi from 'src/apis/event.api'
-import { Button, Skeleton } from 'antd'
+import { Button } from 'antd'
 import { Heading } from '../Heading/Heading'
 import { Img } from '../Img/Img'
-import { parse, format, compareAsc, isAfter, isWithinInterval, isBefore } from 'date-fns'
-import { ArrowRightOutlined, EnvironmentOutlined, RightOutlined, UserOutlined } from '@ant-design/icons'
+import { parse, isAfter, isWithinInterval, isBefore } from 'date-fns'
+import { ArrowRightOutlined, EnvironmentOutlined, UserOutlined } from '@ant-design/icons'
 import { Text } from '../Text/Text'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { checkEventDate } from 'src/utils/checkEventDate'
 import { EventStatus } from 'src/@types/enum'
@@ -15,7 +14,7 @@ import { EventStatus } from 'src/@types/enum'
 const EventListOperator = () => {
   const [currentSelection, setCurrentSelection] = useState('Upcoming')
 
-  const { data, isFetching } = useQuery({
+  const { data } = useQuery({
     queryKey: ['event-list-operator'],
     queryFn: () => eventApi.getEventListOperator()
   })
@@ -72,7 +71,7 @@ const EventListOperator = () => {
 
       {filteredEvent &&
         filteredEvent.map((event) => (
-          <div className={`flex flex-row items-center justify-between `}>
+          <div className={`flex flex-row items-center justify-between `} key={event._id}>
             <div className='w-[10%]'>
               <Heading>{event.displayDate}</Heading>
             </div>
@@ -129,19 +128,39 @@ const EventListOperator = () => {
                         )}
                       </div>
                       {currentSelection === 'Upcoming' ? (
-                        <Button className='mt-[10px] flex items-center gap-1.5'>
-                          <Link to={`/event-operator/manage/${event._id}/overview`}>
-                            <Text size='md' as='p' className='!text-black-900'>
-                              Manager Event
-                            </Text>
-                          </Link>
-                          <ArrowRightOutlined />
-                        </Button>
-                      ): (<>
-                      <div className="mt-[10px] px-2 py-1 border shadow-2xl rounded-lg bg-red ">
-                        <Heading size='xl' as='h6' className='!text-white-A700'>Event was end</Heading>
-                      </div>
-                      </>)}
+                        <div className='flex'>
+                          <Button className='mt-[10px] flex items-center gap-1.5 mr-2'>
+                            <Link to={`/event-operator/manage/${event._id}/overview`}>
+                              <Text size='md' as='p' className='!text-black-900'>
+                                Manager Event
+                              </Text>
+                            </Link>
+                            <ArrowRightOutlined />
+                          </Button>
+                          <div className='mt-[10px] px-2 py-1 border shadow-2xl rounded-lg bg-[#0958d9] hover:bg-[#4096ff]'>
+                            <Link to={`/event-operator/statistical-answer/${event._id}`}>
+                              <Heading size='xl' as='h6' className='!text-white-A700'>
+                                Statistical
+                              </Heading>
+                            </Link>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className='flex'>
+                          <div className='mt-[10px] px-2 py-1 border shadow-2xl rounded-lg bg-red mr-2'>
+                            <Heading size='xl' as='h6' className='!text-white-A700'>
+                              Event was end
+                            </Heading>
+                          </div>
+                          <div className='mt-[10px] px-2 py-1 border shadow-2xl rounded-lg bg-[#0958d9] hover:bg-[#4096ff]'>
+                            <Link to={`/event-operator/statistical-answer/${event._id}`}>
+                              <Heading size='xl' as='h6' className='!text-white-A700'>
+                                Statistical
+                              </Heading>
+                            </Link>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     <div>

@@ -37,7 +37,7 @@ export const ManageEventHome = ({ event }: Props) => {
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
             stroke='currentColor'
-            stroke-linecap='round'
+            strokeLinecap='round'
             stroke-linejoin='round'
             stroke-width='2'
             viewBox='0 0 24 24'
@@ -49,52 +49,29 @@ export const ManageEventHome = ({ event }: Props) => {
       </div>
 
       <div role='tablist' className='tabs tabs-bordered w-full mt-10 '>
-        <NavLink
-          role='tab'
-          className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
-          to='overview'
-        >
+        <NavLink role='tab' className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')} to='overview'>
           Overview
         </NavLink>
-        <NavLink
-          role='tab'
-          className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
-          to='guest'
-        >
+        <NavLink role='tab' className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')} to='guest'>
           Guests
         </NavLink>
-        <NavLink
-          to='registration'
-          className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
-        >
+        <NavLink to='registration' className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}>
           Registration
         </NavLink>
-        <NavLink
-          role='tab'
-          className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
-          to='staff'
-        >
+        <NavLink role='tab' className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')} to='staff'>
           List Staff
         </NavLink>
-        {data &&
-        !data.data.data.formFeedBack &&
-        isValidToFeeback(event.date_event, event.time_end) ? ( //nếu chưa có form feedback và tới giờ feedback rồi mà chưa có form feedback thì ko cho tạo nữa
+        {data && !data.data.data.formFeedBack && isValidToFeeback(event.date_event, event.time_end) ? ( //nếu chưa có form feedback và tới giờ feedback rồi mà chưa có form feedback thì ko cho tạo nữa
           <span
             className='tab '
             onClick={() => {
-              toast.error(
-                'Can not create form feedback before event end 15 minutes'
-              )
+              toast.error('Can not create form feedback before event end 15 minutes')
             }}
           >
             Form Feedback
           </span>
         ) : (
-          <NavLink
-            role='tab'
-            className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')}
-            to='form-feedback'
-          >
+          <NavLink role='tab' className={({ isActive }) => (isActive ? 'tab tab-active' : 'tab')} to='form-feedback'>
             Form Feedback
           </NavLink>
         )}

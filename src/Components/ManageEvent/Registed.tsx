@@ -41,15 +41,5 @@ export const Registed = ({ id }: Props) => {
         <div className='mt-10'>{data && <Table dataSource={data.data.data} columns={columns} pagination={false} className='rounded-lg' />}</div>
       </div>
     </>
-    // <div className='flex items-center justify-center mt-5'>
-    //   {data && (
-    //     <Table
-    //       dataSource={data.data.data}
-    //       columns={columns}
-    //       pagination={false}
-    //       className='rounded-lg'
-    //     />
-    //   )}
-    // </div>
   )
 }
