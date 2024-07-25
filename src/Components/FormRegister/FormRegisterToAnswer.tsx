@@ -22,7 +22,7 @@ const initFormData: FormDataEvent = {
   answers: []
 }
 
-export const FormRegister = ({ _id }: Props) => {
+export const FormRegisterToAnswer = ({ _id }: Props) => {
   const [form, setForm] = useState<FormDataEvent>(initFormData)
   const getQuestion = useQuery({
     queryKey: ['eventId', _id],

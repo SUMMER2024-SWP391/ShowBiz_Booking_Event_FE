@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { Heading } from '../Heading/Heading'
 import { Text } from '../Text/Text'
 import { Button } from '../Button/Button'
-import { FormRegister } from '../FormRegister/FormRegisterToAnswer'
+import { FormRegisterToAnswer } from '../FormRegister/FormRegisterToAnswer'
 import { Event } from 'src/@types/event.type'
 import { AppContext } from 'src/context/app.context'
 import HandleLoginWhenRegisterEvent from '../HandleLoginWhenRegisterEvent/HandleLoginWhenRegisterEvent'
@@ -39,7 +39,7 @@ export const Register = ({ _id }: Props) => {
         type=''
         open={open}
         onClose={() => setOpen(false)}
-        children={<FormRegister _id={_id || ''} />}
+        children={<FormRegisterToAnswer _id={_id || ''} />}
       />
     </div>
   )
