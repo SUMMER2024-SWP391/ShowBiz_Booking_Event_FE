@@ -1,9 +1,6 @@
 import { useForm } from 'react-hook-form'
 import InputVerTwo from '../InputVerTwo/InputVerTwo'
-import {
-  CreateEventOperatorSchema,
-  CreateEventOperatorSchemaYup
-} from 'src/utils/rules'
+import { CreateEventOperatorSchema, CreateEventOperatorSchemaYup } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 import { adminApi } from 'src/apis/admin.api'
@@ -14,15 +11,6 @@ import { toast } from 'react-toastify'
 type FormData = CreateEventOperatorSchema
 
 const CreateEventOperator = () => {
-  const date = new Date()
-  const defaultDate = new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDay() + 1
-  )
-    .toISOString()
-    .split('T')[0]
-
   const {
     register,
     handleSubmit,
@@ -89,17 +77,8 @@ const CreateEventOperator = () => {
           register={register}
           errorMessage={errors.phone_number?.message}
         />
-        <InputVerTwo
-          className='flex flex-col'
-          defaultValue={defaultDate}
-          type='date'
-          name='date_of_birth'
-          renderProps={<label className='mb-2'>Date of birth</label>}
-          classNameInput='input input-bordered w-full max-w-xs'
-          register={register}
-          errorMessage={errors.date_of_birth?.message}
-        />
-        <button className='btn'>Create</button>
+
+        <button className='btn mt-8'>Create</button>
       </form>
     </div>
   )

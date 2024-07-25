@@ -47,11 +47,7 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
         value: 8,
         message: 'Password must be as least 8 characters'
       },
-      validate:
-        typeof getValues === 'function'
-          ? (value) =>
-              value === getValues('password') || 'Password nhập lại không đúng'
-          : undefined
+      validate: typeof getValues === 'function' ? (value) => value === getValues('password') || 'Password nhập lại không đúng' : undefined
     },
     date_of_birth: {
       required: 'This field is required',
@@ -143,16 +139,10 @@ export const CreateEventOperatorSchemaYup = yup.object().shape({
   phone_number: yup
     .string()
     .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/, 'Invalid phone number')
-    .required('This field is required'),
-  date_of_birth: yup
-    .date()
     .required('This field is required')
-    .max(new Date(), 'Date of birth must be less than current date')
 })
 
-export type CreateEventOperatorSchema = yup.InferType<
-  typeof CreateEventOperatorSchemaYup
->
+export type CreateEventOperatorSchema = yup.InferType<typeof CreateEventOperatorSchemaYup>
 
 export const ForgotPasswordSchemaYup = yup.object().shape({
   email: yup.string().email('Invalid email').required('This field is required')
@@ -222,9 +212,7 @@ export const addStaffCheckingSchemaYup = yup.object().shape({
   email: yup.string().required('This field is required').email('Invalid email')
 })
 
-export type AddStaffCheckingSchema = yup.InferType<
-  typeof addStaffCheckingSchemaYup
->
+export type AddStaffCheckingSchema = yup.InferType<typeof addStaffCheckingSchemaYup>
 
 export const registerSchemaYup = yup.object().shape({
   mssv: yup
@@ -233,10 +221,7 @@ export const registerSchemaYup = yup.object().shape({
     .matches(/[A-Z]{2}\d{6}/, 'Invalid MSSV!'),
   user_name: yup.string().required('User name is required!'),
   email: yup.string().required('Email is required!').email('Invalid email!'),
-  password: yup
-    .string()
-    .required('Password is required!')
-    .min(8, 'Password must be at least 8 characters'),
+  password: yup.string().required('Password is required!').min(8, 'Password must be at least 8 characters'),
   confirm_password: yup
     .string()
     .required('Confirm password is required!')
